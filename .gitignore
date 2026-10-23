@@ -4,3 +4,8 @@ app/public/data/
 .env
 .env.local
 *.log
+
+.vercel
+.env*
+
+!.env.example
