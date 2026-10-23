@@ -53,14 +53,15 @@
 - **Lembretes:** tabela `push_inscricoes`, handler `app/public/push-sw.js` importado pelo service worker, `scripts/enviar-lembretes.mjs` + workflow de hora em hora. Envia só se < 40 itens no dia ou com revisões pendentes; 1 vez por dia.
 - **GitHub:** código enviado para `kkaian/CBMAPP` (público), secrets cadastrados, as duas rotinas rodaram com sucesso.
 
+- **Vercel:** publicado em **https://cbmapp-sand.vercel.app** pela CLI (login do usuário), projeto ligado ao GitHub com deploy automático na `main`. Site testado: página, dados, service worker e manifest respondem; tela de login carrega sem erros.
+
 ## Próximos passos
-1. **Vercel:** importar o repositório e colocar `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`. Depois testar no celular: login, sincronização, offline, instalação e lembrete.
+1. Usuário: desligar Confirm email, criar a conta, desligar novos cadastros; instalar no celular e testar login, sincronização, offline e lembrete.
 2. **Produção de conteúdo, começando por Matemática** (MAT-01 a MAT-08: resumo, teoria, manias e ~60 itens por tópico), usando o material do Drive como base.
 3. Depois: RLM, FIS, QUI, MEC… e, em paralelo, simulados, redação e plano de estudos.
 
 ## Pendências do usuário
 - [ ] Supabase: desligar **Confirm email** → criar a conta no app → desligar **Allow new users to sign up**.
-- [ ] Conta na Vercel (entrar com o GitHub).
 - [ ] (Desejável) alterações da Lei 5.346/1992 posteriores a 2014 além da 9.392/2024, e da Lei 6.544/2004.
 - [ ] Gabarito definitivo das provas CBMAL 2021.
 - [ ] Google AI Studio (chave do Gemini), só quando formos fazer a correção de redação por IA.

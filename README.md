@@ -43,11 +43,11 @@ A conexão direta (`db.….supabase.co`) só funciona em IPv6; por isso usamos o
 - Secrets cadastrados: `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_DB_URL`, `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`.
 - Rotinas ([.github/workflows](.github/workflows)): **Manter Supabase acordado** (a cada 3 dias) e **Lembretes de estudo** (de hora em hora, das 6h às 23h de Maceió). As duas foram testadas.
 
-### 3. Vercel (hospedagem)
-1. Em [vercel.com](https://vercel.com), entre com o GitHub e importe o repositório.
-2. Framework: **Vite**. Build command: `npm run build`. Output directory: `dist`. (A raiz do repositório é a raiz do projeto.)
-3. **Environment Variables**: `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`.
-4. Deploy. A cada envio ao GitHub, a Vercel publica sozinha.
+### 3. Vercel (hospedagem) — feito em 23/10/2026
+- **Endereço do app: https://cbmapp-sand.vercel.app**
+- Projeto `cbmapp` (time `aposentados`), ligado ao GitHub: **cada push na `main` publica sozinho** em ~30 s.
+- Configuração em [vercel.json](vercel.json); variáveis `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY` em todos os ambientes.
+- Pelo terminal: `npx.cmd vercel ls cbmapp` lista as publicações (no PowerShell use `npx.cmd`, porque scripts `.ps1` estão bloqueados).
 
 ### 4. Instalar no celular
 Abra o endereço da Vercel no Chrome do celular e use o botão **Instalar app** (aba Mais, ou no fim da tela inicial). No iPhone: Safari › Compartilhar › Adicionar à Tela de Início. Depois do primeiro acesso, o app e todas as questões funcionam sem internet; as respostas sincronizam quando a conexão volta.
