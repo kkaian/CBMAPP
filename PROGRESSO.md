@@ -61,9 +61,18 @@
 - App: campo de código no cadastro, tela "Aguardando aprovação", página **Mais › Administração** (trocar código, aprovar, recusar, remover). Perfil guardado no aparelho para abrir offline.
 - Testado: gatilho numa transação desfeita (código errado recusado, primeira conta admin, segunda pendente, código não fica salvo) e na API real (código errado → `CODIGO_CONVITE_INVALIDO`, nenhuma conta criada).
 
+## Sessão 24/10/2026 — Matemática
+- Conta admin `kaian` criada e confirmada no banco.
+- **Matemática completa em conteúdo** (MAT-01 a MAT-08: resumo, teoria, manias) e **360 itens** (meta 480), todos `ok`, gabarito entre 51% e 56% C por tópico, ~18–23% difíceis.
+- Fontes usadas: Q-Matematica (1) e (2), itens 25–32 dos simulados 01–05, apostila do Drive, + inéditos. Itens do Drive triviais ou repetidos descartados; vários reescritos para virar E (gabarito do Drive era quase todo C).
+- **Ficaram de fora** (dependem de gráficos ausentes no PDF): caderno (2) itens 47–58 e simulados 04 (25–28) e 05 (25–29).
+- Itens dos simulados mantêm `origem: simulado-NN-item` e grupos `MAT-SIMnn-*` com o texto original, para remontar os simulados depois.
+- Build agora aceita vários arquivos por matéria (`questoes-MAT-01.json`, `grupos-MAT-01.json`…). Novo `scripts/balanco.mjs` mostra itens, % C e dificuldade por tópico.
+
 ## Próximos passos
-1. Usuário: criar a conta com o código `BOMBEIRO2026` (vira admin), trocar o código em Mais › Administração; testar no celular login, sincronização, offline e lembrete.
-2. **Produção de Matemática** (interrompida para o convite): Q-Matematica (1) já lido; faltam (2), itens dos simulados e a apostila. Passos em `docs/PROJETO.md` §5.3.1.
+1. **Produção de Raciocínio Lógico (RLM)**, mesmo método.
+2. Completar MAT até ~480 itens quando sobrar tempo (prioridade: MAT-05 a MAT-08, os de maior peso).
+3. Usuário: testar no celular sincronização, offline e lembrete com a conta real.
 2. **Produção de conteúdo, começando por Matemática** (MAT-01 a MAT-08: resumo, teoria, manias e ~60 itens por tópico), usando o material do Drive como base.
 3. Depois: RLM, FIS, QUI, MEC… e, em paralelo, simulados, redação e plano de estudos.
 

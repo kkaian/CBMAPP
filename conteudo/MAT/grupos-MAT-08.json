@@ -1,0 +1,10 @@
+[
+  {
+    "id": "MAT-08-G01",
+    "texto": "Para os itens a seguir, considere as situações descritas na tabela.\n\n| Situação | Dados fornecidos |\n|---|---|\n| I | taxa nominal de 12% ao ano, com capitalização mensal |\n| II | taxa de 2% ao mês |\n| III | taxa aparente de 20% ao ano, em período de inflação de 8% ao ano |\n\nCom base nessas situações e nos conceitos de taxas de juros, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-SIM02-B",
+    "texto": "Considere uma aplicação remunerada à taxa nominal de 24% ao ano, com capitalização mensal. Com base nessa situação, julgue os itens a seguir."
+  }
+]
