@@ -25,10 +25,8 @@ Outros comandos:
 ### 1. Supabase (banco do progresso e login) — feito em 23/10/2026
 - Projeto `iewnzzitsrsqnqxazkyc` (região us-east-1). Tabelas criadas com `scripts/aplicar-schema.mjs` (respostas, revisoes, leituras, push_inscricoes).
 - `.env` local preenchido (fora do Git).
-- **Falta (no painel, só você pode fazer):**
-  1. **Authentication › Sign In / Providers › Email**: desligar **Confirm email**. Precisa ser **antes** de criar a conta: com ele ligado, o Supabase tenta mandar e-mail para um endereço que não existe.
-  2. Criar sua conta na tela de cadastro do app.
-  3. **Depois**: em **Authentication › Sign In / Providers**, desligar **Allow new users to sign up**.
+- **Confirm email** desligado (conferido). **Allow new users to sign up** deve ficar **ligado**: quem barra cadastros é o código de convite.
+- **Acesso:** cadastro exige o código de convite (padrão inicial `BOMBEIRO2026`). A primeira conta criada vira administradora; as outras esperam aprovação em **Mais › Administração**, onde também se troca o código.
 
 Para reaplicar o schema (ex.: depois de mudar `supabase/schema.sql`):
 

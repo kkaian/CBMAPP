@@ -8,6 +8,7 @@ export default function Login() {
   const [usuario, setUsuario] = useState('')
   const [senha, setSenha] = useState('')
   const [confirma, setConfirma] = useState('')
+  const [codigo, setCodigo] = useState('')
   const [erro, setErro] = useState<string | null>(null)
   const [enviando, setEnviando] = useState(false)
 
@@ -17,8 +18,9 @@ export default function Login() {
     if (!usuarioValido(usuario)) return setErro('Usuário: 3 a 30 caracteres, só letras, números, ponto, hífen ou sublinhado.')
     if (senha.length < 6) return setErro('A senha precisa ter pelo menos 6 caracteres.')
     if (aba === 'cadastrar' && senha !== confirma) return setErro('As senhas não conferem.')
+    if (aba === 'cadastrar' && !codigo.trim()) return setErro('Informe o código de convite.')
     setEnviando(true)
-    const msg = aba === 'entrar' ? await entrar(usuario, senha) : await cadastrar(usuario, senha)
+    const msg = aba === 'entrar' ? await entrar(usuario, senha) : await cadastrar(usuario, senha, codigo)
     setEnviando(false)
     if (msg) setErro(msg)
   }
@@ -42,7 +44,11 @@ export default function Login() {
         <input className={campo} placeholder="Usuário" autoCapitalize="none" autoComplete="username" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
         <input className={campo} placeholder="Senha" type="password" autoComplete={aba === 'entrar' ? 'current-password' : 'new-password'} value={senha} onChange={(e) => setSenha(e.target.value)} />
         {aba === 'cadastrar' && (
-          <input className={campo} placeholder="Confirmar senha" type="password" autoComplete="new-password" value={confirma} onChange={(e) => setConfirma(e.target.value)} />
+          <>
+            <input className={campo} placeholder="Confirmar senha" type="password" autoComplete="new-password" value={confirma} onChange={(e) => setConfirma(e.target.value)} />
+            <input className={campo} placeholder="Código de convite" autoCapitalize="characters" autoComplete="off" value={codigo} onChange={(e) => setCodigo(e.target.value)} />
+            <p className="text-suave text-xs -mt-1 mb-2.5">Depois do cadastro, sua conta fica aguardando a aprovação do administrador.</p>
+          </>
         )}
         {erro && <div className="text-[#ff8a8d] text-sm mb-2.5">{erro}</div>}
         <button disabled={enviando} className="w-full py-3 rounded-xl bg-destaque text-white font-bold disabled:opacity-50">

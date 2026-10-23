@@ -7,6 +7,11 @@ import type { RegistroLeitura, RegistroResposta, RegistroRevisao } from './types
 // - revisões: uma linha por item; vence a mais recente (atualizadaEm)
 let timer: ReturnType<typeof setTimeout> | null = null
 let rodando: Promise<void> | null = null
+let aprovado = false // contas pendentes de aprovação não sincronizam (o banco recusaria)
+
+export function definirAprovado(v: boolean) {
+  aprovado = v
+}
 const ouvintes = new Set<(s: EstadoSync) => void>()
 
 export type EstadoSync = { status: 'local' | 'ok' | 'pendente' | 'sincronizando' | 'erro'; ultima?: string; mensagem?: string }
@@ -38,7 +43,7 @@ export function sincronizar(): Promise<void> {
 async function executar() {
   const sb = supabase!
   const { data: sessao } = await sb.auth.getSession()
-  if (!sessao.session) return
+  if (!sessao.session || !aprovado) return
   if (!navigator.onLine) { definir({ ...estado, status: 'pendente', mensagem: 'Sem internet: as respostas ficam guardadas no aparelho.' }); return }
   definir({ ...estado, status: 'sincronizando' })
   try {

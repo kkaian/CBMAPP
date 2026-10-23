@@ -11,7 +11,7 @@ Tudo em **português do Brasil**: conversa, conteúdo, comentários de questão 
 
 ## Restrições fixas
 - **Custo zero.** Só planos gratuitos (Supabase free, Vercel, Gemini free, GitHub).
-- **Login:** usuário + senha (sem e-mail real), detalhes em `docs/PROJETO.md` §6.6.
+- **Login:** usuário + senha (sem e-mail real), com código de convite e aprovação pelo admin; detalhes em `docs/PROJETO.md` §6.6. Mudanças no banco: editar `supabase/schema.sql` e aplicar com `scripts/aplicar-schema.mjs` (pooler `aws-0-us-east-1`).
 - **Conteúdo e questões ficam em arquivos no repositório** (`conteudo/`). O Supabase guarda **só o progresso** do usuário.
 - O app precisa ser **bom no celular e funcionar offline**.
 - Toda questão, resumo e flashcard pendura num **código de tópico** da árvore em `docs/PROJETO.md` (ex.: `FIS-12`). Não inventar tópicos fora do edital.

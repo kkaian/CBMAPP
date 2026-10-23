@@ -510,7 +510,12 @@ Tudo protegido por RLS (só o meu usuário lê e escreve). Streak, nível e diag
 - Tela de **cadastro** (usuário + senha + confirmar senha) e tela de **entrada** (usuário + senha). Sem e-mail.
 - O Supabase Auth trabalha com e-mail, então o app converte o usuário num e-mail interno que nunca é usado (ex.: `kaian` → `kaian@cbmapp.local`) e a **confirmação de e-mail fica desligada**.
 - Sessão fica salva no celular: entro uma vez e não preciso digitar de novo (inclusive offline).
-- **Segurança:** depois que eu criar a minha conta, **desligar novos cadastros** no painel do Supabase (*Allow new users to sign up* = off). Senão, qualquer pessoa que achar o site consegue criar conta. A tela de cadastro continua no app, só deixa de aceitar contas novas.
+- **Código de convite + aprovação** (substitui a ideia de desligar os cadastros):
+  - O cadastro pede um **código de convite**, conferido **no banco** (gatilho em `auth.users`): código errado = conta não é criada. Código padrão inicial: `BOMBEIRO2026`.
+  - A **primeira conta** criada vira **administradora** e entra aprovada. As seguintes ficam **pendentes**: conseguem entrar, mas veem só a tela "Aguardando aprovação" e o banco recusa qualquer leitura ou gravação delas (RLS exige perfil aprovado).
+  - Na aba **Mais › Administração** (só para o admin): ver e trocar o código, **aprovar** ou **recusar** pendentes e **remover** contas (apaga a conta e o progresso dela).
+  - Tabelas `perfis` e `config_app`; funções `admin_*` chamadas por RPC, todas checando se quem chama é admin.
+  - *Allow new users to sign up* fica **ligado** no Supabase (quem barra é o código).
 - Sem "esqueci a senha" por e-mail (não há e-mail real). Se esquecer, troco a senha pelo painel do Supabase.
 
 ### 6.7 Estrutura de pastas (prevista)

@@ -10,7 +10,7 @@ import { useRevisoes } from '../lib/useDados'
 export default function Mais() {
   const nav = useNavigate()
   const revisoes = useRevisoes()
-  const { usuario, sair } = useAuth()
+  const { usuario, sair, perfil } = useAuth()
   const [sync, setSync] = useState<EstadoSync | null>(null)
   useEffect(() => ouvirSync(setSync), [])
   if (!revisoes) return <Carregando />
@@ -21,6 +21,7 @@ export default function Mais() {
     { icone: '📝', titulo: 'Simulados', sub: 'em breve', para: '/em-breve?o=Simulados' },
     { icone: '✍️', titulo: 'Redação', sub: 'estudo, 30 temas, calculadora da nota', para: '/redacao' },
     { icone: '🗓️', titulo: 'Plano de estudos', sub: 'em breve', para: '/em-breve?o=Plano de estudos' },
+    ...(perfil?.admin ? [{ icone: '🛡️', titulo: 'Administração', sub: 'código de convite e aprovação de contas', para: '/admin' }] : []),
   ]
 
   const textoSync: Record<EstadoSync['status'], string> = {

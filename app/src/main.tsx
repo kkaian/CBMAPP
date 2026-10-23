@@ -7,6 +7,8 @@ import './lib/instalar' // escuta o convite de instalação desde o início
 import { AuthProvider, useAuth } from './auth'
 import Shell from './components/Shell'
 import { Carregando } from './components/ui'
+import Admin from './pages/Admin'
+import Aguardando from './pages/Aguardando'
 import Desempenho from './pages/Desempenho'
 import EmBreve from './pages/EmBreve'
 import Erros from './pages/Erros'
@@ -39,15 +41,18 @@ const router = createHashRouter([
       { path: '/perfil', element: <Perfil /> },
       { path: '/em-breve', element: <EmBreve /> },
       { path: '/redacao', element: <Redacao /> },
+      { path: '/admin', element: <Admin /> },
     ],
   },
   { path: '/quiz', element: <div className="max-w-lg mx-auto px-4 pt-4 pb-10"><Quiz /></div> },
 ])
 
 function Portao() {
-  const { pronto, logado } = useAuth()
+  const { pronto, logado, perfil } = useAuth()
   if (!pronto) return <Carregando />
   if (!logado) return <Login />
+  if (!perfil) return <Carregando texto="Conectando… (na primeira vez é preciso internet)" />
+  if (perfil.status !== 'aprovado') return <Aguardando />
   return <RouterProvider router={router} />
 }
 

@@ -55,8 +55,15 @@
 
 - **Vercel:** publicado em **https://cbmapp-sand.vercel.app** pela CLI (login do usuário), projeto ligado ao GitHub com deploy automático na `main`. Site testado: página, dados, service worker e manifest respondem; tela de login carrega sem erros.
 
+## Sessão 23/10/2026 (madrugada) — convite e aprovação
+- Conferido no banco: **nenhuma conta existia** (o cadastro do usuário não chegou ao servidor).
+- **Código de convite + aprovação:** tabelas `perfis` e `config_app`, gatilhos em `auth.users` (confere o código antes de criar; cria o perfil depois), RLS das tabelas de dados agora exige perfil aprovado, funções `admin_*`. Código padrão `BOMBEIRO2026`. Primeira conta = admin.
+- App: campo de código no cadastro, tela "Aguardando aprovação", página **Mais › Administração** (trocar código, aprovar, recusar, remover). Perfil guardado no aparelho para abrir offline.
+- Testado: gatilho numa transação desfeita (código errado recusado, primeira conta admin, segunda pendente, código não fica salvo) e na API real (código errado → `CODIGO_CONVITE_INVALIDO`, nenhuma conta criada).
+
 ## Próximos passos
-1. Usuário: desligar Confirm email, criar a conta, desligar novos cadastros; instalar no celular e testar login, sincronização, offline e lembrete.
+1. Usuário: criar a conta com o código `BOMBEIRO2026` (vira admin), trocar o código em Mais › Administração; testar no celular login, sincronização, offline e lembrete.
+2. **Produção de Matemática** (interrompida para o convite): Q-Matematica (1) já lido; faltam (2), itens dos simulados e a apostila. Passos em `docs/PROJETO.md` §5.3.1.
 2. **Produção de conteúdo, começando por Matemática** (MAT-01 a MAT-08: resumo, teoria, manias e ~60 itens por tópico), usando o material do Drive como base.
 3. Depois: RLM, FIS, QUI, MEC… e, em paralelo, simulados, redação e plano de estudos.
 
