@@ -46,14 +46,22 @@
 - **Leis baixadas** para `conteudo/_fontes/leis/` (5.346, 6.514, 6.544, 14.751 + as alteradoras 9.392/2024 e 9.905/2026), com texto extraído e `LEIAME.md`.
 - **Corrigidas as questões de LEG** contra os textos oficiais: 8 de 10 agora `ok`, com artigo citado. Duas tinham **gabarito errado no material do Drive**: critérios de promoção (a "escolha" foi revogada pela Lei 9.392/2024) e datas de promoção do CBM (são 26/05 e 29/11; 26/02 e 29/09 são o prazo de pontuações). Seguem `revisar` só as 2 do Decreto 37.042.
 
+## Sessão 23/10/2026 (noite) — publicação, lembretes, decreto
+- **Decreto 37.042/1996** recebido e salvo em `conteudo/_fontes/leis/`. As 2 questões que faltavam conferidas (arts. 29 e 56): **todas as 10 de LEG agora `ok`**. Banco: 130 itens, 0 para revisar.
+- **Supabase configurado:** tabelas criadas via pooler (`aws-0-us-east-1`, a conexão direta é só IPv6), `.env` local preenchido. Login testado contra o servidor real (erro esperado com usuário inexistente). **Confirm email ainda está ligado** (checado em `/auth/v1/settings`).
+- **Aba Mais:** botão **Instalar app** (Android/Chrome com convite nativo; instruções para iPhone) e **Lembrete diário** (Web Push: escolher horário, ligar/desligar, testar). Cartão de instalação também no fim do Início.
+- **Lembretes:** tabela `push_inscricoes`, handler `app/public/push-sw.js` importado pelo service worker, `scripts/enviar-lembretes.mjs` + workflow de hora em hora. Envia só se < 40 itens no dia ou com revisões pendentes; 1 vez por dia.
+- **GitHub:** código enviado para `kkaian/CBMAPP` (público), secrets cadastrados, as duas rotinas rodaram com sucesso.
+
 ## Próximos passos
-1. Usuário cria as contas (Supabase, GitHub, Vercel) seguindo o `README.md`; publicamos e testamos login, sincronização e offline no celular.
+1. **Vercel:** importar o repositório e colocar `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`. Depois testar no celular: login, sincronização, offline, instalação e lembrete.
 2. **Produção de conteúdo, começando por Matemática** (MAT-01 a MAT-08: resumo, teoria, manias e ~60 itens por tópico), usando o material do Drive como base.
 3. Depois: RLM, FIS, QUI, MEC… e, em paralelo, simulados, redação e plano de estudos.
 
 ## Pendências do usuário
-- [ ] **Decreto 37.042/1996** (RDPMAL): único texto de lei que falta.
+- [ ] Supabase: desligar **Confirm email** → criar a conta no app → desligar **Allow new users to sign up**.
+- [ ] Conta na Vercel (entrar com o GitHub).
 - [ ] (Desejável) alterações da Lei 5.346/1992 posteriores a 2014 além da 9.392/2024, e da Lei 6.544/2004.
 - [ ] Gabarito definitivo das provas CBMAL 2021.
-- [ ] Contas: GitHub, Supabase, Vercel, Google AI Studio (este só para a redação).
+- [ ] Google AI Studio (chave do Gemini), só quando formos fazer a correção de redação por IA.
 - [ ] Horas disponíveis por dia (para o plano de estudos).

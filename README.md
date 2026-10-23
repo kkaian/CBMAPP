@@ -20,20 +20,28 @@ Outros comandos:
 | `npm run build` | Gera a versão de produção em `dist/` |
 | `npm run preview` | Serve o `dist/` em `http://localhost:4173` |
 
-## Publicar (uma vez só)
+## Publicar
 
-### 1. Supabase (banco do progresso e login)
-1. Crie um projeto em [supabase.com](https://supabase.com) (plano Free). Região: São Paulo.
-2. **SQL Editor › New query**: cole o conteúdo de [supabase/schema.sql](supabase/schema.sql) e clique em **Run**.
-3. **Authentication › Sign In / Providers › Email**: desligue **Confirm email**. (O app usa usuário + senha, sem e-mail real.)
-4. **Project Settings › API**: copie a **Project URL** e a chave **anon public**.
-5. Na pasta do projeto, copie `.env.example` para `.env` e preencha as duas variáveis. Rode `npm run dev` e crie sua conta na tela de cadastro.
-6. **Depois de criar sua conta**: em **Authentication › Sign In / Providers**, desligue **Allow new users to sign up**. Assim ninguém mais consegue criar conta no seu app.
+### 1. Supabase (banco do progresso e login) — feito em 23/10/2026
+- Projeto `iewnzzitsrsqnqxazkyc` (região us-east-1). Tabelas criadas com `scripts/aplicar-schema.mjs` (respostas, revisoes, leituras, push_inscricoes).
+- `.env` local preenchido (fora do Git).
+- **Falta (no painel, só você pode fazer):**
+  1. **Authentication › Sign In / Providers › Email**: desligar **Confirm email**. Precisa ser **antes** de criar a conta: com ele ligado, o Supabase tenta mandar e-mail para um endereço que não existe.
+  2. Criar sua conta na tela de cadastro do app.
+  3. **Depois**: em **Authentication › Sign In / Providers**, desligar **Allow new users to sign up**.
 
-### 2. GitHub (código e backup)
-1. Crie um repositório **privado** (ex.: `cbmapp`).
-2. Envie o projeto para ele (eu faço isso por você numa sessão, quando o repositório existir).
-3. **Settings › Secrets and variables › Actions**: crie os secrets `SUPABASE_URL` e `SUPABASE_ANON_KEY` (os mesmos do `.env`). Eles alimentam a rotina que mantém o Supabase acordado ([.github/workflows/manter-supabase.yml](.github/workflows/manter-supabase.yml)).
+Para reaplicar o schema (ex.: depois de mudar `supabase/schema.sql`):
+
+```bash
+SUPABASE_DB_URL="postgresql://postgres.iewnzzitsrsqnqxazkyc:SENHA@aws-0-us-east-1.pooler.supabase.com:5432/postgres" node scripts/aplicar-schema.mjs
+```
+
+A conexão direta (`db.….supabase.co`) só funciona em IPv6; por isso usamos o *pooler*.
+
+### 2. GitHub (código e backup) — feito em 23/10/2026
+- Repositório: [kkaian/CBMAPP](https://github.com/kkaian/CBMAPP) (está **público**: o código e as questões ficam visíveis; os segredos não).
+- Secrets cadastrados: `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_DB_URL`, `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`.
+- Rotinas ([.github/workflows](.github/workflows)): **Manter Supabase acordado** (a cada 3 dias) e **Lembretes de estudo** (de hora em hora, das 6h às 23h de Maceió). As duas foram testadas.
 
 ### 3. Vercel (hospedagem)
 1. Em [vercel.com](https://vercel.com), entre com o GitHub e importe o repositório.
@@ -42,7 +50,12 @@ Outros comandos:
 4. Deploy. A cada envio ao GitHub, a Vercel publica sozinha.
 
 ### 4. Instalar no celular
-Abra o endereço da Vercel no Chrome do celular › menu › **Adicionar à tela inicial** (ou **Instalar app**). Depois do primeiro acesso, o app e todas as questões funcionam sem internet; as respostas sincronizam quando a conexão volta.
+Abra o endereço da Vercel no Chrome do celular e use o botão **Instalar app** (aba Mais, ou no fim da tela inicial). No iPhone: Safari › Compartilhar › Adicionar à Tela de Início. Depois do primeiro acesso, o app e todas as questões funcionam sem internet; as respostas sincronizam quando a conexão volta.
+
+### 5. Lembretes
+Na aba **Mais › Lembrete diário**: escolha o horário e toque em **Ligar lembrete** (o navegador pede permissão). O GitHub Actions confere de hora em hora e manda a notificação no seu horário **só se** você ainda não fez 40 itens no dia ou tem revisões pendentes. No iPhone, só funciona com o app instalado (iOS 16.4+).
+
+A chave privada das notificações (VAPID) existe só no secret do GitHub. Se precisar trocar: gere um par novo (`npx web-push generate-vapid-keys`), atualize a pública em `app/src/lib/push.ts` e os dois secrets.
 
 ## Conteúdo
 
