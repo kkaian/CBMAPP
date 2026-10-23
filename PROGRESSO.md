@@ -69,10 +69,11 @@
 - Itens dos simulados mantêm `origem: simulado-NN-item` e grupos `MAT-SIMnn-*` com o texto original, para remontar os simulados depois.
 - Build agora aceita vários arquivos por matéria (`questoes-MAT-01.json`, `grupos-MAT-01.json`…). Novo `scripts/balanco.mjs` mostra itens, % C e dificuldade por tópico.
 
+- **Matemática fechada na meta: 480 itens (60 por tópico)**, todos `ok`; % C entre 50 e 55; difíceis entre 17% e 32% (mais na parte financeira). Complemento em arquivos `questoes-*-b.json` e `grupos-*-b.json`, com novos textos-base (tabelas de ocorrências e orçamento substituem os gráficos ausentes do Drive).
+
 ## Próximos passos
 1. **Produção de Raciocínio Lógico (RLM)**, mesmo método.
-2. Completar MAT até ~480 itens quando sobrar tempo (prioridade: MAT-05 a MAT-08, os de maior peso).
-3. Usuário: testar no celular sincronização, offline e lembrete com a conta real.
+2. Usuário: testar no celular sincronização, offline e lembrete com a conta real.
 2. **Produção de conteúdo, começando por Matemática** (MAT-01 a MAT-08: resumo, teoria, manias e ~60 itens por tópico), usando o material do Drive como base.
 3. Depois: RLM, FIS, QUI, MEC… e, em paralelo, simulados, redação e plano de estudos.
 
