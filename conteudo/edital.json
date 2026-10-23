@@ -1,0 +1,221 @@
+{
+  "concurso": "CBM/AL 2026",
+  "cargo": "Cargo 2: Praça Bombeiro Militar Combatente (QPBM/1)",
+  "banca": "Cebraspe",
+  "dataProva": "2027-01-26",
+  "provas": [
+    { "codigo": "P1", "nome": "Conhecimentos básicos", "itens": 50, "minimo": 10 },
+    { "codigo": "P2", "nome": "Conhecimentos específicos", "itens": 70, "minimo": 21 },
+    { "codigo": "P3", "nome": "Discursiva (redação, até 30 linhas, 30 pontos)", "itens": 0, "minimo": 15 }
+  ],
+  "minimoTotal": 36,
+  "materias": [
+    {
+      "codigo": "MAT", "nome": "Matemática", "prova": "P1", "itensProva": 8, "exatas": true, "metaPorTopico": 60,
+      "topicos": [
+        { "codigo": "MAT-01", "nome": "Conjuntos numéricos: inteiros, frações e decimais" },
+        { "codigo": "MAT-02", "nome": "Razão, proporção e divisão proporcional" },
+        { "codigo": "MAT-03", "nome": "Regra de três simples e composta" },
+        { "codigo": "MAT-04", "nome": "Porcentagem" },
+        { "codigo": "MAT-05", "nome": "Juros simples" },
+        { "codigo": "MAT-06", "nome": "Juros compostos e capitalização" },
+        { "codigo": "MAT-07", "nome": "Descontos" },
+        { "codigo": "MAT-08", "nome": "Taxas: nominal, efetiva, equivalente, proporcional, real e aparente" }
+      ]
+    },
+    {
+      "codigo": "RLM", "nome": "Raciocínio Lógico", "prova": "P1", "itensProva": 8, "exatas": true, "metaPorTopico": 50,
+      "topicos": [
+        { "codigo": "RLM-01", "nome": "Proposições simples e compostas, conectivos" },
+        { "codigo": "RLM-02", "nome": "Tabelas-verdade, tautologia e contradição" },
+        { "codigo": "RLM-03", "nome": "Equivalências e negações" },
+        { "codigo": "RLM-04", "nome": "Argumentação, validade e quantificadores" },
+        { "codigo": "RLM-05", "nome": "Estrutura lógica de relações (associação, dedução)" },
+        { "codigo": "RLM-06", "nome": "Sequências, padrões, orientação espacial e temporal" },
+        { "codigo": "RLM-07", "nome": "Leitura de gráficos e tabelas" },
+        { "codigo": "RLM-08", "nome": "Contagem (PFC, permutação, arranjo, combinação)" },
+        { "codigo": "RLM-09", "nome": "Probabilidade" },
+        { "codigo": "RLM-10", "nome": "Falácias" },
+        { "codigo": "RLM-11", "nome": "Estatística: média, moda, mediana e desvio-padrão" }
+      ]
+    },
+    {
+      "codigo": "FIS", "nome": "Física", "prova": "P2", "itensProva": 20, "exatas": true, "metaPorTopico": 50,
+      "topicos": [
+        { "codigo": "FIS-01", "nome": "Vetores e sistemas de forças (composição, concorrentes, binário)" },
+        { "codigo": "FIS-02", "nome": "Noções de movimento e MRU" },
+        { "codigo": "FIS-03", "nome": "MUV e queda livre" },
+        { "codigo": "FIS-04", "nome": "Lançamento de projéteis e MCU" },
+        { "codigo": "FIS-05", "nome": "Leis de Newton e aplicações" },
+        { "codigo": "FIS-06", "nome": "Gravitação universal, leis de Kepler e rotação da Terra" },
+        { "codigo": "FIS-07", "nome": "Trabalho, potência e rendimento" },
+        { "codigo": "FIS-08", "nome": "Energia cinética, potencial e conservação da energia mecânica" },
+        { "codigo": "FIS-09", "nome": "Densidade, pressão e Lei de Stevin" },
+        { "codigo": "FIS-10", "nome": "Princípios de Pascal e Arquimedes" },
+        { "codigo": "FIS-11", "nome": "Temperatura, equilíbrio térmico, calor sensível e latente" },
+        { "codigo": "FIS-12", "nome": "Trocas de calor (calorimetria)" },
+        { "codigo": "FIS-13", "nome": "Dilatação dos sólidos e dilatação anômala da água" },
+        { "codigo": "FIS-14", "nome": "Propagação do calor" },
+        { "codigo": "FIS-15", "nome": "Óptica geométrica: visão e defeitos visuais" },
+        { "codigo": "FIS-16", "nome": "Som: natureza, propagação e qualidades fisiológicas" },
+        { "codigo": "FIS-17", "nome": "Lei de Coulomb" },
+        { "codigo": "FIS-18", "nome": "Corrente elétrica, circuitos e efeito Joule" },
+        { "codigo": "FIS-19", "nome": "Efeitos fisiológicos da corrente elétrica" },
+        { "codigo": "FIS-20", "nome": "Campo magnético e ímãs" },
+        { "codigo": "FIS-21", "nome": "Aplicações: efeito fotoelétrico, efeito estufa, brisas, relâmpagos e trovões" },
+        { "codigo": "FIS-22", "nome": "Radioatividade, radiações ionizantes e decaimento" }
+      ]
+    },
+    {
+      "codigo": "QUI", "nome": "Química", "prova": "P2", "itensProva": 18, "exatas": true, "metaPorTopico": 45,
+      "topicos": [
+        { "codigo": "QUI-01", "nome": "Estrutura atômica: partículas, número atômico e de massa" },
+        { "codigo": "QUI-02", "nome": "Massa molecular, mol, constante de Avogadro e volume molar" },
+        { "codigo": "QUI-03", "nome": "Configuração eletrônica" },
+        { "codigo": "QUI-04", "nome": "Tabela periódica e lei periódica" },
+        { "codigo": "QUI-05", "nome": "Ligação iônica" },
+        { "codigo": "QUI-06", "nome": "Ligação covalente e fórmulas (Lewis, molecular, estrutural)" },
+        { "codigo": "QUI-07", "nome": "Número de oxidação" },
+        { "codigo": "QUI-08", "nome": "Ácidos e bases" },
+        { "codigo": "QUI-09", "nome": "Sais e óxidos" },
+        { "codigo": "QUI-10", "nome": "Tipos de reação: neutralização, simples e dupla troca, oxirredução" },
+        { "codigo": "QUI-11", "nome": "Equação química e balanceamento" },
+        { "codigo": "QUI-12", "nome": "Soluções e concentração (g/L e mol/L)" },
+        { "codigo": "QUI-13", "nome": "Carbono e cadeias carbônicas" },
+        { "codigo": "QUI-14", "nome": "Hidrocarbonetos" },
+        { "codigo": "QUI-15", "nome": "Funções oxigenadas: álcool, fenol, éter, aldeído, cetona, ácido carboxílico" },
+        { "codigo": "QUI-16", "nome": "Funções nitrogenadas: amina e amida" },
+        { "codigo": "QUI-17", "nome": "Nomenclatura IUPAC (1 a 8 carbonos)" },
+        { "codigo": "QUI-18", "nome": "Reações orgânicas: reatividade, oxidação, redução e combustão" }
+      ]
+    },
+    {
+      "codigo": "MEC", "nome": "Mecânica Geral", "prova": "P2", "itensProva": 12, "exatas": true, "metaPorTopico": 50,
+      "topicos": [
+        { "codigo": "MEC-01", "nome": "Motor de combustão interna: conceito e ciclo de 4 tempos" },
+        { "codigo": "MEC-02", "nome": "Ciclo Otto × ciclo Diesel" },
+        { "codigo": "MEC-03", "nome": "Sistema de transmissão" },
+        { "codigo": "MEC-04", "nome": "Sistema de freios: tipos e princípio físico" },
+        { "codigo": "MEC-05", "nome": "Sistema de suspensão" },
+        { "codigo": "MEC-06", "nome": "Sistema elétrico" },
+        { "codigo": "MEC-07", "nome": "Sistema de arrefecimento" },
+        { "codigo": "MEC-08", "nome": "Sistema de alimentação" }
+      ]
+    },
+    {
+      "codigo": "BIO", "nome": "Biologia", "prova": "P2", "itensProva": 20, "exatas": false, "metaPorTopico": 40,
+      "topicos": [
+        { "codigo": "BIO-01", "nome": "Classificação dos seres vivos" },
+        { "codigo": "BIO-02", "nome": "Célula procariota e eucariota; estruturas e funções" },
+        { "codigo": "BIO-03", "nome": "Fisiologia, posição anatômica, divisões do corpo e quadrantes abdominais" },
+        { "codigo": "BIO-04", "nome": "Sistema tegumentar" },
+        { "codigo": "BIO-05", "nome": "Sistema muscular" },
+        { "codigo": "BIO-06", "nome": "Sistema esquelético" },
+        { "codigo": "BIO-07", "nome": "Sistema respiratório" },
+        { "codigo": "BIO-08", "nome": "Sistema cardiovascular" },
+        { "codigo": "BIO-09", "nome": "Sistema geniturinário" },
+        { "codigo": "BIO-10", "nome": "Sistema digestório" },
+        { "codigo": "BIO-11", "nome": "Sistema nervoso" },
+        { "codigo": "BIO-12", "nome": "Tecidos animais" },
+        { "codigo": "BIO-13", "nome": "Evolução dos seres vivos" },
+        { "codigo": "BIO-14", "nome": "Reino vegetal" },
+        { "codigo": "BIO-15", "nome": "Reino animal: invertebrados" },
+        { "codigo": "BIO-16", "nome": "Cordados" },
+        { "codigo": "BIO-17", "nome": "Viroses: AIDS, dengue, poliomielite, raiva e sarampo" },
+        { "codigo": "BIO-18", "nome": "Bacterioses: tuberculose, sífilis, meningite, cólera, tétano e leptospirose" },
+        { "codigo": "BIO-19", "nome": "Protozoonoses e verminoses" },
+        { "codigo": "BIO-20", "nome": "Defesas do organismo: imunidade ativa e passiva" },
+        { "codigo": "BIO-21", "nome": "Ecologia: relações tróficas e biomas" },
+        { "codigo": "BIO-22", "nome": "Ciclos biogeoquímicos, conservação e ação antrópica" }
+      ]
+    },
+    {
+      "codigo": "INF", "nome": "Informática", "prova": "P1", "itensProva": 6, "exatas": false, "metaPorTopico": 35,
+      "topicos": [
+        { "codigo": "INF-01", "nome": "Windows" },
+        { "codigo": "INF-02", "nome": "Linux" },
+        { "codigo": "INF-03", "nome": "Editores de texto (Word / Writer)" },
+        { "codigo": "INF-04", "nome": "Planilhas (Excel / Calc)" },
+        { "codigo": "INF-05", "nome": "Apresentações (PowerPoint / Impress)" },
+        { "codigo": "INF-06", "nome": "Redes, Internet e intranet" },
+        { "codigo": "INF-07", "nome": "Navegadores (Edge, Firefox, Chrome)" },
+        { "codigo": "INF-08", "nome": "Correio eletrônico (Outlook, Thunderbird)" },
+        { "codigo": "INF-09", "nome": "Busca, grupos de discussão e redes sociais" },
+        { "codigo": "INF-10", "nome": "Computação e armazenamento em nuvem" },
+        { "codigo": "INF-11", "nome": "Arquivos, pastas e programas" },
+        { "codigo": "INF-12", "nome": "Segurança: procedimentos, malware e aplicativos de proteção" },
+        { "codigo": "INF-13", "nome": "Backup" }
+      ]
+    },
+    {
+      "codigo": "PT", "nome": "Língua Portuguesa", "prova": "P1", "itensProva": 12, "exatas": false, "metaPorTopico": 35,
+      "topicos": [
+        { "codigo": "PT-01", "nome": "Compreensão e interpretação de textos" },
+        { "codigo": "PT-02", "nome": "Tipos e gêneros textuais" },
+        { "codigo": "PT-03", "nome": "Ortografia oficial" },
+        { "codigo": "PT-04", "nome": "Coesão: referenciação, substituição, repetição e conectores" },
+        { "codigo": "PT-05", "nome": "Tempos e modos verbais" },
+        { "codigo": "PT-06", "nome": "Classes de palavras" },
+        { "codigo": "PT-07", "nome": "Coordenação (orações e termos)" },
+        { "codigo": "PT-08", "nome": "Subordinação (orações e termos)" },
+        { "codigo": "PT-09", "nome": "Pontuação" },
+        { "codigo": "PT-10", "nome": "Concordância verbal e nominal" },
+        { "codigo": "PT-11", "nome": "Regência verbal e nominal" },
+        { "codigo": "PT-12", "nome": "Crase" },
+        { "codigo": "PT-13", "nome": "Colocação pronominal" },
+        { "codigo": "PT-14", "nome": "Reescrita: significação e substituição de palavras e trechos" },
+        { "codigo": "PT-15", "nome": "Reescrita: reorganização de períodos e níveis de formalidade" }
+      ]
+    },
+    {
+      "codigo": "ING", "nome": "Língua Inglesa", "prova": "P1", "itensProva": 6, "exatas": false, "metaPorTopico": 60,
+      "topicos": [
+        { "codigo": "ING-01", "nome": "Compreensão geral e inferência" },
+        { "codigo": "ING-02", "nome": "Vocabulário, cognatos e falsos cognatos" },
+        { "codigo": "ING-03", "nome": "Tempos verbais e verbos modais" },
+        { "codigo": "ING-04", "nome": "Conectivos e referência pronominal" }
+      ]
+    },
+    {
+      "codigo": "CDH", "nome": "Cidadania e Direitos Humanos", "prova": "P1", "itensProva": 5, "exatas": false, "metaPorTopico": 40,
+      "topicos": [
+        { "codigo": "CDH-01", "nome": "Ética e moral" },
+        { "codigo": "CDH-02", "nome": "Ética, princípios e valores" },
+        { "codigo": "CDH-03", "nome": "Ética, democracia e exercício da cidadania" },
+        { "codigo": "CDH-04", "nome": "Ética na função pública e no setor público" },
+        { "codigo": "CDH-05", "nome": "Teoria geral dos DH: conceito, terminologia, estrutura normativa, fundamentação" },
+        { "codigo": "CDH-06", "nome": "Afirmação histórica dos direitos humanos" },
+        { "codigo": "CDH-07", "nome": "Direitos humanos e responsabilidade do Estado" }
+      ]
+    },
+    {
+      "codigo": "LEG", "nome": "Legislação CBMAL", "prova": "P1", "itensProva": 5, "exatas": false, "metaPorTopico": 45,
+      "topicos": [
+        { "codigo": "LEG-01", "nome": "Estatuto (Lei 5.346/1992): disposições gerais, hierarquia e disciplina" },
+        { "codigo": "LEG-02", "nome": "Estatuto: ingresso, deveres, ética e compromisso" },
+        { "codigo": "LEG-03", "nome": "Estatuto: direitos e prerrogativas" },
+        { "codigo": "LEG-04", "nome": "Estatuto: situações funcionais (agregação, reversão, ausência, deserção, exclusão)" },
+        { "codigo": "LEG-05", "nome": "RDPMAL (Decreto 37.042/1996): transgressões" },
+        { "codigo": "LEG-06", "nome": "RDPMAL: punições, julgamento, comportamento e recursos" },
+        { "codigo": "LEG-07", "nome": "Lei 6.514/2004: acesso na hierarquia (oficiais e praças)" },
+        { "codigo": "LEG-08", "nome": "Lei 6.544/2004: acesso de soldados, cabos e subtenentes" },
+        { "codigo": "LEG-09", "nome": "Lei 14.751/2023: princípios, competências e organização" },
+        { "codigo": "LEG-10", "nome": "Lei 14.751/2023: direitos, garantias e vedações" }
+      ]
+    },
+    {
+      "codigo": "RED", "nome": "Redação (discursiva)", "prova": "P3", "itensProva": 0, "exatas": false, "metaPorTopico": 10,
+      "topicos": [
+        { "codigo": "RED-01", "nome": "Formato Cebraspe: comandos, critérios e a fórmula da nota" },
+        { "codigo": "RED-02", "nome": "Estrutura: um parágrafo por comando" },
+        { "codigo": "RED-03", "nome": "Norma culta: os erros que mais descontam" },
+        { "codigo": "RED-04", "nome": "Coesão, conectivos e impessoalidade" },
+        { "codigo": "RED-05", "nome": "Repertório coringa" },
+        { "codigo": "RED-06", "nome": "Atualidades: desastres, defesa civil e clima" },
+        { "codigo": "RED-07", "nome": "Atualidades: água, saneamento e meio ambiente" },
+        { "codigo": "RED-08", "nome": "Atualidades: segurança, prevenção e saúde" },
+        { "codigo": "RED-09", "nome": "Atualidades: sociedade, cidadania e tecnologia" }
+      ]
+    }
+  ]
+}

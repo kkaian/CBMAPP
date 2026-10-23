@@ -1,0 +1,72 @@
+[
+  {
+    "id": "BIO-02-0001", "topico": "BIO-02",
+    "enunciado": "O nucleoide é a região onde se encontra o material genético nas células procarióticas.",
+    "gabarito": "C",
+    "comentario": "Procariontes não têm núcleo delimitado por membrana (carioteca). O DNA fica disperso numa região do citoplasma chamada nucleoide.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "BIO-14-0001", "topico": "BIO-14",
+    "enunciado": "Os musgos pertencem ao grupo das pteridófitas.",
+    "gabarito": "E",
+    "comentario": "Musgos são **briófitas** (avasculares, sem vasos condutores). Pteridófitas (samambaias, avencas) já possuem vasos, mas não têm sementes.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "BIO-02-0002", "topico": "BIO-02",
+    "enunciado": "A parede celular das bactérias é constituída principalmente de celulose.",
+    "gabarito": "E",
+    "comentario": "A parede bacteriana é de **peptideoglicano**. Celulose forma a parede das células vegetais; quitina, a dos fungos.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "BIO-08-0001", "topico": "BIO-08",
+    "enunciado": "As artérias são os vasos que conduzem o sangue para fora do coração.",
+    "gabarito": "C",
+    "comentario": "Artéria = sai do coração; veia = chega ao coração. Não depende de o sangue ser arterial ou venoso: a artéria pulmonar, por exemplo, leva sangue pobre em oxigênio.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "BIO-20-0001", "topico": "BIO-20",
+    "enunciado": "A vacina confere imunidade passiva, por fornecer ao organismo anticorpos prontos.",
+    "gabarito": "E",
+    "comentario": "A vacina fornece antígenos e o próprio organismo produz anticorpos e memória: imunidade **ativa** (artificial). Anticorpos prontos vêm do **soro** (imunidade passiva).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "inversao", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "BIO-06-0001", "topico": "BIO-06",
+    "enunciado": "A coluna vertebral humana possui sete vértebras cervicais.",
+    "gabarito": "C",
+    "comentario": "Coluna: 7 cervicais, 12 torácicas, 5 lombares, sacro (5 fundidas) e cóccix (3–5 fundidas). Macete: 7-12-5.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "BIO-17-0001", "topico": "BIO-17",
+    "enunciado": "O sarampo é uma doença causada por bactéria.",
+    "gabarito": "E",
+    "comentario": "O sarampo é uma **virose** (vírus do gênero Morbillivirus), transmitida por via respiratória e prevenida pela vacina tríplice viral.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "BIO-21-0001", "topico": "BIO-21",
+    "enunciado": "Na cadeia alimentar, em média apenas cerca de 10% da energia é transferida de um nível trófico para o seguinte.",
+    "gabarito": "C",
+    "comentario": "Regra dos 10%: a maior parte da energia de cada nível é gasta no metabolismo e perdida como calor. Por isso as cadeias raramente passam de 4 ou 5 níveis.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "BIO-02-0003", "topico": "BIO-02",
+    "enunciado": "A mitocôndria é a organela responsável pela fotossíntese nas células vegetais.",
+    "gabarito": "E",
+    "comentario": "Fotossíntese ocorre no **cloroplasto**. A mitocôndria faz a respiração celular (presente também nas células vegetais).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "competencia", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "BIO-11-0001", "topico": "BIO-11",
+    "enunciado": "O sistema nervoso simpático está associado a respostas de aceleração do organismo (\"luta ou fuga\").",
+    "gabarito": "C",
+    "comentario": "Simpático: luta ou fuga (acelera o coração, dilata pupilas e brônquios). Parassimpático: repouso e digestão (efeitos opostos).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  }
+]

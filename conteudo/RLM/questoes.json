@@ -1,0 +1,72 @@
+[
+  {
+    "id": "RLM-03-0001", "topico": "RLM-03",
+    "enunciado": "A negação da proposição \"Se chove, então levo guarda-chuva\" é \"Chove e não levo guarda-chuva\".",
+    "gabarito": "C",
+    "comentario": "A negação de \\(A \\to B\\) é \\(A \\land \\lnot B\\): mantém-se o antecedente e nega-se o consequente. \"Chove e não levo guarda-chuva.\"",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RLM-02-0001", "topico": "RLM-02",
+    "enunciado": "A proposição \"Se A e B, então C\" tem uma tabela-verdade com 8 linhas.",
+    "gabarito": "C",
+    "comentario": "Há 3 proposições simples (A, B e C). Número de linhas: \\(2^n = 2^3 = 8\\).",
+    "dificuldade": 1, "tipo": "calculo", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RLM-02-0002", "topico": "RLM-02",
+    "enunciado": "Se a proposição A é falsa, então a condicional \"Se A, então B\" é falsa.",
+    "gabarito": "E",
+    "comentario": "A condicional \\(A \\to B\\) só é falsa no caso V → F. Com antecedente falso, ela é **verdadeira**, qualquer que seja B.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "inversao", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RLM-03-0002", "topico": "RLM-03",
+    "enunciado": "A proposição \"Se A, então B\" é logicamente equivalente a \"não A ou B\".",
+    "gabarito": "C",
+    "comentario": "Equivalência fundamental da condicional: \\(A \\to B \\equiv \\lnot A \\lor B\\). As duas só são falsas quando A é V e B é F.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RLM-03-0003", "topico": "RLM-03",
+    "enunciado": "A negação de \"Todos os bombeiros são corajosos\" é \"Nenhum bombeiro é corajoso\".",
+    "gabarito": "E",
+    "comentario": "Para negar \"todo\", basta um contraexemplo: \"**Algum** bombeiro **não** é corajoso\" (ou \"existe bombeiro que não é corajoso\"). \"Nenhum\" é o contrário, não a negação.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "absoluto", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RLM-04-0001", "topico": "RLM-04",
+    "enunciado": "Um argumento pode ser válido mesmo que suas premissas sejam falsas.",
+    "gabarito": "C",
+    "comentario": "Validade depende só da **forma**: se as premissas fossem verdadeiras, a conclusão teria de ser verdadeira. A verdade real das premissas não interfere na validade.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RLM-04-0002", "topico": "RLM-04",
+    "enunciado": "Das premissas \"Todo A é C\" e \"Todo B é C\", conclui-se logicamente que \"Todo A é B\".",
+    "gabarito": "E",
+    "comentario": "A e B estão ambos dentro de C, mas podem ser conjuntos disjuntos (diagrama de Venn). A conclusão não decorre das premissas: argumento inválido (termo médio não distribuído).",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RLM-02-0003", "topico": "RLM-02",
+    "enunciado": "A proposição \\(\\lnot(P \\land \\lnot Q) \\leftrightarrow (\\lnot P \\lor Q)\\) é uma tautologia.",
+    "gabarito": "C",
+    "comentario": "Pela lei de De Morgan, \\(\\lnot(P \\land \\lnot Q) \\equiv \\lnot P \\lor Q\\). Os dois lados da bicondicional têm sempre o mesmo valor, então ela é sempre verdadeira: tautologia.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RLM-11-0001", "topico": "RLM-11",
+    "enunciado": "Se todos os valores de um conjunto de dados são iguais, o desvio-padrão desse conjunto é zero.",
+    "gabarito": "C",
+    "comentario": "Desvio-padrão mede a dispersão em torno da média. Valores todos iguais = todos iguais à média = nenhuma dispersão. Desvio-padrão (e variância) = 0.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RLM-11-0002", "topico": "RLM-11",
+    "enunciado": "Para calcular a mediana de um conjunto com quantidade par de elementos, toma-se a média dos dois valores centrais, após a ordenação dos dados.",
+    "gabarito": "C",
+    "comentario": "Com \\(n\\) par, ordena-se o rol e a mediana é a média aritmética dos dois termos centrais (posições \\(n/2\\) e \\(n/2 + 1\\)).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  }
+]

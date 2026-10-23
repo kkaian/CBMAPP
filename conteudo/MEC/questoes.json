@@ -1,0 +1,72 @@
+[
+  {
+    "id": "MEC-02-0001", "topico": "MEC-02",
+    "enunciado": "No motor de ciclo Diesel, a ignição da mistura ocorre por meio da vela de ignição.",
+    "gabarito": "E",
+    "comentario": "No Diesel a ignição é por **compressão** (autoignição): o ar comprimido fica tão quente que o diesel injetado inflama sozinho. Não há vela de ignição; existe a vela **aquecedora**, que só ajuda na partida a frio. Vela de ignição é do ciclo Otto.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "MEC-01-0001", "topico": "MEC-01",
+    "enunciado": "No ciclo de quatro tempos, apenas o tempo de combustão (explosão) produz trabalho.",
+    "gabarito": "C",
+    "comentario": "Tempos: 1º admissão, 2º compressão, 3º combustão/expansão, 4º escape. Só o 3º empurra o pistão e gera trabalho; os outros três consomem energia (vinda do volante).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "MEC-03-0001", "topico": "MEC-03",
+    "enunciado": "A embreagem tem a função de acoplar e desacoplar o motor do sistema de transmissão.",
+    "gabarito": "C",
+    "comentario": "A embreagem liga e desliga o motor da caixa de câmbio, permitindo trocar marchas e parar o veículo sem desligar o motor.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "MEC-04-0001", "topico": "MEC-04",
+    "enunciado": "O sistema de freios converte energia cinética em calor por meio do atrito.",
+    "gabarito": "C",
+    "comentario": "Freios de atrito (disco ou tambor) dissipam a energia cinética do veículo na forma de calor nas pastilhas/lonas e no disco/tambor.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "MEC-04-0002", "topico": "MEC-04",
+    "enunciado": "O freio hidráulico fundamenta-se no Princípio de Pascal.",
+    "gabarito": "C",
+    "comentario": "A pressão aplicada no cilindro-mestre é transmitida integralmente pelo fluido até os cilindros das rodas (Pascal). Como a área nas rodas é maior, a força é multiplicada.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "MEC-05-0001", "topico": "MEC-05",
+    "enunciado": "No sistema de suspensão, o amortecedor absorve o impacto e a mola controla a oscilação resultante.",
+    "gabarito": "E",
+    "comentario": "Funções invertidas: a **mola** absorve o impacto (armazena energia); o **amortecedor** controla e dissipa a oscilação da mola, evitando que o carro fique \"quicando\".",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "inversao", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "MEC-06-0001", "topico": "MEC-06",
+    "enunciado": "O alternador é o componente responsável por dar a partida no motor.",
+    "gabarito": "E",
+    "comentario": "Quem dá a partida é o **motor de partida** (arranque), alimentado pela bateria. O alternador gera energia com o motor funcionando e recarrega a bateria.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "competencia", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "MEC-07-0001", "topico": "MEC-07",
+    "enunciado": "A válvula termostática tem a função de manter o motor sempre na menor temperatura possível.",
+    "gabarito": "E",
+    "comentario": "O termostato mantém o motor na temperatura **ideal de trabalho**: fica fechado com o motor frio (aquece mais rápido) e abre quando atinge a temperatura de operação. Motor frio demais também é ruim (mais desgaste e consumo).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "absoluto", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "MEC-02-0002", "topico": "MEC-02",
+    "enunciado": "No motor de ciclo Otto, comprime-se apenas o ar, sendo o combustível injetado posteriormente.",
+    "gabarito": "E",
+    "comentario": "No ciclo Otto clássico comprime-se a **mistura ar + combustível**, que depois é inflamada pela vela. Comprimir só o ar e injetar o combustível depois é característica do **Diesel**.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "inversao", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "MEC-02-0003", "topico": "MEC-02",
+    "enunciado": "O motor Diesel possui taxa de compressão maior que a do Otto, o que contribui para sua maior eficiência.",
+    "gabarito": "C",
+    "comentario": "O Diesel precisa de compressão alta (cerca de 15:1 a 22:1) para a autoignição; o Otto trabalha com cerca de 8:1 a 12:1. Maior taxa de compressão → maior rendimento térmico.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  }
+]

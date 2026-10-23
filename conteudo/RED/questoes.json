@@ -1,0 +1,142 @@
+[
+  {
+    "id": "RED-01-0001", "topico": "RED-01",
+    "enunciado": "Na prova discursiva do Cebraspe, basta desenvolver bem o tema, não sendo necessário responder a cada comando específico do enunciado.",
+    "gabarito": "E",
+    "comentario": "Cada comando vale uma fatia da nota de conteúdo (NC). É preciso responder a **todos**, de forma explícita e, de preferência, na ordem. Texto bom que esquece um comando perde a pontuação inteira daquele comando.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RED-04-0001", "topico": "RED-04",
+    "enunciado": "O texto dissertativo deve ser redigido em terceira pessoa, evitando-se a manifestação explícita de opinião pessoal.",
+    "gabarito": "C",
+    "comentario": "Impessoalidade é exigida no registro formal: nada de \"eu acho\" ou \"na minha opinião\". Use estruturas como \"observa-se que\", \"é necessário que\", \"cabe ao poder público\".",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RED-01-0002", "topico": "RED-01",
+    "enunciado": "Pela fórmula do edital, o desconto de cada erro de norma culta é tanto menor quanto maior for o número de linhas efetivamente escritas.",
+    "gabarito": "C",
+    "comentario": "\\(NPD = NC - \\dfrac{6 \\times NE}{TL}\\). Cada erro vale \\(6 \\div TL\\): com 20 linhas, 0,30; com 30 linhas, 0,20. Por isso escrever perto de 30 linhas, sem erros novos, protege a nota.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RED-05-0001", "topico": "RED-05",
+    "enunciado": "É recomendável incluir dados estatísticos e citações aproximadas para enriquecer a argumentação, ainda que não seja possível confirmá-los.",
+    "gabarito": "E",
+    "comentario": "Dado ou citação inventada enfraquece o texto e pode ser penalizado. Prefira fato real qualitativo (ex.: as enchentes no RS em 2024), artigo da Constituição e paráfrase de autor consagrado.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RED-02-0001", "topico": "RED-02",
+    "enunciado": "A proposta de intervenção, com agente, ação e finalidade, é obrigatória em toda redação do Cebraspe, assim como no ENEM.",
+    "gabarito": "E",
+    "comentario": "No Cebraspe a proposta só é exigida se algum **comando** pedir solução ou medidas. Sem esse comando, a conclusão sintetiza o texto.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "absoluto", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RED-01-0003", "topico": "RED-01",
+    "enunciado": "Ultrapassar o limite de linhas estabelecido faz com que o trecho excedente seja desconsiderado na correção.",
+    "gabarito": "C",
+    "comentario": "Edital, item 9.7.5, alínea c: é desconsiderado o fragmento que ultrapassar a extensão máxima (30 linhas) ou for escrito fora do local apropriado.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RED-01-0004", "topico": "RED-01",
+    "enunciado": "A presença, no texto definitivo, de marca que identifique o candidato acarreta a anulação da prova discursiva.",
+    "gabarito": "C",
+    "comentario": "Edital, item 9.4: qualquer palavra ou marca identificadora fora do local apropriado acarreta a anulação da prova discursiva.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RED-02-0002", "topico": "RED-02",
+    "enunciado": "Iniciar cada parágrafo de desenvolvimento sinalizando qual comando está sendo respondido facilita a identificação pelo examinador.",
+    "gabarito": "C",
+    "comentario": "Aberturas como \"No que se refere a…\", \"Quanto a…\" e \"Acerca de…\" mostram ao examinador onde cada comando foi atendido.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RED-05-0002", "topico": "RED-05",
+    "enunciado": "Copiar literalmente trechos dos textos motivadores é uma boa estratégia para garantir pontuação no conteúdo.",
+    "gabarito": "E",
+    "comentario": "Cópia dos textos motivadores não demonstra desenvolvimento próprio e não pontua. Use os textos como ponto de partida, com suas palavras.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RED-05-0003", "topico": "RED-05",
+    "enunciado": "Ancorar a argumentação em dispositivos da Constituição Federal, como o art. 6º, é um recurso de repertório adequado.",
+    "gabarito": "C",
+    "comentario": "A Constituição é o repertório mais seguro: o art. 6º (direitos sociais) encaixa em quase todo tema; para temas de bombeiro, o art. 144, §5º (defesa civil).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "RED-01-0005", "topico": "RED-01",
+    "enunciado": "Um candidato com nota de conteúdo 22, 6 erros e 27 linhas escritas obtém nota final superior a 20 pontos.",
+    "gabarito": "C",
+    "comentario": "\\(NPD = 22 - \\dfrac{6 \\times 6}{27} = 22 - \\dfrac{36}{27} \\approx 22 - 1{,}33 = 20{,}67\\). Superior a 20.",
+    "dificuldade": 2, "tipo": "calculo", "armadilha": null, "origem": "inedita", "status": "ok"
+  },
+  {
+    "id": "RED-01-0006", "topico": "RED-01",
+    "enunciado": "Para não ser eliminado na prova discursiva, o candidato precisa obter nota igual ou superior a 18 pontos.",
+    "gabarito": "E",
+    "comentario": "Edital, item 9.7.6: é aprovado quem obtém **NPD ≥ 15,00** pontos, metade dos 30.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "numero", "origem": "inedita", "status": "ok"
+  },
+  {
+    "id": "RED-01-0007", "topico": "RED-01",
+    "enunciado": "Com nota de conteúdo 18, um candidato que escreveu 20 linhas com 10 erros fica abaixo do mínimo exigido na discursiva.",
+    "gabarito": "E",
+    "comentario": "\\(NPD = 18 - \\dfrac{6 \\times 10}{20} = 18 - 3 = 15\\). O mínimo é NPD ≥ 15, então ele fica **exatamente no mínimo** e não é eliminado. Mas repare: com 10 erros, qualquer pontinho a menos no conteúdo o eliminaria.",
+    "dificuldade": 2, "tipo": "calculo", "armadilha": "numero", "origem": "inedita", "status": "ok"
+  },
+  {
+    "id": "RED-03-0001", "topico": "RED-03",
+    "enunciado": "Na frase \"A ocupação desordenada das encostas, agrava os riscos de deslizamento\", a vírgula está empregada de acordo com a norma-padrão.",
+    "gabarito": "E",
+    "comentario": "A vírgula separa o sujeito (\"A ocupação desordenada das encostas\") do verbo (\"agrava\"), o que é erro. Sujeito e verbo não se separam por vírgula.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "inedita", "status": "ok"
+  },
+  {
+    "id": "RED-03-0002", "topico": "RED-03",
+    "enunciado": "Está de acordo com a norma-padrão a frase \"Haviam muitos desafios para a defesa civil naquele período\".",
+    "gabarito": "E",
+    "comentario": "\"Haver\" no sentido de existir é impessoal e fica no singular: \"**Havia** muitos desafios\". Com \"existir\", haveria concordância: \"Existiam muitos desafios\".",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "inedita", "status": "ok"
+  },
+  {
+    "id": "RED-03-0003", "topico": "RED-03",
+    "enunciado": "Em \"o risco eminente de deslizamento obrigou a evacuação\", o adjetivo foi empregado com propriedade, no sentido de algo prestes a acontecer.",
+    "gabarito": "E",
+    "comentario": "\"Eminente\" = ilustre, elevado. Prestes a acontecer é \"**iminente**\": \"risco **iminente**\". Troca de parônimos conta como erro de propriedade vocabular.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "outro", "origem": "inedita", "status": "ok"
+  },
+  {
+    "id": "RED-04-0002", "topico": "RED-04",
+    "enunciado": "O conectivo \"portanto\" é adequado para introduzir um argumento adicional no meio do desenvolvimento, com o mesmo valor de \"além disso\".",
+    "gabarito": "E",
+    "comentario": "\"Portanto\" introduz **conclusão**. Para adição: \"além disso\", \"ademais\", \"outrossim\".",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "competencia", "origem": "inedita", "status": "ok"
+  },
+  {
+    "id": "RED-05-0004", "topico": "RED-05",
+    "enunciado": "Por se tratar de repertório sociológico, a obra O Povo Brasileiro, de Darcy Ribeiro, só pode ser empregada em redações sobre formação étnica do país.",
+    "gabarito": "E",
+    "comentario": "Darcy Ribeiro é coringa justamente porque explica a **desigualdade estrutural** da formação do Brasil, o que se conecta a desastres (exposição dos mais pobres ao risco), saúde, saneamento, violência e cidadania.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "absoluto", "origem": "inedita", "status": "ok"
+  },
+  {
+    "id": "RED-06-0001", "topico": "RED-06",
+    "enunciado": "A Constituição Federal atribui aos corpos de bombeiros militares, além das atribuições definidas em lei, a execução de atividades de defesa civil.",
+    "gabarito": "C",
+    "comentario": "Art. 144, §5º, da CF. É repertório institucional seguro para temas de desastres e prevenção.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "inedita", "status": "ok"
+  },
+  {
+    "id": "RED-07-0001", "topico": "RED-07",
+    "enunciado": "Segundo a Lei 9.433/1997, em situações de escassez, o uso prioritário dos recursos hídricos é a geração de energia elétrica.",
+    "gabarito": "E",
+    "comentario": "Em escassez, a prioridade é o **consumo humano** e a **dessedentação de animais** (Lei 9.433/1997, art. 1º, III).",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "inversao", "origem": "inedita", "status": "ok"
+  }
+]

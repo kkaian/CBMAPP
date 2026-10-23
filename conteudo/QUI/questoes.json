@@ -1,0 +1,72 @@
+[
+  {
+    "id": "QUI-01-0001", "topico": "QUI-01",
+    "enunciado": "Em um átomo eletricamente neutro, o número de elétrons é igual ao número de prótons.",
+    "gabarito": "C",
+    "comentario": "Átomo neutro: cargas positivas (prótons) = cargas negativas (elétrons). Ambos iguais ao número atômico \\(Z\\).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "QUI-01-0002", "topico": "QUI-01",
+    "enunciado": "Isótopos são átomos de um mesmo elemento químico que possuem o mesmo número de massa.",
+    "gabarito": "E",
+    "comentario": "Isótopos têm o mesmo número atômico (\\(Z\\)) e números de massa (\\(A\\)) **diferentes**. Mesmo \\(A\\) com \\(Z\\) diferente = isóbaros; mesmo número de nêutrons = isótonos.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "inversao", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "QUI-07-0001", "topico": "QUI-07",
+    "enunciado": "Em regra, o número de oxidação do oxigênio nos compostos é −2, salvo exceções como os peróxidos.",
+    "gabarito": "C",
+    "comentario": "Nox usual do oxigênio: −2. Exceções: peróxidos (−1, ex.: \\(\\text{H}_2\\text{O}_2\\)), superóxidos (−1/2) e fluoretos de oxigênio (\\(\\text{OF}_2\\): +2).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "QUI-06-0001", "topico": "QUI-06",
+    "enunciado": "Os íons sulfato \\((\\text{SO}_4^{2-})\\) e amônio \\((\\text{NH}_4^{+})\\) apresentam geometria tetraédrica.",
+    "gabarito": "C",
+    "comentario": "Nos dois íons o átomo central (S e N) tem 4 ligantes e nenhum par de elétrons livre. Pela teoria da repulsão dos pares eletrônicos, 4 nuvens sem par isolado = geometria tetraédrica (ângulos de ~109,5°).",
+    "dificuldade": 3, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "QUI-10-0001", "topico": "QUI-10",
+    "enunciado": "Na oxidação, uma espécie ganha elétrons e tem seu número de oxidação reduzido.",
+    "gabarito": "E",
+    "comentario": "Oxidação = **perda** de elétrons e **aumento** do Nox. Ganhar elétrons e reduzir o Nox é a **redução**. Macete: \"quem oxida perde\".",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "inversao", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "QUI-10-0002", "topico": "QUI-10",
+    "enunciado": "A reação entre um ácido e uma base, com formação de sal e água, é uma reação de neutralização.",
+    "gabarito": "C",
+    "comentario": "Ácido + base → sal + água é a definição de neutralização. Ex.: \\(\\text{HCl} + \\text{NaOH} \\to \\text{NaCl} + \\text{H}_2\\text{O}\\).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "QUI-02-0001", "topico": "QUI-02",
+    "enunciado": "Nas CNTP, o volume molar de um gás é igual a 22,4 litros por mol.",
+    "gabarito": "C",
+    "comentario": "Nas CNTP (0 °C e 1 atm), 1 mol de gás ideal ocupa 22,4 L. É o valor usado em provas, salvo quando o enunciado der outro.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "QUI-12-0001", "topico": "QUI-12",
+    "enunciado": "Em uma diluição, ao se adicionar solvente, a quantidade de soluto, em mols, aumenta.",
+    "gabarito": "E",
+    "comentario": "Na diluição só se acrescenta solvente: a quantidade de soluto se conserva e a concentração diminui. Por isso vale \\(C_1 V_1 = C_2 V_2\\).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "QUI-15-0001", "topico": "QUI-15",
+    "enunciado": "Em um aldeído, o grupo carbonila (C=O) localiza-se em um carbono na extremidade da cadeia.",
+    "gabarito": "C",
+    "comentario": "Aldeído: carbonila em carbono primário, na ponta da cadeia (grupo \\(-\\text{CHO}\\)). Na cetona, a carbonila fica em carbono secundário, no meio da cadeia.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "QUI-05-0001", "topico": "QUI-05",
+    "enunciado": "No cloreto de amônio \\((\\text{NH}_4\\text{Cl})\\), a ligação entre o cátion \\(\\text{NH}_4^{+}\\) e o ânion \\(\\text{Cl}^{-}\\) é covalente.",
+    "gabarito": "E",
+    "comentario": "Entre cátion e ânion a ligação é **iônica** (atração eletrostática). As ligações N–H dentro do íon amônio é que são covalentes. O \\(\\text{NH}_4\\text{Cl}\\) é um composto iônico sem metal.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  }
+]

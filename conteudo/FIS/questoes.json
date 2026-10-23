@@ -1,0 +1,72 @@
+[
+  {
+    "id": "FIS-04-0001", "topico": "FIS-04",
+    "enunciado": "No movimento circular uniforme, a velocidade escalar é constante, embora exista aceleração centrípeta.",
+    "gabarito": "C",
+    "comentario": "No MCU o módulo da velocidade é constante, mas a direção do vetor velocidade muda a cada instante. Essa mudança de direção exige aceleração centrípeta, \\(a_c = v^2/R\\), apontada para o centro.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "FIS-06-0001", "topico": "FIS-06",
+    "enunciado": "A força gravitacional entre dois corpos é inversamente proporcional à distância entre eles.",
+    "gabarito": "E",
+    "comentario": "Lei da Gravitação Universal: \\(F = G\\dfrac{m_1 m_2}{d^2}\\). A força é inversamente proporcional ao **quadrado** da distância: dobrando \\(d\\), a força cai para 1/4.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "numero", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "FIS-04-0002", "topico": "FIS-04",
+    "enunciado": "No lançamento de projétil, os movimentos horizontal e vertical podem ser tratados de forma independente.",
+    "gabarito": "C",
+    "comentario": "Princípio da independência (Galileu): na horizontal, MRU (sem aceleração, desprezando o ar); na vertical, MUV com aceleração \\(g\\). Os dois só compartilham o tempo.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "FIS-11-0001", "topico": "FIS-11",
+    "enunciado": "Durante a fusão de uma substância pura, a temperatura permanece constante enquanto há recebimento de calor.",
+    "gabarito": "C",
+    "comentario": "Na mudança de fase de substância pura, o calor recebido (calor latente, \\(Q = m \\cdot L\\)) é usado para romper ligações, não para aumentar a temperatura. Ela fica constante até a fusão terminar.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "FIS-10-0001", "topico": "FIS-10",
+    "enunciado": "Pelo Princípio de Arquimedes, o empuxo sobre um corpo imerso é igual ao peso do fluido por ele deslocado.",
+    "gabarito": "C",
+    "comentario": "Enunciado do Princípio de Arquimedes: \\(E = \\rho_{\\text{fluido}} \\cdot V_{\\text{deslocado}} \\cdot g\\), que é exatamente o peso do fluido deslocado.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "FIS-15-0001", "topico": "FIS-15",
+    "enunciado": "Na miopia, a imagem se forma atrás da retina, sendo corrigida com lente convergente.",
+    "gabarito": "E",
+    "comentario": "Na miopia o olho é \"longo\" e a imagem se forma **antes** da retina; corrige-se com lente **divergente**. Imagem atrás da retina e lente convergente descrevem a **hipermetropia**.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "inversao", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "FIS-16-0001", "topico": "FIS-16",
+    "enunciado": "O som é uma onda eletromagnética que se propaga inclusive no vácuo.",
+    "gabarito": "E",
+    "comentario": "O som é uma onda **mecânica** (longitudinal no ar): precisa de um meio material para se propagar. No vácuo não há som. Quem se propaga no vácuo são as ondas eletromagnéticas (luz, rádio).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "FIS-18-0001", "topico": "FIS-18",
+    "enunciado": "Na associação de resistores em série, a resistência equivalente é a soma das resistências individuais.",
+    "gabarito": "C",
+    "comentario": "Em série a corrente é a mesma em todos e as tensões se somam: \\(R_{eq} = R_1 + R_2 + \\cdots\\). (Em paralelo, somam-se os inversos.)",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "FIS-03-0001", "topico": "FIS-03",
+    "enunciado": "Na função horária \\(s = s_0 + v_0 t + \\tfrac{1}{2} a t^2\\), o coeficiente que multiplica \\(t^2\\) é numericamente igual à aceleração.",
+    "gabarito": "E",
+    "comentario": "O coeficiente de \\(t^2\\) é \\(\\tfrac{a}{2}\\), a **metade** da aceleração. Ex.: em \\(s = 5 + 2t + 3t^2\\), a aceleração é \\(6\\ \\text{m/s}^2\\), não 3.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "numero", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "FIS-07-0001", "topico": "FIS-07",
+    "enunciado": "O rendimento de uma máquina térmica pode ultrapassar 100%.",
+    "gabarito": "E",
+    "comentario": "Rendimento \\(\\eta = \\dfrac{P_{\\text{útil}}}{P_{\\text{total}}}\\). Como a potência útil nunca supera a total (conservação da energia), \\(\\eta < 100\\%\\) em qualquer máquina real.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "absoluto", "origem": "drive-comentadas", "status": "ok"
+  }
+]

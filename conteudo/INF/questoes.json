@@ -1,0 +1,72 @@
+[
+  {
+    "id": "INF-02-0001", "topico": "INF-02",
+    "enunciado": "No Linux, o comando cat é o indicado para descobrir se um arquivo é do tipo texto ou binário.",
+    "gabarito": "E",
+    "comentario": "O `cat` apenas exibe (concatena) o conteúdo do arquivo. Para identificar o tipo, usa-se o comando `file`.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "competencia", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "INF-01-0001", "topico": "INF-01",
+    "enunciado": "No Windows 10, o Gerenciador de Tarefas permite visualizar os aplicativos em execução e ordená-los pelo consumo de CPU.",
+    "gabarito": "C",
+    "comentario": "O Gerenciador de Tarefas (Ctrl+Shift+Esc) mostra processos e aplicativos e permite ordenar por CPU, memória, disco e rede. Não confundir com o Visualizador de Eventos, que mostra logs.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "INF-10-0001", "topico": "INF-10",
+    "enunciado": "Gmail e Microsoft Office 365 são exemplos de plataforma como serviço (PaaS).",
+    "gabarito": "E",
+    "comentario": "São **SaaS** (software como serviço): aplicação pronta para o usuário final. PaaS oferece plataforma para desenvolver e hospedar aplicações; IaaS oferece infraestrutura (máquinas, rede, armazenamento).",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "INF-07-0001", "topico": "INF-07",
+    "enunciado": "Cookies são complementos que o usuário instala no navegador para personalizar a navegação, como bloqueadores de anúncios.",
+    "gabarito": "E",
+    "comentario": "Isso descreve **extensões/complementos**. Cookies são pequenos arquivos de dados gravados pelo site no navegador (sessão, preferências, rastreamento).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "INF-12-0001", "topico": "INF-12",
+    "enunciado": "Além de filtrar o tráfego de rede, o firewall realiza o backup de arquivos críticos do sistema operacional.",
+    "gabarito": "E",
+    "comentario": "Firewall só controla o tráfego que entra e sai da rede, segundo regras. Backup é outra ferramenta.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "competencia", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "INF-13-0001", "topico": "INF-13",
+    "enunciado": "Fazer backups regularmente é uma forma eficaz de mitigar os efeitos de um ataque de ransomware.",
+    "gabarito": "C",
+    "comentario": "O ransomware criptografa os dados e pede resgate. Com backup atualizado (de preferência desconectado da rede), restauram-se os arquivos sem pagar.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "INF-04-0001", "topico": "INF-04",
+    "enunciado": "No Excel, a função CONT.VALORES conta apenas as células que contêm números.",
+    "gabarito": "E",
+    "comentario": "CONT.VALORES conta células **não vazias** (números, textos, erros). Quem conta só números é CONT.NÚM; CONTAR.VAZIO conta as vazias.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "competencia", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "INF-04-0002", "topico": "INF-04",
+    "enunciado": "Em uma referência absoluta no Excel, como $A$1, a linha e a coluna permanecem fixas ao copiar a fórmula.",
+    "gabarito": "C",
+    "comentario": "O cifrão trava o que vem logo depois dele. Em $A$1, coluna e linha ficam fixas. Mistas: $A1 (trava a coluna) e A$1 (trava a linha).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "INF-12-0002", "topico": "INF-12",
+    "enunciado": "Um worm é um tipo de malware que necessita de um arquivo hospedeiro para se propagar.",
+    "gabarito": "E",
+    "comentario": "Quem precisa de hospedeiro (arquivo ou programa infectado) é o **vírus**. O worm se autorreplica e se espalha sozinho pela rede, explorando falhas.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "competencia", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "INF-01-0002", "topico": "INF-01",
+    "enunciado": "SSDs devem ser desfragmentados periodicamente para que o computador funcione melhor.",
+    "gabarito": "E",
+    "comentario": "Desfragmentação é para HD mecânico. No SSD não traz ganho e gasta ciclos de escrita; o Windows apenas \"otimiza\" o SSD com o comando TRIM.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  }
+]

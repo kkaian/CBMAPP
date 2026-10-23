@@ -1,0 +1,20 @@
+# Mantém o projeto do Supabase acordado (o plano grátis pausa após 7 dias sem atividade).
+# Precisa dos secrets SUPABASE_URL e SUPABASE_ANON_KEY no repositório
+# (GitHub > Settings > Secrets and variables > Actions).
+name: Manter Supabase acordado
+
+on:
+  schedule:
+    - cron: '0 12 */3 * *' # a cada 3 dias, 9h de Brasília
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chamar a função ping()
+        run: |
+          curl -sf -X POST "${{ secrets.SUPABASE_URL }}/rest/v1/rpc/ping" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Content-Type: application/json" -d '{}'

@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CBMAPP — Esboço</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --phone: #161920;
+    --card: #1f232c;
+    --card2: #272c37;
+    --line: #333946;
+    --text: #eef0f4;
+    --muted: #9aa1ae;
+    --red: #e5484d;
+    --orange: #f2994a;
+    --yellow: #f2c94c;
+    --green: #3fb970;
+    --gray: #5b6270;
+    --accent: #e5484d;
+    --blue: #4c8df6;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .layout { display: flex; gap: 32px; justify-content: center; align-items: flex-start; padding: 24px 16px; }
+  .index { width: 240px; position: sticky; top: 24px; }
+  .index h1 { font-size: 18px; margin: 0 0 4px; }
+  .index p { color: var(--muted); font-size: 13px; margin: 0 0 16px; }
+  .index button {
+    display: block; width: 100%; text-align: left; margin: 0 0 6px; padding: 9px 12px;
+    background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: 10px; cursor: pointer; font: inherit; font-size: 14px;
+  }
+  .index button.on { border-color: var(--accent); background: #2a1c1f; }
+  .phone {
+    width: 390px; height: 800px; background: var(--phone); border: 10px solid #000; border-radius: 44px;
+    overflow: hidden; position: relative; box-shadow: 0 20px 60px #0008; display: flex; flex-direction: column;
+  }
+  .screen { display: none; flex: 1; overflow-y: auto; padding: 18px 16px 90px; }
+  .screen.on { display: block; }
+  .nav {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 68px; background: #12141a; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-around; align-items: center;
+  }
+  .nav button { background: none; border: 0; color: var(--muted); font: inherit; font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; }
+  .nav button span { font-size: 20px; }
+  .nav button.on { color: var(--text); }
+  .nav.hide { display: none; }
+  @media (max-width: 760px) {
+    .layout { padding: 0; display: block; }
+    .index { display: none; }
+    .phone { width: 100%; height: 100vh; border: 0; border-radius: 0; }
+  }
+
+  h2 { font-size: 22px; margin: 4px 0 14px; }
+  h3 { font-size: 15px; margin: 18px 0 8px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; font-size: 12px; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 14px; margin-bottom: 10px; }
+  .row { display: flex; align-items: center; gap: 10px; }
+  .between { justify-content: space-between; }
+  .muted { color: var(--muted); }
+  .small { font-size: 13px; }
+  .big { font-size: 28px; font-weight: 700; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 12px; font-weight: 600; background: var(--card2); }
+  .p-red { background: #3a1d20; color: #ff8a8d; }
+  .p-orange { background: #3a2a1a; color: #ffb877; }
+  .p-yellow { background: #3a3419; color: #f7d96b; }
+  .p-green { background: #173324; color: #6fdc98; }
+  .p-gray { background: #2a2e37; color: var(--muted); }
+  .btn {
+    display: block; width: 100%; padding: 13px; border: 0; border-radius: 12px; background: var(--accent); color: #fff;
+    font: inherit; font-weight: 700; cursor: pointer; text-align: center;
+  }
+  .btn.ghost { background: var(--card2); color: var(--text); }
+  .bar { height: 8px; background: var(--card2); border-radius: 99px; overflow: hidden; }
+  .bar i { display: block; height: 100%; border-radius: 99px; }
+  .task { display: flex; gap: 12px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); }
+  .task:first-of-type { border-top: 0; }
+  .check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--gray); flex: none; }
+  .check.done { background: var(--green); border-color: var(--green); }
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; }
+  .grid i { aspect-ratio: 1; border-radius: 3px; }
+  .tabs { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 12px; }
+  .tabs button { flex: none; padding: 7px 12px; border-radius: 99px; border: 1px solid var(--line); background: none; color: var(--muted); font: inherit; font-size: 13px; cursor: pointer; }
+  .tabs button.on { background: var(--text); color: #111; border-color: var(--text); }
+  .choices { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .choices button, .conf button {
+    padding: 12px 6px; border-radius: 12px; border: 2px solid var(--line); background: var(--card); color: var(--text);
+    font: inherit; font-weight: 700; cursor: pointer;
+  }
+  .conf { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+  .conf button { font-weight: 500; font-size: 13px; }
+  .conf button.on { border-color: var(--blue); background: #1b2740; }
+  .feedback { display: none; }
+  .feedback.on { display: block; }
+  .ring { width: 96px; height: 96px; flex: none; }
+  .formula { font-family: "Cambria Math", Georgia, serif; font-size: 18px; text-align: center; padding: 10px; background: var(--card2); border-radius: 10px; margin: 8px 0; }
+  .note { border-left: 3px solid var(--yellow); padding: 8px 10px; background: #2a2716; border-radius: 6px; font-size: 13px; margin: 10px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  td, th { padding: 7px 4px; border-bottom: 1px solid var(--line); text-align: left; }
+  th { color: var(--muted); font-weight: 600; }
+  input, textarea {
+    width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--text); font: inherit; margin-bottom: 10px;
+  }
+  textarea { min-height: 170px; resize: vertical; font-family: Georgia, serif; line-height: 1.7; }
+  .logo { text-align: center; margin: 60px 0 30px; }
+  .logo b { font-size: 34px; letter-spacing: .02em; }
+  .logo b span { color: var(--accent); }
+  .badge { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; background: var(--card2); }
+  .badge.off { opacity: .3; filter: grayscale(1); }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="index">
+    <h1>CBMAPP · esboço</h1>
+    <p>Protótipo só visual, com dados de mentira. Clique nas telas ou use a barra de baixo do celular.</p>
+    <div id="index"></div>
+  </aside>
+
+  <div class="phone">
+
+    <!-- LOGIN -->
+    <section class="screen" id="login" data-title="Entrar / cadastrar">
+      <div class="logo"><b>CBM<span>APP</span></b><div class="muted small">CBM/AL 2026 · Praça Combatente</div></div>
+      <div class="tabs" style="justify-content:center"><button class="on">Entrar</button><button>Cadastrar</button></div>
+      <input placeholder="Usuário" value="kaian">
+      <input placeholder="Senha" type="password" value="........">
+      <button class="btn" onclick="go('inicio')">Entrar</button>
+      <p class="muted small" style="text-align:center;margin-top:16px">No cadastro: usuário, senha e confirmar senha.<br>Depois da sua conta, novos cadastros ficam bloqueados.</p>
+    </section>
+
+    <!-- INICIO -->
+    <section class="screen" id="inicio" data-title="Início · missão do dia">
+      <div class="row between">
+        <div><div class="muted small">Sexta, 23/10</div><h2 style="margin:0">Boa tarde, Kaian</h2></div>
+        <div class="pill p-orange">🔥 12 dias</div>
+      </div>
+
+      <div class="card row" style="margin-top:14px">
+        <svg class="ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.9" fill="none" stroke="#272c37" stroke-width="3.5"/><circle cx="18" cy="18" r="15.9" fill="none" stroke="#e5484d" stroke-width="3.5" stroke-dasharray="62 100" stroke-linecap="round" transform="rotate(-90 18 18)"/><text x="18" y="17" text-anchor="middle" fill="#eef0f4" font-size="8" font-weight="700">25/40</text><text x="18" y="23" text-anchor="middle" fill="#9aa1ae" font-size="4">itens hoje</text></svg>
+        <div>
+          <div class="big">95 dias</div>
+          <div class="muted small">até a prova · 26/01/2027</div>
+          <div class="small" style="margin-top:6px">Patente: <b>Cabo</b> · 1.240 XP<br><span class="muted">faltam 260 XP para 3º Sargento</span></div>
+        </div>
+      </div>
+
+      <h3>Missão do dia</h3>
+      <div class="card">
+        <div class="task"><div class="check done"></div><div style="flex:1"><b>Resumo · MAT-06 Juros compostos</b><div class="muted small">lido às 14:10</div></div></div>
+        <div class="task" onclick="go('questao')" style="cursor:pointer"><div class="check"></div><div style="flex:1"><b>25 itens · FIS-12 Trocas de calor</b><div class="muted small">ponto fraco · <span class="pill p-red">46%</span> · 10 de 25 feitos</div></div><span>›</span></div>
+        <div class="task"><div class="check"></div><div style="flex:1"><b>Revisão · 15 itens do caderno de erros</b><div class="muted small">vencem hoje</div></div><span>›</span></div>
+        <div class="task"><div class="check"></div><div style="flex:1"><b>10 flashcards · Química</b><div class="muted small">revisão espaçada</div></div><span>›</span></div>
+      </div>
+
+      <div class="row" style="gap:8px">
+        <button class="btn" onclick="go('questao')">⚡ Relâmpago · 5 itens</button>
+        <button class="btn ghost" onclick="go('topico')">Continuar FIS-12</button>
+      </div>
+
+      <h3>Desafio da semana</h3>
+      <div class="card">
+        <div class="row between small"><b>Química acima de 75%</b><span class="muted">71% · faltam 3 dias</span></div>
+        <div class="bar" style="margin-top:8px"><i style="width:71%;background:var(--yellow)"></i></div>
+      </div>
+    </section>
+
+    <!-- MATERIAS -->
+    <section class="screen" id="materias" data-title="Estudar · matérias e mapa">
+      <h2>Estudar</h2>
+      <h3>Mapa do edital · 138 tópicos</h3>
+      <div class="card">
+        <div class="grid" id="mapa"></div>
+        <div class="row small muted" style="gap:12px;margin-top:10px;flex-wrap:wrap">
+          <span>🟢 18</span><span>🟡 21</span><span>🟠 14</span><span>🔴 9</span><span>⚪ 76 sem dados</span>
+        </div>
+      </div>
+      <h3>P2 · Específicos (70 itens)</h3>
+      <div id="listaP2"></div>
+      <h3>P1 · Básicos (50 itens)</h3>
+      <div id="listaP1"></div>
+    </section>
+
+    <!-- TOPICO -->
+    <section class="screen" id="topico" data-title="Tópico · resumo, teoria, questões">
+      <div class="muted small">Física › FIS-12</div>
+      <h2 style="margin-top:2px">Trocas de calor</h2>
+      <div class="row" style="gap:6px;margin-bottom:12px"><span class="pill p-red">🔴 Crítico · 46%</span><span class="pill p-gray">28 respostas</span><span class="pill p-gray">50 itens no banco</span></div>
+      <div class="note">Recomendação: volte à <b>teoria completa</b> e veja a videoaula sugerida antes de mais questões.</div>
+      <div class="tabs" id="tabsTopico">
+        <button class="on" data-t="t-resumo">Resumo</button><button data-t="t-teoria">Teoria</button><button data-t="t-manias">Manias da banca</button><button data-t="t-flash">Flashcards</button><button data-t="t-quest">Questões</button>
+      </div>
+      <div class="tpane" id="t-resumo">
+        <div class="card">
+          <b>O essencial</b>
+          <div class="formula">Q = m · c · ΔT</div>
+          <p class="small">Calor <b>sensível</b>: muda a temperatura. <b>c</b> da água = 1 cal/g·°C.</p>
+          <div class="formula">Q = m · L</div>
+          <p class="small">Calor <b>latente</b>: muda o estado, temperatura constante.</p>
+          <div class="formula">ΣQ = 0</div>
+          <p class="small">Sistema isolado: o calor que um cede, o outro recebe.</p>
+        </div>
+        <button class="btn ghost">Marcar como lido</button>
+      </div>
+      <div class="tpane" id="t-teoria" style="display:none"><div class="card small">Teoria completa com exemplos resolvidos, gráfico de aquecimento da água, calor latente de fusão/vaporização, equilíbrio térmico com mudança de fase…<br><br>▶ Videoaula sugerida (link)</div></div>
+      <div class="tpane" id="t-manias" style="display:none"><div class="card small">• Trocar calor <b>sensível</b> por <b>latente</b> na mudança de fase.<br>• Dizer que a temperatura sobe durante a fusão.<br>• Confundir <b>calor específico</b> com <b>capacidade térmica</b> (C = m·c).</div></div>
+      <div class="tpane" id="t-flash" style="display:none"><div class="card" style="text-align:center;padding:40px 14px"><div class="muted small">Frente</div><b style="font-size:18px">Durante a ebulição da água, a temperatura…</b><br><br><button class="btn ghost">Mostrar resposta</button></div></div>
+      <div class="tpane" id="t-quest" style="display:none"><button class="btn" onclick="go('questao')">Responder 10 itens de FIS-12</button></div>
+    </section>
+
+    <!-- QUESTAO -->
+    <section class="screen" id="questao" data-title="Questão · C/E com confiança">
+      <div class="row between small muted"><span>FIS-12 · item 11 de 25</span><span>⏱ 0:48</span></div>
+      <div class="bar" style="margin:8px 0 14px"><i style="width:44%;background:var(--accent)"></i></div>
+      <div class="card small muted">Em um quartel, a água de um reservatório é aquecida para o banho da tropa. Considere o calor específico da água igual a 1 cal/g·°C. Com base nessa situação, julgue o item a seguir.</div>
+      <div class="card" style="font-size:16px">Para aquecer 200 g de água de 25 °C até 75 °C, são necessárias 10.000 cal.</div>
+
+      <div class="muted small" style="margin:12px 0 6px">1. Quão seguro você está?</div>
+      <div class="conf" id="conf"><button>✅ Certeza</button><button class="on">🤔 Dúvida</button><button>🎲 Chute</button></div>
+      <div class="muted small" style="margin-bottom:6px">2. Sua resposta</div>
+      <div class="choices">
+        <button onclick="answer('C')" style="border-color:var(--green)">CERTO</button>
+        <button onclick="answer('E')" style="border-color:var(--red)">ERRADO</button>
+        <button onclick="answer('B')">Branco</button>
+      </div>
+
+      <div class="feedback" id="fb">
+        <div class="card" id="fbHead" style="margin-top:14px"></div>
+        <div class="card small">
+          <b>Comentário</b><br>
+          Q = m · c · ΔT = 200 · 1 · (75 − 25) = 200 · 50 = <b>10.000 cal</b>. Item <b>CERTO</b>.
+          <div class="muted" style="margin-top:6px">Armadilha comum: usar a temperatura final (75) no lugar da variação (50).</div>
+        </div>
+        <div class="row" style="gap:8px"><button class="btn ghost">⚑ Reportar erro</button><button class="btn" onclick="resetQ()">Próximo ›</button></div>
+      </div>
+    </section>
+
+    <!-- DESEMPENHO -->
+    <section class="screen" id="desempenho" data-title="Desempenho · diagnóstico">
+      <h2>Desempenho</h2>
+      <div class="row" style="gap:8px">
+        <div class="card" style="flex:1"><div class="muted small">Acerto geral</div><div class="big">68%</div><div class="small" style="color:var(--green)">▲ 7 pts em 3 semanas</div></div>
+        <div class="card" style="flex:1"><div class="muted small">Nota líquida</div><div class="big">+0,36</div><div class="muted small">(certos − errados) ÷ feitos</div></div>
+      </div>
+
+      <h3>Física · últimas semanas</h3>
+      <div class="card">
+        <svg viewBox="0 0 300 120" width="100%">
+          <line x1="0" y1="20" x2="300" y2="20" stroke="#333946" stroke-dasharray="3 3"/><text x="2" y="16" fill="#9aa1ae" font-size="9">85%</text>
+          <line x1="0" y1="60" x2="300" y2="60" stroke="#333946" stroke-dasharray="3 3"/><text x="2" y="56" fill="#9aa1ae" font-size="9">50%</text>
+          <polyline fill="none" stroke="#e5484d" stroke-width="2.5" points="20,78 90,70 160,58 230,44 290,38"/>
+          <g fill="#e5484d"><circle cx="20" cy="78" r="3.5"/><circle cx="90" cy="70" r="3.5"/><circle cx="160" cy="58" r="3.5"/><circle cx="230" cy="44" r="3.5"/><circle cx="290" cy="38" r="4.5"/></g>
+          <g fill="#9aa1ae" font-size="9" text-anchor="middle"><text x="20" y="112">S1</text><text x="90" y="112">S2</text><text x="160" y="112">S3</text><text x="230" y="112">S4</text><text x="290" y="112">S5</text></g>
+        </svg>
+      </div>
+
+      <h3>Vale a pena chutar?</h3>
+      <div class="card small">
+        <div class="row between"><span>Química</span><span>chutes acertam <b>61%</b> <span class="pill p-green">arrisque</span></span></div>
+        <div class="row between" style="margin-top:8px"><span>Biologia</span><span>chutes acertam <b>42%</b> <span class="pill p-red">deixe em branco</span></span></div>
+        <div class="muted" style="margin-top:8px">Chutar só compensa com mais de 50% de acerto.</div>
+      </div>
+
+      <h3>Excesso de confiança</h3>
+      <div class="card small">⚠️ <b>9 itens</b> marcados como <b>certeza</b> e errados esta semana. Na prova, são os que tiram ponto sem você perceber. <span style="color:var(--blue)">Revisar agora ›</span></div>
+
+      <h3>Pegadinhas em que você mais cai</h3>
+      <div class="card small">
+        <div class="row between"><span>Número trocado</span><b>34%</b></div>
+        <div class="row between"><span>"Sempre / nunca / exclusivamente"</span><b>27%</b></div>
+        <div class="row between"><span>Inversão causa/efeito</span><b>18%</b></div>
+      </div>
+
+      <h3>Tópicos · Física</h3>
+      <div class="card">
+        <table>
+          <tr><th>Tópico</th><th>Acerto</th><th>Status</th></tr>
+          <tr><td>FIS-05 Newton</td><td>88%</td><td><span class="pill p-green">Dominado</span></td></tr>
+          <tr><td>FIS-08 Energia</td><td>77%</td><td><span class="pill p-yellow">Bom</span></td></tr>
+          <tr><td>FIS-10 Pascal/Arq.</td><td>63%</td><td><span class="pill p-orange">Construção</span></td></tr>
+          <tr><td>FIS-12 Trocas calor</td><td>46%</td><td><span class="pill p-red">Crítico</span></td></tr>
+          <tr><td>FIS-16 Som</td><td>—</td><td><span class="pill p-gray">Sem dados</span></td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- MAIS -->
+    <section class="screen" id="mais" data-title="Mais · menu">
+      <h2>Mais</h2>
+      <div class="card task" onclick="go('simulados')" style="cursor:pointer;border:0"><span style="font-size:22px">📝</span><div style="flex:1"><b>Simulados</b><div class="muted small">completo, mini, por matéria, pontos fracos</div></div>›</div>
+      <div class="card task" onclick="go('redacao')" style="cursor:pointer;border:0"><span style="font-size:22px">✍️</span><div style="flex:1"><b>Redação</b><div class="muted small">correção por IA com a fórmula do Cebraspe</div></div>›</div>
+      <div class="card task" onclick="go('plano')" style="cursor:pointer;border:0"><span style="font-size:22px">🗓️</span><div style="flex:1"><b>Plano de estudos</b><div class="muted small">fase 1 · passada completa</div></div>›</div>
+      <div class="card task" onclick="go('erros')" style="cursor:pointer;border:0"><span style="font-size:22px">📕</span><div style="flex:1"><b>Caderno de erros</b><div class="muted small">87 itens · 15 vencem hoje</div></div>›</div>
+      <div class="card task" onclick="go('perfil')" style="cursor:pointer;border:0"><span style="font-size:22px">🎖️</span><div style="flex:1"><b>Perfil e conquistas</b><div class="muted small">Cabo · 1.240 XP</div></div>›</div>
+    </section>
+
+    <!-- SIMULADOS -->
+    <section class="screen" id="simulados" data-title="Simulados · resultado">
+      <h2>Simulados</h2>
+      <div class="row" style="gap:8px;margin-bottom:10px">
+        <button class="btn">Completo · 120 itens · 4h30</button>
+      </div>
+      <div class="row" style="gap:8px;margin-bottom:6px">
+        <button class="btn ghost">Mini · 30 itens</button><button class="btn ghost">Pontos fracos</button>
+      </div>
+      <h3>Último resultado · Simulado 03 · 20/10</h3>
+      <div class="card">
+        <table>
+          <tr><th>Prova</th><th>Nota</th><th>Mínimo</th><th></th></tr>
+          <tr><td>P1 Básicos</td><td><b>24</b></td><td>10</td><td>✅</td></tr>
+          <tr><td>P2 Específicos</td><td><b>19</b></td><td>21</td><td>❌</td></tr>
+          <tr><td>Total</td><td><b>43</b></td><td>36</td><td>✅</td></tr>
+        </table>
+        <div class="note">Você seria <b>eliminado na P2</b> por 2 pontos. Maior perda: Química (−5) e Mecânica (−3).</div>
+        <div class="small muted">31 em branco · 14 desses você teria acertado (seus chutes de Química acertam 61%).</div>
+      </div>
+      <h3>Evolução</h3>
+      <div class="card small">S01: 31 · S02: 38 · S03: 43 <span style="color:var(--green)">▲</span></div>
+    </section>
+
+    <!-- REDACAO -->
+    <section class="screen" id="redacao" data-title="Redação · correção">
+      <h2>Redação</h2>
+      <div class="card small"><div class="muted">Tema sorteado · Atualidades</div><b>Os desafios da prevenção a desastres naturais nas cidades brasileiras</b></div>
+      <div class="muted small" style="margin-bottom:6px">Digite exatamente como escreveu na folha, com os erros.</div>
+      <textarea>As enchentes que atingem as cidades brasileiras todo ano mostra que a prevenção ainda não é prioridade...</textarea>
+      <div class="row" style="gap:8px"><input value="27" style="width:90px;margin:0"><span class="muted small">linhas escritas na folha (TL)</span></div>
+      <button class="btn" style="margin-top:12px">Corrigir com IA</button>
+      <button class="btn ghost" style="margin-top:8px">Copiar para corrigir fora / lançar nota</button>
+
+      <h3>Resultado</h3>
+      <div class="card">
+        <div class="row between"><span class="muted small">NPD = NC − 6 × NE ÷ TL</span><span class="pill p-green">aprovado (≥ 15)</span></div>
+        <div class="big" style="margin:6px 0">20,7 <span class="muted small">/ 30</span></div>
+        <div class="small">NC <b>22,0</b> · NE <b>6</b> · TL <b>27</b> → 22 − 6 × 6 ÷ 27 = 22 − 1,3</div>
+        <div class="small muted" style="margin-top:8px">L1 "mostra" → "mostram" (concordância) · L9 crase indevida · L14 "excessão" → "exceção"…</div>
+      </div>
+    </section>
+
+    <!-- PLANO -->
+    <section class="screen" id="plano" data-title="Plano de estudos">
+      <h2>Plano de estudos</h2>
+      <div class="card">
+        <div class="row between small"><b>Fase 1 · Passada completa</b><span class="muted">23/10 → 05/12</span></div>
+        <div class="bar" style="margin:8px 0"><i style="width:22%;background:var(--accent)"></i></div>
+        <div class="muted small">31 de 138 tópicos vistos</div>
+      </div>
+      <div class="card small muted">Fase 2 · Reforço · 06/12 → 10/01<br>Fase 3 · Reta final · 11/01 → 25/01</div>
+      <h3>Hoje · 2h30 disponíveis</h3>
+      <div class="card small">
+        <div class="row between"><span>Física · FIS-12, FIS-13</span><b>1h</b></div>
+        <div class="row between"><span>RLM · RLM-08 Contagem</span><b>40 min</b></div>
+        <div class="row between"><span>Química · QUI-12</span><b>30 min</b></div>
+        <div class="row between"><span>Revisão (erros + flashcards)</span><b>20 min</b></div>
+      </div>
+      <div class="card small"><b>Projeção:</b> neste ritmo você chega em 26/01 com <b>78%</b> do edital dominado.</div>
+    </section>
+
+    <!-- ERROS -->
+    <section class="screen" id="erros" data-title="Caderno de erros">
+      <h2>Caderno de erros</h2>
+      <div class="row" style="gap:8px">
+        <div class="card" style="flex:1"><div class="big">15</div><div class="muted small">vencem hoje</div></div>
+        <div class="card" style="flex:1"><div class="big">87</div><div class="muted small">no caderno</div></div>
+      </div>
+      <div class="card small">Os itens voltam em <b>1, 3, 7, 15 e 30 dias</b>. Acertou com certeza → avança. Errou → volta ao começo.</div>
+      <button class="btn" onclick="go('questao')">Revisar os 15 de hoje</button>
+      <h3>Por matéria</h3>
+      <div class="card small">
+        <div class="row between"><span>Química</span><b>29</b></div>
+        <div class="row between"><span>Física</span><b>24</b></div>
+        <div class="row between"><span>Raciocínio Lógico</span><b>18</b></div>
+        <div class="row between"><span>Outras</span><b>16</b></div>
+      </div>
+    </section>
+
+    <!-- PERFIL -->
+    <section class="screen" id="perfil" data-title="Perfil · patentes e conquistas">
+      <h2>Perfil</h2>
+      <div class="card">
+        <div class="row between"><b>Cabo</b><span class="muted small">1.240 / 1.500 XP</span></div>
+        <div class="bar" style="margin:8px 0"><i style="width:83%;background:var(--yellow)"></i></div>
+        <div class="muted small">Soldado → <b>Cabo</b> → 3º Sgt → 2º Sgt → 1º Sgt → Subtenente → Aspirante → … → Coronel</div>
+      </div>
+      <h3>Conquistas</h3>
+      <div class="row" style="gap:10px;flex-wrap:wrap">
+        <div class="badge" title="7 dias seguidos">🔥</div>
+        <div class="badge" title="100 itens de Física">⚛️</div>
+        <div class="badge" title="1º simulado acima do mínimo">🎯</div>
+        <div class="badge off" title="Caderno de erros zerado">📕</div>
+        <div class="badge off" title="RLM toda verde">🧠</div>
+        <div class="badge off" title="30 dias seguidos">🏆</div>
+      </div>
+      <h3>Configurações</h3>
+      <div class="card small">
+        <div class="row between"><span>Meta diária</span><b>40 itens + 1 resumo</b></div>
+        <div class="row between"><span>Horas por dia</span><b>seg–sex 2h30 · sáb 4h</b></div>
+        <div class="row between"><span>Data da prova</span><b>26/01/2027</b></div>
+      </div>
+    </section>
+
+    <nav class="nav" id="nav">
+      <button data-go="inicio"><span>🏠</span>Início</button>
+      <button data-go="materias"><span>📚</span>Estudar</button>
+      <button data-go="questao"><span>✅</span>Questões</button>
+      <button data-go="desempenho"><span>📈</span>Desempenho</button>
+      <button data-go="mais"><span>☰</span>Mais</button>
+    </nav>
+  </div>
+</div>
+
+<script>
+  const navMap = { simulados: 'mais', redacao: 'mais', plano: 'mais', erros: 'mais', perfil: 'mais', topico: 'materias' };
+  function go(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id));
+    document.querySelectorAll('#index button').forEach(b => b.classList.toggle('on', b.dataset.go === id));
+    const tab = navMap[id] || id;
+    document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.go === tab));
+    document.getElementById('nav').classList.toggle('hide', id === 'login');
+    document.getElementById(id).scrollTop = 0;
+  }
+
+  // índice lateral
+  const idx = document.getElementById('index');
+  document.querySelectorAll('.screen').forEach(s => {
+    const b = document.createElement('button');
+    b.textContent = s.dataset.title; b.dataset.go = s.id; b.onclick = () => go(s.id);
+    idx.appendChild(b);
+  });
+  document.querySelectorAll('#nav button').forEach(b => b.onclick = () => go(b.dataset.go));
+
+  // mapa do edital (dados de mentira)
+  const cores = { g: '#3fb970', y: '#f2c94c', o: '#f2994a', r: '#e5484d', n: '#2a2e37' };
+  const seq = 'g'.repeat(18) + 'y'.repeat(21) + 'o'.repeat(14) + 'r'.repeat(9) + 'n'.repeat(76);
+  const mixed = seq.split('').sort(() => Math.random() - .5);
+  document.getElementById('mapa').innerHTML = mixed.map(c => `<i style="background:${cores[c]}"></i>`).join('');
+
+  // listas de matérias
+  const p2 = [['Física', 22, 64, 'o'], ['Química', 18, 58, 'o'], ['Biologia', 22, 71, 'y'], ['Mecânica Geral', 8, null, 'n']];
+  const p1 = [['Matemática', 8, 74, 'y'], ['Raciocínio Lógico', 11, 66, 'o'], ['Português', 15, 83, 'y'], ['Inglês', 4, 79, 'y'], ['Informática', 13, null, 'n'], ['Cidadania e DH', 7, null, 'n'], ['Legislação', 10, null, 'n']];
+  const pill = { g: 'p-green', y: 'p-yellow', o: 'p-orange', r: 'p-red', n: 'p-gray' };
+  const barColor = { g: 'var(--green)', y: 'var(--yellow)', o: 'var(--orange)', r: 'var(--red)', n: 'var(--gray)' };
+  function lista(el, dados) {
+    document.getElementById(el).innerHTML = dados.map(([nome, t, pct, c]) => `
+      <div class="card" onclick="go('topico')" style="cursor:pointer">
+        <div class="row between"><b>${nome}</b><span class="pill ${pill[c]}">${pct === null ? 'sem dados' : pct + '%'}</span></div>
+        <div class="muted small" style="margin:4px 0 8px">${t} tópicos</div>
+        <div class="bar"><i style="width:${pct || 0}%;background:${barColor[c]}"></i></div>
+      </div>`).join('');
+  }
+  lista('listaP2', p2); lista('listaP1', p1);
+
+  // abas do tópico
+  document.querySelectorAll('#tabsTopico button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('#tabsTopico button').forEach(x => x.classList.toggle('on', x === b));
+    document.querySelectorAll('.tpane').forEach(p => p.style.display = p.id === b.dataset.t ? 'block' : 'none');
+  });
+
+  // confiança + resposta
+  document.querySelectorAll('#conf button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('#conf button').forEach(x => x.classList.toggle('on', x === b));
+  });
+  function answer(r) {
+    const head = document.getElementById('fbHead');
+    if (r === 'C') head.innerHTML = '<b style="color:var(--green)">✔ Acertou (+1)</b> <span class="muted small">· gabarito: CERTO</span>';
+    else if (r === 'E') head.innerHTML = '<b style="color:var(--red)">✘ Errou (−1)</b> <span class="muted small">· gabarito: CERTO · foi para o caderno de erros</span>';
+    else head.innerHTML = '<b>Em branco (0)</b> <span class="muted small">· gabarito: CERTO</span>';
+    document.getElementById('fb').classList.add('on');
+  }
+  function resetQ() { document.getElementById('fb').classList.remove('on'); document.getElementById('questao').scrollTop = 0; }
+
+  go('inicio');
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+node_modules/
+dist/
+app/public/data/
+.env
+.env.local
+*.log

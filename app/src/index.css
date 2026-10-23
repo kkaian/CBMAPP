@@ -1,0 +1,46 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+
+@theme {
+  --color-fundo: #161920;
+  --color-card: #1f232c;
+  --color-card2: #272c37;
+  --color-linha: #333946;
+  --color-texto: #eef0f4;
+  --color-suave: #9aa1ae;
+  --color-destaque: #e5484d;
+  --color-verde: #3fb970;
+  --color-amarelo: #f2c94c;
+  --color-laranja: #f2994a;
+  --color-azul: #4c8df6;
+  --color-cinza: #5b6270;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--color-fundo);
+  color: var(--color-texto);
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+button { cursor: pointer; }
+
+/* texto rico (resumos, teoria, comentários) */
+.rico { overflow-wrap: anywhere; }
+.rico p { margin: 0.5em 0; }
+.rico h1 { display: none; }
+.rico h2, .rico h3 { font-weight: 700; margin: 1.1em 0 0.4em; font-size: 1.05em; }
+.rico ul, .rico ol { padding-left: 1.2em; margin: 0.5em 0; }
+.rico ul { list-style: disc; }
+.rico ol { list-style: decimal; }
+.rico li { margin: 0.2em 0; }
+.rico strong { color: #fff; }
+.rico code { background: var(--color-card2); padding: 0 4px; border-radius: 4px; font-size: 0.9em; }
+.rico table { border-collapse: collapse; margin: 0.6em 0; font-size: 0.9em; display: block; overflow-x: auto; }
+.rico th, .rico td { border: 1px solid var(--color-linha); padding: 4px 8px; text-align: left; }
+.rico .katex-display { overflow-x: auto; overflow-y: hidden; padding: 6px 0; margin: 0.4em 0; background: var(--color-card2); border-radius: 10px; }
+.rico .katex { font-size: 1.05em; }

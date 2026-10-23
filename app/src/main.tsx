@@ -1,0 +1,60 @@
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { createHashRouter, RouterProvider } from 'react-router-dom'
+import { registerSW } from 'virtual:pwa-register'
+import './index.css'
+import './lib/instalar' // escuta o convite de instalação desde o início
+import { AuthProvider, useAuth } from './auth'
+import Shell from './components/Shell'
+import { Carregando } from './components/ui'
+import Desempenho from './pages/Desempenho'
+import EmBreve from './pages/EmBreve'
+import Erros from './pages/Erros'
+import Estudar from './pages/Estudar'
+import Inicio from './pages/Inicio'
+import Login from './pages/Login'
+import Mais from './pages/Mais'
+import Materia from './pages/Materia'
+import Perfil from './pages/Perfil'
+import Questoes from './pages/Questoes'
+import Quiz from './pages/Quiz'
+import Redacao from './pages/Redacao'
+import Topico from './pages/Topico'
+
+registerSW({ immediate: true })
+
+// Rotas com # (ex.: /#/t/FIS-12): funcionam offline e na Vercel sem configuração extra.
+const router = createHashRouter([
+  {
+    element: <Shell />,
+    children: [
+      { path: '/', element: <Inicio /> },
+      { path: '/estudar', element: <Estudar /> },
+      { path: '/m/:cod', element: <Materia /> },
+      { path: '/t/:cod', element: <Topico /> },
+      { path: '/questoes', element: <Questoes /> },
+      { path: '/desempenho', element: <Desempenho /> },
+      { path: '/mais', element: <Mais /> },
+      { path: '/erros', element: <Erros /> },
+      { path: '/perfil', element: <Perfil /> },
+      { path: '/em-breve', element: <EmBreve /> },
+      { path: '/redacao', element: <Redacao /> },
+    ],
+  },
+  { path: '/quiz', element: <div className="max-w-lg mx-auto px-4 pt-4 pb-10"><Quiz /></div> },
+])
+
+function Portao() {
+  const { pronto, logado } = useAuth()
+  if (!pronto) return <Carregando />
+  if (!logado) return <Login />
+  return <RouterProvider router={router} />
+}
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <AuthProvider>
+      <Portao />
+    </AuthProvider>
+  </StrictMode>,
+)

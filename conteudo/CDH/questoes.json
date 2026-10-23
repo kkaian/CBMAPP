@@ -1,0 +1,72 @@
+[
+  {
+    "id": "CDH-06-0001", "topico": "CDH-06",
+    "enunciado": "Os direitos de primeira geração correspondem aos direitos civis e políticos, associados ao valor da liberdade.",
+    "gabarito": "C",
+    "comentario": "Gerações (dimensões): 1ª = civis e políticos (liberdade); 2ª = econômicos, sociais e culturais (igualdade); 3ª = difusos e coletivos (fraternidade/solidariedade).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "CDH-06-0002", "topico": "CDH-06",
+    "enunciado": "Os direitos econômicos, sociais e culturais são classificados como direitos de terceira geração.",
+    "gabarito": "E",
+    "comentario": "Direitos econômicos, sociais e culturais são de **segunda** geração (igualdade). A terceira é a dos direitos difusos e coletivos (meio ambiente, paz, desenvolvimento).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "numero", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "CDH-05-0001", "topico": "CDH-05",
+    "enunciado": "A Declaração Universal dos Direitos Humanos (1948) é, do ponto de vista técnico-formal, um tratado internacional juridicamente vinculante.",
+    "gabarito": "E",
+    "comentario": "A DUDH é uma **resolução** da Assembleia Geral da ONU, formalmente uma recomendação, não um tratado. Hoje parte da doutrina a reconhece como costume internacional, mas tecnicamente não é tratado vinculante.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "CDH-05-0002", "topico": "CDH-05",
+    "enunciado": "Os direitos humanos consagram-se no plano internacional, enquanto os direitos fundamentais se consagram no plano interno (constitucional).",
+    "gabarito": "C",
+    "comentario": "Distinção terminológica clássica: direitos humanos = previstos em normas internacionais; direitos fundamentais = positivados na Constituição de cada Estado.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "CDH-06-0003", "topico": "CDH-06",
+    "enunciado": "O princípio da solidariedade está associado aos direitos de terceira geração.",
+    "gabarito": "C",
+    "comentario": "Terceira geração = fraternidade/solidariedade: direitos difusos e coletivos, como meio ambiente equilibrado, paz e desenvolvimento.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "CDH-01-0001", "topico": "CDH-01",
+    "enunciado": "Ética e moral são conceitos antônimos.",
+    "gabarito": "E",
+    "comentario": "Não são opostos, e sim relacionados: moral é o conjunto de normas e costumes de um grupo; ética é a reflexão crítica (filosófica) sobre esses valores.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "CDH-05-0003", "topico": "CDH-05",
+    "enunciado": "Para a corrente positivista, os direitos humanos existem independentemente de previsão em norma jurídica.",
+    "gabarito": "E",
+    "comentario": "Isso é o **jusnaturalismo** (direitos inerentes à condição humana, anteriores ao Estado). Para o positivismo, os direitos só existem se previstos em norma jurídica.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "competencia", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "CDH-07-0001", "topico": "CDH-07",
+    "enunciado": "O Pacto de San José da Costa Rica integra o sistema interamericano de proteção dos direitos humanos.",
+    "gabarito": "C",
+    "comentario": "O Pacto de San José é a Convenção Americana sobre Direitos Humanos (1969), base do sistema interamericano (OEA), com a Comissão e a Corte Interamericana.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "CDH-07-0002", "topico": "CDH-07",
+    "enunciado": "Em caso de violação de tratado de direitos humanos cometida por município brasileiro, a União responde internacionalmente.",
+    "gabarito": "C",
+    "comentario": "No plano internacional quem responde é o Estado brasileiro, representado pela União, ainda que a violação tenha sido praticada por estado, município ou qualquer agente público.",
+    "dificuldade": 2, "tipo": "situacao", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "CDH-05-0004", "topico": "CDH-05",
+    "enunciado": "Todos os tratados de direitos humanos ratificados pelo Brasil possuem status de norma constitucional.",
+    "gabarito": "E",
+    "comentario": "Só os aprovados em cada Casa do Congresso, em dois turnos, por 3/5 dos votos (art. 5º, §3º, CF, incluído pela EC 45/2004) equivalem a emendas constitucionais. Os demais têm status supralegal (entendimento do STF).",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "absoluto", "origem": "drive-comentadas", "status": "ok"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ING-02-0001", "topico": "ING-02",
+    "enunciado": "The word \"actually\" is best translated into Portuguese as \"atualmente\".",
+    "gabarito": "E",
+    "comentario": "Falso cognato: \"actually\" = na verdade, de fato. \"Atualmente\" = currently, nowadays.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "ING-02-0002", "topico": "ING-02",
+    "enunciado": "The word \"eventually\" means \"por fim / finalmente\", not \"eventualmente\".",
+    "gabarito": "C",
+    "comentario": "Falso cognato clássico: \"eventually\" = por fim, no final. \"Eventualmente\" (às vezes) = occasionally.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "ING-03-0001", "topico": "ING-03",
+    "enunciado": "In the phrase \"the inhaling and exhaling of CO2\", the words \"inhaling\" and \"exhaling\" function as nouns.",
+    "gabarito": "C",
+    "comentario": "Precedidas de artigo (\"the\") e seguidas de \"of\", as formas em -ing funcionam como substantivos (gerúndios nominais): \"a inalação e a exalação de CO2\".",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "ING-04-0001", "topico": "ING-04",
+    "enunciado": "The connectors \"however\" and \"but\" both express a contrast with something said before.",
+    "gabarito": "C",
+    "comentario": "Ambos são conectivos de contraste (= porém, mas). Outros: nevertheless, yet, although (concessão).",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "ING-02-0003", "topico": "ING-02",
+    "enunciado": "The word \"library\" is a false cognate that means \"livraria\".",
+    "gabarito": "E",
+    "comentario": "\"Library\" é falso cognato, mas significa **biblioteca**. Livraria = bookstore.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "ING-03-0002", "topico": "ING-03",
+    "enunciado": "In \"deforestation is caused by rich countries\", the verb is in the passive voice.",
+    "gabarito": "C",
+    "comentario": "Voz passiva = verbo \"to be\" + particípio passado (\"is caused\"), com o agente introduzido por \"by\".",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "ING-01-0001", "topico": "ING-01",
+    "enunciado": "The phrase \"the most species-rich area\" can be correctly paraphrased as \"the area with the largest variety of species\".",
+    "gabarito": "C",
+    "comentario": "\"Species-rich\" = rica em espécies; \"the most\" = superlativo. \"A área com a maior variedade de espécies\" mantém o sentido.",
+    "dificuldade": 2, "tipo": "interpretacao", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "ING-02-0004", "topico": "ING-02",
+    "enunciado": "The verb \"to pretend\" means \"pretender\".",
+    "gabarito": "E",
+    "comentario": "Falso cognato: \"to pretend\" = fingir. \"Pretender\" (ter intenção) = to intend.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "ING-04-0002", "topico": "ING-04",
+    "enunciado": "The connector \"therefore\" is used to introduce a contrast.",
+    "gabarito": "E",
+    "comentario": "\"Therefore\" introduz conclusão/consequência (= portanto). Contraste seria \"however\", \"but\", \"nevertheless\".",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "ING-03-0003", "topico": "ING-03",
+    "enunciado": "In \"one third have been cut down\", the present perfect relates a past action to its present relevance.",
+    "gabarito": "C",
+    "comentario": "Present perfect (have/has + particípio) liga uma ação passada, sem tempo definido, a seus efeitos no presente.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  }
+]

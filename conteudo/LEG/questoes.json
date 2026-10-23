@@ -1,0 +1,72 @@
+[
+  {
+    "id": "LEG-01-0001", "topico": "LEG-01",
+    "enunciado": "O posto dos oficiais é conferido por ato do Comandante-Geral da corporação.",
+    "gabarito": "E",
+    "comentario": "Lei 5.346/1992, art. 6º, IV: **posto** é o grau hierárquico privativo do oficial, conferido por ato do **Chefe do Poder Executivo** (Governador). O Comandante-Geral confere a **graduação** das praças (art. 6º, V). Competência cruzada: pegadinha clássica.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "competencia", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "LEG-09-0001", "topico": "LEG-09",
+    "enunciado": "Os corpos de bombeiros militares são forças auxiliares e reserva do Exército.",
+    "gabarito": "C",
+    "comentario": "Art. 144, §6º, da Constituição Federal: polícias militares e corpos de bombeiros militares são forças auxiliares e reserva do Exército, subordinando-se aos governadores. A Lei 14.751/2023 reafirma essa condição.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "LEG-05-0001", "topico": "LEG-05",
+    "enunciado": "No Regulamento Disciplinar (Decreto 37.042/1996), as transgressões classificam-se em leves, médias, graves e gravíssimas.",
+    "gabarito": "E",
+    "comentario": "Decreto 37.042/1996, art. 29: segundo a intensidade, as transgressões são **leves, médias e graves**. Não existe \"gravíssima\" no RDPMAL.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "LEG-06-0001", "topico": "LEG-06",
+    "enunciado": "A punição disciplinar exime o militar das responsabilidades civil e penal.",
+    "gabarito": "E",
+    "comentario": "Decreto 37.042/1996, art. 56: a punição disciplinar **não exime** o punido das responsabilidades civil e penal. O art. 28 reforça: as instâncias criminal e administrativa são independentes e podem correr ao mesmo tempo.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "LEG-07-0001", "topico": "LEG-07",
+    "enunciado": "Em Alagoas, são critérios de promoção dos militares estaduais o merecimento, a escolha e a antiguidade.",
+    "gabarito": "E",
+    "comentario": "Era assim na redação original da Lei 6.514/2004 (art. 5º: merecimento, escolha e antiguidade). A **Lei 9.392/2024** deu nova redação ao art. 5º e **revogou a escolha**: hoje os critérios são só **merecimento e antiguidade**. A bravura é forma **excepcional** de promoção (art. 13). Atenção: o edital cobra a lei \"e suas alterações\".",
+    "dificuldade": 3, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "LEG-04-0001", "topico": "LEG-04",
+    "enunciado": "O militar da ativa que, no desempenho de serviço, tiver seu paradeiro ignorado por mais de oito dias é considerado desaparecido.",
+    "gabarito": "C",
+    "comentario": "Lei 5.346/1992, art. 43: é considerado desaparecido o militar da ativa que, em serviço, viagem, operações ou calamidade pública, tiver o paradeiro ignorado por **mais de 8 dias**. Parágrafo único: só se não houver indício de deserção.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "LEG-04-0002", "topico": "LEG-04",
+    "enunciado": "O militar que permanecer desaparecido por mais de trinta dias passa a ser oficialmente considerado extraviado e, a partir dessa data, agregado.",
+    "gabarito": "C",
+    "comentario": "Lei 5.346/1992, art. 44: desaparecido por **mais de 30 dias** → oficialmente **extraviado** e, a partir dessa data, **agregado**. O extravio interrompe o serviço ativo (art. 45).",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "LEG-07-0002", "topico": "LEG-07",
+    "enunciado": "A promoção por bravura depende da existência de vaga no grau hierárquico superior.",
+    "gabarito": "E",
+    "comentario": "Lei 6.514/2004, art. 14, §4º (redação da Lei 9.392/2024): a promoção por bravura ocorre **independentemente** do cumprimento de interstício e da existência de vaga; o militar fica **excedente** no posto ou graduação superior até abrir vaga.",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "excecao", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "LEG-01-0002", "topico": "LEG-01",
+    "enunciado": "Subtenentes, sargentos, cabos e soldados pertencem todos a um mesmo círculo hierárquico.",
+    "gabarito": "E",
+    "comentario": "Lei 5.346/1992, art. 11, \"b\": há dois círculos de praças: **subtenentes e sargentos** (I) e **cabos e soldados** (II). Item semelhante caiu em 2021.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "LEG-07-0003", "topico": "LEG-07",
+    "enunciado": "No Corpo de Bombeiros Militar de Alagoas, as promoções por merecimento e antiguidade são efetuadas nos dias 26 de fevereiro e 29 de setembro.",
+    "gabarito": "E",
+    "comentario": "Lei 6.514/2004, art. 31 (redação da Lei 9.392/2024): no CBM as promoções ocorrem em **26 de maio e 29 de novembro**. As datas **26 de fevereiro e 29 de setembro** são a **data-limite para inclusão de pontuações e habilitações** nos Quadros de Acesso (parágrafo único, II). Na PM: promoções em 3/fev e 25/ago; data-limite 3/dez e 25/mai.",
+    "dificuldade": 3, "tipo": "conceito", "armadilha": "numero", "origem": "drive-comentadas", "status": "ok"
+  }
+]

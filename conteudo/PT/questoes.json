@@ -1,0 +1,72 @@
+[
+  {
+    "id": "PT-08-0001", "topico": "PT-08",
+    "enunciado": "Em \"O comandante chamou os soldados que estavam de plantão\", a oração \"que estavam de plantão\" é subordinada adjetiva restritiva e, por isso, dispensa vírgula.",
+    "gabarito": "C",
+    "comentario": "A oração restringe quais soldados foram chamados (só os de plantão): adjetiva restritiva, sem vírgula. Se fosse explicativa (todos os soldados estavam de plantão), viria entre vírgulas.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "PT-10-0001", "topico": "PT-10",
+    "enunciado": "Na frase \"Faz dois anos que ele ingressou no CBM\", o verbo \"fazer\" poderia ser flexionado no plural — \"Fazem dois anos\" — sem ofensa à norma-padrão.",
+    "gabarito": "E",
+    "comentario": "\"Fazer\" indicando tempo decorrido é impessoal (oração sem sujeito) e fica no singular: \"Faz dois anos\". O mesmo vale para \"haver\" com sentido de existir ou de tempo.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "PT-12-0001", "topico": "PT-12",
+    "enunciado": "Em \"O bombeiro dirigiu-se à vítima\", o acento grave resulta da fusão da preposição \"a\" com o artigo \"a\".",
+    "gabarito": "C",
+    "comentario": "\"Dirigir-se\" exige a preposição \"a\"; \"vítima\" admite o artigo \"a\". Preposição + artigo = crase: \"à vítima\".",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "PT-12-0002", "topico": "PT-12",
+    "enunciado": "Caberia o acento grave na expressão \"Entreguei o equipamento a Vossa Senhoria\".",
+    "gabarito": "E",
+    "comentario": "Pronomes de tratamento (Vossa Senhoria, Vossa Excelência) não admitem artigo, logo não há crase. Exceções que admitem artigo: senhora, senhorita, dona.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "excecao", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "PT-09-0001", "topico": "PT-09",
+    "enunciado": "Em \"Os militares, que são disciplinados, mereceram elogio\", o uso das vírgulas indica que a qualidade de disciplinados se estende a todos os militares.",
+    "gabarito": "C",
+    "comentario": "Entre vírgulas, a oração é adjetiva explicativa: atribui a qualidade a todo o grupo. Sem vírgulas (restritiva), só os militares disciplinados teriam merecido elogio.",
+    "dificuldade": 2, "tipo": "interpretacao", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "PT-13-0001", "topico": "PT-13",
+    "enunciado": "Em \"Nunca se viu tamanha coragem\", a próclise (anteposição do \"se\") justifica-se pela presença da palavra negativa \"Nunca\".",
+    "gabarito": "C",
+    "comentario": "Palavras de sentido negativo (não, nunca, jamais, ninguém) são fatores de próclise: atraem o pronome átono para antes do verbo.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "PT-10-0002", "topico": "PT-10",
+    "enunciado": "A concordância está correta em \"É proibido a entrada de pessoas estranhas\".",
+    "gabarito": "E",
+    "comentario": "Com determinante (artigo \"a\"), o adjetivo concorda: \"É proibid**a** a entrada\". Sem determinante, fica invariável: \"É proibido entrada\".",
+    "dificuldade": 2, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "PT-12-0003", "topico": "PT-12",
+    "enunciado": "Em \"O plantão ocorre das 8 às 18 horas\", o acento grave em \"às 18 horas\" é obrigatório.",
+    "gabarito": "C",
+    "comentario": "Na indicação de horas determinadas há crase. E o paralelismo confirma: \"das 8\" (de + as) pede \"às 18\" (a + as). Se fosse \"de 8 a 18 horas\", sem artigo, não haveria crase.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "PT-14-0001", "topico": "PT-14",
+    "enunciado": "Os vocábulos \"ratificar\" e \"retificar\" são sinônimos e podem ser usados indistintamente.",
+    "gabarito": "E",
+    "comentario": "São parônimos (grafia e som parecidos, sentidos diferentes): ratificar = confirmar; retificar = corrigir.",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": "outro", "origem": "drive-comentadas", "status": "ok"
+  },
+  {
+    "id": "PT-11-0001", "topico": "PT-11",
+    "enunciado": "Em \"Assisti ao treinamento\", a preposição \"a\" decorre da regência do verbo \"assistir\" no sentido de presenciar.",
+    "gabarito": "C",
+    "comentario": "\"Assistir\" no sentido de ver/presenciar é transitivo indireto e exige \"a\". No sentido de dar assistência/ajudar, é transitivo direto (\"O médico assistiu o paciente\").",
+    "dificuldade": 1, "tipo": "conceito", "armadilha": null, "origem": "drive-comentadas", "status": "ok"
+  }
+]
