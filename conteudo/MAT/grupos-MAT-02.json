@@ -1,0 +1,18 @@
+[
+  {
+    "id": "MAT-02-G01",
+    "texto": "Considere as situações a seguir, relativas à distribuição de recursos em uma unidade do Corpo de Bombeiros.\n\n**Situação I:** uma verba de R$ 90.000,00 foi dividida entre os quartéis A, B e C de forma diretamente proporcional ao efetivo de cada um: A, 30 militares; B, 45 militares; C, 15 militares.\n\n**Situação II:** um bônus de R$ 24.000,00 foi dividido entre os militares X, Y e Z de forma inversamente proporcional ao número de faltas de cada um (X: 2 faltas; Y: 3 faltas; Z: 6 faltas).\n\n**Situação III:** em uma unidade, a razão entre viaturas operacionais e viaturas de reserva é de 5 para 2, havendo, ao todo, 28 viaturas.\n\nCom base nessas situações, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-SIM01-A",
+    "texto": "Uma verba de R$ 60.000,00 foi dividida entre os quartéis A, B e C, de forma diretamente proporcional aos números 3, 4 e 5, respectivamente. Considere, ainda, que 8 bombeiros, trabalhando em ritmo constante, limpam 120 m de uma via em 3 dias. Com base nessas situações, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-SIM02-A",
+    "texto": "Um bônus de R$ 18.000,00 foi dividido entre os militares X, Y e Z, de forma inversamente proporcional ao número de faltas de cada um (X: 2 faltas; Y: 3 faltas; Z: 6 faltas). Considere, ainda, que 6 bombas de igual vazão esvaziam um reservatório em 8 horas. Com base nessas situações, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-SIM03-A",
+    "texto": "Uma verba de R$ 40.000,00 foi dividida entre os quartéis A, B e C, de forma diretamente proporcional aos números 2, 3 e 5. Considere, ainda, que 5 bombeiros, trabalhando 4 horas por dia, limpam 240 m de uma via em 6 dias. Julgue os itens a seguir."
+  }
+]

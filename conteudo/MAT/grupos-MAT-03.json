@@ -1,0 +1,10 @@
+[
+  {
+    "id": "MAT-03-G01",
+    "texto": "Considere as situações a seguir.\n\n**Situação I:** um reservatório é esvaziado por bombas de igual vazão. A tabela relaciona o número de bombas ao tempo de esvaziamento.\n\n| Bombas | Tempo (h) |\n|---|---|\n| 3 | 8 |\n| 4 | 6 |\n| 6 | 4 |\n| 8 | 3 |\n\n**Situação II:** uma mangueira despeja água a uma vazão constante, lançando 15 litros a cada 3 segundos.\n\n**Situação III:** trabalhando em ritmo constante, 6 bombeiros limpam 300 m de uma via em 4 dias.\n\nA respeito dessas situações, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-03-G02",
+    "texto": "Um destacamento de 20 bombeiros, em operação em área isolada, dispõe de ração suficiente para 15 dias, considerando-se consumo diário igual para todos. Com base nessa situação hipotética, julgue os itens a seguir."
+  }
+]

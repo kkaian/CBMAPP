@@ -1,0 +1,14 @@
+[
+  {
+    "id": "MAT-01-G01",
+    "texto": "A tabela a seguir apresenta o consumo diário de água, em metros cúbicos (m³), registrado por um quartel do Corpo de Bombeiros ao longo de uma semana.\n\n| Dia | Consumo (m³) |\n|---|---|\n| Segunda-feira | 12,5 |\n| Terça-feira | 9,75 |\n| Quarta-feira | 15,2 |\n| Quinta-feira | 8,4 |\n| Sexta-feira | 11,25 |\n| Sábado | 6,8 |\n| Domingo | 5,1 |\n\nCom base nas informações da tabela, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-01-G02",
+    "texto": "Em um quartel, a equipe A entra de serviço a cada 4 dias, a equipe B, a cada 6 dias, e a equipe C, a cada 10 dias. Hoje, as três equipes estão de serviço no mesmo dia. Com base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-01-G03",
+    "texto": "Três mangueiras, de 36 m, 48 m e 60 m, serão cortadas em pedaços de mesmo comprimento, o maior possível, sem que sobre nenhum pedaço. Com base nessa situação hipotética, julgue os itens a seguir."
+  }
+]

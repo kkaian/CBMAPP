@@ -5,8 +5,8 @@
 //   node scripts/build-conteudo.mjs --check   só valida (sai com erro se houver problema)
 //
 // Estrutura esperada por matéria (ex.: conteudo/FIS/):
-//   questoes.json   lista de itens (formato em docs/PROJETO.md §6.4)
-//   grupos.json     lista de { id, texto } com textos-base compartilhados (opcional)
+//   questoes*.json  lista(s) de itens (formato em docs/PROJETO.md §6.4); ex.: questoes-FIS-12.json
+//   grupos*.json    lista(s) de { id, texto } com textos-base compartilhados (opcional)
 //   FIS-12.md       conteúdo do tópico, com as seções "## Resumo", "## Teoria" e "## Manias da banca" (opcional)
 //   temas.json      só na redação (RED): temas com ganchos e comandos
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
@@ -51,8 +51,10 @@ const porMateria = {}
 
 for (const materia of edital.materias) {
   const pasta = join(CONTEUDO, materia.codigo)
-  const questoes = existsSync(join(pasta, 'questoes.json')) ? lerJson(join(pasta, 'questoes.json')) : []
-  const grupos = existsSync(join(pasta, 'grupos.json')) ? lerJson(join(pasta, 'grupos.json')) : []
+  // aceita um arquivo único (questoes.json) ou vários (questoes-MAT-01.json…); idem para grupos
+  const arquivos = (prefixo) => (existsSync(pasta) ? readdirSync(pasta).filter((a) => a.startsWith(prefixo) && a.endsWith('.json')).sort() : [])
+  const questoes = arquivos('questoes').flatMap((a) => lerJson(join(pasta, a)))
+  const grupos = arquivos('grupos').flatMap((a) => lerJson(join(pasta, a)))
   const temas = existsSync(join(pasta, 'temas.json')) ? lerJson(join(pasta, 'temas.json')) : undefined // só na redação
   const idsGrupos = new Set(grupos.map((g) => g.id))
   const conteudos = {}
@@ -79,7 +81,7 @@ for (const materia of edital.materias) {
     if (q.tipo && !TIPOS.includes(q.tipo)) erros.push(`${onde}: tipo inválido "${q.tipo}"`)
     if (q.armadilha != null && !ARMADILHAS.includes(q.armadilha)) erros.push(`${onde}: armadilha inválida "${q.armadilha}"`)
     if (q.status && !STATUS.includes(q.status)) erros.push(`${onde}: status inválido "${q.status}"`)
-    if (q.grupo && !idsGrupos.has(q.grupo)) erros.push(`${onde}: grupo "${q.grupo}" não existe em grupos.json`)
+    if (q.grupo && !idsGrupos.has(q.grupo)) erros.push(`${onde}: grupo "${q.grupo}" não existe em grupos*.json`)
     if (q.enunciado) {
       const chave = normalizar(q.enunciado)
       if (enunciadosVistos.has(chave)) avisos.push(`${onde}: enunciado igual a ${enunciadosVistos.get(chave)}`)
