@@ -25,8 +25,8 @@ Início (missão do dia, meta, streak, patente) · Estudar (mapa do edital) · M
 | **MAT** | **480 / 480** | **8 / 8** | ✅ completa |
 | **RED** | 20 / 90 | **9 / 9** | conteúdo completo; itens de técnica |
 | **RLM** | **553 / 550** | **11 / 11** | ✅ completa |
-| FIS | 10 / 1100 | 0 / 22 | ⏭️ **próxima** |
-| QUI | 10 / 810 | 0 / 18 | a fazer |
+| **FIS** | **1.118 / 1.100** | **22 / 22** | ✅ completa |
+| QUI | 10 / 810 | 0 / 18 | ⏭️ **próxima** |
 | MEC | 10 / 400 | 0 / 8 | a fazer |
 | BIO | 10 / 880 | 0 / 22 | a fazer |
 | INF | 10 / 455 | 0 / 13 | a fazer |
@@ -34,12 +34,12 @@ Início (missão do dia, meta, streak, patente) · Estudar (mapa do edital) · M
 | ING | 10 / 240 | 0 / 4 | a fazer |
 | CDH | 10 / 280 | 0 / 7 | a fazer |
 | LEG | 10 / 450 | 0 / 10 | a fazer (leis já em `conteudo/_fontes/leis/`) |
-| **Total** | **1.143** | **28 / 147** | 0 itens em revisão |
+| **Total** | **2.251** | **50 / 147** | 0 itens em revisão |
 
 ## O que ainda falta
 
 ### 1. Conteúdo (prioridade — exatas primeiro)
-Ordem: ~~MAT~~ → ~~RLM~~ → **FIS → QUI → MEC → BIO → INF → PT → ING → CDH → LEG**.
+Ordem: ~~MAT~~ → ~~RLM~~ → ~~FIS~~ → **QUI → MEC → BIO → INF → PT → ING → CDH → LEG**.
 Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 1. Extrair os itens dos PDFs do Drive (`D:\CBM\MATERIAL\CBMAL`: `Q-<Matéria>_100_Questoes(1)/(2)`, itens da matéria nos simulados 01–05, prova 2021) com `pdftotext`.
 2. Ler a apostila `E-CBMAL_<Matéria>.pdf` como base do conteúdo.
@@ -69,6 +69,7 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 ## Histórico resumido
 - **23/10** — Ideia, documento do projeto, esboço, app mínimo, Supabase, GitHub, Vercel, lembretes, redação (conteúdo + temas), leis oficiais baixadas e questões de LEG corrigidas (2 gabaritos do Drive estavam errados), código de convite + aprovação.
 - **24/10** — Matemática completa: conteúdo dos 8 tópicos e 480 itens; build aceita vários arquivos por matéria; `scripts/balanco.mjs`.
+- **24/10** — Física completa: conteúdo dos 22 tópicos e 1.118 itens (50–56% C por tópico; 53% no geral). Todos os 100 itens de Física dos simulados 01–05 entraram (grupos `FIS-SIMnn-A`); o gráfico v × t e o circuito do simulado 04, ausentes no PDF, viraram tabela e texto. Itens do caderno 2 que dependiam de figura (bloco II, gráfico de velocidade) ganharam tabela. Leis da termodinâmica e impulso/quantidade de movimento ficaram de fora (não estão no edital de Praça). FIS-19 (efeitos fisiológicos) e FIS-21/22 incluem conduta de segurança (socorro a vítima de choque, raios, fonte radioativa). Pendência leve: os tópicos conceituais FIS-11, 15, 16 e 20 têm 40–50% de itens fáceis (meta 20%); vale acrescentar itens difíceis numa revisão.
 - **24/10** — Raciocínio Lógico completo: conteúdo dos 11 tópicos e 553 itens (52–56% C por tópico). Itens do Drive que dependiam de figura/gráfico (caderno 2, blocos III e IV) refeitos com tabelas. Itens dos simulados usam os grupos `RLM-SIMnn-A` (texto-base do bloco de RLM de cada simulado). Os PDFs extraídos do Drive estão no scratchpad antigo; se sumirem, reextrair com `pdftotext -layout`.
 
 ## Decisões que valem para todo o projeto
