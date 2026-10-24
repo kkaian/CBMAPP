@@ -1,0 +1,10 @@
+[
+  { "id": "FIS-07-G01", "texto": "Considere (g = 10 m/s²): um bombeiro de 80 kg que sobe uma escada de 15 m de altura em 30 s; um corpo de 2 kg que se move a 10 m/s; um objeto que cai livremente de 5 m; e uma máquina que recebe 1.000 J e realiza 700 J de trabalho útil. Julgue os itens a seguir." },
+  { "id": "FIS-07-G02", "texto": "A bomba de uma viatura eleva 1.200 L de água (densidade 1 kg/L) a uma altura de 10 m em 1 minuto, com velocidade constante. Adote g = 10 m/s². Julgue os itens a seguir." },
+  { "id": "FIS-08-G01", "texto": "Uma criança de 30 kg parte do repouso no topo de um escorregador de 5 m de altura e chega ao fim dele, no nível do solo, com velocidade de 8 m/s. Adote g = 10 m/s². Julgue os itens a seguir." },
+  { "id": "FIS-08-G02", "texto": "Uma mola ideal, de constante elástica 1.000 N/m, está comprimida em 0,2 m por um bloco de 0,4 kg, sobre uma superfície horizontal sem atrito. Liberado o sistema, a mola empurra o bloco. Adote g = 10 m/s². Julgue os itens a seguir." },
+  { "id": "FIS-09-G01", "texto": "Um mergulhador do Corpo de Bombeiros desce em um lago de água doce (densidade 1.000 kg/m³). A pressão atmosférica na superfície do lago é de 1,0 × 10⁵ Pa, e g = 10 m/s². Julgue os itens a seguir." },
+  { "id": "FIS-09-G02", "texto": "Um tubo em U, aberto nas duas extremidades, contém água (densidade 1,0 g/cm³) e óleo (densidade 0,8 g/cm³), líquidos que não se misturam. O óleo foi colocado em um dos ramos e o sistema está em equilíbrio. Julgue os itens a seguir." },
+  { "id": "FIS-09-G03", "texto": "Uma prensa hidráulica tem êmbolos de áreas \\(A_1 = 10\\) cm² e \\(A_2 = 200\\) cm²; no êmbolo menor aplica-se a força \\(F_1 = 50\\) N. Considere ainda um corpo de massa 800 g e volume 1.000 cm³, e água de densidade 1,0 g/cm³ (g = 10 m/s²). Julgue os itens a seguir." },
+  { "id": "FIS-10-G01", "texto": "Um bloco de 2 kg e volume 500 cm³ está pendurado em um dinamômetro, que indica 20 N no ar. Em seguida, o bloco é mergulhado em água (densidade 1.000 kg/m³), sem tocar o fundo do recipiente. Adote g = 10 m/s². Julgue os itens a seguir." }
+]
