@@ -1,0 +1,12 @@
+[
+  { "id": "RLM-01-G01", "texto": "Considere as proposições P: \"Alagoas fica na Região Nordeste\" e Q: \"Maceió é a capital de Pernambuco\". Com base nessas proposições, julgue os itens a seguir." },
+  { "id": "RLM-01-G02", "texto": "Considere a proposição S: \"Se o alarme soa e há fumaça, então a guarnição é acionada\". Com base nessa proposição, julgue os itens a seguir." },
+  { "id": "RLM-02-G01", "texto": "Considere a proposição composta \\(S: (P \\lor Q) \\to R\\), em que P, Q e R são proposições simples. Com base nessa proposição, julgue os itens a seguir." },
+  { "id": "RLM-04-G01", "texto": "Considere as seguintes premissas, todas verdadeiras:\n\nP1: Se há fumaça, então o alarme dispara.\n\nP2: Se o alarme dispara, então a guarnição sai.\n\nP3: A guarnição não saiu.\n\nCom base nessas premissas, julgue os itens a seguir." },
+  { "id": "RLM-04-G02", "texto": "Considere as seguintes premissas, todas verdadeiras:\n\nP1: Todo bombeiro é nadador.\n\nP2: Algum nadador é mergulhador.\n\nP3: Nenhum mergulhador é sedentário.\n\nCom base nessas premissas, julgue os itens a seguir." },
+  { "id": "RLM-SIM01-A", "texto": "Considere o rol de tempos de resposta, em minutos, de seis ocorrências: 4, 6, 6, 8, 10, 12. Com base nesse rol e nos conceitos de raciocínio lógico e analítico, julgue os itens a seguir." },
+  { "id": "RLM-SIM02-A", "texto": "Considere o rol de tempos de serviço, em anos, de seis militares: 3, 5, 5, 7, 9, 13. Considere, ainda, uma urna com 5 bolas verdes e 3 bolas vermelhas. Julgue os itens a seguir." },
+  { "id": "RLM-SIM03-A", "texto": "Considere o rol de tempos, em minutos, de sete atendimentos: 2, 4, 4, 6, 8, 8, 8. Julgue os itens a seguir." },
+  { "id": "RLM-SIM04-A", "texto": "Considere a tabela-verdade das proposições \\(P \\to Q\\) e o rol de tempos, em minutos, de sete atendimentos: 12, 15, 15, 18, 20, 22, 26. Julgue os itens a seguir." },
+  { "id": "RLM-SIM05-A", "texto": "Considere o rol de tempos de resposta, em minutos, de oito ocorrências: 5, 7, 7, 9, 11, 13, 15, 17. Julgue os itens a seguir." }
+]
