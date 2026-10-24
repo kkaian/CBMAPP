@@ -1,0 +1,8 @@
+[
+  { "id": "RLM-09-G01", "texto": "Considere um dado honesto de seis faces e uma urna contendo 4 bolas vermelhas e 6 bolas azuis, indistinguíveis ao tato. Com base nessas situações e nos conceitos de probabilidade, julgue os itens a seguir." },
+  { "id": "RLM-09-G02", "texto": "Uma caixa contém 10 extintores, dos quais 3 apresentam defeito e 7 estão em bom estado. Dois extintores são retirados ao acaso, um após o outro, sem reposição. Com base nessa situação, julgue os itens a seguir." },
+  { "id": "RLM-09-G03", "texto": "Dois dados honestos de seis faces são lançados simultaneamente. Com base nessa situação, julgue os itens a seguir." },
+  { "id": "RLM-11-G01", "texto": "Considere o seguinte rol de tempos de atendimento, em minutos, registrados em dez ocorrências: 10, 12, 15, 15, 18, 20, 20, 20, 25, 25. Com base nesse rol, julgue os itens a seguir." },
+  { "id": "RLM-11-G02", "texto": "Considere o conjunto de dados 2, 4, 4, 4, 5, 5, 7, 9. Com base nesse conjunto, julgue os itens a seguir." },
+  { "id": "RLM-11-G03", "texto": "As notas obtidas por oito candidatos em uma prova foram: 6, 7, 7, 8, 8, 8, 9 e 10. Com base nessas informações, julgue os itens a seguir." }
+]

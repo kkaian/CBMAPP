@@ -24,8 +24,8 @@ Início (missão do dia, meta, streak, patente) · Estudar (mapa do edital) · M
 |---|---|---|---|
 | **MAT** | **480 / 480** | **8 / 8** | ✅ completa |
 | **RED** | 20 / 90 | **9 / 9** | conteúdo completo; itens de técnica |
-| RLM | 10 / 550 | 0 / 11 | ⏭️ **próxima** |
-| FIS | 10 / 1100 | 0 / 22 | a fazer |
+| **RLM** | **553 / 550** | **11 / 11** | ✅ completa |
+| FIS | 10 / 1100 | 0 / 22 | ⏭️ **próxima** |
 | QUI | 10 / 810 | 0 / 18 | a fazer |
 | MEC | 10 / 400 | 0 / 8 | a fazer |
 | BIO | 10 / 880 | 0 / 22 | a fazer |
@@ -34,12 +34,12 @@ Início (missão do dia, meta, streak, patente) · Estudar (mapa do edital) · M
 | ING | 10 / 240 | 0 / 4 | a fazer |
 | CDH | 10 / 280 | 0 / 7 | a fazer |
 | LEG | 10 / 450 | 0 / 10 | a fazer (leis já em `conteudo/_fontes/leis/`) |
-| **Total** | **600** | **17 / 147** | 0 itens em revisão |
+| **Total** | **1.143** | **28 / 147** | 0 itens em revisão |
 
 ## O que ainda falta
 
 ### 1. Conteúdo (prioridade — exatas primeiro)
-Ordem: **RLM → FIS → QUI → MEC → BIO → INF → PT → ING → CDH → LEG**.
+Ordem: ~~MAT~~ → ~~RLM~~ → **FIS → QUI → MEC → BIO → INF → PT → ING → CDH → LEG**.
 Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 1. Extrair os itens dos PDFs do Drive (`D:\CBM\MATERIAL\CBMAL`: `Q-<Matéria>_100_Questoes(1)/(2)`, itens da matéria nos simulados 01–05, prova 2021) com `pdftotext`.
 2. Ler a apostila `E-CBMAL_<Matéria>.pdf` como base do conteúdo.
@@ -69,6 +69,7 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 ## Histórico resumido
 - **23/10** — Ideia, documento do projeto, esboço, app mínimo, Supabase, GitHub, Vercel, lembretes, redação (conteúdo + temas), leis oficiais baixadas e questões de LEG corrigidas (2 gabaritos do Drive estavam errados), código de convite + aprovação.
 - **24/10** — Matemática completa: conteúdo dos 8 tópicos e 480 itens; build aceita vários arquivos por matéria; `scripts/balanco.mjs`.
+- **24/10** — Raciocínio Lógico completo: conteúdo dos 11 tópicos e 553 itens (52–56% C por tópico). Itens do Drive que dependiam de figura/gráfico (caderno 2, blocos III e IV) refeitos com tabelas. Itens dos simulados usam os grupos `RLM-SIMnn-A` (texto-base do bloco de RLM de cada simulado). Os PDFs extraídos do Drive estão no scratchpad antigo; se sumirem, reextrair com `pdftotext -layout`.
 
 ## Decisões que valem para todo o projeto
 - Custo zero; conteúdo em arquivos no repositório; Supabase só para progresso.
