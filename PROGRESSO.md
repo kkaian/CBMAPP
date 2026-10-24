@@ -27,19 +27,19 @@ Início (missão do dia, meta, streak, patente) · Estudar (mapa do edital) · M
 | **RLM** | **553 / 550** | **11 / 11** | ✅ completa |
 | **FIS** | **1.173 / 1.100** | **22 / 22** | ✅ completa |
 | **QUI** | **886 / 810** | **18 / 18** | ✅ completa |
-| MEC | 10 / 400 | 0 / 8 | ⏭️ **próxima** |
-| BIO | 10 / 880 | 0 / 22 | a fazer |
+| **MEC** | **414 / 400** | **8 / 8** | ✅ completa |
+| BIO | 10 / 880 | 0 / 22 | ⏭️ **próxima** |
 | INF | 10 / 455 | 0 / 13 | a fazer |
 | PT | 10 / 525 | 0 / 15 | a fazer |
 | ING | 10 / 240 | 0 / 4 | a fazer |
 | CDH | 10 / 280 | 0 / 7 | a fazer |
 | LEG | 10 / 450 | 0 / 10 | a fazer (leis já em `conteudo/_fontes/leis/`) |
-| **Total** | **3.182** | **68 / 147** | 0 itens em revisão |
+| **Total** | **3.586** | **76 / 147** | 0 itens em revisão |
 
 ## O que ainda falta
 
 ### 1. Conteúdo (prioridade — exatas primeiro)
-Ordem: ~~MAT~~ → ~~RLM~~ → ~~FIS~~ → ~~QUI~~ → **MEC → BIO → INF → PT → ING → CDH → LEG**.
+Ordem: ~~MAT~~ → ~~RLM~~ → ~~FIS~~ → ~~QUI~~ → ~~MEC~~ → **BIO → INF → PT → ING → CDH → LEG**.
 Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 1. Extrair os itens dos PDFs do Drive (`D:\CBM\MATERIAL\CBMAL`: `Q-<Matéria>_100_Questoes(1)/(2)`, itens da matéria nos simulados 01–05, prova 2021) com `pdftotext`.
 2. Ler a apostila `E-CBMAL_<Matéria>.pdf` como base do conteúdo.
@@ -69,6 +69,7 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 ## Histórico resumido
 - **23/10** — Ideia, documento do projeto, esboço, app mínimo, Supabase, GitHub, Vercel, lembretes, redação (conteúdo + temas), leis oficiais baixadas e questões de LEG corrigidas (2 gabaritos do Drive estavam errados), código de convite + aprovação.
 - **24/10** — Matemática completa: conteúdo dos 8 tópicos e 480 itens; build aceita vários arquivos por matéria; `scripts/balanco.mjs`.
+- **24/10** — Mecânica Geral completa: conteúdo dos 8 sistemas e 414 itens (51–54% C por tópico). Os 60 itens dos simulados 01–05 (109–120) entraram; o esquema de arrefecimento (sim. 04) e as figuras de freios (sim. 05) viraram descrições em texto. Muitas situações de viatura: tomada de força da autobomba, freio a ar e molas acumuladoras, fading em serra, tampa do radiador quente, fusível de amperagem maior, ordem de desconexão da bateria, sangria do diesel após pane seca, ARLA 32, alta tensão em híbridos. Pendência leve: matéria conceitual, com 35–50% de itens fáceis por tópico.
 - **24/10** — Química completa: conteúdo dos 18 tópicos e 886 itens (51–54% C por tópico). Os 90 itens de Química dos simulados 01–05 entraram (grupos `QUI-SIMnn-A`, com as tabelas de massas). Itens de Química da prova de **Oficial 2021** adaptados como referência de estilo (pó ABC dos extintores e etilenoglicol: grupos `QUI-2021-A/B`, origem `cbmal2021-oficial-NN`; gabaritos conferidos por cálculo). Fórmulas químicas escritas com subscritos Unicode (H₂SO₄) em vez de LaTeX. Muitos itens de segurança: GLP × gás natural, CO, metais alcalinos (classe D), diluição de ácidos, oxidantes, extintores. Pendência leve: QUI-04 (tabela periódica) tem 51% de itens fáceis.
 - **24/10** — Reforço de Física: +55 itens difíceis em FIS-11, 15, 16 e 20 (conversões de escala, curva de aquecimento, dioptrias, espelhos associados, câmara escura, decibéis, ecos, Doppler, força magnética, indução, transformador). Agora têm 31–38% de fáceis e 32–41% de difíceis; FIS-16 ainda tem mais fáceis que a meta.
 - **24/10** — Física completa: conteúdo dos 22 tópicos e 1.118 itens (50–56% C por tópico; 53% no geral). Todos os 100 itens de Física dos simulados 01–05 entraram (grupos `FIS-SIMnn-A`); o gráfico v × t e o circuito do simulado 04, ausentes no PDF, viraram tabela e texto. Itens do caderno 2 que dependiam de figura (bloco II, gráfico de velocidade) ganharam tabela. Leis da termodinâmica e impulso/quantidade de movimento ficaram de fora (não estão no edital de Praça). FIS-19 (efeitos fisiológicos) e FIS-21/22 incluem conduta de segurança (socorro a vítima de choque, raios, fonte radioativa).
