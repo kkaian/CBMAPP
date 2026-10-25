@@ -18,6 +18,7 @@ export default function Mais() {
   const itens = [
     { icone: '📕', titulo: 'Caderno de erros', sub: `${noCaderno(revisoes).length} itens · ${revisoesPendentes(revisoes).length} vencem hoje`, para: '/erros' },
     { icone: '🎖️', titulo: 'Perfil e conquistas', sub: 'patente, XP, meta diária', para: '/perfil' },
+    { icone: '🏆', titulo: 'Ranking', sub: 'XP da semana e geral, perfil dos colegas', para: '/ranking' },
     { icone: '📝', titulo: 'Simulados', sub: 'completo, mini, pontos fracos e 01–05', para: '/simulados' },
     { icone: '✍️', titulo: 'Redação', sub: 'estudo, 30 temas, calculadora da nota', para: '/redacao' },
     { icone: '🗓️', titulo: 'Plano de estudos', sub: 'em breve', para: '/em-breve?o=Plano de estudos' },

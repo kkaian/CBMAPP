@@ -1,4 +1,5 @@
 import { db, gravarConfig, lerConfig } from './db'
+import { publicarResumo } from './ranking'
 import { supabase } from './supabase'
 import type { RegistroLeitura, RegistroResposta, RegistroRevisao, RegistroSimulado } from './types'
 
@@ -50,6 +51,8 @@ async function executar() {
   try {
     await enviar()
     await receber()
+    // o ranking é extra: se falhar, não marca a sincronização como erro
+    try { await publicarResumo() } catch (e) { console.warn('ranking:', (e as Error).message) }
     definir({ status: 'ok', ultima: new Date().toISOString() })
   } catch (e) {
     definir({ ...estado, status: 'erro', mensagem: (e as Error).message })

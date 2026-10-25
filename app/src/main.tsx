@@ -19,6 +19,7 @@ import Mais from './pages/Mais'
 import Materia from './pages/Materia'
 import Perfil from './pages/Perfil'
 import Questoes from './pages/Questoes'
+import Ranking, { PerfilColega } from './pages/Ranking'
 import Quiz from './pages/Quiz'
 import Redacao from './pages/Redacao'
 import Simulado from './pages/Simulado'
@@ -44,6 +45,8 @@ const router = createHashRouter([
       { path: '/em-breve', element: <EmBreve /> },
       { path: '/redacao', element: <Redacao /> },
       { path: '/simulados', element: <Simulados /> },
+      { path: '/ranking', element: <Ranking /> },
+      { path: '/ranking/:id', element: <PerfilColega /> },
       { path: '/admin', element: <Admin /> },
     ],
   },

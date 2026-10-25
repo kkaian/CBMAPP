@@ -209,6 +209,40 @@ drop policy if exists "dono" on public.simulados;
 create policy "dono" on public.simulados for all to authenticated
   using (user_id = auth.uid() and public.eh_aprovado()) with check (user_id = auth.uid() and public.eh_aprovado());
 
+-- Ranking entre os colegas aprovados: um resumo por pessoa (XP, patente, sequência, conquistas…),
+-- montado no app e publicado na sincronização. Só contas aprovadas leem; cada um só grava o seu.
+-- O nome vem do perfil (não do app), para ninguém aparecer com o nome de outro.
+create table if not exists public.ranking (
+  user_id uuid primary key default auth.uid() references auth.users (id) on delete cascade,
+  usuario text not null default '',
+  visivel boolean not null default true,
+  dados jsonb not null,
+  atualizado_em timestamptz not null default now()
+);
+alter table public.ranking enable row level security;
+
+create or replace function public.ranking_preencher() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  new.user_id := auth.uid();
+  new.usuario := coalesce((select usuario from public.perfis where user_id = auth.uid()), '');
+  new.atualizado_em := now();
+  return new;
+end $$;
+drop trigger if exists ranking_preencher on public.ranking;
+create trigger ranking_preencher before insert or update on public.ranking
+  for each row execute function public.ranking_preencher();
+
+drop policy if exists "ver ranking" on public.ranking;
+create policy "ver ranking" on public.ranking for select to authenticated
+  using (public.eh_aprovado() and (visivel or user_id = auth.uid()));
+drop policy if exists "gravar o proprio" on public.ranking;
+create policy "gravar o proprio" on public.ranking for insert to authenticated
+  with check (user_id = auth.uid() and public.eh_aprovado());
+drop policy if exists "atualizar o proprio" on public.ranking;
+create policy "atualizar o proprio" on public.ranking for update to authenticated
+  using (user_id = auth.uid() and public.eh_aprovado()) with check (user_id = auth.uid() and public.eh_aprovado());
+
 -- Inscrições de notificação (Web Push) de cada aparelho.
 create table if not exists public.push_inscricoes (
   endpoint text primary key,

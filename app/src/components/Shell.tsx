@@ -6,7 +6,7 @@ const ABAS = [
   { para: '/estudar', icone: '📚', rotulo: 'Estudar', prefixos: ['/estudar', '/m/', '/t/'] },
   { para: '/questoes', icone: '✅', rotulo: 'Questões', prefixos: ['/questoes', '/simulados'] },
   { para: '/desempenho', icone: '📈', rotulo: 'Desempenho', prefixos: ['/desempenho'] },
-  { para: '/mais', icone: '☰', rotulo: 'Mais', prefixos: ['/mais', '/erros', '/perfil', '/em-breve', '/redacao', '/admin'] },
+  { para: '/mais', icone: '☰', rotulo: 'Mais', prefixos: ['/mais', '/erros', '/perfil', '/em-breve', '/redacao', '/admin', '/ranking'] },
 ]
 
 export default function Shell() {
