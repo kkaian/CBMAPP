@@ -1,0 +1,25 @@
+# Aplica supabase/schema.sql no banco (é idempotente: pode rodar de novo sem problema).
+# Roda manualmente (Actions > Aplicar schema > Run workflow) e sozinho quando o schema muda no main.
+# Precisa do secret SUPABASE_DB_URL (string do pooler com a senha), o mesmo dos lembretes.
+name: Aplicar schema
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths: ['supabase/schema.sql']
+
+jobs:
+  aplicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --no-audit --no-fund pg@8
+      - name: Aplicar supabase/schema.sql
+        run: node scripts/aplicar-schema.mjs
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}

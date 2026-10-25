@@ -44,6 +44,18 @@ create table if not exists public.leituras (
 );
 create index if not exists leituras_user_recebida on public.leituras (user_id, recebida_em);
 
+-- Simulados: uma linha por tentativa (itens, folha de respostas e tempo em "dados").
+-- Vence a versão mais recente (atualizada_em). As respostas também entram em "respostas" ao entregar.
+create table if not exists public.simulados (
+  id uuid primary key,
+  user_id uuid not null default auth.uid() references auth.users (id) on delete cascade,
+  dados jsonb not null,
+  status text not null check (status in ('andamento', 'concluido', 'descartado')),
+  atualizada_em timestamptz not null,
+  recebida_em timestamptz not null default now()
+);
+create index if not exists simulados_user_recebida on public.simulados (user_id, recebida_em);
+
 -- ============================================================================
 -- Acesso: código de convite + aprovação pelo administrador
 -- - Para se cadastrar é preciso o código de convite (conferido aqui no banco, não no app).
@@ -171,11 +183,15 @@ end $$;
 drop trigger if exists revisoes_tocar on public.revisoes;
 create trigger revisoes_tocar before insert or update on public.revisoes
   for each row execute function public.tocar_recebida_em();
+drop trigger if exists simulados_tocar on public.simulados;
+create trigger simulados_tocar before insert or update on public.simulados
+  for each row execute function public.tocar_recebida_em();
 
 -- Segurança: cada usuário só vê e grava as próprias linhas.
 alter table public.respostas enable row level security;
 alter table public.revisoes enable row level security;
 alter table public.leituras enable row level security;
+alter table public.simulados enable row level security;
 
 drop policy if exists "dono" on public.respostas;
 create policy "dono" on public.respostas for all to authenticated
@@ -187,6 +203,10 @@ create policy "dono" on public.revisoes for all to authenticated
 
 drop policy if exists "dono" on public.leituras;
 create policy "dono" on public.leituras for all to authenticated
+  using (user_id = auth.uid() and public.eh_aprovado()) with check (user_id = auth.uid() and public.eh_aprovado());
+
+drop policy if exists "dono" on public.simulados;
+create policy "dono" on public.simulados for all to authenticated
   using (user_id = auth.uid() and public.eh_aprovado()) with check (user_id = auth.uid() and public.eh_aprovado());
 
 -- Inscrições de notificação (Web Push) de cada aparelho.
