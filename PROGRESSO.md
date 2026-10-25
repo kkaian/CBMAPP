@@ -30,16 +30,16 @@ Início (missão do dia, meta, streak, patente) · Estudar (mapa do edital) · M
 | **MEC** | **414 / 400** | **8 / 8** | ✅ completa |
 | **BIO** | **937 / 880** | **22 / 22** | ✅ completa |
 | **INF** | **507 / 455** | **13 / 13** | ✅ completa |
-| PT | 10 / 525 | 0 / 15 | ⏭️ **próxima** |
-| ING | 10 / 240 | 0 / 4 | a fazer |
+| **PT** | **648 / 525** | **15 / 15** | ✅ completa |
+| ING | 10 / 240 | 0 / 4 | ⏭️ **próxima** |
 | CDH | 10 / 280 | 0 / 7 | a fazer |
 | LEG | 10 / 450 | 0 / 10 | a fazer (leis já em `conteudo/_fontes/leis/`) |
-| **Total** | **5.010** | **111 / 147** | 0 itens em revisão |
+| **Total** | **5.648** | **126 / 147** | 0 itens em revisão |
 
 ## O que ainda falta
 
 ### 1. Conteúdo (prioridade — exatas primeiro)
-Ordem: ~~MAT~~ → ~~RLM~~ → ~~FIS~~ → ~~QUI~~ → ~~MEC~~ → ~~BIO~~ → ~~INF~~ → **PT → ING → CDH → LEG**.
+Ordem: ~~MAT~~ → ~~RLM~~ → ~~FIS~~ → ~~QUI~~ → ~~MEC~~ → ~~BIO~~ → ~~INF~~ → ~~PT~~ → **ING → CDH → LEG**.
 Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 1. Extrair os itens dos PDFs do Drive (`D:\CBM\MATERIAL\CBMAL`: `Q-<Matéria>_100_Questoes(1)/(2)`, itens da matéria nos simulados 01–05, prova 2021) com `pdftotext`.
 2. Ler a apostila `E-CBMAL_<Matéria>.pdf` como base do conteúdo.
@@ -69,6 +69,7 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 ## Histórico resumido
 - **23/10** — Ideia, documento do projeto, esboço, app mínimo, Supabase, GitHub, Vercel, lembretes, redação (conteúdo + temas), leis oficiais baixadas e questões de LEG corrigidas (2 gabaritos do Drive estavam errados), código de convite + aprovação.
 - **24/10** — Matemática completa: conteúdo dos 8 tópicos e 480 itens; build aceita vários arquivos por matéria; `scripts/balanco.mjs`.
+- **24/10** — Português completo: conteúdo dos 15 tópicos e 648 itens (48–53% C por tópico). 22 textos-base em `grupos-PT.json`: os 13 textos dos cadernos do Drive (`PT-G01`…`PT-G13`), os 5 dos simulados (`PT-SIMnn-A`, itens 1–12, todos cobertos) e 4 das provas de 2021 (`PT-2021-A`…`D`). Os textos de 2021 vêm de sites (CBM/AL, National Geographic, Letras Ambientais, BBC); entraram **resumidos com palavras próprias**, mantendo só os trechos citados nos itens, para não reproduzir os originais. A apostila não traz gabarito de PT 2021: usei só os itens em que o gabarito é seguro (cerca de 30 de Praça 1–30 e Oficial 1–15) e deixei de fora os duvidosos. Os itens do Manual de Redação da Presidência (caem na prova, embora o edital fale só em "níveis de formalidade") ficaram em PT-15. Itens gerados por scripts no scratchpad (`pt/ptNN.mjs` + `gen.mjs`).
 - **24/10** — Informática completa: conteúdo dos 13 tópicos e 507 itens (48–50% C por tópico). Entraram os 30 itens dos simulados 01–05 (19–24) e os 15 itens oficiais de 2021: Praça 41–50 (origem `cbmal2021-praca-NN`) e Oficial 21–25, com os gabaritos da apostila. As tabelas das provas de 2021 que faltavam no PDF (Excel do Oficial 23 e do Praça 48) foram reconstituídas de forma coerente com o gabarito, com aviso no texto-base (grupos `INF-2021-B/C`). Ponto de atenção: o item 25 do Oficial 2021 (ransomware evitado com antivírus) ficou CERTO conforme a apostila, com ressalva no comentário. Atalhos do Word conferidos na versão em português (Ctrl+B salva, Ctrl+N negrito) × Writer (Ctrl+B negrito).
 - **24/10** — Biologia completa: conteúdo dos 22 tópicos e 937 itens (48–51% C por tópico). Os 100 itens de Biologia dos simulados 01–05 (89–108) entraram; a tabela de doenças (sim. 04) e o esquema da circulação (sim. 05) viraram grupos de texto (`BIO-SIMnn-A`). Itens da prova de **Oficial 2021** usados: musgo (briófita, não pteridófita) e DTPa × sarampo (a DTPa protege contra difteria, tétano e coqueluche, e vacina é imunidade ativa); grupos `BIO-2021-A/B`. O item do muçuã (quelônio "carnívoro") ficou de fora por gabarito duvidoso; virou item próprio só sobre a carapaça. Muitos itens ligados ao serviço: queimaduras e regra dos nove, síndrome do esmagamento, fraturas e coluna cervical, CO na fumaça, RCP, hemorragias e choque, evisceração, Glasgow, parto de emergência, acidentes ofídicos e com águas-vivas, leptospirose em enchentes, PEP do HIV, soros. Números de referência usados (FR 12–20, FC 60–100, RCP 100–120/min e 5–6 cm, Glasgow 3–15) são os usuais em APH. Pendência leve: BIO-02 e BIO-03 têm cerca de 40% de itens fáceis.
 - **24/10** — Mecânica Geral completa: conteúdo dos 8 sistemas e 414 itens (51–54% C por tópico). Os 60 itens dos simulados 01–05 (109–120) entraram; o esquema de arrefecimento (sim. 04) e as figuras de freios (sim. 05) viraram descrições em texto. Muitas situações de viatura: tomada de força da autobomba, freio a ar e molas acumuladoras, fading em serra, tampa do radiador quente, fusível de amperagem maior, ordem de desconexão da bateria, sangria do diesel após pane seca, ARLA 32, alta tensão em híbridos. Pendência leve: matéria conceitual, com 35–50% de itens fáceis por tópico.
