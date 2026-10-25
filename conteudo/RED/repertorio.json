@@ -1,0 +1,196 @@
+[
+  {
+    "id": "darcy",
+    "nome": "Darcy Ribeiro",
+    "obra": "O Povo Brasileiro: a formação e o sentido do Brasil",
+    "ano": 1995,
+    "coringa": true,
+    "quem": "Antropólogo, educador, romancista e político mineiro (1922–1997). Conviveu anos com povos indígenas como etnólogo do Serviço de Proteção aos Índios; foi o primeiro reitor da Universidade de Brasília (UnB), ministro da Educação e chefe da Casa Civil no governo João Goulart. Exilado depois de 1964, voltou ao Brasil e, como vice-governador do Rio de Janeiro, criou com Leonel Brizola os CIEPs, escolas de tempo integral. Como senador, foi o relator da Lei de Diretrizes e Bases da Educação (Lei 9.394/1996), conhecida como Lei Darcy Ribeiro. Membro da Academia Brasileira de Letras.",
+    "contexto": "O Povo Brasileiro foi o último grande livro de Darcy, publicado dois anos antes de sua morte, depois de décadas de pesquisa. Ele tenta responder a uma pergunta: por que o Brasil, com tantas riquezas, ainda não deu certo para a maioria de seu povo? A resposta passa pela forma como o país foi formado na colonização.",
+    "ideia": "O povo brasileiro nasceu do encontro, quase sempre violento, de três matrizes: a indígena (tupi), a europeia (lusa) e a africana. Dessa mistura surgiu um 'povo novo', diferente de cada uma das origens. Mas esse povo foi organizado, desde o início, para servir a um projeto de fora: a colônia era uma empresa de exploração que consumia gente como combustível. O resultado é uma sociedade marcada por uma distância enorme entre uma pequena elite, que concentra terra, renda e poder, e a grande massa da população, tratada como força de trabalho descartável. Para Darcy, a desigualdade brasileira não é acidente: é estrutural, foi construída na formação do país e se reproduz até hoje.",
+    "conceitos": [
+      { "termo": "Povo novo", "explicacao": "O brasileiro não é indígena, nem português, nem africano: é um povo novo, nascido da fusão das três matrizes, com identidade própria." },
+      { "termo": "Moinhos de gastar gente", "explicacao": "Título de um capítulo do livro. Imagem da colônia como máquina que moía indígenas e africanos escravizados para produzir riqueza (açúcar, ouro) que ia para fora. Serve para falar de trabalho degradante, mortes evitáveis e vidas tratadas como descartáveis." },
+      { "termo": "Ninguendade", "explicacao": "A condição dos primeiros mestiços (filhos de europeus com indígenas ou africanas), que não eram aceitos por nenhum dos grupos de origem: não eram 'ninguém'. Foi dessa ninguendade que se forjou a identidade brasileira. Bom para temas de identidade, exclusão e pertencimento." },
+      { "termo": "Os Brasis", "explicacao": "O livro descreve vários 'Brasis' regionais (crioulo, caboclo, sertanejo, caipira e sulino), formados pela mesma matriz, mas com modos de vida diferentes. Útil para falar de desigualdades regionais (Nordeste, Norte, sertão)." },
+      { "termo": "Distância social", "explicacao": "A separação brutal entre a elite e o povo, herdada da escravidão, que faz parte da população viver como se fosse de outro país. É a ideia central quando o tema é desigualdade, violência ou acesso a direitos." }
+    ],
+    "encaixa": ["Desigualdade social", "Vulnerabilidade a desastres e áreas de risco", "Saneamento e acesso à água", "Violência e segurança pública", "Educação", "Racismo e exclusão", "Cidadania e direitos humanos", "Saúde pública"],
+    "aplicacoes": [
+      { "tema": "Desastres e áreas de risco", "frase": "A leitura de Darcy Ribeiro, em O Povo Brasileiro, ajuda a compreender esse quadro: ao evidenciar como o país se estruturou concentrando terra e renda, o autor explica por que a população mais pobre foi empurrada para encostas e margens de rios, justamente as áreas mais expostas a deslizamentos e enchentes." },
+      { "tema": "Desigualdade social", "frase": "Segundo a interpretação de Darcy Ribeiro em O Povo Brasileiro, a desigualdade brasileira não é um acidente, mas uma herança estrutural da colonização, que organizou a sociedade em torno de uma elite restrita e de uma maioria tratada como mera força de trabalho." },
+      { "tema": "Saneamento e saúde", "frase": "A distância social descrita por Darcy Ribeiro em O Povo Brasileiro ganha forma concreta no saneamento: enquanto bairros centrais contam com água tratada e esgoto, periferias e comunidades rurais convivem com doenças que o restante do país já superou." },
+      { "tema": "Educação", "frase": "Darcy Ribeiro, que além de autor de O Povo Brasileiro foi o idealizador de escolas de tempo integral, via na educação pública o principal caminho para romper o ciclo de exclusão herdado da formação do país." },
+      { "tema": "Violência e trabalho degradante", "frase": "A imagem dos 'moinhos de gastar gente', usada por Darcy Ribeiro em O Povo Brasileiro para descrever a colônia, ainda ilumina realidades atuais, como o trabalho análogo à escravidão e a naturalização de mortes evitáveis entre os mais pobres." },
+      { "tema": "Cidadania e identidade", "frase": "Darcy Ribeiro descreve os brasileiros como um povo novo, ainda em construção, impedido de realizar plenamente suas potencialidades enquanto grande parte da população permanecer à margem dos direitos básicos." }
+    ],
+    "citacoes": [
+      { "texto": "Nós, brasileiros, somos um povo em ser, impedido de sê-lo.", "situacao": "muito citada como sendo de O Povo Brasileiro", "nota": "Aparece em muitos artigos atribuída ao livro, mas não conferimos a página. Use entre aspas só se conferir no livro; senão, use a paráfrase (último exemplo acima)." },
+      { "texto": "A crise da educação no Brasil não é uma crise; é um projeto.", "situacao": "atribuída (palestra na SBPC, 1977)", "nota": "Não está em O Povo Brasileiro. Há versões com 'programa' no lugar de 'projeto'. Prefira a paráfrase: 'Darcy Ribeiro sustentava que o abandono da escola pública no Brasil não era descuido, mas resultado de escolhas políticas'." }
+    ],
+    "cuidados": "Cite o nome completo e a obra em itálico (na folha, sublinhe ou só escreva normalmente: não há itálico à mão). Não diga 'segundo Darcy Ribeiro, X% dos brasileiros…': o livro é interpretação histórica, não estatística. Use em 1 parágrafo, amarrado ao comando, e não em todos."
+  },
+  {
+    "id": "jmc",
+    "nome": "José Murilo de Carvalho",
+    "obra": "Cidadania no Brasil: o longo caminho",
+    "ano": 2001,
+    "quem": "Historiador e cientista político mineiro (1939–2023), professor da UFRJ e membro da Academia Brasileira de Letras. Um dos maiores estudiosos da formação do Estado e da cidadania no Brasil.",
+    "contexto": "O livro parte do modelo do sociólogo inglês T. H. Marshall, que descreveu a cidadania na Inglaterra como uma sequência: primeiro os direitos civis (século XVIII), depois os políticos (XIX) e por fim os sociais (XX).",
+    "ideia": "No Brasil, a ordem foi invertida. Os direitos sociais (leis trabalhistas, previdência) vieram primeiro, concedidos 'de cima para baixo' por Getúlio Vargas num período sem liberdade política; os políticos se ampliaram depois, inclusive durante a ditadura militar; e os direitos civis (liberdade, igualdade perante a lei, segurança) continuam os mais frágeis para grande parte da população. Por isso, temos democracia formal convivendo com desigualdade extrema e com uma cidadania que muitos não exercem de fato.",
+    "conceitos": [
+      { "termo": "Inversão da pirâmide de Marshall", "explicacao": "Direitos sociais antes dos políticos e dos civis. A cidadania chegou como concessão do Estado, não como conquista da sociedade." },
+      { "termo": "Estadania", "explicacao": "Palavra que o autor usa para a cultura de esperar tudo do Estado, em vez de participar e cobrar como cidadão." }
+    ],
+    "encaixa": ["Cidadania", "Direitos humanos", "Segurança pública e violência", "Valorização do serviço público", "Participação social e voluntariado"],
+    "aplicacoes": [
+      { "tema": "Segurança pública", "frase": "Como demonstra José Murilo de Carvalho em Cidadania no Brasil, os direitos civis, como a segurança e a igualdade perante a lei, permanecem os mais frágeis para grande parte da população brasileira, o que ajuda a explicar por que a violência atinge de modo tão desigual os mais pobres." },
+      { "tema": "Cidadania e participação", "frase": "O historiador José Murilo de Carvalho observa que, no Brasil, os direitos foram frequentemente concedidos pelo Estado antes de serem conquistados pela sociedade, o que contribuiu para uma cultura de pouca participação cidadã." }
+    ],
+    "citacoes": [],
+    "cuidados": "Combina muito bem com Darcy Ribeiro: Darcy explica a origem da desigualdade; José Murilo, por que a cidadania ficou incompleta. Não confunda com T. H. Marshall (que é o modelo inglês)."
+  },
+  {
+    "id": "milton",
+    "nome": "Milton Santos",
+    "obra": "O espaço do cidadão",
+    "ano": 1987,
+    "quem": "Geógrafo baiano (1926–2001), um dos intelectuais brasileiros mais reconhecidos no mundo. Recebeu em 1994 o Prêmio Vautrin Lud, considerado o 'Nobel da Geografia'.",
+    "contexto": "Escrito no fim da ditadura, quando o Brasil discutia a nova Constituição, o livro pergunta: há cidadãos neste país? (título de um dos capítulos).",
+    "ideia": "O lugar onde a pessoa vive determina, em grande parte, a extensão da sua cidadania. Quem mora em bairros sem saneamento, transporte, escola, posto de saúde e segurança tem direitos só no papel: é um 'cidadão mutilado'. Para Milton Santos, a desigualdade brasileira é também espacial, e o planejamento do território é uma questão de justiça.",
+    "conceitos": [
+      { "termo": "Cidadão mutilado", "explicacao": "Título de um capítulo: a pessoa que tem direitos formais, mas não os exerce por causa do lugar em que vive e da falta de serviços." },
+      { "termo": "Consumidor mais-que-perfeito", "explicacao": "Crítica à troca do cidadão pelo consumidor: onde falta cidadania, sobra apelo ao consumo." }
+    ],
+    "encaixa": ["Áreas de risco e ocupação desordenada", "Enchentes urbanas", "Saneamento básico", "Mobilidade e trânsito", "Desigualdade social"],
+    "aplicacoes": [
+      { "tema": "Ocupação de áreas de risco", "frase": "O geógrafo Milton Santos, em O espaço do cidadão, demonstra que o lugar onde a pessoa vive define a extensão de sua cidadania; nas encostas e várzeas ocupadas sem planejamento, essa cidadania é mutilada pela falta de drenagem, moradia segura e serviços básicos." },
+      { "tema": "Saneamento", "frase": "Conforme a análise de Milton Santos em O espaço do cidadão, o acesso a direitos no Brasil depende do território: o mesmo cidadão que tem direito constitucional à saúde vê esse direito negado quando mora em um bairro sem esgoto tratado." }
+    ],
+    "citacoes": [],
+    "cuidados": "É o melhor repertório para temas urbanos. Não diga que ele 'criou o conceito de favela' nem atribua números a ele."
+  },
+  {
+    "id": "sergio",
+    "nome": "Sérgio Buarque de Holanda",
+    "obra": "Raízes do Brasil",
+    "ano": 1936,
+    "quem": "Historiador e sociólogo paulista (1902–1982), um dos 'intérpretes do Brasil' ao lado de Gilberto Freyre e Caio Prado Júnior.",
+    "contexto": "Livro curto e clássico que procura, na herança ibérica e colonial, explicar o modo de ser do brasileiro e as dificuldades de construir um Estado moderno e impessoal.",
+    "ideia": "O brasileiro tende a levar para a esfera pública os laços pessoais e afetivos da família: o famoso 'homem cordial'. 'Cordial' vem de cor, cordis (coração, em latim): não significa gentil, e sim alguém que age pela emoção e pela intimidade, e não pela regra impessoal. Daí a confusão entre o público e o privado (patrimonialismo), o 'jeitinho', o favorecimento de amigos e a dificuldade de cumprir normas que valem para todos.",
+    "conceitos": [
+      { "termo": "Homem cordial", "explicacao": "Quem age guiado pelo coração e pelas relações pessoais, inclusive no trato com o Estado. Cuidado: NÃO é elogio à simpatia do brasileiro." },
+      { "termo": "Patrimonialismo", "explicacao": "Tratar o bem e o cargo público como se fossem propriedade privada (nepotismo, favores, uso da estrutura pública para fins pessoais)." }
+    ],
+    "encaixa": ["Valorização e ética do serviço público", "Segurança contra incêndio (descumprimento de normas)", "Trânsito", "Corrupção e nepotismo"],
+    "aplicacoes": [
+      { "tema": "Descumprimento de normas de segurança", "frase": "Sérgio Buarque de Holanda, em Raízes do Brasil, apontou a dificuldade brasileira de separar o interesse privado das regras públicas, traço que ajuda a explicar a tolerância com o descumprimento de normas de segurança, vistas como mera burocracia." },
+      { "tema": "Serviço público", "frase": "A figura do homem cordial, descrita por Sérgio Buarque de Holanda em Raízes do Brasil, ajuda a compreender práticas como o nepotismo, que confundem o público com o privado e afrontam o princípio constitucional da impessoalidade." }
+    ],
+    "citacoes": [],
+    "cuidados": "O erro clássico é usar 'homem cordial' como sinônimo de povo gentil e acolhedor. É o contrário do sentido do autor."
+  },
+  {
+    "id": "beck",
+    "nome": "Ulrich Beck",
+    "obra": "Sociedade de risco",
+    "ano": 1986,
+    "quem": "Sociólogo alemão (1944–2015), professor da Universidade de Munique.",
+    "contexto": "O livro saiu no mesmo ano do acidente nuclear de Chernobyl (1986), que pareceu confirmar sua tese.",
+    "ideia": "Nas sociedades modernas, os maiores perigos já não vêm só da natureza: são produzidos pelo próprio desenvolvimento (indústria, química, energia nuclear, mudanças climáticas). Esses riscos são muitas vezes invisíveis, ultrapassam fronteiras e exigem que a sociedade passe a gerir riscos, e não só a distribuir riquezas. Embora alguns riscos atinjam a todos, os mais pobres costumam ser os mais expostos e os que têm menos meios de se proteger.",
+    "conceitos": [
+      { "termo": "Risco fabricado", "explicacao": "Perigo criado pela ação humana e pela tecnologia, e não por um evento natural: rompimento de barragem, vazamento químico, afundamento do solo por mineração." },
+      { "termo": "Modernização reflexiva", "explicacao": "A sociedade precisa olhar para as consequências do próprio progresso e corrigi-las." }
+    ],
+    "encaixa": ["Desastres tecnológicos (Mariana, Brumadinho, Maceió)", "Mudanças climáticas", "Tecnologia e inteligência artificial", "Produtos perigosos"],
+    "aplicacoes": [
+      { "tema": "Desastres tecnológicos", "frase": "O sociólogo Ulrich Beck, em Sociedade de risco, alerta que os maiores perigos contemporâneos são produzidos pelo próprio desenvolvimento; os rompimentos de barragens de mineração em Mariana (2015) e em Brumadinho (2019) ilustram de forma trágica essa tese." },
+      { "tema": "Maceió (afundamento do solo)", "frase": "O afundamento do solo em bairros de Maceió, associado à extração de sal-gema, é exemplo do que Ulrich Beck chamou de risco fabricado: uma ameaça criada pela atividade econômica que transformou a vida de milhares de famílias." },
+      { "tema": "Mudanças climáticas", "frase": "Na perspectiva de Ulrich Beck, as mudanças climáticas são o risco fabricado por excelência: resultam do modelo de desenvolvimento e recaem com mais força sobre quem menos contribuiu para provocá-las." }
+    ],
+    "citacoes": [
+      { "texto": "A miséria é hierárquica; a poluição é democrática.", "situacao": "frase muito citada do livro (o original fala em smog)", "nota": "Ideia central do autor, mas a tradução varia. Prefira a paráfrase: os riscos modernos tendem a atingir a todos, ainda que os pobres sejam os mais vulneráveis." }
+    ],
+    "cuidados": "Ótimo para o perfil do bombeiro, porque fala de riscos e prevenção. Lembre que, para Beck, o risco não é 'castigo da natureza'."
+  },
+  {
+    "id": "bauman",
+    "nome": "Zygmunt Bauman",
+    "obra": "Modernidade líquida",
+    "ano": 2000,
+    "quem": "Sociólogo polonês (1925–2017), professor na Inglaterra (Universidade de Leeds).",
+    "contexto": "Bauman compara a sociedade de hoje a um líquido: nada mantém a forma por muito tempo.",
+    "ideia": "Na 'modernidade líquida', relações, empregos, valores e instituições são frágeis e passageiros. Tudo muda rápido, as pessoas vivem inseguras e tendem a se ligar ao que é imediato, ao consumo e às conexões superficiais. Isso ajuda a entender a ansiedade, a solidão em meio às redes sociais e a facilidade com que boatos se espalham.",
+    "conceitos": [
+      { "termo": "Liquidez", "explicacao": "Falta de solidez e de permanência nas relações, nas instituições e nas referências." },
+      { "termo": "Amor líquido / relações líquidas", "explicacao": "Vínculos fáceis de criar e de desfazer, típicos das redes (ideia desenvolvida em outro livro, Amor líquido, de 2003)." }
+    ],
+    "encaixa": ["Desinformação e redes sociais", "Saúde mental", "Consumo e resíduos", "Inteligência artificial e privacidade"],
+    "aplicacoes": [
+      { "tema": "Desinformação", "frase": "Em um cenário que Zygmunt Bauman definiu como modernidade líquida, marcado pela fragilidade das referências e dos vínculos, muitos passam a confiar mais no que confirma suas crenças do que em fontes verificáveis, o que favorece a propagação de conteúdos falsos." },
+      { "tema": "Saúde mental", "frase": "A fragilidade dos laços sociais descrita por Zygmunt Bauman em Modernidade líquida ajuda a compreender o paradoxo de uma geração hiperconectada nas redes e, ao mesmo tempo, solitária e ansiosa." }
+    ],
+    "citacoes": [],
+    "cuidados": "É o repertório mais usado em redações de concurso: funciona, mas use bem amarrado ao comando para não parecer decorado."
+  },
+  {
+    "id": "freire",
+    "nome": "Paulo Freire",
+    "obra": "Pedagogia do Oprimido",
+    "ano": 1968,
+    "quem": "Educador pernambucano (1921–1997), patrono da educação brasileira (Lei 12.612/2012). Ficou conhecido por alfabetizar adultos a partir das palavras do cotidiano deles.",
+    "contexto": "O livro foi escrito no exílio, no Chile, no fim dos anos 1960, e é um dos títulos das ciências humanas mais citados no mundo.",
+    "ideia": "Freire critica a 'educação bancária', em que o professor apenas deposita conteúdos em alunos passivos. Defende uma educação problematizadora, que parte da realidade do educando e o leva a compreender criticamente o mundo para poder transformá-lo (conscientização).",
+    "conceitos": [
+      { "termo": "Educação bancária", "explicacao": "Ensino que só transmite e cobra memorização, sem diálogo nem reflexão." },
+      { "termo": "Conscientização", "explicacao": "Passar a enxergar criticamente a própria realidade e agir sobre ela." }
+    ],
+    "encaixa": ["Cultura de prevenção e educação para emergências", "Desinformação (educação midiática)", "Trânsito", "Drogas", "Primeiros socorros"],
+    "aplicacoes": [
+      { "tema": "Educação para emergências", "frase": "Inspirada em Paulo Freire, para quem a educação deve partir da realidade do educando, a prevenção de desastres ganha força quando a escola discute os riscos do próprio bairro, as rotas de fuga e os alertas da defesa civil, em vez de apenas transmitir regras abstratas." },
+      { "tema": "Desinformação", "frase": "A educação crítica defendida por Paulo Freire em Pedagogia do Oprimido é o fundamento da educação midiática: formar leitores capazes de questionar a origem e a intenção das informações que recebem." }
+    ],
+    "citacoes": [
+      { "texto": "Educação não transforma o mundo. Educação muda as pessoas. Pessoas transformam o mundo.", "situacao": "atribuída", "nota": "Circula como de Paulo Freire, mas não é de Pedagogia do Oprimido e a origem exata é incerta. Use a paráfrase." }
+    ],
+    "cuidados": "Evite tom militante ou panfletário; use a ideia pedagógica (educação crítica e ligada à realidade), que é o que interessa ao tema."
+  },
+  {
+    "id": "krenak",
+    "nome": "Ailton Krenak",
+    "obra": "Ideias para adiar o fim do mundo",
+    "ano": 2019,
+    "quem": "Líder indígena, ambientalista e escritor mineiro (nascido em 1953), do povo Krenak, do vale do Rio Doce. Em 2023, tornou-se o primeiro indígena eleito para a Academia Brasileira de Letras.",
+    "contexto": "O livro reúne palestras. O povo Krenak vive às margens do Rio Doce, devastado pela lama do rompimento da barragem de Fundão, em Mariana (2015).",
+    "ideia": "A humanidade se acostumou a se ver separada da natureza, como se a Terra fosse apenas recurso a ser explorado. Essa separação está na raiz da crise ambiental. Krenak propõe reaprender com os povos originários a viver como parte da natureza, e não como sua dona.",
+    "conceitos": [
+      { "termo": "Humanidade separada da natureza", "explicacao": "A ideia de que o ser humano está fora e acima da natureza, que justificaria explorá-la sem limites." }
+    ],
+    "encaixa": ["Desenvolvimento sustentável", "Queimadas", "Mudanças climáticas", "Água e rios", "Desastres de mineração"],
+    "aplicacoes": [
+      { "tema": "Preservação ambiental", "frase": "Ailton Krenak, em Ideias para adiar o fim do mundo, critica a visão de uma humanidade separada da natureza, que passa a enxergar rios e florestas como meros recursos; superar essa visão é condição para um desenvolvimento verdadeiramente sustentável." },
+      { "tema": "Rios e desastres de mineração", "frase": "Para o povo de Ailton Krenak, o Rio Doce, atingido pela lama de Mariana em 2015, não é apenas fonte de água, mas parte da própria vida da comunidade, o que revela a dimensão humana de desastres ambientais." }
+    ],
+    "citacoes": [],
+    "cuidados": "Repertório atual e forte para temas ambientais. Escreva o nome corretamente: Ailton (sem 'e')."
+  },
+  {
+    "id": "arendt",
+    "nome": "Hannah Arendt",
+    "obra": "Eichmann em Jerusalém: um relato sobre a banalidade do mal",
+    "ano": 1963,
+    "quem": "Filósofa alemã de origem judaica (1906–1975), que fugiu do nazismo e se naturalizou nos Estados Unidos.",
+    "contexto": "Arendt acompanhou o julgamento de Adolf Eichmann, um dos organizadores do Holocausto. Esperava um monstro e encontrou um burocrata comum, que dizia apenas 'cumprir ordens'.",
+    "ideia": "O mal extremo pode ser praticado por pessoas comuns que deixam de pensar sobre o que fazem e se escondem atrás de ordens, regras e rotinas. É a 'banalidade do mal': a ausência de reflexão e de responsabilidade individual torna possível a violência em grande escala.",
+    "conceitos": [
+      { "termo": "Banalidade do mal", "explicacao": "O mal praticado sem ódio nem grandeza, por obediência irrefletida e indiferença." }
+    ],
+    "encaixa": ["Direitos humanos", "Violência contra a mulher", "Omissão diante da violência", "Ética no serviço público"],
+    "aplicacoes": [
+      { "tema": "Omissão diante da violência", "frase": "Hannah Arendt mostrou, ao cunhar a expressão banalidade do mal, que a violência se sustenta também na indiferença de quem a assiste sem refletir; romper o silêncio diante da violência doméstica é, por isso, dever de toda a sociedade." },
+      { "tema": "Direitos humanos e serviço público", "frase": "A reflexão de Hannah Arendt sobre a banalidade do mal lembra que cumprir ordens não exime ninguém de pensar: o agente público responde pelos seus atos e deve recusar ordens manifestamente ilegais." }
+    ],
+    "citacoes": [],
+    "cuidados": "Tema pesado: use com sobriedade e sem comparações exageradas com o Holocausto. A ligação com a função militar existe também nas leis: o RDPMAL só justifica a obediência a ordem não manifestamente ilegal."
+  }
+]

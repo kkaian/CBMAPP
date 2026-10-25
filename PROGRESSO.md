@@ -67,6 +67,12 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 - [ ] Quando formos fazer a correção de redação: chave do Gemini (Google AI Studio).
 
 ## Histórico resumido
+- **25/10** — **Redação aprofundada:**
+  - **5 redações-modelo completas** (~28–30 linhas cada), comentadas parágrafo por parágrafo, com modo "texto corrido": desastres (tema 1), incêndio em edificações (11), desigualdade (15), segurança hídrica (7) e desinformação (17).
+  - **Repertório comentado** com 9 autores: Darcy Ribeiro (coringa, bem completo), José Murilo de Carvalho, Milton Santos, Sérgio Buarque de Holanda, Ulrich Beck, Bauman, Paulo Freire, Ailton Krenak e Hannah Arendt. Cada um tem quem foi, contexto da obra, ideia central, conceitos, onde encaixa, frases prontas em paráfrase por tema, citações literais com aviso e cuidados.
+  - **RED-05** ganhou uma tabela de fatos citáveis (Kiss, Mariana, Brumadinho, Petrópolis, RS 2024, Maceió, COP30).
+  - **Arquivos novos:** `conteudo/RED/repertorio.json` e `modelos.json` (o build valida os dois).
+  - **Conferência na web:** "Moinhos de gastar gente" é título de capítulo de *O Povo Brasileiro*. "Povo em ser, impedido de sê-lo" é muito citada, mas sem página conferida; "a crise da educação… é um projeto" é de palestra de 1977 (versões com "programa"). As duas estão marcadas para usar só em paráfrase.
 - **25/10** — **Ranking entre colegas** (Mais › Ranking, e atalho no Perfil):
   - XP **da semana** (segunda a domingo) e **geral**. Tocar num colega abre o perfil dele comparado ao seu: XP, itens, acerto da semana, sequência, dias de estudo, conquistas, simulados e acerto por matéria.
   - Cada aparelho publica, ao sincronizar, só **totais** na nova tabela `ranking` (nunca as respostas). O nome vem do perfil no banco, então ninguém aparece com o nome de outro.

@@ -2,6 +2,8 @@
 
 ## Resumo
 
+> **Versão completa:** na tela **Redação › Repertório comentado** estão os 9 autores com biografia, contexto da obra, ideia central, conceitos-chave, frases prontas por tema e avisos sobre citações literais. Em **Redações-modelo**, você os vê aplicados em textos completos.
+
 **Coringa principal: Darcy Ribeiro, *O Povo Brasileiro* (1995).** Encaixa em quase todo tema social porque explica a **desigualdade estrutural** da formação do Brasil.
 
 Três versões prontas (paráfrase, sem aspas, risco zero):
@@ -37,6 +39,17 @@ O repertório tem que **servir ao comando**, em uma ou duas frases, e depois **a
 - **Marco de Sendai para a Redução do Risco de Desastres** (2015–2030): acordo da ONU que prioriza a **prevenção** e a **redução do risco**, não só a resposta. Combina com a Lei 12.608/2012 (Política Nacional de Proteção e Defesa Civil).
 - **Milton Santos** (*O espaço do cidadão*, 1987): o lugar onde a pessoa mora determina seu acesso a direitos; quem vive na periferia tem uma cidadania "mutilada". Ótimo para ocupação urbana, saneamento, mobilidade.
 - **Zygmunt Bauman** (*Modernidade líquida*, 2000): relações e instituições frágeis e voláteis na sociedade contemporânea. Bom para desinformação, redes sociais, saúde mental.
+
+### Fatos que você pode citar (sem número arriscado)
+| Fato | Encaixa em | Como citar com segurança |
+|---|---|---|
+| **Incêndio na boate Kiss**, Santa Maria (RS), janeiro de 2013, 242 mortos | segurança contra incêndio, fiscalização | levou à **Lei 13.425/2017 (Lei Kiss)** |
+| **Rompimento da barragem de Fundão**, Mariana (MG), 2015 | desastres tecnológicos, rios, meio ambiente | lama devastou o **Rio Doce** até o mar |
+| **Rompimento da barragem de Brumadinho** (MG), 2019 | desastres tecnológicos, fiscalização | "centenas de mortos" (mais de 270) |
+| **Deslizamentos em Petrópolis** (RJ), fevereiro de 2022 | áreas de risco, chuvas | "mais de duzentas mortes" |
+| **Enchentes no Rio Grande do Sul**, 2024 | eventos extremos, defesa civil, voluntariado | "a maior catástrofe climática da história do estado"; evite números |
+| **Afundamento do solo em Maceió** (bairros como Pinheiro, Mutange e Bebedouro), ligado à extração de sal-gema | risco fabricado (Ulrich Beck), moradia, Alagoas | "milhares de famílias tiveram de deixar suas casas" [confirme números] |
+| **COP30**, Belém (PA), 2025 | clima, Amazônia | primeira COP sediada na Amazônia |
 
 ### Constituição: os artigos-coringa
 | Artigo | Conteúdo |

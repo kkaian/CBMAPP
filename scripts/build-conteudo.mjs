@@ -9,6 +9,8 @@
 //   grupos*.json    lista(s) de { id, texto } com textos-base compartilhados (opcional)
 //   FIS-12.md       conteúdo do tópico, com as seções "## Resumo", "## Teoria" e "## Manias da banca" (opcional)
 //   temas.json      só na redação (RED): temas com ganchos e comandos
+//   repertorio.json só na redação: autores e obras comentados, com aplicações por tema
+//   modelos.json    só na redação: redações-modelo anotadas parágrafo a parágrafo
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { join } from 'node:path'
@@ -55,7 +57,10 @@ for (const materia of edital.materias) {
   const arquivos = (prefixo) => (existsSync(pasta) ? readdirSync(pasta).filter((a) => a.startsWith(prefixo) && a.endsWith('.json')).sort() : [])
   const questoes = arquivos('questoes').flatMap((a) => lerJson(join(pasta, a)))
   const grupos = arquivos('grupos').flatMap((a) => lerJson(join(pasta, a)))
-  const temas = existsSync(join(pasta, 'temas.json')) ? lerJson(join(pasta, 'temas.json')) : undefined // só na redação
+  const opcional = (arq) => (existsSync(join(pasta, arq)) ? lerJson(join(pasta, arq)) : undefined) // só na redação
+  const temas = opcional('temas.json')
+  const repertorio = opcional('repertorio.json')
+  const modelos = opcional('modelos.json')
   const idsGrupos = new Set(grupos.map((g) => g.id))
   const conteudos = {}
 
@@ -98,7 +103,16 @@ for (const materia of edital.materias) {
     if (t.eixo && topicoDaMateria.get(t.eixo) !== materia.codigo) erros.push(`${materia.codigo}/temas.json: tema ${t.id} com eixo inválido "${t.eixo}"`)
   }
 
-  porMateria[materia.codigo] = { questoes, grupos, conteudos, ...(temas ? { temas } : {}) }
+  for (const r of repertorio ?? []) {
+    if (!r.id || !r.nome || !r.obra || !r.ideia || !Array.isArray(r.aplicacoes)) erros.push(`${materia.codigo}/repertorio.json: entrada ${r.id ?? '?'} incompleta (id, nome, obra, ideia, aplicacoes)`)
+  }
+  const idsTemas = new Set((temas ?? []).map((t) => t.id))
+  for (const m of modelos ?? []) {
+    if (!m.titulo || !Array.isArray(m.paragrafos) || m.paragrafos.some((p) => !p.texto || !p.papel)) erros.push(`${materia.codigo}/modelos.json: modelo ${m.id} incompleto`)
+    if (m.tema != null && !idsTemas.has(m.tema)) erros.push(`${materia.codigo}/modelos.json: modelo ${m.id} aponta para tema ${m.tema}, que não existe`)
+  }
+
+  porMateria[materia.codigo] = { questoes, grupos, conteudos, ...(temas ? { temas } : {}), ...(repertorio ? { repertorio } : {}), ...(modelos ? { modelos } : {}) }
 }
 
 // balanceamento por tópico (só avisa quando já há volume)

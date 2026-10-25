@@ -68,11 +68,38 @@ export interface TemaRedacao {
   comandos: string[]
 }
 
+export interface Repertorio {
+  id: string
+  nome: string
+  obra: string
+  ano: number
+  coringa?: boolean
+  quem: string
+  contexto: string
+  ideia: string
+  conceitos: { termo: string; explicacao: string }[]
+  encaixa: string[]
+  aplicacoes: { tema: string; frase: string }[]
+  citacoes: { texto: string; situacao: string; nota: string }[]
+  cuidados: string
+}
+
+export interface RedacaoModelo {
+  id: number
+  tema?: number // id em temas.json
+  titulo: string
+  repertorio: string[]
+  paragrafos: { papel: string; texto: string; nota: string }[]
+  destaques: string[]
+}
+
 export interface DadosMateria {
   questoes: Questao[]
   grupos: Grupo[]
   conteudos: Record<string, ConteudoTopico>
   temas?: TemaRedacao[]
+  repertorio?: Repertorio[]
+  modelos?: RedacaoModelo[]
 }
 
 // ---- registros locais (IndexedDB) e no Supabase ----

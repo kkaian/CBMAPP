@@ -30,6 +30,8 @@ export default function Redacao() {
   if (!ind || !red || !leituras) return <Carregando />
   const materia = ind.edital.materias.find((m) => m.codigo === 'RED')
   const temas = red.temas ?? []
+  const modelos = red.modelos ?? []
+  const repertorio = red.repertorio ?? []
   const lidos = new Set(leituras.map((l) => l.topico))
 
   const n = Number(nc.replace(',', '.')), e = Number(ne), t = Number(tl)
@@ -68,6 +70,30 @@ export default function Redacao() {
         <div className="text-suave">Você vai digitar o texto exatamente como escreveu na folha, informar as linhas, e a IA aponta os erros e calcula a nota pela fórmula acima. Por enquanto, escreva na folha e use a calculadora.</div>
       </Card>
 
+      <Secao>Redações-modelo · {modelos.length}</Secao>
+      <div className="text-suave text-[13px] mb-2">Textos completos, de 28 a 30 linhas, com o comentário de cada parágrafo: qual comando responde, como o repertório foi amarrado e por que pontua.</div>
+      {modelos.map((m) => (
+        <Card key={m.id} onClick={() => nav(`/redacao/modelo/${m.id}`)} className="flex items-center gap-3">
+          <span className="text-2xl">📄</span>
+          <div className="flex-1 min-w-0">
+            <div className="font-semibold leading-snug">{m.titulo}</div>
+            <div className="text-suave text-[12px] truncate">{m.repertorio.slice(0, 3).join(' · ')}</div>
+          </div>
+          <span className="text-suave">›</span>
+        </Card>
+      ))}
+
+      <Secao>Repertório comentado · {repertorio.length}</Secao>
+      <div className="text-suave text-[13px] mb-2">Quem é o autor, o contexto da obra, a ideia central, os conceitos e frases prontas por tema.</div>
+      <div className="grid grid-cols-2 gap-2 mb-2.5">
+        {repertorio.map((r) => (
+          <Card key={r.id} onClick={() => nav(`/redacao/repertorio/${r.id}`)} className={`!mb-0 ${r.coringa ? 'border border-amarelo/50 col-span-2' : ''}`}>
+            <div className="font-semibold leading-snug">{r.coringa ? '★ ' : ''}{r.nome}</div>
+            <div className="text-suave text-[12px] leading-snug mt-0.5"><i>{r.obra}</i> ({r.ano})</div>
+          </Card>
+        ))}
+      </div>
+
       <Secao>Estudar</Secao>
       {materia?.topicos.map((tp) => (
         <Card key={tp.codigo} onClick={() => nav(`/t/${tp.codigo}`)} className="flex items-center gap-3">
@@ -84,7 +110,8 @@ export default function Redacao() {
       <Secao>Temas · {temas.length}</Secao>
       <Botao onClick={sortear} className="mb-2.5">🎲 Sortear um tema para escrever</Botao>
       {temas.map((tema) => (
-        <Tema key={tema.id} tema={tema} aberto={aberto === tema.id} onToggle={() => setAberto(aberto === tema.id ? null : tema.id)} />
+        <Tema key={tema.id} tema={tema} aberto={aberto === tema.id} onToggle={() => setAberto(aberto === tema.id ? null : tema.id)}
+          modelo={modelos.find((m) => m.tema === tema.id)?.id} onAbrir={(para) => nav(para)} />
       ))}
 
       <Secao>Checklist antes de entregar</Secao>
@@ -105,7 +132,9 @@ function Campo({ rotulo, valor, onChange }: { rotulo: string; valor: string; onC
   )
 }
 
-function Tema({ tema, aberto, onToggle }: { tema: TemaRedacao; aberto: boolean; onToggle: () => void }) {
+function Tema({ tema, aberto, onToggle, modelo, onAbrir }: {
+  tema: TemaRedacao; aberto: boolean; onToggle: () => void; modelo?: number; onAbrir: (para: string) => void
+}) {
   return (
     <div id={`tema-${tema.id}`}>
       <Card onClick={onToggle}>
@@ -122,7 +151,10 @@ function Tema({ tema, aberto, onToggle }: { tema: TemaRedacao; aberto: boolean; 
             <ul className="list-disc pl-5 space-y-1 text-suave">
               {tema.ganchos.map((g) => <li key={g}>{g.replace(/\[confirme[^\]]*\]/g, '')}{/\[confirme/.test(g) && <span className="text-amarelo"> (confirme o dado atual)</span>}</li>)}
             </ul>
-            <div className="text-suave text-xs mt-3">Coringa: Darcy Ribeiro, <i>O Povo Brasileiro</i> (desigualdade estrutural). Veja RED-05.</div>
+            <div className="text-suave text-xs mt-3">
+              Coringa: <button className="underline" onClick={() => onAbrir('/redacao/repertorio/darcy')}>Darcy Ribeiro, <i>O Povo Brasileiro</i></button> (desigualdade estrutural).
+            </div>
+            {modelo && <button onClick={() => onAbrir(`/redacao/modelo/${modelo}`)} className="mt-2 w-full py-2 rounded-xl bg-card2 text-[13px]">📄 Ver a redação-modelo deste tema</button>}
           </div>
         )}
       </Card>
