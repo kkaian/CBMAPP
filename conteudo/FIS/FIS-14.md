@@ -15,43 +15,83 @@
 
 ## Teoria
 
-### Condução
-A energia passa de partícula vizinha em partícula vizinha (nos metais, também pelos elétrons livres). O material não se desloca.
-- Cabo metálico da panela esquenta; cabo de madeira, não.
-- Às 6 h da manhã, uma maçaneta de metal "parece mais fria" que a porta de madeira, embora ambas estejam à mesma temperatura: o metal **conduz** o calor da mão mais rápido. A sensação térmica depende da rapidez da troca, não só da temperatura.
-- Agasalhos de lã e penas retêm **ar parado**, ótimo isolante. O agasalho não "produz calor": dificulta a perda do calor do corpo.
-- Iglu: o gelo e a neve compactada isolam bem.
+### 1. As três formas de propagar calor
+O calor sempre vai do mais quente para o mais frio, por **três mecanismos** que, num incêndio, atuam juntos.
 
-**Fourier.** Parede de 10 m², 20 cm de espessura, \(k\) = 0,8 W/m·°C, temperaturas de 30 °C e 10 °C:
-\[ \phi = \frac{0{,}8 \times 10 \times 20}{0{,}2} = 800\ \text{W} \]
-Dobrar a espessura reduz o fluxo à metade; dobrar a área o dobra.
+### 2. Condução
+**Como funciona:** as partículas mais agitadas (região quente) passam energia às vizinhas por **colisões e vibrações**, de uma em uma, **sem que a matéria se desloque**. Nos metais, os **elétrons livres** ajudam muito, por isso eles conduzem bem.
+- Precisa de **meio material**; predomina nos **sólidos**.
+- **Bons condutores:** metais (prata, cobre, alumínio, ferro).
+- **Isolantes:** **ar parado**, lã, isopor, cortiça, madeira, borracha, vidro, fibra de vidro, amianto.
+- **Por que agasalho, isopor e roupa de aproximação funcionam:** prendem **ar parado** entre fibras ou bolhas, e o ar parado conduz muito mal.
 
-### Convecção
-Fluido aquecido dilata, fica menos denso e sobe; o fluido frio, mais denso, desce: formam-se **correntes de convecção**. Precisa de gravidade e de um fluido.
-- O **congelador** fica no alto da geladeira: o ar frio desce e resfria o resto.
-- O **ar-condicionado** é instalado no alto; o **aquecedor**, embaixo.
-- A água de uma panela no fogo esquenta por convecção.
-- **Chaminés** e coifas: o ar quente sobe e sai.
-- **Brisas litorâneas** e ventos (FIS-21).
-- **Em incêndios:** gases quentes e fumaça sobem e se acumulam junto ao teto; o ar mais fresco e respirável fica junto ao chão. Por isso a orientação de se deslocar **abaixado** ou rastejando em ambiente com fumaça.
-- **Inversão térmica:** camada de ar quente sobre ar frio junto ao solo bloqueia a convecção e retém poluentes.
+**Lei de Fourier** (fluxo de calor por condução numa parede):
+\[ \phi = \frac{Q}{\Delta t} = \frac{k \cdot A \cdot \Delta T}{e} \]
 
-### Irradiação (radiação térmica)
-Todo corpo emite ondas eletromagnéticas; quanto mais quente, mais emite. É a única forma que atravessa o **vácuo** (o calor do Sol chega assim).
-- Superfície escura e fosca: boa absorvedora e boa emissora. Clara ou espelhada: reflete.
-- Roupas claras são mais frescas ao sol; carro preto esquenta mais.
-- Roupas de aproximação de bombeiros são **aluminizadas** para refletir o calor radiante.
-- Sentir o calor de uma fogueira de frente (e não por cima): é irradiação; por cima, também chega convecção.
-- No incêndio, a irradiação das chamas e dos gases quentes pode inflamar materiais distantes, sem contato (propagação a distância, *flashover*).
+| Símbolo | O que é | Unidade |
+|---|---|---|
+| \(\phi\) | fluxo de calor: quantidade de calor que atravessa por unidade de tempo | W (J/s) ou cal/s |
+| \(k\) | condutividade térmica do material (alta nos metais, baixa nos isolantes) | W/(m·°C) |
+| \(A\) | área atravessada | m² |
+| \(\Delta T\) | diferença de temperatura entre as faces | °C |
+| \(e\) | espessura da parede | m |
 
-### Garrafa térmica
-Reduz os três processos ao mesmo tempo:
-- **vácuo** entre as paredes duplas → bloqueia condução e convecção;
-- paredes **espelhadas** → refletem a radiação;
-- **tampa** → impede a convecção do ar e a evaporação.
+**Lendo:** o fluxo **aumenta** com \(k\), com a área e com a diferença de temperatura, e **diminui** com a espessura. Dobrar a espessura do isolante corta o fluxo pela metade.
 
-### Estufa
-O vidro deixa passar a luz visível do Sol; o interior aquece e emite infravermelho, que o vidro bloqueia em boa parte; o ar fechado também não perde calor por convecção. A ideia é a base do efeito estufa atmosférico (FIS-21).
+**Sensação térmica:** um piso de cerâmica e um tapete na mesma temperatura (20 °C) parecem diferentes ao pé descalço porque a cerâmica **conduz melhor** e tira calor do pé mais depressa. O metal "parece mais frio" pelo mesmo motivo.
+
+**No incêndio:** vigas, tubulações e paredes metálicas **conduzem** o calor para outros cômodos e andares e podem iniciar focos longe do fogo original.
+
+### 3. Convecção
+**Como funciona:** o fluido aquecido (líquido ou gás) **dilata**, fica **menos denso** e **sobe**; o fluido mais frio, mais denso, **desce** e ocupa o lugar. Formam-se **correntes de convecção**: há **transporte de matéria**.
+- Só ocorre em **fluidos** (líquidos e gases), e precisa da gravidade.
+- **Exemplos:**
+  - o **congelador fica em cima** na geladeira (o ar frio desce e resfria o resto);
+  - o **ar-condicionado** fica no alto e o aquecedor, embaixo;
+  - a água da panela circula ao aquecer por baixo;
+  - as **brisas** marítima e terrestre (FIS-21);
+  - a **inversão térmica**, que prende a poluição perto do solo quando uma camada de ar quente fica por cima de ar frio.
+
+**No incêndio (a mais perigosa em ambiente fechado):** a fumaça e os gases quentes **sobem** e se acumulam **junto ao teto**, formando uma camada que se espalha horizontalmente e desce conforme se acumula. Por isso:
+- a vítima deve sair **abaixada**, onde o ar é mais fresco e respirável;
+- o fogo se propaga **para cima** (escadas, poços de elevador, dutos funcionam como chaminés);
+- a abertura de janelas no alto (**ventilação vertical**) deixa a fumaça sair.
+
+### 4. Irradiação (radiação térmica)
+**Como funciona:** todo corpo emite **ondas eletromagnéticas**, principalmente **infravermelho** nas temperaturas do dia a dia e dos incêndios. Elas viajam e são **absorvidas** por outros corpos, aquecendo-os.
+- **Não precisa de meio**: é o **único** processo que ocorre **no vácuo** (é assim que o calor do Sol chega à Terra).
+- Quanto **mais quente** o corpo, **muito mais** ele irradia (a potência cresce com a 4ª potência da temperatura absoluta).
+- **Superfícies escuras e foscas** absorvem e emitem mais; **claras, polidas e espelhadas** refletem. Roupas claras no verão, telhado branco, o **revestimento aluminizado** das roupas de aproximação e a **manta térmica** de emergência (refletem a radiação).
+
+**No incêndio:** a radiação aquece e incendeia objetos **a distância**, sem contato e sem chama encostando (por isso o fogo "pula" de uma casa para a vizinha e é preciso **resfriar as edificações expostas**). O **flashover** (inflamação generalizada) ocorre quando a camada de gases quentes do teto irradia tanto calor que todos os materiais do cômodo atingem a temperatura de ignição quase ao mesmo tempo.
+
+### 5. Comparando
+| | Condução | Convecção | Irradiação |
+|---|---|---|---|
+| Mecanismo | contato, partícula a partícula | movimento do fluido | ondas eletromagnéticas |
+| Transporta matéria? | não | **sim** | não |
+| Precisa de meio? | sim | sim (fluido) | **não** |
+| Predomina em | sólidos | líquidos e gases | qualquer lugar, inclusive vácuo |
+| No incêndio | estruturas metálicas | fumaça no teto, propagação vertical | ignição a distância, flashover |
+
+### 6. A garrafa térmica: os três bloqueados
+- **Vácuo** entre as paredes duplas → bloqueia **condução e convecção** (não há meio).
+- **Paredes espelhadas** → refletem a **irradiação**.
+- **Tampa** → impede a convecção do ar para fora.
+
+### 7. Exemplos resolvidos
+**(1)** Uma parede de 10 m², com 0,2 m de espessura e \(k = 0{,}8\) W/(m·°C), separa 30 °C de 20 °C: \(\phi = \dfrac{0{,}8 \cdot 10 \cdot 10}{0{,}2} = 400\) W. Dobrando a espessura: 200 W.
+
+**(2)** Por que a panela tem cabo de madeira ou baquelite? Porque são **isolantes** (conduzem mal), e o calor não chega à mão.
+
+**(3)** Por que o bombeiro sente o calor do fogo mesmo de longe, com ar fresco soprando no rosto? Porque a energia chega por **irradiação** (o vento afeta a convecção, não as ondas eletromagnéticas).
+
+### 8. Bizus finais
+- **Só a irradiação** passa no vácuo; **só a convecção** transporta matéria.
+- Ar **parado** é ótimo isolante; ar **em movimento** transporta calor (convecção).
+- Fumaça quente **sobe** e se acumula no teto: sair abaixado.
+- Escuro absorve e emite; claro e espelhado refletem.
+- Fourier: mais espessura → menos fluxo.
 
 ## Manias da banca
 

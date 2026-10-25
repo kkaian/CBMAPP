@@ -17,38 +17,90 @@
 
 ## Teoria
 
-### Montando a equação
-Para cada corpo: \(Q = m c (T_{eq} - T_{inicial})\) (positivo se esquenta, negativo se esfria), mais \(\pm mL\) se mudar de estado. A soma de todos é zero.
+### 1. O princípio das trocas de calor
+Num sistema **isolado** (que não troca calor com o ambiente, como um calorímetro ideal ou uma garrafa térmica), toda a energia que os corpos quentes **cedem** é recebida pelos frios:
+\[ \sum Q = 0 \quad\Leftrightarrow\quad Q_1 + Q_2 + Q_3 + \dots = 0 \]
 
-**Exemplo 1 — água com água.** 200 g a 80 °C + 300 g a 20 °C:
-\[ T_{eq} = \frac{200 \cdot 80 + 300 \cdot 20}{500} = \frac{22.000}{500} = 44\ °\text{C} \]
-Conferência: a água quente cede \(200 \times 36 = 7.200\) cal; a fria recebe \(300 \times 24 = 7.200\) cal.
-O equilíbrio fica mais perto da temperatura da **maior massa**.
+| Convenção | Sinal |
+|---|---|
+| corpo que **recebe** calor (esquenta, derrete, ferve) | \(Q > 0\) |
+| corpo que **cede** calor (esfria, solidifica, condensa) | \(Q < 0\) |
 
-**Exemplo 2 — metal na água.** 500 g de metal a 100 °C em 300 g de água a 20 °C; equilíbrio a 40 °C:
-- água recebe \(300 \times 1 \times 20 = 6.000\) cal;
-- metal cede \(500 \times c \times 60 = 30.000\,c\) → \(c = 0{,}2\) cal/g·°C.
-O metal variou 60 °C e a água só 20 °C: quem tem **menor capacidade térmica** varia mais.
+Usando \(\Delta T = T_{final} - T_{inicial}\) em cada termo, os sinais saem sozinhos: quem estava mais quente que o equilíbrio fica com \(\Delta T < 0\).
 
-**Exemplo 3 — gelo na água.** 100 g de gelo a 0 °C em 400 g de água a 50 °C:
-1. Calor para fundir todo o gelo: \(100 \times 80 = 8.000\) cal.
-2. Calor que a água cederia até 0 °C: \(400 \times 50 = 20.000\) cal → basta, todo o gelo derrete.
-3. Equação: \(400(50 - T) = 8.000 + 100(T - 0)\) → \(20.000 - 400T = 8.000 + 100T\) → \(T = 24\) °C.
+**Forma equivalente (sem sinais):** \(\lvert Q_{cedido} \rvert = Q_{recebido}\).
 
-Se fossem 300 g de gelo: para fundir, 24.000 cal; a água só tem 20.000 cal até 0 °C → equilíbrio a **0 °C**, com \(20.000/80 = 250\) g de gelo derretidos e 50 g restantes.
+### 2. Roteiro para qualquer problema
+1. Liste os corpos: massa, calor específico, temperatura inicial.
+2. Veja se alguém **muda de estado** (gelo derretendo, vapor condensando). Se sim, inclua o termo \(m\,L\).
+3. Escreva um \(Q\) para cada etapa de cada corpo, usando a **mesma** temperatura final \(T\).
+4. Some tudo e iguale a zero.
+5. **Confira:** a temperatura de equilíbrio tem de ficar **entre** a menor e a maior temperaturas iniciais (sem fontes externas). Se deu fora, há erro de sinal.
 
-### Calorímetro
-Recipiente isolado (ideal: não troca calor com o ambiente). Se o próprio calorímetro participar, entra na conta com sua capacidade térmica \(C\) (\(Q = C\Delta T\)). Um calorímetro de 50 cal/°C "equivale" a 50 g de água.
+### 3. Mistura sem mudança de estado
+\[ m_1 c_1 (T - T_1) + m_2 c_2 (T - T_2) = 0 \quad\Rightarrow\quad T = \frac{m_1 c_1 T_1 + m_2 c_2 T_2}{m_1 c_1 + m_2 c_2} \]
 
-### Fontes de calor
-\[ P = \frac{Q}{\Delta t} \]
-- Fonte de 100 cal/s aquece 500 g de água de 20 °C a 80 °C (30.000 cal) em 300 s = 5 min.
-- Resistor de 420 W (= 100 cal/s, com 1 cal = 4,2 J) leva 1 kg de água de 20 °C a 100 °C (80.000 cal) em 800 s.
-- Com a mesma fonte e o mesmo tempo, massas iguais de substâncias diferentes sofrem variações de temperatura inversamente proporcionais ao calor específico.
+| Símbolo | O que é |
+|---|---|
+| \(T\) | temperatura final de equilíbrio |
+| \(m_i\), \(c_i\), \(T_i\) | massa, calor específico e temperatura inicial de cada corpo |
+| \(m_i c_i\) | capacidade térmica \(C\) de cada corpo |
 
-### Na prática do bombeiro
-- Resfriar um tanque aquecido com jato d'água: a água absorve calor sensível e, principalmente, latente de vaporização (540 cal/g).
-- Bolsa de gelo em queimaduras leves não é recomendada (risco de lesão pelo frio); usa-se água corrente em temperatura ambiente, que retira calor de forma gradual.
+**Leitura:** \(T\) é a **média das temperaturas ponderada pelas capacidades térmicas**. Quem tem \(m\,c\) maior "puxa" a temperatura final para perto da sua.
+
+**Atalhos:**
+- **Mesma substância** (o \(c\) cancela): \(T = \dfrac{m_1 T_1 + m_2 T_2}{m_1 + m_2}\) (média ponderada pelas **massas**).
+- **Massas iguais da mesma substância:** média **aritmética**.
+
+**Exemplo 1.** 200 g de água a 80 °C + 600 g de água a 20 °C:
+\[ T = \frac{200 \cdot 80 + 600 \cdot 20}{800} = \frac{16.000 + 12.000}{800} = 35\ °\text{C} \]
+(Mais perto de 20 °C porque há mais água fria.)
+
+**Exemplo 2 (substâncias diferentes).** Um bloco de ferro de 500 g a 200 °C (\(c = 0{,}1\) cal/g·°C) é jogado em 500 g de água a 20 °C.
+\[ 500 \cdot 0{,}1 \cdot (T - 200) + 500 \cdot 1 \cdot (T - 20) = 0 \]
+\[ 50T - 10.000 + 500T - 10.000 = 0 \Rightarrow 550T = 20.000 \Rightarrow T \approx 36{,}4\ °\text{C} \]
+A água, com capacidade térmica 10 vezes maior (500 contra 50 cal/°C), "vence": o ferro esfria muito, e a água esquenta pouco. É o raciocínio do **resfriamento de material incandescente com água** num rescaldo.
+
+### 4. Mistura com gelo (mudança de estado)
+**Primeiro, teste:** o calor que a parte quente pode ceder até chegar a 0 °C é suficiente para derreter **todo** o gelo?
+
+**Exemplo 3.** 100 g de gelo a 0 °C + 400 g de água a 30 °C.
+1. Calor que a água cede até 0 °C: \(400 \cdot 1 \cdot 30 = 12.000\) cal.
+2. Calor para derreter todo o gelo: \(100 \cdot 80 = 8.000\) cal.
+3. Como 12.000 > 8.000, **todo o gelo derrete** e sobram 4.000 cal para aquecer os 500 g de água: \(4000 = 500 \cdot 1 \cdot T\) → \(T = 8\) °C.
+
+Conferência pela equação completa: \(100 \cdot 80 + 100 \cdot 1 \cdot (T - 0) + 400 \cdot 1 \cdot (T - 30) = 0\) → \(8000 + 500T - 12.000 = 0\) → \(T = 8\) °C. ✔
+
+**Exemplo 4.** 200 g de gelo a 0 °C + 100 g de água a 40 °C.
+1. A água cede no máximo \(100 \cdot 40 = 4.000\) cal até 0 °C.
+2. Derreter todo o gelo exige \(200 \cdot 80 = 16.000\) cal.
+3. Não basta: derretem só \(4000 / 80 = 50\) g de gelo. O equilíbrio fica em **0 °C**, com 150 g de gelo e 150 g de água.
+
+> **Bizu:** se a conta der temperatura final **negativa** num problema com gelo a 0 °C e água quente, ou abaixo de 0 °C sem nada abaixo de 0 °C, o gelo **não derreteu todo**: o equilíbrio é 0 °C.
+
+### 5. Fonte de potência constante
+Se um aquecedor (ou chama) fornece potência \(P\) constante:
+\[ Q = P \cdot \Delta t \]
+- \(P\) em cal/s ou W (J/s); \(\Delta t\) em s.
+
+**Exemplo 5.** Um ebulidor de 1.000 W aquece 1 kg de água de 20 °C a 100 °C (use 1 cal = 4 J).
+1. \(Q = 1000 \cdot 1 \cdot 80 = 80.000\) cal = 320.000 J.
+2. \(\Delta t = 320.000 / 1000 = 320\) s ≈ 5 min 20 s.
+3. Para vaporizar toda essa água depois: \(1000 \cdot 540 = 540.000\) cal = 2.160.000 J → 2.160 s (36 min). Ferver demora muito mais que esquentar.
+
+### 6. Calorímetro e equivalente em água
+O recipiente também troca calor. Em vez de \(m\,c\) do recipiente, muitos problemas dão o **equivalente em água**: a massa de água que teria a mesma capacidade térmica. Um calorímetro de "equivalente em água 50 g" entra na conta como 50 g de água a mais.
+
+### 7. Por que isso importa no combate a incêndio
+- A água retira calor do material em combustão (resfriamento) **e** do ambiente ao vaporizar (540 cal/g). Gotas finas (neblina) aumentam a área de contato e vaporizam mais rápido, absorvendo mais calor por litro.
+- Um líquido de **alto calor específico** e **alto calor latente** é bom agente de resfriamento: é o caso da água.
+
+### 8. Bizus finais
+- \(\sum Q = 0\), com \(\Delta T = \text{final} - \text{inicial}\) em todos os termos.
+- Mesma substância: média ponderada pelas **massas**; substâncias diferentes: pelas **capacidades térmicas** (\(m c\)).
+- Com gelo: **teste primeiro** se dá para derreter tudo.
+- \(T_{eq}\) sempre **entre** as temperaturas iniciais.
+- Fonte constante: \(Q = P\,\Delta t\).
 
 ## Manias da banca
 

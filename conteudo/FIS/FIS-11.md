@@ -19,53 +19,110 @@ Variações: \(\Delta T_C = \Delta T_K\); \(\Delta T_F = 1{,}8\,\Delta T_C\).
 
 ## Teoria
 
-### Temperatura e escalas
-O termômetro mede a temperatura **dele mesmo** depois de entrar em equilíbrio térmico com o corpo (por isso é preciso esperar).
-- 27 °C = 300 K; 37 °C = 98,6 °F; −40 °C = −40 °F (única leitura igual nas duas escalas).
-- A escala Kelvin é absoluta: não tem valores negativos e não usa "grau" (300 K, e não 300 °K).
-- Uma variação de 10 °C equivale a 10 K e a 18 °F.
-
-### Calor não é temperatura
-- Calor é energia que **passa**; um corpo não "tem calor", tem energia interna.
-- Um balde de água morna pode ter mais energia interna que uma xícara de água fervendo, apesar de estar a temperatura menor.
-- **Lei zero da termodinâmica:** se A está em equilíbrio térmico com B, e B com C, então A está em equilíbrio com C.
-
-### Calor sensível
-\[ Q = m\,c\,\Delta T \]
-- 200 g de água de 20 °C a 80 °C: \(200 \times 1 \times 60 = 12.000\) cal.
-- 500 g de 20 °C a 60 °C: 20.000 cal. 300 g de 25 °C a 75 °C: 15.000 cal.
-- **Calor específico** é característica da substância: a água tem um dos maiores valores comuns (1 cal/g·°C). Por isso esquenta e esfria devagar, regula o clima do litoral, explica as brisas e é ótimo agente de resfriamento no combate a incêndios.
-- Metais têm calor específico baixo (ferro ≈ 0,11; alumínio ≈ 0,22): esquentam rápido.
-- Com o mesmo calor recebido, o corpo de **maior capacidade térmica** (\(mc\)) varia **menos** a temperatura.
-
-### Calor latente e mudanças de estado
-\[ Q = m\,L \]
-- Fundir 50 g de gelo a 0 °C: \(50 \times 80 = 4.000\) cal. Fundir 200 g: 16.000 cal.
-- Vaporizar 10 g de água a 100 °C: 5.400 cal. Vaporizar exige quase 7 vezes mais calor que fundir.
-
-| Mudança | Nome | Calor |
+### 1. Temperatura × calor (não confunda)
+| | Temperatura | Calor |
 |---|---|---|
-| sólido → líquido | fusão | recebe |
-| líquido → sólido | solidificação | cede |
-| líquido → gasoso | vaporização (evaporação, ebulição, calefação) | recebe |
-| gasoso → líquido | condensação (liquefação) | cede |
-| sólido ↔ gasoso | sublimação | recebe (ida) / cede (volta) |
+| O que é | medida do **grau de agitação** das partículas (energia cinética média delas) | **energia em trânsito** de um corpo para outro, por causa de uma **diferença de temperatura** |
+| O corpo "tem"? | sim, é um estado do corpo | **não**: o corpo tem energia interna; calor é só a energia **enquanto passa** |
+| Unidade | °C, K, °F | joule (J) ou caloria (cal); 1 cal ≈ 4,2 J |
 
-- **Evaporação**: lenta, na superfície, a qualquer temperatura (roupa no varal, suor resfriando a pele). **Ebulição**: em toda a massa, na temperatura de ebulição. **Calefação**: brusca, líquido sobre superfície muito quente (gota "dançando" na chapa).
-- Durante a mudança de estado de substância **pura**, a temperatura fica **constante**, mesmo recebendo calor.
-- A temperatura de ebulição depende da pressão: panela de pressão → água ferve acima de 100 °C; em grandes altitudes, abaixo.
+- O calor flui **espontaneamente** do corpo **mais quente** para o **mais frio** e para quando as temperaturas se igualam.
+- **Equilíbrio térmico:** corpos em contato chegam à **mesma temperatura** (não à mesma quantidade de energia). Um termômetro funciona assim: entra em equilíbrio com o corpo e mostra a temperatura dele (lei zero da termodinâmica).
+- "Fechar a porta para o frio não entrar" está errado em física: é o **calor** que sai.
 
-### Curva de aquecimento da água (1 atm)
-Gelo a −10 °C aquecido até vapor a 110 °C:
-1. rampa: gelo esquenta até 0 °C (sensível, \(c\) ≈ 0,5);
-2. **patamar a 0 °C**: fusão (latente, 80 cal/g);
-3. rampa: água de 0 a 100 °C (sensível, \(c\) = 1);
-4. **patamar a 100 °C**: ebulição (latente, 540 cal/g), o mais longo;
-5. rampa: vapor acima de 100 °C.
-Nos patamares, o calor recebido rompe ligações entre as moléculas; a agitação média (temperatura) não aumenta.
+### 2. Escalas termométricas
+| Ponto | Celsius | Fahrenheit | Kelvin |
+|---|---|---|---|
+| fusão do gelo (1 atm) | 0 | 32 | 273 |
+| ebulição da água (1 atm) | 100 | 212 | 373 |
+| zero absoluto | −273 | −459,4 | **0** |
+| divisões entre fusão e ebulição | 100 | 180 | 100 |
 
-### Queimadura por vapor
-O vapor a 100 °C, ao condensar na pele, libera 540 cal/g **além** do calor de resfriamento: queima muito mais que a mesma massa de água a 100 °C.
+**Fórmula de conversão** (sai de uma regra de três entre as escalas):
+\[ \frac{T_C}{5} = \frac{T_F - 32}{9} = \frac{T_K - 273}{5} \]
+- **De onde vem:** em cada escala, a posição relativa entre fusão e ebulição é a mesma: \(\dfrac{T_C - 0}{100 - 0} = \dfrac{T_F - 32}{212 - 32}\), e \(100\) e \(180\) se simplificam para 5 e 9.
+- \(T_K = T_C + 273\). **Kelvin não usa grau** (escreve-se 300 K, não "300 °K") e não tem valores negativos.
+- **Zero absoluto (0 K):** a menor temperatura possível, em que a agitação das partículas seria mínima.
+
+**Variações de temperatura:**
+\[ \Delta T_C = \Delta T_K \qquad \Delta T_F = 1{,}8\,\Delta T_C \]
+(Uma variação de 10 °C é uma variação de 10 K e de 18 °F.)
+
+**Exemplos.**
+- 40 °C em Fahrenheit: \(\dfrac{40}{5} = \dfrac{T_F - 32}{9}\) → \(T_F - 32 = 72\) → \(T_F = 104\) °F.
+- −40 °C = −40 °F (único ponto em que as duas escalas coincidem).
+- 37 °C = 310 K.
+
+### 3. Calor sensível: muda a temperatura
+\[ Q = m\,c\,\Delta T \]
+
+| Símbolo | O que é | Unidade usual |
+|---|---|---|
+| \(Q\) | quantidade de calor recebida (\(Q > 0\)) ou cedida (\(Q < 0\)) | cal ou J |
+| \(m\) | massa | g |
+| \(c\) | **calor específico**: calor para elevar **1 g** do material em **1 °C** | cal/g·°C |
+| \(\Delta T\) | variação de temperatura (final − inicial) | °C |
+
+> **Bizu do "QUE MACETE":** \(Q = m\,c\,\Delta T\) se lê "**Q**ue **m**a**c**e**t**e".
+
+**O calor específico diz o quanto o material "resiste" a mudar de temperatura:**
+| Material | c (cal/g·°C) |
+|---|---|
+| água (líquida) | **1** (muito alto) |
+| gelo | 0,5 |
+| vapor d'água | ≈ 0,5 |
+| alumínio | ≈ 0,22 |
+| ferro | ≈ 0,11 |
+
+- **A água tem calor específico muito alto**: absorve muito calor esquentando pouco. É por isso que ela é o **agente extintor** mais usado (resfria o material em combustão), que a areia da praia esquenta mais rápido que o mar, e que cidades litorâneas têm menor variação de temperatura.
+
+**Capacidade térmica** (do corpo inteiro, não do material):
+\[ C = m\,c = \frac{Q}{\Delta T} \quad (\text{cal/°C}) \]
+Uma panela grande e uma pequena do mesmo alumínio têm o mesmo \(c\), mas a grande tem \(C\) maior.
+
+**Exemplo.** Aquecer 500 g de água de 20 °C a 80 °C: \(Q = 500 \cdot 1 \cdot 60 = 30.000\) cal = 30 kcal (≈ 126.000 J).
+
+### 4. Calor latente: muda o estado, com temperatura constante
+\[ Q = m\,L \]
+
+| Símbolo | O que é | Unidade |
+|---|---|---|
+| \(L\) | **calor latente**: calor para mudar de estado **1 g** da substância, **sem mudar a temperatura** | cal/g |
+
+**Valores da água (1 atm):**
+- fusão (gelo → água, a 0 °C): \(L_F = 80\) cal/g (solidificação: −80 cal/g);
+- vaporização (água → vapor, a 100 °C): \(L_V = 540\) cal/g (condensação: −540 cal/g).
+
+**Durante a mudança de estado, a temperatura não muda:** toda a energia vai para romper as ligações entre as partículas. O gelo derretendo fica em 0 °C até acabar; a água fervendo fica em 100 °C (com mais chama, ferve **mais rápido**, não mais quente).
+
+> **Por que a água vaporizando é tão boa para apagar fogo:** cada grama que vira vapor absorve **540 cal**, mais de cinco vezes o que absorveu para ir de 0 a 100 °C. Por isso o jato **neblinado** (gotas finas, que vaporizam rápido) é tão eficiente para resfriar o ambiente. E o vapor também abafa, deslocando o oxigênio.
+
+> **E por que queimadura por vapor é pior que por água fervente:** o vapor a 100 °C, ao condensar na pele, libera os 540 cal/g **além** do calor de esfriar.
+
+### 5. A curva de aquecimento
+Aquecendo 10 g de gelo a −20 °C até vapor a 100 °C (sob 1 atm):
+
+| Etapa | O que acontece | Cálculo | Calor |
+|---|---|---|---|
+| 1 | gelo de −20 a 0 °C | \(10 \cdot 0{,}5 \cdot 20\) | 100 cal |
+| 2 | fusão a 0 °C (patamar) | \(10 \cdot 80\) | 800 cal |
+| 3 | água de 0 a 100 °C | \(10 \cdot 1 \cdot 100\) | 1.000 cal |
+| 4 | vaporização a 100 °C (patamar) | \(10 \cdot 540\) | 5.400 cal |
+| **total** | | | **7.300 cal** |
+
+No gráfico temperatura × calor, os trechos **inclinados** são calor sensível; os **horizontais (patamares)** são mudança de estado. O patamar da vaporização é o mais longo.
+
+### 6. Mudanças de estado e pressão
+- **Fusão** (sólido → líquido), **solidificação** (líquido → sólido), **vaporização** (líquido → gás: evaporação lenta, ebulição tumultuosa, calefação em superfície muito quente), **condensação** ou **liquefação** (gás → líquido), **sublimação** (sólido → gás direto: gelo seco, naftalina).
+- **A pressão muda o ponto de ebulição:** em locais altos (menos pressão) a água ferve abaixo de 100 °C; na **panela de pressão** (mais pressão) ferve acima de 100 °C (≈ 120 °C) e cozinha mais rápido.
+- **Evaporação resfria:** as moléculas que escapam levam energia. É o suor resfriando o corpo e o motivo de a hipertermia ser perigosa com o equipamento de proteção (que impede a evaporação).
+
+### 7. Bizus finais
+- Calor = energia **em trânsito**; temperatura = **agitação**.
+- \(\dfrac{C}{5} = \dfrac{F - 32}{9} = \dfrac{K - 273}{5}\); \(\Delta C = \Delta K\); \(\Delta F = 1{,}8\,\Delta C\).
+- Sensível: \(Q = m\,c\,\Delta T\) (muda a temperatura). Latente: \(Q = m\,L\) (temperatura **constante**).
+- Água: \(c = 1\); \(L_F = 80\); \(L_V = 540\) (cal/g).
+- Patamar no gráfico = mudança de estado.
 
 ## Manias da banca
 

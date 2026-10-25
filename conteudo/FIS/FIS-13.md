@@ -18,39 +18,79 @@
 
 ## Teoria
 
-### Por que os corpos dilatam
-Com mais temperatura, as partículas vibram com mais amplitude e passam a ocupar, em média, mais espaço.
+### 1. Por que os corpos dilatam
+Ao receber calor, as partículas vibram com mais amplitude e passam a ocupar, em média, **mais espaço**: o corpo aumenta de tamanho. Ao esfriar, **contrai**. A dilatação é pequena, mas a força que ela gera, se impedida, é enorme: trilhos empenam, viadutos racham, vidros quebram com choque térmico e estruturas metálicas se deformam em incêndios.
 
-### Dilatação linear
-\[ \Delta L = L_0\,\alpha\,\Delta T \]
-Barra de 2 m, α = 12 × 10⁻⁶ °C⁻¹, aquecida em 50 °C:
-\[ \Delta L = 2 \times 12 \times 10^{-6} \times 50 = 1{,}2 \times 10^{-3}\ \text{m} = 1{,}2\ \text{mm} \]
-(e não 1,2 cm). Comprimento final: 2,0012 m.
-- O coeficiente α é característica do material (alumínio ≈ 23 × 10⁻⁶; aço ≈ 12 × 10⁻⁶; vidro comum ≈ 9 × 10⁻⁶; vidro pirex ≈ 3 × 10⁻⁶ °C⁻¹). A unidade é °C⁻¹ (ou K⁻¹, mesmo valor).
-- Dobrando o comprimento inicial **ou** a variação de temperatura, a dilatação dobra.
+### 2. Dilatação linear (comprimento)
+\[ \Delta L = L_0\,\alpha\,\Delta T \qquad\qquad L = L_0\,(1 + \alpha\,\Delta T) \]
 
-### Superficial e volumétrica
-- Chapa: \(\beta = 2\alpha\). Bloco: \(\gamma = 3\alpha\).
-- Uma chapa com furo, aquecida: o furo **aumenta** (é por isso que se aquece uma porca emperrada ou a tampa metálica de um vidro para soltá-la).
+| Símbolo | O que é | Unidade |
+|---|---|---|
+| \(\Delta L\) | aumento (ou diminuição) do comprimento | m, cm, mm |
+| \(L_0\) | comprimento inicial | mesma unidade de \(\Delta L\) |
+| \(\alpha\) | coeficiente de dilatação **linear** do material | °C⁻¹ (lê-se "por grau Celsius") |
+| \(\Delta T\) | variação de temperatura | °C (ou K: mesma variação) |
+| \(L\) | comprimento final | |
 
-### Aplicações e cuidados
-- **Juntas de dilatação** em pontes, viadutos, calçadas e trilhos: folgas que evitam trincas e empenamentos.
-- **Fios de alta tensão** ficam mais "barrigudos" no verão.
-- **Lâmina bimetálica** (dois metais soldados): no aquecimento, o de maior α se alonga mais e a lâmina curva para o lado do de menor α. Usada em termostatos, ferros de passar, pisca-piscas e disjuntores térmicos.
-- **Vidro comum** pode trincar com choque térmico (superfície e interior dilatam de forma desigual); o **pirex**, de α pequeno, resiste.
-- **Combustível:** como os líquidos dilatam mais que os sólidos, abastecer em horário quente entrega menos massa por litro.
-- Recipiente cheio até a borda, aquecido: transborda a **dilatação aparente** (o líquido dilata mais que o recipiente).
+**Lendo o coeficiente:** \(\alpha_{aço} \approx 1{,}2 \times 10^{-5}\ °\text{C}^{-1}\) significa que cada metro de aço cresce \(1{,}2 \times 10^{-5}\) m (0,012 mm) para cada 1 °C. Parece nada, mas multiplica pelo comprimento e pelo \(\Delta T\).
 
-### Dilatação anômala da água
-Ao contrário da maioria das substâncias:
-- de 0 °C a 4 °C, aquecer a água **diminui** seu volume;
-- acima de 4 °C, volta ao comportamento normal (aquecer → dilatar);
-- a 4 °C, volume mínimo e **densidade máxima** (≈ 1,000 g/cm³).
-Consequências:
-- **Lagos em regiões frias** congelam primeiro na superfície; a água do fundo fica a cerca de 4 °C, e a camada de gelo isola o restante, preservando a vida aquática.
-- **O gelo flutua** (≈ 0,92 g/cm³).
-- **Garrafas cheias no congelador estouram** e canos podem romper com o congelamento da água.
-O comportamento vem das ligações de hidrogênio: no gelo, as moléculas formam uma estrutura aberta, com espaços vazios.
+**A dilatação é diretamente proporcional a três coisas:** ao tamanho inicial, ao coeficiente do material e à variação de temperatura. Dobrou qualquer uma, dobrou \(\Delta L\).
+
+**Exemplo 1 (trilho).** Trilho de aço de 20 m, de 10 °C a 60 °C (\(\alpha = 1{,}2 \times 10^{-5}\)):
+\[ \Delta L = 20 \cdot 1{,}2 \times 10^{-5} \cdot 50 = 1{,}2 \times 10^{-2}\ \text{m} = 1{,}2\ \text{cm} \]
+É por isso que trilhos, pontes e calçadas têm **juntas de dilatação**.
+
+**Exemplo 2 (viga em incêndio).** Uma viga de aço de 10 m que vai de 20 °C a 520 °C (\(\Delta T = 500\)):
+\[ \Delta L = 10 \cdot 1{,}2 \times 10^{-5} \cdot 500 = 0{,}06\ \text{m} = 6\ \text{cm} \]
+Se a viga estiver presa entre duas paredes, esses 6 cm viram um **empurrão** capaz de deslocar paredes ou fazer a viga flambar: é um dos motivos de colapso estrutural em incêndios.
+
+### 3. Dilatação superficial e volumétrica
+\[ \Delta A = A_0\,\beta\,\Delta T \qquad\qquad \Delta V = V_0\,\gamma\,\Delta T \]
+
+| Coeficiente | Relação com α | Por quê |
+|---|---|---|
+| superficial \(\beta\) | \(\beta = 2\alpha\) | a área cresce em **duas** dimensões |
+| volumétrico \(\gamma\) | \(\gamma = 3\alpha\) | o volume cresce em **três** dimensões |
+
+(Vale porque α é muito pequeno: os termos com \(\alpha^2\) e \(\alpha^3\) são desprezíveis.)
+
+**Exemplo 3.** Uma chapa de alumínio de 2 m² (\(\alpha = 2{,}4 \times 10^{-5}\)) aquecida em 100 °C:
+\(\Delta A = 2 \cdot (2 \cdot 2{,}4 \times 10^{-5}) \cdot 100 = 9{,}6 \times 10^{-3}\) m² (96 cm²).
+
+### 4. Furos, anéis e lâminas bimetálicas
+- **Furos dilatam como se fossem feitos do próprio material.** Aquecendo uma chapa com furo, o furo **aumenta**. Por isso se aquece um anel metálico para encaixá-lo num eixo, e se esquenta a tampa metálica do vidro para abri-la.
+- **Lâmina bimetálica:** duas tiras de metais diferentes soldadas. Ao aquecer, a de **maior α** cresce mais, e a lâmina se **curva para o lado do metal de menor α** (o de maior α fica do lado de fora da curva). É o princípio do **termostato** e de alguns **disjuntores** térmicos: a lâmina curva e abre o circuito.
+
+### 5. Dilatação dos líquidos
+Os líquidos não têm forma própria, então só importa a dilatação **volumétrica**. Como o recipiente também dilata, o que se vê "transbordar" é a dilatação **aparente**:
+\[ \Delta V_{real} = \Delta V_{aparente} + \Delta V_{recipiente} \qquad \gamma_{real} = \gamma_{ap} + \gamma_{rec} \]
+
+**Exemplo 4.** O tanque de combustível cheio até a boca numa manhã fria transborda à tarde no sol: a gasolina dilata **muito mais** que o tanque metálico. Por isso não se completa tanque até a borda e postos vendem por volume a uma temperatura de referência.
+
+### 6. A dilatação anômala da água
+Quase todo líquido contrai ao esfriar. A água é diferente **entre 0 °C e 4 °C**:
+
+| Faixa | Ao aquecer | Ao resfriar |
+|---|---|---|
+| acima de 4 °C | dilata (normal) | contrai |
+| **de 0 °C a 4 °C** | **contrai** (anômalo) | **dilata** |
+
+- **A 4 °C** a água tem **volume mínimo** e **densidade máxima** (≈ 1,000 g/cm³).
+- **Ao congelar**, aumenta de volume em ≈ **9%**: o gelo (≈ 0,92 g/cm³) é **menos denso** e **flutua**.
+- **Por que:** perto de 0 °C as moléculas começam a se organizar por **ligações de hidrogênio** numa estrutura hexagonal "aberta", com espaços vazios.
+
+**Consequências:**
+1. **Lagos congelam de cima para baixo.** A água a 4 °C (mais densa) vai para o fundo; a superfície congela e o gelo isola o resto. A vida aquática sobrevive embaixo.
+2. **Garrafas de vidro cheias no freezer estouram**; canos de água estouram em lugares frios.
+3. **Rochas se fragmentam** quando a água infiltrada nas fendas congela (intemperismo).
+
+### 7. Bizus finais
+- \(\Delta L = L_0\,\alpha\,\Delta T\): proporcional ao tamanho, ao material e ao \(\Delta T\).
+- \(\beta = 2\alpha\) e \(\gamma = 3\alpha\).
+- Furo **aumenta** ao aquecer.
+- Bimetálica curva para o lado do **menor** α.
+- Líquido: real = aparente + recipiente.
+- Água: densidade máxima a **4 °C**; gelo **flutua**; congela e **expande** ≈ 9%.
 
 ## Manias da banca
 

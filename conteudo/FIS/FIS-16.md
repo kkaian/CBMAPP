@@ -16,33 +16,103 @@
 
 ## Teoria
 
-### Ondas: tipos
-- **Mecânicas:** perturbação de um meio material (som, ondas na corda, na água). **Eletromagnéticas:** campos elétrico e magnético, propagam-se também no vácuo (luz, rádio, micro-ondas, raios X).
-- **Longitudinal:** vibração na direção da propagação (som no ar). **Transversal:** vibração perpendicular (onda numa corda, luz).
-- Uma onda transporta **energia**, não matéria: as partículas oscilam em torno da posição de equilíbrio.
+### 1. O que é o som
+O som é uma **onda mecânica**: uma perturbação que se propaga pela **vibração das partículas de um meio material** (ar, água, sólidos), transportando **energia**, mas **sem transportar matéria** (o ar não "viaja" até o ouvido; ele só vibra no lugar).
+- **Precisa de meio:** não se propaga no **vácuo** (no espaço não há som). Por isso explosões em filmes no espaço são ficção.
+- No ar, é **longitudinal**: as partículas vibram **na mesma direção** em que a onda avança, formando **compressões** (pressão maior) e **rarefações** (pressão menor). (Na onda transversal, como na corda, a vibração é perpendicular.)
 
-### Velocidade e comprimento de onda
-\[ v = \lambda f \]
-- Som de 680 Hz no ar: \(\lambda = 340/680 = 0{,}5\) m.
-- O som do apito do trem chega antes pelo trilho (aço) do que pelo ar.
-- O som propaga-se mais rápido no ar quente que no frio.
+### 2. As grandezas de uma onda
+| Grandeza | Símbolo | Unidade | O que é |
+|---|---|---|---|
+| comprimento de onda | \(\lambda\) (lambda) | m | distância entre duas compressões seguidas (um ciclo completo) |
+| frequência | \(f\) | Hz (ciclos por segundo) | quantas vibrações por segundo; **definida pela fonte** |
+| período | \(T\) | s | tempo de um ciclo; \(T = 1/f\) |
+| velocidade | \(v\) | m/s | rapidez com que a onda avança; **definida pelo meio** |
+| amplitude | \(A\) | — | "tamanho" da variação de pressão; ligada à **energia** |
 
-### Qualidades fisiológicas
-- **Altura:** "som alto" na física é **agudo** (frequência alta), não volume alto. Voz feminina costuma ser mais aguda (frequência maior) que a masculina.
-- **Intensidade:** ligada à amplitude e à energia que a onda transporta; percebida como volume. O **nível sonoro** é medido em **decibéis**, escala logarítmica: +10 dB = intensidade 10 vezes maior; +20 dB = 100 vezes. Exposição prolongada acima de cerca de 85 dB pode causar perda auditiva (protetor auricular para operadores de motosserra e moto-bombas).
-- **Timbre:** a mesma nota (mesma frequência fundamental) num violão e num piano soa diferente porque a mistura de harmônicos muda a forma da onda. É também o que nos faz reconhecer a voz de alguém.
+**Equação fundamental da ondulatória:**
+\[ v = \lambda \cdot f \]
+**De onde vem:** em um período \(T\), a onda avança exatamente um comprimento de onda: \(v = \dfrac{\lambda}{T} = \lambda f\).
 
-### Fenômenos
-- **Reflexão:** **eco** (som refletido percebido separadamente; o ouvido distingue sons separados por cerca de 0,1 s, o que exige obstáculo a ≥ 17 m) e **reverberação** (reflexão que prolonga o som, sem separá-lo).
-  Grito com eco após 2 s → o som foi e voltou: distância = \(340 \times 2 / 2 = 340\) m.
-- **Sonar** e **ultrassonografia:** emitem ultrassom e medem o tempo do eco.
-- **Difração:** o som contorna obstáculos (ouvimos alguém atrás de um muro), porque seu comprimento de onda é comparável aos obstáculos do dia a dia.
-- **Ressonância:** um corpo vibra com grande amplitude quando excitado na sua frequência natural (taça que quebra com uma nota, ponte que oscila).
-- **Efeito Doppler:** a sirene de uma viatura que **se aproxima** soa mais **aguda** (frequência percebida maior); ao se afastar, mais grave. A frequência emitida não muda.
+**Exemplo.** Um som de 680 Hz no ar (340 m/s): \(\lambda = 340/680 = 0{,}5\) m.
 
-### Infrassom e ultrassom
-- Infrassom (< 20 Hz): terremotos, alguns animais (elefantes, baleias).
-- Ultrassom (> 20 kHz): morcegos e golfinhos (ecolocalização), apitos para cães, exames de imagem, limpeza de peças.
+### 3. Velocidade do som nos meios
+| Meio | Velocidade aproximada |
+|---|---|
+| ar (≈ 20 °C) | **340 m/s** |
+| água | ≈ 1.500 m/s |
+| aço | ≈ 5.000 m/s |
+
+- **Sólidos > líquidos > gases** (as partículas estão mais "ligadas" e transmitem a vibração mais depressa). É o **contrário da luz**, que é mais rápida no vácuo e no ar.
+- No ar, a velocidade **aumenta com a temperatura**.
+- **Ao mudar de meio, a frequência não muda** (ela é da fonte); mudam a velocidade e o comprimento de onda. Um som que passa do ar para a água fica com λ cerca de 4,4 vezes maior.
+
+**Exemplo (encostar o ouvido no trilho):** o som chega pelo aço muito antes de chegar pelo ar.
+
+### 4. Faixas de frequência
+| Faixa | Frequência | Exemplos |
+|---|---|---|
+| **infrassom** | abaixo de 20 Hz | terremotos, elefantes, algumas máquinas |
+| **som audível (humano)** | de **20 Hz a 20.000 Hz** | fala, música, sirene |
+| **ultrassom** | acima de 20.000 Hz | morcegos, golfinhos, ecografia, sonar |
+
+Com a idade e com exposição a ruído, perde-se primeiro a audição dos **agudos**.
+
+### 5. As qualidades fisiológicas do som
+| Qualidade | Depende de | Permite distinguir | Exemplo |
+|---|---|---|---|
+| **Altura** | **frequência** | **grave** (baixa f) × **agudo** (alta f) | voz masculina costuma ser mais grave que a feminina |
+| **Intensidade** (volume) | **amplitude** (energia transportada) | **forte** × **fraco** | aumentar o volume do rádio |
+| **Timbre** | **forma da onda** (mistura de harmônicos) | a **mesma nota**, com a mesma intensidade, em instrumentos ou vozes diferentes | reconhecer a voz de alguém ao telefone |
+
+> **Pegadinha clássica:** "som **alto**" no dia a dia quer dizer "forte" (volume). Em física, **alto = agudo** (frequência alta). "Abaixe o volume" é intensidade, não altura.
+
+### 6. Nível sonoro em decibéis (dB)
+O ouvido percebe a intensidade de forma **logarítmica**: a escala em **decibéis** imita isso.
+\[ \beta = 10 \cdot \log\frac{I}{I_0} \]
+
+| Símbolo | O que é |
+|---|---|
+| \(\beta\) | nível sonoro, em decibéis (dB) |
+| \(I\) | intensidade física do som (W/m²) |
+| \(I_0\) | intensidade mínima audível (\(10^{-12}\) W/m²), que corresponde a 0 dB |
+
+**O que você precisa saber (sem fazer log):**
+- **+10 dB = intensidade 10 vezes maior**; +20 dB = 100 vezes; +30 dB = 1.000 vezes.
+- **+3 dB ≈ intensidade dobrada** (duas fontes iguais juntas).
+
+| Situação | dB aproximado |
+|---|---|
+| limiar da audição | 0 |
+| conversa | 60 |
+| trânsito intenso | 80 |
+| sirene de perto, show | 110 a 120 |
+| limiar da dor | ≈ 120 a 130 |
+
+Exposição prolongada acima de ≈ 85 dB causa **perda auditiva**: por isso o protetor auricular para quem opera motobomba, motosserra e viatura com sirene.
+
+### 7. Fenômenos que caem
+- **Eco:** o som refletido chega separado do original. O ouvido distingue dois sons com intervalo de ≈ 0,1 s; com 340 m/s, o obstáculo tem de estar a pelo menos \(340 \cdot 0{,}1 / 2 = 17\) m (ida e volta).
+- **Distância de um obstáculo pelo eco:** grito e eco 2 s depois → \(d = 340 \cdot 2 / 2 = 340\) m.
+- **Difração:** o som contorna obstáculos e passa por portas (comprimentos de onda de centímetros a metros), por isso se ouve quem está no outro cômodo.
+- **Ressonância:** um corpo vibra com amplitude enorme quando recebe ondas na sua **frequência natural** (taça que quebra com a voz, ponte que oscila).
+- **Efeito Doppler:** se a **fonte e o observador se aproximam**, o som é percebido **mais agudo** (frequência aparente maior); ao se afastarem, **mais grave**. É a sirene da viatura que "muda de tom" ao passar. A frequência **emitida** não muda; muda a **percebida**.
+- **Sonar e ecolocalização:** emitem ultrassom e medem o tempo do eco (localizar cardumes, submarinos, vítimas e objetos submersos em buscas).
+
+### 8. Exemplos resolvidos
+**(1)** Um relâmpago é visto e o trovão é ouvido 3 s depois. A luz chega praticamente instantânea; o som leva 3 s: \(d = 340 \cdot 3 \approx 1.000\) m.
+
+**(2)** Uma onda sonora de 2.000 Hz passa do ar (340 m/s) para a água (1.500 m/s). Frequência na água: **2.000 Hz** (não muda). Comprimento de onda: \(1500/2000 = 0{,}75\) m (no ar era 0,17 m).
+
+**(3)** Um som passa de 60 dB para 90 dB: aumento de 30 dB → intensidade **1.000 vezes** maior.
+
+### 9. Bizus finais
+- Som: **mecânica** e **longitudinal** no ar; **não** passa no vácuo.
+- \(v = \lambda f\); \(f\) é da **fonte**, \(v\) é do **meio**.
+- Velocidade: **sólido > líquido > gás** (≈ 340 m/s no ar).
+- Altura → **frequência**; intensidade → **amplitude**; timbre → **forma da onda**.
+- +10 dB → 10× a intensidade.
+- Doppler: aproximando → mais agudo.
 
 ## Manias da banca
 
