@@ -33,13 +33,13 @@ Início (missão do dia, meta, streak, patente) · Estudar (mapa do edital) · M
 | **PT** | **648 / 525** | **15 / 15** | ✅ completa |
 | **ING** | **328 / 240** | **4 / 4** | ✅ completa |
 | **CDH** | **310 / 280** | **7 / 7** | ✅ completa |
-| LEG | 10 / 450 | 0 / 10 | ⏭️ **próxima** (leis já em `conteudo/_fontes/leis/`) |
-| **Total** | **6.266** | **137 / 147** | 0 itens em revisão |
+| **LEG** | **489 / 450** | **10 / 10** | ✅ completa |
+| **Total** | **6.745** | **147 / 147** | 0 itens em revisão |
 
 ## O que ainda falta
 
 ### 1. Conteúdo (prioridade — exatas primeiro)
-Ordem: ~~MAT~~ → ~~RLM~~ → ~~FIS~~ → ~~QUI~~ → ~~MEC~~ → ~~BIO~~ → ~~INF~~ → ~~PT~~ → ~~ING~~ → ~~CDH~~ → **LEG**.
+Ordem: ~~MAT~~ → ~~RLM~~ → ~~FIS~~ → ~~QUI~~ → ~~MEC~~ → ~~BIO~~ → ~~INF~~ → ~~PT~~ → ~~ING~~ → ~~CDH~~ → ~~LEG~~. **Todas as matérias com conteúdo completo**; próximo passo: funcionalidades (simulados primeiro, já que todos os itens 01–05 estão no banco).
 Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 1. Extrair os itens dos PDFs do Drive (`D:\CBM\MATERIAL\CBMAL`: `Q-<Matéria>_100_Questoes(1)/(2)`, itens da matéria nos simulados 01–05, prova 2021) com `pdftotext`.
 2. Ler a apostila `E-CBMAL_<Matéria>.pdf` como base do conteúdo.
@@ -67,6 +67,7 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 - [ ] Quando formos fazer a correção de redação: chave do Gemini (Google AI Studio).
 
 ## Histórico resumido
+- **25/10** — Legislação completa: conteúdo dos 10 tópicos e 489 itens (49–52% C por tópico). **Tudo conferido no texto oficial** de `conteudo/_fontes/leis/`, com o artigo citado em cada comentário; o material do Drive serviu só de ideia de item (origem `drive-q1/q2-LEG-N` quando adaptado). Alterações aplicadas: **Lei 9.392/2024** na 6.514 (critérios só merecimento e antiguidade; proporções Maj 3/5, TC e Cel 4/5 por merecimento; datas CBM 26/05 e 29/11 com data-limite 26/02 e 29/09; bravura sem interstício nem vaga, prazo decadencial de 5 anos, máximo de 2; invalidez inclui trajeto; post mortem e incapacidade promovem até o último grau habilitado; interstício do 3º Sgt passou de 60 para 36 meses) e no Estatuto (art. 54, VII; art. 71); **Lei 6.544/2004** (3º Sgt todo por antiguidade); **Lei 9.905/2026** (efetivo 2.950, quadros QOEM/QOE/QP, primeiro posto do QOE só por merecimento intelectual ou tempo de serviço) em LEG-08. Os 25 itens dos simulados (41–45) entraram, todos cobertos; de 2021 entraram Praça 111–120 e Oficial 61–64, gabaritados pelo texto da lei (o Oficial 65 virou item próprio sobre o CFP). Pontos de atenção registrados nos resumos: estabilidade "mais de 10 anos" no Estatuto × 3 anos na Lei 14.751; regras de inatividade do Estatuto podem ter sido afetadas pela lei estadual de proteção social (8.671/2022), que não está no edital, por isso os itens dizem "nos termos do Estatuto"; números do anexo da 9.905 (efetivo por posto) ficaram de fora porque a tabela extraída do PDF está desalinhada.
 - **23/10** — Ideia, documento do projeto, esboço, app mínimo, Supabase, GitHub, Vercel, lembretes, redação (conteúdo + temas), leis oficiais baixadas e questões de LEG corrigidas (2 gabaritos do Drive estavam errados), código de convite + aprovação.
 - **24/10** — Matemática completa: conteúdo dos 8 tópicos e 480 itens; build aceita vários arquivos por matéria; `scripts/balanco.mjs`.
 - **24/10** — Cidadania e Direitos Humanos completa: conteúdo dos 7 tópicos e 310 itens (49–51% C por tópico). Fontes: os dois cadernos do Drive, os 25 itens dos simulados (46–50, todos cobertos) e 10 itens de 2021 com gabarito confirmado pela apostila (Praça 101, 102, 103, 105, 109; Oficial 56–60); os demais de 2021 ficaram de fora. Gerações e marcos históricos (DUDH, Pactos) em CDH-06; sistemas de proteção e responsabilidade do Estado em CDH-07; tratados (supralegal × EC 45/2004) em CDH-05. Tabelas do caderno 2 (dimensões e marcos) viraram grupos `CDH-G01/G02`. Itens com dispositivos constitucionais usam só artigos bem conhecidos (arts. 1º, 3º, 5º, 14, 37, 109 § 5º).
