@@ -209,6 +209,38 @@ drop policy if exists "dono" on public.simulados;
 create policy "dono" on public.simulados for all to authenticated
   using (user_id = auth.uid() and public.eh_aprovado()) with check (user_id = auth.uid() and public.eh_aprovado());
 
+-- Redações: uma linha por texto (tema, texto, avaliação da IA ou nota manual, NPD), sincronizada como os simulados.
+create table if not exists public.redacoes (
+  id uuid primary key,
+  user_id uuid not null default auth.uid() references auth.users (id) on delete cascade,
+  dados jsonb not null,
+  atualizada_em timestamptz not null,
+  recebida_em timestamptz not null default now()
+);
+create index if not exists redacoes_user_recebida on public.redacoes (user_id, recebida_em);
+alter table public.redacoes enable row level security;
+drop policy if exists "dono" on public.redacoes;
+create policy "dono" on public.redacoes for all to authenticated
+  using (user_id = auth.uid() and public.eh_aprovado()) with check (user_id = auth.uid() and public.eh_aprovado());
+drop trigger if exists redacoes_tocar on public.redacoes;
+create trigger redacoes_tocar before insert or update on public.redacoes
+  for each row execute function public.tocar_recebida_em();
+
+-- Correções por IA usadas (para o limite diário por pessoa, conferido no servidor).
+create table if not exists public.correcoes_ia (
+  id bigint generated always as identity primary key,
+  user_id uuid not null default auth.uid() references auth.users (id) on delete cascade,
+  modelo text,
+  criada_em timestamptz not null default now()
+);
+create index if not exists correcoes_ia_user_dia on public.correcoes_ia (user_id, criada_em);
+alter table public.correcoes_ia enable row level security;
+drop policy if exists "ver as proprias" on public.correcoes_ia;
+create policy "ver as proprias" on public.correcoes_ia for select to authenticated using (user_id = auth.uid());
+drop policy if exists "registrar a propria" on public.correcoes_ia;
+create policy "registrar a propria" on public.correcoes_ia for insert to authenticated
+  with check (user_id = auth.uid() and public.eh_aprovado());
+
 -- Ranking entre os colegas aprovados: um resumo por pessoa (XP, patente, sequência, conquistas…),
 -- montado no app e publicado na sincronização. Só contas aprovadas leem; cada um só grava o seu.
 -- O nome vem do perfil (não do app), para ninguém aparecer com o nome de outro.

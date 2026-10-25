@@ -52,7 +52,7 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 
 ### 2. Funcionalidades
 - [x] **Simulados** (25/10): completo, mini, pontos fracos e 01–05; nota pela regra do edital. Falta: simulado **por matéria** e **tempo por item** no resultado (o tempo já é gravado em `tempos`).
-- [ ] **Correção de redação por IA** (Gemini free via Supabase Edge Function; usuário precisa criar a chave no Google AI Studio) + histórico de NPD.
+- [x] **Correção de redação por IA** (25/10) + histórico de NPD. Falta: testar com a conta real (não posso entrar com a senha).
 - [ ] **Plano de estudos** (fases até 26/01, horas por dia, peso por matéria × desempenho).
 - [ ] **Flashcards** com revisão espaçada (previsto no PROJETO, ainda não feito).
 - [ ] Reportes de questão: hoje ficam só no aparelho (Perfil); levar ao Supabase.
@@ -64,9 +64,19 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 - [ ] Decidir se o repositório fica **público** (código e questões visíveis; segredos protegidos) ou vira privado (Settings › General).
 - [ ] (Recomendado) trocar a senha do banco do Supabase, que foi escrita na conversa; depois atualizar o secret `SUPABASE_DB_URL` no GitHub.
 - [ ] Trocar o código de convite padrão em **Mais › Administração** (antes de passar o link ao amigo) e aprovar a conta dele lá.
-- [ ] Quando formos fazer a correção de redação: chave do Gemini (Google AI Studio).
+- [ ] (Recomendado) a chave do Gemini foi colada na conversa: se quiser, gere outra no AI Studio e troque em Vercel › Settings › Environment Variables (`GEMINI_API_KEY`).
 
 ## Histórico resumido
+- **25/10** — **Correção de redação por IA** (Redação › Corrigir uma redação):
+  - **Como funciona:** o usuário digita o texto linha a linha como na folha (TL contado sozinho) e escolhe um dos 30 temas ou digita um tema próprio. A função `api/corrigir.ts` da **Vercel** chama o **Gemini**.
+  - **Segurança:** a chave fica só no servidor (`GEMINI_API_KEY`); a função confere o login e a aprovação no Supabase.
+  - **Limite:** **3 correções por pessoa por dia** (tabela `correcoes_ia`; muda com `LIMITE_CORRECOES_DIA`).
+  - **Modelos:** tenta, em ordem, `gemini-3.5-flash`, `gemini-flash-latest` e `gemini-flash-lite-latest` (variável `GEMINI_MODELOS`). O `gemini-2.5-flash` não está mais disponível para chaves novas, e o `flash-latest` devolvia "muita demanda" no teste.
+  - **O que volta:** NC por comando (estrutura 0–6 + 24 divididos entre os comandos), lista de erros com linha, correção e explicação, comentário de repertório (sabe que a coringa é Darcy Ribeiro), pontos fortes, melhorias e 2 trechos reescritos.
+  - **Nota:** o usuário marca "não é erro" no que discordar, e NE e NPD são recalculados.
+  - **Reserva sem cota:** "Copiar para correção" (prompt pronto para Claude/ChatGPT) + lançar NC e NE à mão.
+  - **Histórico:** tabela `redacoes` sincronizada; gráfico de NPD e erros mais frequentes (crase, concordância, regência, pontuação, acentuação…).
+  - **Teste local da IA** com uma redação-modelo e 4 erros plantados: achou os 4, sem falso positivo, em ~15 s. **Ainda não testado com a conta real.**
 - **25/10** — **Redação aprofundada:**
   - **5 redações-modelo completas** (~28–30 linhas cada), comentadas parágrafo por parágrafo, com modo "texto corrido": desastres (tema 1), incêndio em edificações (11), desigualdade (15), segurança hídrica (7) e desinformação (17).
   - **Repertório comentado** com 9 autores: Darcy Ribeiro (coringa, bem completo), José Murilo de Carvalho, Milton Santos, Sérgio Buarque de Holanda, Ulrich Beck, Bauman, Paulo Freire, Ailton Krenak e Hannah Arendt. Cada um tem quem foi, contexto da obra, ideia central, conceitos, onde encaixa, frases prontas em paráfrase por tema, citações literais com aviso e cuidados.

@@ -164,3 +164,38 @@ export interface RegistroSimulado {
   atualizadaEm: string
   sincronizada: 0 | 1
 }
+
+// ---- redações escritas pelo usuário ----
+
+export type TipoErro = 'grafia' | 'morfossintaxe' | 'propriedade vocabular'
+
+export interface AvaliacaoIA {
+  fugaAoTema: boolean
+  estrutura: { nota: number; maximo: number; comentario: string }
+  comandos: { comando: string; atendido: 'sim' | 'parcial' | 'nao'; nota: number; maximo: number; comentario: string }[]
+  erros: { linha: number; trecho: string; correcao: string; tipo: TipoErro; explicacao: string }[]
+  repertorio: string
+  pontosFortes: string[]
+  melhorias: string[]
+  reescritas: { original: string; sugestao: string }[]
+  nc: number
+  modelo: string
+}
+
+export interface RegistroRedacao {
+  id: string
+  temaId: number | null // id em temas.json; null = tema próprio
+  tema: string
+  comandos: string[]
+  texto: string // uma linha da folha por linha
+  origem: 'rascunho' | 'ia' | 'manual'
+  avaliacao: AvaliacaoIA | null
+  errosRecusados: number[] // índices de avaliacao.erros que o usuário não considerou erro
+  nc: number | null
+  ne: number | null
+  npd: number | null
+  criadaEm: string
+  atualizadaEm: string
+  excluida?: boolean
+  sincronizada: 0 | 1
+}

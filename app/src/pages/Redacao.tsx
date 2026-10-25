@@ -4,6 +4,9 @@ import { Botao, Cabecalho, Card, Carregando, Pill, Secao } from '../components/u
 import { carregarMateria, useAsync, useIndice } from '../lib/conteudo'
 import type { TemaRedacao } from '../lib/types'
 import { useLeituras } from '../lib/useDados'
+import { useLiveQuery } from 'dexie-react-hooks'
+import { db } from '../lib/db'
+import { errosFrequentes } from '../lib/redacao'
 
 const CHECKLIST = [
   'Respondi todos os comandos, na ordem e de forma explícita?',
@@ -65,10 +68,9 @@ export default function Redacao() {
         {valido && <div className="text-suave text-xs mt-1">Cada erro está custando {(6 / t).toFixed(2).replace('.', ',')} ponto.</div>}
       </Card>
 
-      <Card className="text-sm">
-        <div className="font-semibold mb-1">Correção por IA · em breve</div>
-        <div className="text-suave">Você vai digitar o texto exatamente como escreveu na folha, informar as linhas, e a IA aponta os erros e calcula a nota pela fórmula acima. Por enquanto, escreva na folha e use a calculadora.</div>
-      </Card>
+      <Botao onClick={() => nav('/redacao/escrever')} className="mb-2.5">✍️ Corrigir uma redação (IA ou nota manual)</Botao>
+
+      <MinhasRedacoes />
 
       <Secao>Redações-modelo · {modelos.length}</Secao>
       <div className="text-suave text-[13px] mb-2">Textos completos, de 28 a 30 linhas, com o comentário de cada parágrafo: qual comando responde, como o repertório foi amarrado e por que pontua.</div>
@@ -155,9 +157,53 @@ function Tema({ tema, aberto, onToggle, modelo, onAbrir }: {
               Coringa: <button className="underline" onClick={() => onAbrir('/redacao/repertorio/darcy')}>Darcy Ribeiro, <i>O Povo Brasileiro</i></button> (desigualdade estrutural).
             </div>
             {modelo && <button onClick={() => onAbrir(`/redacao/modelo/${modelo}`)} className="mt-2 w-full py-2 rounded-xl bg-card2 text-[13px]">📄 Ver a redação-modelo deste tema</button>}
+            <button onClick={() => onAbrir(`/redacao/escrever?tema=${tema.id}`)} className="mt-2 w-full py-2 rounded-xl bg-card2 text-[13px]">✍️ Escrevi sobre este tema: corrigir</button>
           </div>
         )}
       </Card>
     </div>
+  )
+}
+
+function MinhasRedacoes() {
+  const nav = useNavigate()
+  const lista = useLiveQuery(() => db.redacoes.orderBy('criadaEm').reverse().toArray(), [])
+  const redacoes = (lista ?? []).filter((r) => !r.excluida)
+  if (!redacoes.length) return null
+  const notas = redacoes.filter((r) => r.npd != null).slice(0, 12).reverse()
+  const freq = errosFrequentes(redacoes).slice(0, 5)
+  const media = notas.length ? notas.reduce((s, r) => s + r.npd!, 0) / notas.length : null
+  return (
+    <>
+      <Secao>Minhas redações · {redacoes.length}</Secao>
+      {notas.length >= 2 && (
+        <Card>
+          <div className="flex justify-between text-xs text-suave mb-1"><span>NPD das últimas {notas.length}</span><span>tracejado = mínimo (15)</span></div>
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-20">
+            <line x1="0" x2="100" y1={100 - (15 / 30) * 100} y2={100 - (15 / 30) * 100} stroke="#9aa1ae" strokeDasharray="2 2" strokeWidth="0.6" vectorEffect="non-scaling-stroke" />
+            <polyline fill="none" stroke="#e5484d" strokeWidth="2" vectorEffect="non-scaling-stroke"
+              points={notas.map((r, i) => `${(i / (notas.length - 1)) * 100},${100 - (Math.min(30, r.npd!) / 30) * 100}`).join(' ')} />
+          </svg>
+          <div className="flex justify-between text-[12px] text-suave mt-1"><span>média {media!.toFixed(1).replace('.', ',')}</span><span>última <b className="text-texto">{notas[notas.length - 1].npd!.toFixed(1).replace('.', ',')}</b></span></div>
+        </Card>
+      )}
+      {freq.length > 0 && (
+        <Card className="text-sm">
+          <div className="font-semibold mb-1">Seus erros mais frequentes</div>
+          {freq.map((f) => <div key={f.nome} className="flex justify-between py-0.5"><span>{f.nome}</span><b>{f.n}×</b></div>)}
+        </Card>
+      )}
+      {redacoes.slice(0, 8).map((r) => (
+        <Card key={r.id} onClick={() => nav(r.npd != null ? `/redacao/r/${r.id}` : `/redacao/escrever?id=${r.id}`)} className="flex justify-between items-center gap-2">
+          <div className="min-w-0">
+            <div className="font-semibold leading-snug truncate">{r.tema || 'Sem tema'}</div>
+            <div className="text-suave text-[12px]">{new Date(r.criadaEm).toLocaleDateString('pt-BR')} · {r.origem === 'ia' ? 'IA' : r.origem === 'manual' ? 'nota manual' : 'rascunho'}</div>
+          </div>
+          {r.npd != null
+            ? <b className={r.npd >= 15 ? 'text-verde' : 'text-destaque'}>{r.npd.toFixed(1).replace('.', ',')}</b>
+            : <span className="text-suave text-sm">›</span>}
+        </Card>
+      ))}
+    </>
   )
 }

@@ -1,12 +1,12 @@
 import { db, gravarConfig, lerConfig } from './db'
 import { publicarResumo } from './ranking'
 import { supabase } from './supabase'
-import type { RegistroLeitura, RegistroResposta, RegistroRevisao, RegistroSimulado } from './types'
+import type { RegistroLeitura, RegistroResposta, RegistroRevisao, RegistroSimulado, RegistroRedacao } from './types'
 
 // Sincronização local ⇄ Supabase.
 // - respostas e leituras: só acrescentam (id único), nunca mudam
 // - revisões: uma linha por item; vence a mais recente (atualizadaEm)
-// - simulados: uma linha por tentativa; idem
+// - simulados e redações: uma linha por registro; idem
 let timer: ReturnType<typeof setTimeout> | null = null
 let rodando: Promise<void> | null = null
 let aprovado = false // contas pendentes de aprovação não sincronizam (o banco recusaria)
@@ -94,6 +94,17 @@ async function enviar() {
       await db.simulados.where('id').equals(s.id).and((x) => x.atualizadaEm === s.atualizadaEm).modify({ sincronizada: 1 })
     }
   }
+  const redacoes = await db.redacoes.where('sincronizada').equals(0).toArray()
+  for (const lote of lotes(redacoes, 50)) {
+    const { error } = await sb.from('redacoes').upsert(
+      lote.map(({ sincronizada: _, ...dados }) => ({ id: dados.id, dados, atualizada_em: dados.atualizadaEm })),
+      { onConflict: 'id' },
+    )
+    if (error) throw error
+    for (const r of lote) {
+      await db.redacoes.where('id').equals(r.id).and((x) => x.atualizadaEm === r.atualizadaEm).modify({ sincronizada: 1 })
+    }
+  }
 }
 
 // Traz o que foi feito em outro aparelho desde a última vez.
@@ -126,6 +137,13 @@ async function receber() {
     const local = await db.simulados.get(remoto.id)
     if (local && local.atualizadaEm >= remoto.atualizadaEm) continue
     await db.simulados.put({ ...remoto, sincronizada: 1 })
+  }
+  const redacoes = await paginar<Record<string, unknown>>((de, ate) => sb.from('redacoes').select('*').gt('recebida_em', desde).range(de, ate))
+  for (const linha of redacoes) {
+    const remoto = linha.dados as Omit<RegistroRedacao, 'sincronizada'>
+    const local = await db.redacoes.get(remoto.id)
+    if (local && local.atualizadaEm >= remoto.atualizadaEm) continue
+    await db.redacoes.put({ ...remoto, sincronizada: 1 })
   }
   await gravarConfig('sync.recebidoAte', inicio)
 }

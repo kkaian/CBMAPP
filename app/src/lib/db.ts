@@ -1,5 +1,5 @@
 import Dexie, { type Table } from 'dexie'
-import type { RegistroLeitura, RegistroResposta, RegistroRevisao, RegistroSimulado } from './types'
+import type { RegistroLeitura, RegistroResposta, RegistroRevisao, RegistroSimulado, RegistroRedacao } from './types'
 
 // Banco local do aparelho. Tudo é gravado aqui primeiro (funciona offline)
 // e depois enviado ao Supabase pela sincronização.
@@ -8,6 +8,7 @@ class BancoLocal extends Dexie {
   revisoes!: Table<RegistroRevisao, string>
   leituras!: Table<RegistroLeitura, string>
   simulados!: Table<RegistroSimulado, string>
+  redacoes!: Table<RegistroRedacao, string>
   config!: Table<{ chave: string; valor: unknown }, string>
 
   constructor() {
@@ -20,6 +21,9 @@ class BancoLocal extends Dexie {
     })
     this.version(2).stores({
       simulados: '&id, status, iniciadoEm, sincronizada',
+    })
+    this.version(3).stores({
+      redacoes: '&id, criadaEm, sincronizada',
     })
   }
 }
