@@ -29,17 +29,17 @@ Início (missão do dia, meta, streak, patente) · Estudar (mapa do edital) · M
 | **QUI** | **886 / 810** | **18 / 18** | ✅ completa |
 | **MEC** | **414 / 400** | **8 / 8** | ✅ completa |
 | **BIO** | **937 / 880** | **22 / 22** | ✅ completa |
-| INF | 10 / 455 | 0 / 13 | ⏭️ **próxima** |
-| PT | 10 / 525 | 0 / 15 | a fazer |
+| **INF** | **507 / 455** | **13 / 13** | ✅ completa |
+| PT | 10 / 525 | 0 / 15 | ⏭️ **próxima** |
 | ING | 10 / 240 | 0 / 4 | a fazer |
 | CDH | 10 / 280 | 0 / 7 | a fazer |
 | LEG | 10 / 450 | 0 / 10 | a fazer (leis já em `conteudo/_fontes/leis/`) |
-| **Total** | **4.513** | **98 / 147** | 0 itens em revisão |
+| **Total** | **5.010** | **111 / 147** | 0 itens em revisão |
 
 ## O que ainda falta
 
 ### 1. Conteúdo (prioridade — exatas primeiro)
-Ordem: ~~MAT~~ → ~~RLM~~ → ~~FIS~~ → ~~QUI~~ → ~~MEC~~ → ~~BIO~~ → **INF → PT → ING → CDH → LEG**.
+Ordem: ~~MAT~~ → ~~RLM~~ → ~~FIS~~ → ~~QUI~~ → ~~MEC~~ → ~~BIO~~ → ~~INF~~ → **PT → ING → CDH → LEG**.
 Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 1. Extrair os itens dos PDFs do Drive (`D:\CBM\MATERIAL\CBMAL`: `Q-<Matéria>_100_Questoes(1)/(2)`, itens da matéria nos simulados 01–05, prova 2021) com `pdftotext`.
 2. Ler a apostila `E-CBMAL_<Matéria>.pdf` como base do conteúdo.
@@ -69,6 +69,7 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 ## Histórico resumido
 - **23/10** — Ideia, documento do projeto, esboço, app mínimo, Supabase, GitHub, Vercel, lembretes, redação (conteúdo + temas), leis oficiais baixadas e questões de LEG corrigidas (2 gabaritos do Drive estavam errados), código de convite + aprovação.
 - **24/10** — Matemática completa: conteúdo dos 8 tópicos e 480 itens; build aceita vários arquivos por matéria; `scripts/balanco.mjs`.
+- **24/10** — Informática completa: conteúdo dos 13 tópicos e 507 itens (48–50% C por tópico). Entraram os 30 itens dos simulados 01–05 (19–24) e os 15 itens oficiais de 2021: Praça 41–50 (origem `cbmal2021-praca-NN`) e Oficial 21–25, com os gabaritos da apostila. As tabelas das provas de 2021 que faltavam no PDF (Excel do Oficial 23 e do Praça 48) foram reconstituídas de forma coerente com o gabarito, com aviso no texto-base (grupos `INF-2021-B/C`). Ponto de atenção: o item 25 do Oficial 2021 (ransomware evitado com antivírus) ficou CERTO conforme a apostila, com ressalva no comentário. Atalhos do Word conferidos na versão em português (Ctrl+B salva, Ctrl+N negrito) × Writer (Ctrl+B negrito).
 - **24/10** — Biologia completa: conteúdo dos 22 tópicos e 937 itens (48–51% C por tópico). Os 100 itens de Biologia dos simulados 01–05 (89–108) entraram; a tabela de doenças (sim. 04) e o esquema da circulação (sim. 05) viraram grupos de texto (`BIO-SIMnn-A`). Itens da prova de **Oficial 2021** usados: musgo (briófita, não pteridófita) e DTPa × sarampo (a DTPa protege contra difteria, tétano e coqueluche, e vacina é imunidade ativa); grupos `BIO-2021-A/B`. O item do muçuã (quelônio "carnívoro") ficou de fora por gabarito duvidoso; virou item próprio só sobre a carapaça. Muitos itens ligados ao serviço: queimaduras e regra dos nove, síndrome do esmagamento, fraturas e coluna cervical, CO na fumaça, RCP, hemorragias e choque, evisceração, Glasgow, parto de emergência, acidentes ofídicos e com águas-vivas, leptospirose em enchentes, PEP do HIV, soros. Números de referência usados (FR 12–20, FC 60–100, RCP 100–120/min e 5–6 cm, Glasgow 3–15) são os usuais em APH. Pendência leve: BIO-02 e BIO-03 têm cerca de 40% de itens fáceis.
 - **24/10** — Mecânica Geral completa: conteúdo dos 8 sistemas e 414 itens (51–54% C por tópico). Os 60 itens dos simulados 01–05 (109–120) entraram; o esquema de arrefecimento (sim. 04) e as figuras de freios (sim. 05) viraram descrições em texto. Muitas situações de viatura: tomada de força da autobomba, freio a ar e molas acumuladoras, fading em serra, tampa do radiador quente, fusível de amperagem maior, ordem de desconexão da bateria, sangria do diesel após pane seca, ARLA 32, alta tensão em híbridos. Pendência leve: matéria conceitual, com 35–50% de itens fáceis por tópico.
 - **24/10** — Química completa: conteúdo dos 18 tópicos e 886 itens (51–54% C por tópico). Os 90 itens de Química dos simulados 01–05 entraram (grupos `QUI-SIMnn-A`, com as tabelas de massas). Itens de Química da prova de **Oficial 2021** adaptados como referência de estilo (pó ABC dos extintores e etilenoglicol: grupos `QUI-2021-A/B`, origem `cbmal2021-oficial-NN`; gabaritos conferidos por cálculo). Fórmulas químicas escritas com subscritos Unicode (H₂SO₄) em vez de LaTeX. Muitos itens de segurança: GLP × gás natural, CO, metais alcalinos (classe D), diluição de ácidos, oxidantes, extintores. Pendência leve: QUI-04 (tabela periódica) tem 51% de itens fáceis.
