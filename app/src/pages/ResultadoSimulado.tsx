@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Rico } from '../components/Rico'
-import { Botao, Card, Carregando, Pill, Secao } from '../components/ui'
+import { Botao, Card, Carregando, Pill, Secao, StatusPill } from '../components/ui'
 import { acharTopico, materiaDoTopico, useIndice } from '../lib/conteudo'
 import { calcularNota, formatarDuracao, valeChutar, type Placar } from '../lib/simulado'
+import { STATUS_INFO, diagnosticoPorTopico } from '../lib/stats'
 import type { Grupo, Questao, RegistroSimulado } from '../lib/types'
 import { useRespostas } from '../lib/useDados'
 
@@ -14,6 +15,7 @@ export default function ResultadoSimulado({ sim, questoes, grupos }: { sim: Regi
   const respostas = useRespostas()
   const nav = useNavigate()
   const [filtro, setFiltro] = useState<Filtro | null>(null)
+  const [verTodos, setVerTodos] = useState(false)
   if (!ind || !respostas) return <Carregando />
 
   const nota = calcularNota(sim, questoes, ind.edital)
@@ -22,13 +24,26 @@ export default function ResultadoSimulado({ sim, questoes, grupos }: { sim: Regi
   const respondidos = nota.total.certos + nota.total.errados
   const mediaItem = sim.itens.length ? sim.gastoMs / sim.itens.length : 0
 
-  // onde perdi mais pontos: tópicos com mais erros
-  const errosPorTopico = new Map<string, number>()
+  // impacto por tópico: o que este simulado mandou para revisão e como ficou o diagnóstico de cada tópico
+  const porTopico = new Map<string, { erros: number; brancos: number; chutes: number }>()
+  let paraCaderno = 0
   for (const q of questoes) {
-    const r = sim.respostas[q.id]?.r
-    if (r && r !== 'B' && r !== q.gabarito) errosPorTopico.set(q.topico, (errosPorTopico.get(q.topico) ?? 0) + 1)
+    const resp = sim.respostas[q.id]
+    const r = resp?.r ?? 'B'
+    const errou = r !== 'B' && r !== q.gabarito
+    const chutou = !errou && r !== 'B' && resp?.c === 'chute'
+    if (errou || r === 'B' || chutou) paraCaderno++
+    if (!errou && r !== 'B' && !chutou) continue
+    const t = porTopico.get(q.topico) ?? { erros: 0, brancos: 0, chutes: 0 }
+    if (errou) t.erros++
+    else if (r === 'B') t.brancos++
+    else t.chutes++
+    porTopico.set(q.topico, t)
   }
-  const piores = [...errosPorTopico.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5)
+  const diag = diagnosticoPorTopico(respostas)
+  const impacto = [...porTopico.entries()]
+    .sort((a, b) => b[1].erros - a[1].erros || b[1].brancos + b[1].chutes - a[1].brancos - a[1].chutes)
+  const mostrar = verTodos ? impacto : impacto.slice(0, 6)
 
   return (
     <div className="pt-1">
@@ -104,15 +119,35 @@ export default function ResultadoSimulado({ sim, questoes, grupos }: { sim: Regi
         </table>
       </Card>
 
-      {piores.length > 0 && (
+      {impacto.length > 0 && (
         <>
-          <Secao>Onde perdi mais pontos</Secao>
-          {piores.map(([t, n]) => (
-            <Card key={t} onClick={() => nav(`/t/${t}`)} className="flex justify-between items-center text-sm">
-              <span><b>{t}</b> <span className="text-suave">{acharTopico(ind, t)?.nome}</span></span>
-              <span className="text-destaque whitespace-nowrap ml-2">−{n} ›</span>
-            </Card>
-          ))}
+          <Secao>Impacto nos tópicos</Secao>
+          <Card className="text-sm">
+            <b>{paraCaderno}</b> {paraCaderno === 1 ? 'item foi' : 'itens foram'} para o caderno de erros (errados, brancos e chutes) e
+            {' '}{paraCaderno === 1 ? 'volta' : 'voltam'} amanhã em <b>Revisão</b>. O diagnóstico de cada tópico já conta este simulado.
+          </Card>
+          {mostrar.map(([t, n]) => {
+            const d = diag[t]
+            const fraco = d && (d.status === 'critico' || d.status === 'construcao')
+            return (
+              <Card key={t} onClick={() => nav(`/t/${t}`)} className="text-sm">
+                <div className="flex justify-between items-start gap-2">
+                  <span><b>{t}</b> <span className="text-suave">{acharTopico(ind, t)?.nome}</span></span>
+                  {d && <StatusPill status={d.status} acerto={d.acerto} />}
+                </div>
+                <div className="text-suave text-[12px] mt-1">
+                  {[n.erros && <span key="e" className="text-destaque">{n.erros} {n.erros === 1 ? 'erro' : 'erros'} (−{n.erros})</span>,
+                    n.brancos && <span key="b">{n.brancos} em branco</span>,
+                    n.chutes && <span key="c">{n.chutes} {n.chutes === 1 ? 'chute certo' : 'chutes certos'}</span>]
+                    .filter(Boolean).reduce<ReactNode[]>((acc, x, i) => (i ? [...acc, ' · ', x] : [x]), [])}
+                </div>
+                {fraco && <div className="text-[12px] mt-1">{STATUS_INFO[d.status].recomendacao}</div>}
+              </Card>
+            )
+          })}
+          {impacto.length > mostrar.length && (
+            <button onClick={() => setVerTodos(true)} className="text-suave text-sm w-full py-2">Ver todos os {impacto.length} tópicos ›</button>
+          )}
         </>
       )}
 

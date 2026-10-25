@@ -67,6 +67,7 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 - [ ] Quando formos fazer a correção de redação: chave do Gemini (Google AI Studio).
 
 ## Histórico resumido
+- **25/10** — Resultado do simulado ganhou **Impacto nos tópicos**: quantos itens foram ao caderno de erros, e para cada tópico com erro, branco ou chute, o status do diagnóstico já atualizado e a recomendação (os simulados já alimentavam diagnóstico e caderno desde a entrega; agora isso aparece na tela). **Conquistas** passaram de 14 para 32, em 4 grupos (Volume, Constância, Domínio, Simulados), todas ligadas a progresso real.
 - **25/10** — **Simulados** no app (Questões › Simulados):
   - **Tipos:** **completo** (120 itens na distribuição do edital, 4h30); **mini** (30 itens proporcionais, 40 min); **pontos fracos** (30 itens dos tópicos 🔴🟠, 40 min); **simulados 01–05** do Drive, na ordem do caderno.
   - **Sorteio:** prioriza itens nunca respondidos, depois os errados, e mantém juntos até 5 itens do mesmo texto-base.
