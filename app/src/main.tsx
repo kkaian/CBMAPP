@@ -21,6 +21,8 @@ import Perfil from './pages/Perfil'
 import Questoes from './pages/Questoes'
 import Quiz from './pages/Quiz'
 import Redacao from './pages/Redacao'
+import Simulado from './pages/Simulado'
+import Simulados from './pages/Simulados'
 import Topico from './pages/Topico'
 
 registerSW({ immediate: true })
@@ -41,10 +43,12 @@ const router = createHashRouter([
       { path: '/perfil', element: <Perfil /> },
       { path: '/em-breve', element: <EmBreve /> },
       { path: '/redacao', element: <Redacao /> },
+      { path: '/simulados', element: <Simulados /> },
       { path: '/admin', element: <Admin /> },
     ],
   },
   { path: '/quiz', element: <div className="max-w-lg mx-auto px-4 pt-4 pb-10"><Quiz /></div> },
+  { path: '/simulado/:id', element: <div className="max-w-lg mx-auto px-4 pt-4 pb-10"><Simulado /></div> },
 ])
 
 function Portao() {

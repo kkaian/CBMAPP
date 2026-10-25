@@ -1,10 +1,11 @@
 import { db, gravarConfig, lerConfig } from './db'
 import { supabase } from './supabase'
-import type { RegistroLeitura, RegistroResposta, RegistroRevisao } from './types'
+import type { RegistroLeitura, RegistroResposta, RegistroRevisao, RegistroSimulado } from './types'
 
 // Sincronização local ⇄ Supabase.
 // - respostas e leituras: só acrescentam (id único), nunca mudam
 // - revisões: uma linha por item; vence a mais recente (atualizadaEm)
+// - simulados: uma linha por tentativa; idem
 let timer: ReturnType<typeof setTimeout> | null = null
 let rodando: Promise<void> | null = null
 let aprovado = false // contas pendentes de aprovação não sincronizam (o banco recusaria)
@@ -78,6 +79,18 @@ async function enviar() {
     if (error) throw error
     await db.revisoes.bulkUpdate(lote.map((r) => ({ key: r.itemId, changes: { sincronizada: 1 as const } })))
   }
+  const simulados = await db.simulados.where('sincronizada').equals(0).toArray()
+  for (const lote of lotes(simulados, 50)) {
+    const { error } = await sb.from('simulados').upsert(
+      lote.map(({ sincronizada: _, ...dados }) => ({ id: dados.id, dados, status: dados.status, atualizada_em: dados.atualizadaEm })),
+      { onConflict: 'id' },
+    )
+    if (error) throw error
+    // só marca como enviada se não mudou durante o envio (o simulado em andamento é salvo o tempo todo)
+    for (const s of lote) {
+      await db.simulados.where('id').equals(s.id).and((x) => x.atualizadaEm === s.atualizadaEm).modify({ sincronizada: 1 })
+    }
+  }
 }
 
 // Traz o que foi feito em outro aparelho desde a última vez.
@@ -103,6 +116,13 @@ async function receber() {
     if (local && local.atualizadaEm >= (r.atualizada_em as string)) continue
     const reg: RegistroRevisao = { itemId: r.item_id as string, topico: r.topico as string, etapa: r.etapa as number, proxima: (r.proxima as string | null) ?? null, atualizadaEm: r.atualizada_em as string, sincronizada: 1 }
     await db.revisoes.put(reg)
+  }
+  const simulados = await paginar<Record<string, unknown>>((de, ate) => sb.from('simulados').select('*').gt('recebida_em', desde).range(de, ate))
+  for (const linha of simulados) {
+    const remoto = linha.dados as Omit<RegistroSimulado, 'sincronizada'>
+    const local = await db.simulados.get(remoto.id)
+    if (local && local.atualizadaEm >= remoto.atualizadaEm) continue
+    await db.simulados.put({ ...remoto, sincronizada: 1 })
   }
   await gravarConfig('sync.recebidoAte', inicio)
 }

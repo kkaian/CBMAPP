@@ -77,7 +77,7 @@ export interface DadosMateria {
 
 // ---- registros locais (IndexedDB) e no Supabase ----
 
-export type ModoEstudo = 'treino' | 'revisao' | 'relampago'
+export type ModoEstudo = 'treino' | 'revisao' | 'relampago' | 'simulado'
 
 export interface RegistroResposta {
   id: string
@@ -108,5 +108,32 @@ export interface RegistroLeitura {
   topico: string
   aba: 'resumo' | 'teoria'
   criadaEm: string
+  sincronizada: 0 | 1
+}
+
+// ---- simulados ----
+
+export type TipoSimulado = 'drive' | 'completo' | 'mini' | 'fracos'
+
+export interface RespostaSimulado {
+  r: Resposta
+  c: Confianca | null
+}
+
+export interface RegistroSimulado {
+  id: string
+  tipo: TipoSimulado
+  titulo: string
+  itens: string[] // ids na ordem da prova
+  respostas: Record<string, RespostaSimulado> // só os itens marcados (C, E ou branco)
+  tempos: Record<string, number> // tempo acumulado em cada item (ms)
+  limiteMs: number
+  gastoMs: number // tempo de prova (só conta com a tela aberta)
+  atual: number // índice do item em que parou
+  status: 'andamento' | 'concluido' | 'descartado'
+  iniciadoEm: string
+  concluidoEm: string | null
+  resumo?: { nota: number; itens: number; passou: boolean } // gravado ao entregar, para o histórico
+  atualizadaEm: string
   sincronizada: 0 | 1
 }

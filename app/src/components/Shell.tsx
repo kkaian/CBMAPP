@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 const ABAS = [
   { para: '/', icone: '🏠', rotulo: 'Início', prefixos: ['/'] },
   { para: '/estudar', icone: '📚', rotulo: 'Estudar', prefixos: ['/estudar', '/m/', '/t/'] },
-  { para: '/questoes', icone: '✅', rotulo: 'Questões', prefixos: ['/questoes'] },
+  { para: '/questoes', icone: '✅', rotulo: 'Questões', prefixos: ['/questoes', '/simulados'] },
   { para: '/desempenho', icone: '📈', rotulo: 'Desempenho', prefixos: ['/desempenho'] },
   { para: '/mais', icone: '☰', rotulo: 'Mais', prefixos: ['/mais', '/erros', '/perfil', '/em-breve', '/redacao', '/admin'] },
 ]

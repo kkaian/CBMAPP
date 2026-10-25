@@ -22,7 +22,7 @@ Início (missão do dia, meta, streak, patente) · Estudar (mapa do edital) · M
 ### Conteúdo
 | Matéria | Itens / meta | Conteúdo (tópicos) | Situação |
 |---|---|---|---|
-| **MAT** | **480 / 480** | **8 / 8** | ✅ completa |
+| **MAT** | **489 / 480** | **8 / 8** | ✅ completa |
 | **RED** | 20 / 90 | **9 / 9** | conteúdo completo; itens de técnica |
 | **RLM** | **553 / 550** | **11 / 11** | ✅ completa |
 | **FIS** | **1.173 / 1.100** | **22 / 22** | ✅ completa |
@@ -34,12 +34,12 @@ Início (missão do dia, meta, streak, patente) · Estudar (mapa do edital) · M
 | **ING** | **328 / 240** | **4 / 4** | ✅ completa |
 | **CDH** | **310 / 280** | **7 / 7** | ✅ completa |
 | **LEG** | **489 / 450** | **10 / 10** | ✅ completa |
-| **Total** | **6.745** | **147 / 147** | 0 itens em revisão |
+| **Total** | **6.754** | **147 / 147** | 0 itens em revisão |
 
 ## O que ainda falta
 
 ### 1. Conteúdo (prioridade — exatas primeiro)
-Ordem: ~~MAT~~ → ~~RLM~~ → ~~FIS~~ → ~~QUI~~ → ~~MEC~~ → ~~BIO~~ → ~~INF~~ → ~~PT~~ → ~~ING~~ → ~~CDH~~ → ~~LEG~~. **Todas as matérias com conteúdo completo**; próximo passo: funcionalidades (simulados primeiro, já que todos os itens 01–05 estão no banco).
+Ordem: ~~MAT~~ → ~~RLM~~ → ~~FIS~~ → ~~QUI~~ → ~~MEC~~ → ~~BIO~~ → ~~INF~~ → ~~PT~~ → ~~ING~~ → ~~CDH~~ → ~~LEG~~. **Todas as matérias com conteúdo completo**; agora são as funcionalidades (simulados feitos; próximas: plano de estudos, flashcards, correção de redação).
 Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 1. Extrair os itens dos PDFs do Drive (`D:\CBM\MATERIAL\CBMAL`: `Q-<Matéria>_100_Questoes(1)/(2)`, itens da matéria nos simulados 01–05, prova 2021) com `pdftotext`.
 2. Ler a apostila `E-CBMAL_<Matéria>.pdf` como base do conteúdo.
@@ -51,7 +51,7 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 - **Gráficos ausentes nos PDFs:** itens que dependem deles ficam de fora ou ganham tabela nova (feito assim em MAT).
 
 ### 2. Funcionalidades
-- [ ] **Simulados**: completo (120 itens, 4h30), mini (30), por pontos fracos; nota pela regra do edital (P1 ≥ 10, P2 ≥ 21, total ≥ 36). Montar os simulados 01–05 do Drive a partir de `origem: simulado-NN-*` (depende de todas as matérias terem os itens dos simulados).
+- [x] **Simulados** (25/10): completo, mini, pontos fracos e 01–05; nota pela regra do edital. Falta: simulado **por matéria** e **tempo por item** no resultado (o tempo já é gravado em `tempos`).
 - [ ] **Correção de redação por IA** (Gemini free via Supabase Edge Function; usuário precisa criar a chave no Google AI Studio) + histórico de NPD.
 - [ ] **Plano de estudos** (fases até 26/01, horas por dia, peso por matéria × desempenho).
 - [ ] **Flashcards** com revisão espaçada (previsto no PROJETO, ainda não feito).
@@ -67,6 +67,17 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 - [ ] Quando formos fazer a correção de redação: chave do Gemini (Google AI Studio).
 
 ## Histórico resumido
+- **25/10** — **Simulados** no app (Questões › Simulados):
+  - **Tipos:** **completo** (120 itens na distribuição do edital, 4h30); **mini** (30 itens proporcionais, 40 min); **pontos fracos** (30 itens dos tópicos 🔴🟠, 40 min); **simulados 01–05** do Drive, na ordem do caderno.
+  - **Sorteio:** prioriza itens nunca respondidos, depois os errados, e mantém juntos até 5 itens do mesmo texto-base.
+  - **Prova:** folha de respostas, troca de resposta, confiança opcional e relógio que só corre com a tela aberta. Sair salva para continuar depois; com o tempo esgotado, entrega sozinho.
+  - **Resultado:** nota P1, P2 e total (certos − errados) contra os mínimos 10/21/36, proporcionais nos simulados menores; tabela por matéria; tópicos onde mais perdeu pontos; análise dos brancos pelo acerto histórico dos chutes; revisão dos itens com gabarito e comentário; histórico com gráfico de evolução.
+  - **Entrega:** cada item vira resposta normal (modo `simulado`), que entra no diagnóstico e no caderno de erros.
+  - **Supabase:** nova tabela `simulados` (uma linha por tentativa, vence a versão mais recente), aplicada pelo novo workflow **Aplicar schema**, que roda sozinho quando o `schema.sql` muda no main.
+  - **Conquistas novas:** 1º simulado completo; simulado completo acima do mínimo.
+  - **Matemática dos simulados 04 e 05:** os 9 itens que dependiam de gráfico (04: 25–28; 05: 25–29) entraram com o gráfico reconstituído em tabela (grupos `MAT-SIM04-A/05-A`, coerentes com o gabarito escolhido). Agora os 5 simulados têm os 120 itens.
+  - **Testado no navegador em modo local:** 04 completo, mini, completo sorteado, pontos fracos e entrega por tempo. Um bug achado no teste foi corrigido: ao sair da prova entregue, o salvamento a revertia para "em andamento".
+  - **Não testado:** a sincronização real entre dois aparelhos.
 - **25/10** — Legislação completa: conteúdo dos 10 tópicos e 489 itens (49–52% C por tópico). **Tudo conferido no texto oficial** de `conteudo/_fontes/leis/`, com o artigo citado em cada comentário; o material do Drive serviu só de ideia de item (origem `drive-q1/q2-LEG-N` quando adaptado). Alterações aplicadas: **Lei 9.392/2024** na 6.514 (critérios só merecimento e antiguidade; proporções Maj 3/5, TC e Cel 4/5 por merecimento; datas CBM 26/05 e 29/11 com data-limite 26/02 e 29/09; bravura sem interstício nem vaga, prazo decadencial de 5 anos, máximo de 2; invalidez inclui trajeto; post mortem e incapacidade promovem até o último grau habilitado; interstício do 3º Sgt passou de 60 para 36 meses) e no Estatuto (art. 54, VII; art. 71); **Lei 6.544/2004** (3º Sgt todo por antiguidade); **Lei 9.905/2026** (efetivo 2.950, quadros QOEM/QOE/QP, primeiro posto do QOE só por merecimento intelectual ou tempo de serviço) em LEG-08. Os 25 itens dos simulados (41–45) entraram, todos cobertos; de 2021 entraram Praça 111–120 e Oficial 61–64, gabaritados pelo texto da lei (o Oficial 65 virou item próprio sobre o CFP). Pontos de atenção registrados nos resumos: estabilidade "mais de 10 anos" no Estatuto × 3 anos na Lei 14.751; regras de inatividade do Estatuto podem ter sido afetadas pela lei estadual de proteção social (8.671/2022), que não está no edital, por isso os itens dizem "nos termos do Estatuto"; números do anexo da 9.905 (efetivo por posto) ficaram de fora porque a tabela extraída do PDF está desalinhada.
 - **23/10** — Ideia, documento do projeto, esboço, app mínimo, Supabase, GitHub, Vercel, lembretes, redação (conteúdo + temas), leis oficiais baixadas e questões de LEG corrigidas (2 gabaritos do Drive estavam errados), código de convite + aprovação.
 - **24/10** — Matemática completa: conteúdo dos 8 tópicos e 480 itens; build aceita vários arquivos por matéria; `scripts/balanco.mjs`.

@@ -1,7 +1,7 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { Barra, Cabecalho, Card, Carregando, Secao } from '../components/ui'
 import { useIndice } from '../lib/conteudo'
-import { gravarConfig, lerConfig } from '../lib/db'
+import { db, gravarConfig, lerConfig } from '../lib/db'
 import {
   PATENTES, calcularStreak, calcularXp, diagnosticoPorTopico, diasComEstudo, noCaderno, patente,
 } from '../lib/stats'
@@ -13,6 +13,7 @@ export default function Perfil() {
   const leituras = useLeituras()
   const revisoes = useRevisoes()
   const meta = useMetaDiaria()
+  const simulados = useLiveQuery(() => db.simulados.where('status').equals('concluido').toArray(), [])
   const reportes = useLiveQuery(() => lerConfig<{ itemId: string; motivo: string; em: string }[]>('reportes', []), [])
   if (!ind || !respostas || !leituras || !revisoes) return <Carregando />
 
@@ -37,6 +38,8 @@ export default function Perfil() {
     { icone: '📕', nome: 'Caderno de erros zerado (com 20+ revisões)', ok: noCaderno(revisoes).length === 0 && respostas.filter((r) => r.modo === 'revisao').length >= 20 },
     { icone: '📖', nome: '10 resumos lidos', ok: new Set(leituras.map((l) => l.topico)).size >= 10 },
     { icone: '📅', nome: '20 dias de estudo', ok: ultimos30.size >= 20 },
+    { icone: '📝', nome: '1º simulado completo', ok: !!simulados?.some((s) => s.itens.length >= 120) },
+    { icone: '🎖️', nome: 'Simulado completo acima do mínimo', ok: !!simulados?.some((s) => s.itens.length >= 120 && s.resumo?.passou) },
   ]
 
   return (
