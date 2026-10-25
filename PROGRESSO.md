@@ -32,14 +32,14 @@ Início (missão do dia, meta, streak, patente) · Estudar (mapa do edital) · M
 | **INF** | **507 / 455** | **13 / 13** | ✅ completa |
 | **PT** | **648 / 525** | **15 / 15** | ✅ completa |
 | **ING** | **328 / 240** | **4 / 4** | ✅ completa |
-| CDH | 10 / 280 | 0 / 7 | ⏭️ **próxima** |
-| LEG | 10 / 450 | 0 / 10 | a fazer (leis já em `conteudo/_fontes/leis/`) |
-| **Total** | **5.966** | **130 / 147** | 0 itens em revisão |
+| **CDH** | **310 / 280** | **7 / 7** | ✅ completa |
+| LEG | 10 / 450 | 0 / 10 | ⏭️ **próxima** (leis já em `conteudo/_fontes/leis/`) |
+| **Total** | **6.266** | **137 / 147** | 0 itens em revisão |
 
 ## O que ainda falta
 
 ### 1. Conteúdo (prioridade — exatas primeiro)
-Ordem: ~~MAT~~ → ~~RLM~~ → ~~FIS~~ → ~~QUI~~ → ~~MEC~~ → ~~BIO~~ → ~~INF~~ → ~~PT~~ → ~~ING~~ → **CDH → LEG**.
+Ordem: ~~MAT~~ → ~~RLM~~ → ~~FIS~~ → ~~QUI~~ → ~~MEC~~ → ~~BIO~~ → ~~INF~~ → ~~PT~~ → ~~ING~~ → ~~CDH~~ → **LEG**.
 Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 1. Extrair os itens dos PDFs do Drive (`D:\CBM\MATERIAL\CBMAL`: `Q-<Matéria>_100_Questoes(1)/(2)`, itens da matéria nos simulados 01–05, prova 2021) com `pdftotext`.
 2. Ler a apostila `E-CBMAL_<Matéria>.pdf` como base do conteúdo.
@@ -69,6 +69,7 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 ## Histórico resumido
 - **23/10** — Ideia, documento do projeto, esboço, app mínimo, Supabase, GitHub, Vercel, lembretes, redação (conteúdo + temas), leis oficiais baixadas e questões de LEG corrigidas (2 gabaritos do Drive estavam errados), código de convite + aprovação.
 - **24/10** — Matemática completa: conteúdo dos 8 tópicos e 480 itens; build aceita vários arquivos por matéria; `scripts/balanco.mjs`.
+- **24/10** — Cidadania e Direitos Humanos completa: conteúdo dos 7 tópicos e 310 itens (49–51% C por tópico). Fontes: os dois cadernos do Drive, os 25 itens dos simulados (46–50, todos cobertos) e 10 itens de 2021 com gabarito confirmado pela apostila (Praça 101, 102, 103, 105, 109; Oficial 56–60); os demais de 2021 ficaram de fora. Gerações e marcos históricos (DUDH, Pactos) em CDH-06; sistemas de proteção e responsabilidade do Estado em CDH-07; tratados (supralegal × EC 45/2004) em CDH-05. Tabelas do caderno 2 (dimensões e marcos) viraram grupos `CDH-G01/G02`. Itens com dispositivos constitucionais usam só artigos bem conhecidos (arts. 1º, 3º, 5º, 14, 37, 109 § 5º).
 - **24/10** — Inglês completo: conteúdo dos 4 tópicos e 328 itens (49–51% C por tópico). 20 textos-base em `grupos-ING.json`: 13 dos cadernos do Drive, os 5 dos simulados (itens 13–18, todos cobertos) e 2 das provas de 2021 (Praça 31–40 e Oficial 16–20, gabaritos da apostila), estes resumidos em inglês com palavras próprias, mantendo só os trechos citados. Ficaram de fora Praça 31 e Oficial 18 (gabarito não confirmado). Itens do caderno 1 seguem em português; os do caderno 2, dos simulados e os inéditos estão em inglês, como na prova da CBM/AL. ING-01 ficou grande (121 itens) porque concentra a interpretação dos 20 textos.
 - **24/10** — Português completo: conteúdo dos 15 tópicos e 648 itens (48–53% C por tópico). 22 textos-base em `grupos-PT.json`: os 13 textos dos cadernos do Drive (`PT-G01`…`PT-G13`), os 5 dos simulados (`PT-SIMnn-A`, itens 1–12, todos cobertos) e 4 das provas de 2021 (`PT-2021-A`…`D`). Os textos de 2021 vêm de sites (CBM/AL, National Geographic, Letras Ambientais, BBC); entraram **resumidos com palavras próprias**, mantendo só os trechos citados nos itens, para não reproduzir os originais. A apostila não traz gabarito de PT 2021: usei só os itens em que o gabarito é seguro (cerca de 30 de Praça 1–30 e Oficial 1–15) e deixei de fora os duvidosos. Os itens do Manual de Redação da Presidência (caem na prova, embora o edital fale só em "níveis de formalidade") ficaram em PT-15. Itens gerados por scripts no scratchpad (`pt/ptNN.mjs` + `gen.mjs`).
 - **24/10** — Informática completa: conteúdo dos 13 tópicos e 507 itens (48–50% C por tópico). Entraram os 30 itens dos simulados 01–05 (19–24) e os 15 itens oficiais de 2021: Praça 41–50 (origem `cbmal2021-praca-NN`) e Oficial 21–25, com os gabaritos da apostila. As tabelas das provas de 2021 que faltavam no PDF (Excel do Oficial 23 e do Praça 48) foram reconstituídas de forma coerente com o gabarito, com aviso no texto-base (grupos `INF-2021-B/C`). Ponto de atenção: o item 25 do Oficial 2021 (ransomware evitado com antivírus) ficou CERTO conforme a apostila, com ressalva no comentário. Atalhos do Word conferidos na versão em português (Ctrl+B salva, Ctrl+N negrito) × Writer (Ctrl+B negrito).
