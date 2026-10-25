@@ -17,32 +17,105 @@
 
 ## Teoria
 
-### Calculando a massa molar
-Multiplique a massa de cada elemento pelo índice e some:
-- H₂SO₄: 2(1) + 32 + 4(16) = **98 g/mol**.
-- Ca(OH)₂: 40 + 2(16 + 1) = **74 g/mol** (o índice fora do parêntese multiplica tudo dentro).
-- C₆H₁₂O₆ (glicose): 6(12) + 12(1) + 6(16) = **180 g/mol**.
+### 1. Por que existe o "mol"
+Átomos e moléculas são pequenos demais para contar um a um. O **mol** é um "pacote" com um número fixo de entidades, como a dúzia (12) ou a resma (500 folhas), só que gigantesco:
+\[ 1\ \text{mol} = 6{,}0 \times 10^{23}\ \text{entidades} \quad (\text{constante de Avogadro, } N_A) \]
+Pode ser mol de átomos, de moléculas, de íons ou de elétrons: **diga sempre de quê**.
 
-### Conversões
-- 36 g de água → \(36/18 = 2\) mol → \(2 \times 6 \times 10^{23} = 1{,}2 \times 10^{24}\) moléculas → como cada molécula tem 3 átomos, \(3{,}6 \times 10^{24}\) átomos.
-- 88 g de CO₂ → 2 mol → nas CNTP, \(2 \times 22{,}4 = 44{,}8\) L.
-- 11,2 L de um gás nas CNTP → 0,5 mol.
-- \(3 \times 10^{23}\) moléculas de O₂ → 0,5 mol → 16 g.
-- Massa de **uma** molécula de água: \(18/(6 \times 10^{23}) = 3 \times 10^{-23}\) g.
+**A mágica do número:** ele foi escolhido para que **1 mol de uma substância tenha, em gramas, o mesmo número da sua massa em u**. Como uma molécula de água tem 18 u, 1 mol de água (\(6 \times 10^{23}\) moléculas) tem **18 g**.
 
-### Mol de moléculas × mol de átomos
-1 mol de CO₂ tem 1 mol de átomos de C e **2 mol** de átomos de O (3 mol de átomos no total). 1 mol de H₂SO₄ tem 7 mol de átomos.
+### 2. Massa atômica, massa molecular e massa molar
+| Grandeza | Símbolo | Unidade | O que é |
+|---|---|---|---|
+| massa atômica | — | u (unidade de massa atômica) | massa de **um átomo**, em relação a 1/12 do carbono-12 (está na tabela periódica) |
+| massa molecular | — | u | massa de **uma molécula** = soma das massas atômicas |
+| **massa molar** | \(M\) | **g/mol** | massa de **1 mol** da substância; mesmo número da massa molecular |
 
-### Volume molar e hipótese de Avogadro
-- **Volumes iguais de gases quaisquer, nas mesmas condições de temperatura e pressão, contêm o mesmo número de moléculas.**
-- O valor 22,4 L/mol vale para gases nas **CNTP** (0 °C e 1 atm). Em outras condições muda (≈ 24,5 L/mol a 25 °C e 1 atm). Não vale para líquidos e sólidos: 1 mol de água líquida ocupa só 18 mL.
-- Massas iguais de gases diferentes **não** têm o mesmo número de moléculas: 4 g de H₂ (2 mol) têm o mesmo número de moléculas que 64 g de O₂ (2 mol).
+**Como calcular a massa molar:** multiplique a massa de cada elemento pelo seu índice e some. O índice **fora do parêntese multiplica tudo que está dentro**.
 
-### Densidade de gases (aplicação em segurança)
-Nas CNTP, \(d = M/22{,}4\). O ar (M média ≈ 29 g/mol) tem cerca de 1,3 g/L.
-- **CO₂** (44) e **GLP** (propano 44, butano 58) são **mais densos que o ar**: acumulam-se em locais baixos (porões, poços, valas, galerias). O vazamento de gás de cozinha se espalha rente ao chão.
-- **Metano** (16, gás natural) e **H₂** (2) são **menos densos** e sobem.
-- **CO** (28) tem densidade próxima à do ar e se mistura a ele: tóxico e inodoro.
+| Substância | Conta | M (g/mol) |
+|---|---|---|
+| H₂O | 2(1) + 16 | 18 |
+| CO₂ | 12 + 2(16) | 44 |
+| H₂SO₄ | 2(1) + 32 + 4(16) | 98 |
+| Ca(OH)₂ | 40 + 2(16 + 1) | 74 |
+| Al₂(SO₄)₃ | 2(27) + 3[32 + 4(16)] | 342 |
+| C₆H₁₂O₆ | 6(12) + 12(1) + 6(16) | 180 |
+
+Massas atômicas usuais: H 1, C 12, N 14, O 16, Na 23, Mg 24, Al 27, S 32, Cl 35,5, K 39, Ca 40, Fe 56, Cu 63,5.
+
+### 3. A "ponte" do mol: as três fórmulas
+Toda conta de química quantitativa passa por **mols**. As três portas de entrada e saída:
+\[ n = \frac{m}{M} \qquad n = \frac{N}{6 \times 10^{23}} \qquad n = \frac{V}{22{,}4\ \text{L}}\ (\text{gás nas CNTP}) \]
+
+| Símbolo | O que é | Unidade |
+|---|---|---|
+| \(n\) | quantidade de matéria (número de mols) | mol |
+| \(m\) | massa da amostra | g |
+| \(M\) | massa molar | g/mol |
+| \(N\) | número de entidades (moléculas, átomos…) | — |
+| \(V\) | volume do **gás** nas CNTP (0 °C e 1 atm) | L |
+
+> **Bizu do mapa:** massa (g) ⇄ **mol** ⇄ número de partículas, e mol ⇄ volume de gás. Passe **sempre pelo mol**: de gramas para moléculas, divida por \(M\) e depois multiplique por \(6 \times 10^{23}\).
+
+**De onde vem cada uma:** são regras de três. Se 1 mol tem \(M\) gramas, então \(m\) gramas são \(m/M\) mols. Se 1 mol tem \(6 \times 10^{23}\) moléculas, \(N\) moléculas são \(N / 6 \times 10^{23}\) mols.
+
+### 4. Exemplos resolvidos (passo a passo)
+**(1) Gramas → moléculas → átomos.** Quantas moléculas e quantos átomos há em 36 g de água?
+1. \(n = 36 / 18 = 2\) mol.
+2. Moléculas: \(2 \times 6 \times 10^{23} = 1{,}2 \times 10^{24}\).
+3. Cada molécula (H₂O) tem 3 átomos: \(3 \times 1{,}2 \times 10^{24} = 3{,}6 \times 10^{24}\) átomos.
+
+**(2) Gramas → volume de gás.** Que volume ocupam 88 g de CO₂ nas CNTP?
+\(n = 88 / 44 = 2\) mol → \(V = 2 \times 22{,}4 = 44{,}8\) L.
+
+**(3) Volume → massa.** Quantos gramas há em 11,2 L de O₂ nas CNTP?
+\(n = 11{,}2 / 22{,}4 = 0{,}5\) mol → \(m = 0{,}5 \times 32 = 16\) g.
+
+**(4) Massa de uma única molécula.**
+\(m_{1\ \text{molécula}} = \dfrac{M}{6 \times 10^{23}} = \dfrac{18}{6 \times 10^{23}} = 3 \times 10^{-23}\) g.
+
+**(5) Mol de moléculas × mol de átomos.** 1 mol de H₂SO₄ tem 2 mol de H, 1 mol de S e 4 mol de O (7 mol de átomos). 0,5 mol de CO₂ tem 0,5 mol de C e **1 mol** de O.
+
+> **Bizu da potência de 10:** \(6 \times 10^{23} \times 2 = 12 \times 10^{23} = 1{,}2 \times 10^{24}\). Ao "andar" a vírgula uma casa para a esquerda, o expoente sobe 1.
+
+### 5. Gases: hipótese de Avogadro e volume molar
+> **Volumes iguais de gases quaisquer, nas mesmas condições de temperatura e pressão, contêm o mesmo número de moléculas.**
+
+Consequência: **1 mol de qualquer gás** ocupa o mesmo volume nas mesmas condições.
+| Condição | Volume molar |
+|---|---|
+| **CNTP** (0 °C = 273 K e 1 atm) | **22,4 L/mol** |
+| 25 °C e 1 atm ("condições ambientes") | ≈ 24,5 L/mol |
+
+- **Não vale para líquidos e sólidos:** 1 mol de água líquida ocupa só 18 mL.
+- **Equação geral dos gases** (para outras condições): \(p\,V = n\,R\,T\), com \(R \approx 0{,}082\) atm·L/(mol·K) e \(T\) em **kelvin**. Nas CNTP: \(V = \dfrac{1 \cdot 0{,}082 \cdot 273}{1} \approx 22{,}4\) L. ✔
+
+### 6. Densidade de gases (o que importa no socorro)
+Nas CNTP, a densidade de um gás é
+\[ d = \frac{M}{22{,}4} \quad (\text{g/L}) \]
+Com a mesma temperatura e pressão, **quanto maior a massa molar, mais denso** o gás. O **ar** é uma mistura com massa molar média de **≈ 29 g/mol** (78% N₂, 21% O₂).
+
+| Gás | M (g/mol) | Comparado ao ar | Onde se acumula |
+|---|---|---|---|
+| H₂ (hidrogênio) | 2 | muito mais leve | sobe |
+| CH₄ (metano, gás natural) | 16 | mais leve | **sobe** (teto) |
+| NH₃ (amônia) | 17 | mais leve | sobe |
+| CO (monóxido de carbono) | 28 | quase igual | **mistura-se** ao ar (não se concentra só no alto ou no baixo) |
+| ar | ≈ 29 | — | — |
+| H₂S (gás sulfídrico) | 34 | mais denso | locais baixos |
+| CO₂ | 44 | mais denso | **locais baixos** (poços, porões, galerias, silos) |
+| GLP (propano 44 / butano 58) | 44 a 58 | **bem mais denso** | **rente ao chão**, ralos, porões |
+| Cl₂ (cloro) | 71 | muito mais denso | locais baixos |
+
+**Regra prática:** gás com \(M > 29\) desce; com \(M < 29\) sobe. Num vazamento de GLP, ventile **embaixo** e não acione interruptores (a faísca pode provocar a explosão). Em poços e galerias, suspeite de CO₂ e H₂S acumulados: entrar sem proteção respiratória mata por asfixia.
+
+### 7. Bizus finais
+- 1 mol = \(6 \times 10^{23}\); massa molar em g/mol = massa molecular em u.
+- Toda conta passa pelo **mol**: \(n = m/M = N/N_A = V/22{,}4\).
+- 22,4 L/mol só para **gás** e só nas **CNTP**.
+- Índice fora do parêntese multiplica tudo de dentro.
+- Gás com M > 29 se acumula **embaixo**; com M < 29, **em cima**.
 
 ## Manias da banca
 
