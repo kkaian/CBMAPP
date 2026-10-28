@@ -9,7 +9,7 @@ const { SUPABASE_DB_URL, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY } = process.env
 if (!SUPABASE_DB_URL || !VAPID_PUBLIC_KEY || !VAPID_PRIVATE_KEY) { console.error('Faltam variáveis de ambiente.'); process.exit(1) }
 
 const META = 40 // meta diária padrão do app
-const PROVA = '2027-01-26'
+const PROVA = '2027-01-24'
 const FUSO = 'America/Maceio'
 
 webpush.setVapidDetails('mailto:noreply@cbmapp.local', VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY)

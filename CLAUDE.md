@@ -1,6 +1,6 @@
 # CBMAPP — regras para o Claude
 
-App pessoal de estudos para o concurso **CBM/AL 2026 — Cargo 2: Praça Combatente**. Banca **Cebraspe** (certo/errado, item errado anula um certo). **Prova em 26/01/2027.**
+App pessoal de estudos para o concurso **CBM/AL 2026 — Cargo 2: Praça Combatente**. Banca **Cebraspe** (certo/errado, item errado anula um certo). **Prova em 24/01/2027** (Edital nº 7, de 4/9/2026).
 
 ## Leia antes de qualquer tarefa
 1. `PROGRESSO.md`: estado atual, última sessão, próximos passos.

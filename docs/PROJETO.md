@@ -12,7 +12,7 @@
 ### 1.1 O objetivo
 App pessoal de estudos (site que se instala no celular como app) para o concurso **CBM/AL 2026 — Cargo 2: Praça Bombeiro Militar Combatente (QPBM/1)**.
 
-**Prova: 26/01/2027** (adiada; data original era 11/10/2026). Hoje são **95 dias** até a prova.
+**Prova: 24/01/2027** (adiada; data original era 11/10/2026). Hoje são **95 dias** até a prova.
 
 ### 1.2 Os problemas que o app resolve
 1. **Só estudo no computador.** Fora de casa o estudo morre, porque o material são PDFs no Drive. → O app tem que ser **bom no celular e funcionar offline**.
@@ -276,7 +276,7 @@ Ordem de produção: ⭐ = exatas (prioridade 1).
 
 ### 4.1 Tela inicial — "Missão do dia"
 Ao abrir, sem eu decidir nada:
-- Contagem regressiva para 26/01/2027.
+- Contagem regressiva para 24/01/2027.
 - **Missão do dia** montada automaticamente, ex.: *"25 itens de FIS-12 (seu ponto fraco) + revisão de 15 erros + 10 flashcards"*.
 - Anel de progresso da meta diária, streak 🔥, nível atual.
 - Atalhos: **Modo relâmpago** (5 itens em 3 min), continuar de onde parei.
@@ -345,7 +345,7 @@ Fluxo (do jeito que combinamos):
 Extras: repertório de Atualidades por eixo temático (dados, leis, exemplos ligados a bombeiros e segurança pública).
 
 ### 4.8 Plano de estudos
-- Entradas: data da prova (26/01/2027), horas disponíveis por dia da semana.
+- Entradas: data da prova (24/01/2027), horas disponíveis por dia da semana.
 - **Fases:**
   1. **Passada completa** (23/10 → ~05/12): passar por **todos os 138 tópicos** de novo, exatas primeiro. Teoria + questões em cada tópico. É aqui que o diagnóstico ganha dados.
   2. **Reforço** (~06/12 → ~10/01): foco nos tópicos 🔴🟠, simulado completo semanal, redação 1×/semana.
@@ -552,7 +552,7 @@ CBMAPP/
 | **24–26/10** | App mínimo no ar: questões por tópico, comentário, confiança, diagnóstico, caderno de erros, streak, meta diária, offline. **Matemática** já dentro. |
 | **26/10–02/11** | Produção pesada: RLM, FIS, QUI, MEC, BIO, INF, PT, ING, CDH (e LEG se as leis chegarem). Em paralelo: simulados, redação com IA, plano de estudos, gamificação. |
 | **Depois de 02/11** | Uso diário. Correções a partir dos reportes. LEG quando as leis chegarem. |
-| **26/01/2027** | Prova. |
+| **24/01/2027** | Prova. |
 
 ---
 

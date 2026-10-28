@@ -2,7 +2,7 @@
   "concurso": "CBM/AL 2026",
   "cargo": "Cargo 2: Praça Bombeiro Militar Combatente (QPBM/1)",
   "banca": "Cebraspe",
-  "dataProva": "2027-01-26",
+  "dataProva": "2027-01-24",
   "provas": [
     { "codigo": "P1", "nome": "Conhecimentos básicos", "itens": 50, "minimo": 10 },
     { "codigo": "P2", "nome": "Conhecimentos específicos", "itens": 70, "minimo": 21 },

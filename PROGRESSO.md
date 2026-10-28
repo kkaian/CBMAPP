@@ -1,7 +1,7 @@
 # PROGRESSO — CBMAPP
 
 > Diário do projeto. Atualizado ao fim de cada sessão.
-> Prova: **26/01/2027**. App no ar: **https://cbmapp-sand.vercel.app**
+> Prova: **24/01/2027**. App no ar: **https://cbmapp-sand.vercel.app**
 > Ao retomar: leia este arquivo e `docs/PROJETO.md`; regras em `CLAUDE.md`.
 
 ## Estado atual (28/10/2026)
