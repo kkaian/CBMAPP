@@ -1,5 +1,5 @@
 import { diaLocal, inicioSemana, somarDias } from './datas'
-import type { Armadilha, IndiceConteudo, RegistroLeitura, RegistroResposta, RegistroRevisao } from './types'
+import type { Armadilha, IndiceConteudo, RegistroLeitura, RegistroRedacao, RegistroResposta, RegistroRevisao, RegistroSimulado } from './types'
 
 // ---------- diagnóstico por tópico ----------
 
@@ -262,6 +262,43 @@ export function materiasDaSemana(respostas: RegistroResposta[], hoje = diaLocal(
   const c: Record<string, number> = {}
   for (const r of respostas) if (diaLocal(new Date(r.criadaEm)) >= semana) c[r.materia] = (c[r.materia] ?? 0) + 1
   return c
+}
+
+// Metas mensais: 1 simulado completo (120 itens) e 1 redação corrigida por mês.
+// São cumulativas: o mês não cumprido fica pendente e soma com o seguinte. Fazer mais de um num mês
+// quita pendências antigas, mas não adianta meses futuros. A contagem começa no mês do primeiro estudo.
+export interface MetaMensal { feitosNoMes: number; pendentes: number; desde: string }
+
+function mesDe(iso: string) {
+  return diaLocal(new Date(iso)).slice(0, 7)
+}
+
+function mesesDesde(inicio: string, atual: string): string[] {
+  const meses: string[] = []
+  let [a, m] = inicio.split('-').map(Number)
+  const [af, mf] = atual.split('-').map(Number)
+  while (a < af || (a === af && m <= mf)) {
+    meses.push(`${a}-${String(m).padStart(2, '0')}`)
+    if (++m > 12) { m = 1; a++ }
+  }
+  return meses
+}
+
+function metaCumulativa(datas: string[], inicio: string, atual: string): MetaMensal {
+  const porMes: Record<string, number> = {}
+  for (const d of datas) porMes[mesDe(d)] = (porMes[mesDe(d)] ?? 0) + 1
+  let divida = 0
+  for (const mes of mesesDesde(inicio, atual)) divida = Math.max(0, divida + 1 - (porMes[mes] ?? 0))
+  return { feitosNoMes: porMes[atual] ?? 0, pendentes: divida, desde: inicio }
+}
+
+export function metasMensais(respostas: RegistroResposta[], simulados: RegistroSimulado[], redacoes: RegistroRedacao[], hoje = diaLocal()) {
+  const atual = hoje.slice(0, 7)
+  const primeiro = respostas.reduce<string | null>((min, r) => (!min || r.criadaEm < min ? r.criadaEm : min), null)
+  const inicio = primeiro && mesDe(primeiro) < atual ? mesDe(primeiro) : atual
+  const sims = simulados.filter((x) => x.status === 'concluido' && x.itens.length >= 120 && x.concluidoEm).map((x) => x.concluidoEm!)
+  const reds = redacoes.filter((x) => !x.excluida && x.npd !== null).map((x) => x.criadaEm)
+  return { simulado: metaCumulativa(sims, inicio, atual), redacao: metaCumulativa(reds, inicio, atual) }
 }
 
 export interface Missao {

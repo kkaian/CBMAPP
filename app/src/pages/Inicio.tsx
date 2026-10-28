@@ -1,10 +1,12 @@
+import { useLiveQuery } from 'dexie-react-hooks'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth'
 import { CardInstalar } from '../components/Extras'
 import { Anel, Botao, Card, Carregando, Pill, Secao } from '../components/ui'
 import { acharTopico, useIndice } from '../lib/conteudo'
+import { db } from '../lib/db'
 import { diaLocal, diasEntre, formatarDia } from '../lib/datas'
-import { calcularStreak, calcularXp, condecoracoes, diasComEstudo, montarMissao, patente } from '../lib/stats'
+import { calcularStreak, calcularXp, condecoracoes, diasComEstudo, metasMensais, montarMissao, patente } from '../lib/stats'
 import { useLeituras, useMetaDiaria, useRespostas, useRevisoes } from '../lib/useDados'
 
 function saudacao() {
@@ -20,6 +22,8 @@ export default function Inicio() {
   const meta = useMetaDiaria()
   const { usuario } = useAuth()
   const nav = useNavigate()
+  const simulados = useLiveQuery(() => db.simulados.where('status').equals('concluido').toArray(), [])
+  const redacoes = useLiveQuery(() => db.redacoes.toArray(), [])
 
   if (erro) return <Carregando texto={erro} />
   if (!ind || !respostas || !revisoes || !leituras) return <Carregando />
@@ -35,6 +39,8 @@ export default function Inicio() {
   const leitura = m.leituraTopico ? acharTopico(ind, m.leituraTopico) : null
   const sugerida = m.materiaSugerida ? ind.edital.materias.find((x) => x.codigo === m.materiaSugerida) ?? null : null
   const leituraMarcadaHoje = !!m.leituraTopico && leituras.some((l) => l.topico === m.leituraTopico && diaLocal(new Date(l.criadaEm)) === hoje)
+  const mensais = metasMensais(respostas, simulados ?? [], redacoes ?? [], hoje)
+  const mesNome = new Date().toLocaleDateString('pt-BR', { month: 'long' })
   const nome = usuario && usuario !== 'modo local' ? `, ${usuario}` : ''
 
   return (
@@ -85,6 +91,12 @@ export default function Inicio() {
           onClick={m.revisaoPendentes ? () => nav('/quiz?modo=revisao&n=20') : undefined} />
       </Card>
 
+      <Secao>Metas do mês · {mesNome}</Secao>
+      <Card>
+        <MetaMes titulo="1 simulado completo (120 itens)" meta={mensais.simulado} rotulo="simulado" onClick={() => nav('/simulados')} />
+        <MetaMes titulo="1 redação corrigida" meta={mensais.redacao} rotulo="redação" onClick={() => nav('/redacao/escrever')} />
+      </Card>
+
       <div className="flex gap-2">
         <Botao to="/quiz?modo=relampago&n=5">⚡ Relâmpago · 5 itens</Botao>
         <Botao variante="secundario" to="/estudar">Escolher tópico</Botao>
@@ -109,6 +121,14 @@ export default function Inicio() {
       <div className="text-center mt-4"><Link to="/desempenho" className="text-azul text-sm">Ver desempenho ›</Link></div>
     </>
   )
+}
+
+function MetaMes({ titulo, meta, rotulo, onClick }: { titulo: string; meta: { feitosNoMes: number; pendentes: number }; rotulo: string; onClick: () => void }) {
+  const plural = (n: number) => `${n} ${rotulo === 'redação' ? (n === 1 ? 'redação' : 'redações') : n === 1 ? 'simulado' : 'simulados'}`
+  const sub = meta.pendentes === 0
+    ? meta.feitosNoMes ? `feito este mês${meta.feitosNoMes > 1 ? ` (${meta.feitosNoMes})` : ''}` : 'em dia'
+    : `${meta.feitosNoMes ? `${meta.feitosNoMes} feito este mês · ` : ''}${plural(meta.pendentes)} ${meta.pendentes === 1 ? 'pendente' : 'pendentes'}${meta.pendentes > 1 || meta.feitosNoMes ? ' (acumulado dos meses anteriores)' : ''}`
+  return <Tarefa feita={meta.pendentes === 0} titulo={titulo} sub={sub} onClick={onClick} />
 }
 
 function Tarefa({ feita, titulo, sub, onClick }: { feita: boolean; titulo: string; sub: string; onClick?: () => void }) {
