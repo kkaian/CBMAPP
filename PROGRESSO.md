@@ -72,8 +72,18 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
   - **QUI-02/11/12** (mol, estequiometria, concentração) e **RLM-08/09/11** (contagem, probabilidade, estatística): mesmo padrão, com roteiros de resolução.
   - **BIO**, 22 tópicos (de ~1,4 mil para 6,5 a 10 mil caracteres cada): tabelas comparativas, mecanismos explicados (contração muscular, impulso nervoso, néfron, hematose, coagulação, resposta imune), contas (débito cardíaco, regra dos 9, regra dos 10%, ventilação) e uma seção **"Aplicações ao serviço"** em cada tópico (APH, queimaduras, trauma, CO e fumaça, peçonhentos, enchentes e leptospirose, precauções-padrão).
   - Fórmulas conferidas com KaTeX (0 erros) e `npm run validar` ok.
-  - **MAT** foi avaliada e considerada adequada. **MEC** (~2,1 mil caracteres por tópico, mais conceitual) não foi mexida.
-  - **Próximo passo, se o usuário quiser:** MEC e os demais tópicos de QUI.
+  - **MEC**, 8 tópicos (de ~2,1 mil para 6,8 a 9,9 mil caracteres cada): a física por trás de cada sistema, com símbolos e exemplos numéricos:
+    - cilindrada, taxa de compressão, \(P = 	au\omega\), Carnot;
+    - compressão adiabática do Diesel e rendimento do ciclo Otto;
+    - relação de engrenagens e velocidade da roda;
+    - Pascal no freio, \(d = v^2/2\mu g\) e atrito estático × cinético;
+    - Hooke e frequência da suspensão, tombamento e superfície livre;
+    - Ohm, baterias em série e em paralelo, 24 V;
+    - \(Q = mc\Delta T\) no arrefecimento;
+    - lambda e \(pV = nRT\) no turbo e no intercooler.
+    - Cada tópico liga o conteúdo à viatura: TDF, bombeamento parado, freio a ar com molas, GNV e elétricos.
+  - **MAT** foi avaliada e considerada adequada.
+  - **Próximo passo, se o usuário quiser:** os demais tópicos de QUI.
 - **25/10** — **Correção de redação por IA** (Redação › Corrigir uma redação):
   - **Como funciona:** o usuário digita o texto linha a linha como na folha (TL contado sozinho) e escolhe um dos 30 temas ou digita um tema próprio. A função `api/corrigir.ts` da **Vercel** chama o **Gemini**.
   - **Segurança:** a chave fica só no servidor (`GEMINI_API_KEY`); a função confere o login e a aprovação no Supabase.

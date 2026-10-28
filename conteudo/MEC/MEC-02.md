@@ -18,30 +18,86 @@
 
 ## Teoria
 
-### Ciclo Otto
-1. Admissão de mistura ar-combustível (em injeção indireta).
-2. Compressão moderada (taxa limitada para evitar que a mistura se inflame antes da hora).
-3. A **vela** solta a centelha no fim da compressão; a mistura queima e empurra o pistão.
-4. Escape.
-- **Detonação (batida de pino):** queima anormal, espontânea e prematura de parte da mistura, por excesso de compressão ou temperatura, ponto de ignição adiantado ou combustível de **octanagem** inadequada. Danifica pistões e bielas.
-- O **etanol** tem maior resistência à detonação: permite taxas de compressão maiores. Motores **flex** ajustam a injeção e a ignição pelo sensor (sonda lambda).
+### 1. A diferença em uma frase
+- **Otto:** comprime uma **mistura** de ar e combustível e a acende com uma **faísca** (vela de ignição).
+- **Diesel:** comprime **só ar**, tanto que ele fica **quente o bastante** para inflamar o diesel injetado: **ignição por compressão**.
 
-### Ciclo Diesel
-1. Admissão de **ar puro**.
-2. Compressão alta: o ar esquenta muito.
-3. **Injeção** do diesel sob alta pressão, pulverizado pelo bico injetor: **autoignição**.
-4. Escape.
-- Em dias frios, a partida é auxiliada pelas **velas aquecedoras** (de pré-aquecimento), que aquecem a câmara — não produzem centelha.
-- **Vantagens:** maior rendimento térmico (taxa alta), mais torque em baixa rotação, durabilidade. **Desvantagens:** motor mais pesado e caro, mais ruído, emissões de **material particulado** (fumaça preta) e **NOₓ**. Nos diesel modernos, o **ARLA 32** (solução de ureia) é injetado no escapamento para reduzir os óxidos de nitrogênio.
-- Por isso as viaturas pesadas do CBM (autobombas, auto tanques, auto escada) usam, em regra, motor Diesel.
+Todo o resto (taxa de compressão, torque, peso, combustível) decorre disso.
 
-### Combustível errado
-- **Gasolina em motor Diesel:** não tem a lubricidade e a facilidade de autoignição do diesel; pode danificar a bomba injetora e os bicos.
-- **Diesel em motor Otto:** o diesel não vaporiza nem queima adequadamente com a centelha; o motor falha ou não funciona.
-- Não são intercambiáveis.
+### 2. Por que o ar comprimido esquenta (a física do Diesel)
+Quando um gás é comprimido **rápido** (sem tempo de trocar calor, a transformação **adiabática**), o trabalho feito sobre ele vira **energia interna**: a temperatura sobe. É o mesmo efeito que esquenta a bomba de encher pneu de bicicleta.
 
-### Idealização termodinâmica (noção)
-No ciclo Otto ideal, a combustão é tratada como ocorrendo a **volume constante** (rápida, com o pistão no PMS); no Diesel ideal, a **pressão constante** (a queima acompanha a injeção enquanto o pistão desce).
+Para um gás ideal comprimido adiabaticamente pela taxa \(r\):
+\[ T_2 = T_1 \cdot r^{\,\gamma - 1} \]
+- \(T_1\) = temperatura do ar admitido (em **kelvin**); \(T_2\) = temperatura no fim da compressão; \(r\) = taxa de compressão; \(\gamma \approx 1{,}4\) para o ar (razão entre os calores específicos).
+
+**Exemplo Diesel:** ar a 27 °C (300 K), \(r = 16\): \(16^{0{,}4} \approx 3{,}0\) → \(T_2 \approx 900\) K ≈ **630 °C**. A **autoignição** do diesel ocorre bem abaixo disso (≈ 250 °C): ao ser injetado, ele se inflama sozinho.
+
+**Exemplo Otto:** \(r = 9\): \(9^{0{,}4} \approx 2{,}4\) → \(T_2 \approx 720\) K ≈ 450 °C. Na prática, a mistura precisa **não** se inflamar sozinha antes da faísca: por isso a taxa do Otto é **limitada**.
+
+### 3. Comparação completa
+| Característica | **Otto** | **Diesel** |
+|---|---|---|
+| combustível | **gasolina**, **etanol**, GNV (motores **flex** usam gasolina e etanol) | **óleo diesel** (com parcela de **biodiesel**) |
+| o que entra na admissão | **mistura** ar + combustível (injeção indireta) | **só ar** |
+| ignição | **centelha** da **vela de ignição** | **compressão** (autoignição) |
+| taxa de compressão | **menor** (≈ 8 : 1 a 13 : 1) | **maior** (≈ 15 : 1 a 22 : 1) |
+| controle da potência | **borboleta** (acelerador) dosa a **quantidade de mistura** | sem borboleta: dosa-se a **quantidade de diesel injetada** |
+| injeção | baixa pressão, no coletor (ou direta, nos modernos) | **altíssima pressão** (common rail: mais de 1.500 bar), **direto na câmara** |
+| rendimento | menor (≈ 25–35%) | **maior** (≈ 35–45%) |
+| torque | menor em baixa rotação; gira mais alto | **muito torque em baixa rotação** |
+| construção | mais **leve** e barato | mais **pesado** e robusto (aguenta pressões maiores), mais **durável** |
+| emissões típicas | CO e hidrocarbonetos (reduzidos pelo **catalisador**) | **material particulado** (fumaça preta) e **NOₓ** (reduzidos com **ARLA 32** e filtros) |
+| qualidade do combustível | **octanagem** (resistir à detonação) | **cetanagem** (inflamar fácil por compressão) |
+| uso | carros de passeio, motos | **caminhões**, ônibus, **viaturas de bombeiro**, geradores, tratores, navios |
+
+### 4. Por que taxa maior dá rendimento maior
+No **ciclo Otto ideal** (combustão a volume constante), o rendimento depende **só da taxa de compressão**:
+\[ \eta_{Otto} = 1 - \frac{1}{r^{\,\gamma-1}} \]
+| \(r\) | \(r^{0{,}4}\) | \(\eta\) ideal |
+|---|---|---|
+| 8 | ≈ 2,30 | ≈ 56% |
+| 10 | ≈ 2,51 | ≈ 60% |
+| 16 | ≈ 3,03 | ≈ 67% |
+
+Os valores reais são bem menores (atrito, perdas de calor, queima não instantânea), mas a **tendência** vale: **mais compressão → mais rendimento**. Como o Diesel trabalha com taxas mais altas, é mais eficiente e gasta menos combustível pela mesma tarefa.
+
+**Ciclos ideais:** no **Otto**, a combustão é tratada como a **volume constante** (rápida, com o pistão no PMS); no **Diesel**, a **pressão constante** (a queima acompanha a injeção enquanto o pistão desce).
+
+### 5. Detalhes do Otto
+- **Vela de ignição:** recebe alta tensão da **bobina** (MEC-06) e solta a faísca entre seus eletrodos.
+- **Ponto de ignição:** a faísca ocorre um pouco **antes** do PMS, porque a chama leva um tempo para se espalhar; a central eletrônica ajusta o ponto conforme a rotação e a carga.
+- **Detonação ("batida de pino"):** parte da mistura se inflama **sozinha**, antes ou fora da frente de chama, com ondas de pressão que "batem" no pistão. Causas: **octanagem** baixa, compressão ou temperatura altas, ponto adiantado, carvão na câmara. Danifica pistões, bielas e a junta. O **sensor de detonação** faz a central atrasar o ponto.
+- **Octanagem:** resistência à detonação. O **etanol** tem octanagem **maior** que a gasolina, o que permite taxas mais altas (motores a etanol e flex têm taxas maiores).
+- **Motor flex:** a **sonda lambda** e a central identificam a proporção de etanol e ajustam injeção e ignição.
+- **Catalisador:** no escapamento, transforma gases tóxicos (CO, hidrocarbonetos, NOₓ) em CO₂, água e N₂. Trabalha muito **quente**: viatura estacionada sobre **capim seco** pode iniciar incêndio.
+
+### 6. Detalhes do Diesel
+- **Velas aquecedoras** (de pré-aquecimento): aquecem a câmara para a **partida a frio**. **Não produzem faísca** e não participam da combustão normal. É a luz em espiral no painel: espera-se apagar antes de dar a partida.
+- **Bico injetor:** pulveriza o diesel em gotículas finíssimas, para queimar rápido e por completo.
+- **Fumaça preta:** combustível em excesso ou ar insuficiente (filtro de ar sujo, turbo com defeito, bico ruim).
+- **ARLA 32:** solução de **ureia** em água injetada no escapamento; reage com os **NOₓ** e forma N₂ e água. Faltando ARLA, a central reduz a potência.
+- **Cetanagem:** facilidade de autoignição. Diesel de cetanagem baixa demora a inflamar: partida difícil, batida e fumaça.
+
+### 7. Combustível errado
+- **Gasolina no Diesel:** a gasolina **não lubrifica** a bomba e os bicos (o diesel lubrifica) e resiste à autoignição: risco de dano à **bomba injetora**. Não dar a partida; drenar o tanque.
+- **Diesel no Otto:** o diesel **não vaporiza** bem nem queima com a faísca: o motor falha, fuma ou não funciona.
+- **Não são intercambiáveis.**
+
+### 8. Por que a viatura de bombeiro é Diesel
+- **Torque alto em baixa rotação:** arranca carregada (milhares de litros de água, equipamentos, guarnição) e sobe ladeiras.
+- **Rendimento maior:** menos combustível em operação longa de bombeamento.
+- **Robustez e durabilidade** em trabalho pesado e contínuo.
+- O diesel é **menos volátil** que a gasolina (ponto de fulgor muito mais alto: precisa ser aquecido para formar vapores inflamáveis), o que reduz o risco no abastecimento e em acidentes.
+
+### 9. Bizus finais
+- Otto: **mistura + faísca**; Diesel: **ar + compressão**.
+- Diesel: taxa **maior**, rendimento **maior**, **torque** em baixa, mais pesado.
+- \(T_2 = T_1 r^{\gamma-1}\): comprimir esquenta (adiabática).
+- \(\eta_{Otto} = 1 - 1/r^{\gamma-1}\): mais compressão, mais rendimento.
+- Otto: **octanagem**; Diesel: **cetanagem**.
+- Vela **aquecedora** não faz faísca.
+- Gasolina e diesel **não** se trocam.
 
 ## Manias da banca
 
