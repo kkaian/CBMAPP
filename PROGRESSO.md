@@ -86,7 +86,14 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
   - **QUI**, os 15 tópicos restantes (de ~1,5–2,5 mil para 5,5 a 8,7 mil caracteres cada), também com o *porquê* de cada regra e contas resolvidas: massa atômica média, meia-vida, distribuição passo a passo, propriedades periódicas explicadas, Lewis e geometria, forças intermoleculares, Nox, pH, hidrólise, fila de reatividade, fórmulas gerais e balanceamento de combustão.
     - Aplicações ao serviço: classe D, água × equipamento energizado, densidade de gases em relação ao ar (M vs. 29), LII/LSI, pós BC e ABC, espuma AR, backdraft, oxidantes, aramidas.
     - Agora **todas as 18 de QUI** estão no padrão novo.
-  - **Próximo passo, se o usuário quiser:** avaliar INF, PT, CDH e ING (não foram revisadas nesta rodada).
+  - **28/10, segunda rodada** (pedido: "para o resto, mesma coisa"): Teoria reescrita em **INF** (13), **PT** (15), **CDH** (7), **ING** (4), **RLM** (os 8 restantes) e **MAT** (8). Cada tópico tem agora de 5 a 11 mil caracteres.
+    - **INF:** como cada coisa funciona (SO, permissões Linux, referências do Excel, pilha TCP/IP, POP3 × IMAP, nuvem, malware, criptografia, tipos de backup), atalhos e exemplos.
+    - **PT:** regras com o porquê e testes práticos (troca pelo masculino na crase, "isso" nas substantivas, "o qual" nas adjetivas), exemplos resolvidos estilo Cebraspe, redação oficial.
+    - **CDH:** correntes éticas, regras × princípios, LIMPE e improbidade (Lei 8.429 com a 14.230/2021), características e fundamentação dos DH, hierarquia dos tratados, gerações e marcos, art. 37, § 6º, sistema interamericano, IDC.
+    - **ING:** estratégias de leitura, armadilhas, falsos cognatos ampliados, tempos e modais com sentido, conectivos e referência, exemplos resolvidos.
+    - **RLM e MAT:** tabelas-verdade completas, métodos passo a passo e fórmulas deduzidas com exemplos.
+    - KaTeX sem erros e `npm run validar` ok.
+    - **Não mexidas:** **LEG** (a teoria já tem 3 a 7 mil caracteres por tópico e só pode ser ampliada com o texto oficial das leis) e **RED** (já tem modelos, repertório e correção por IA).
 - **25/10** — **Correção de redação por IA** (Redação › Corrigir uma redação):
   - **Como funciona:** o usuário digita o texto linha a linha como na folha (TL contado sozinho) e escolhe um dos 30 temas ou digita um tema próprio. A função `api/corrigir.ts` da **Vercel** chama o **Gemini**.
   - **Segurança:** a chave fica só no servidor (`GEMINI_API_KEY`); a função confere o login e a aprovação no Supabase.
