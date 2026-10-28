@@ -73,7 +73,7 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
   - **BIO**, 22 tópicos (de ~1,4 mil para 6,5 a 10 mil caracteres cada): tabelas comparativas, mecanismos explicados (contração muscular, impulso nervoso, néfron, hematose, coagulação, resposta imune), contas (débito cardíaco, regra dos 9, regra dos 10%, ventilação) e uma seção **"Aplicações ao serviço"** em cada tópico (APH, queimaduras, trauma, CO e fumaça, peçonhentos, enchentes e leptospirose, precauções-padrão).
   - Fórmulas conferidas com KaTeX (0 erros) e `npm run validar` ok.
   - **MEC**, 8 tópicos (de ~2,1 mil para 6,8 a 9,9 mil caracteres cada): a física por trás de cada sistema, com símbolos e exemplos numéricos:
-    - cilindrada, taxa de compressão, \(P = 	au\omega\), Carnot;
+    - cilindrada, taxa de compressão, \(P = \tau\omega\), Carnot;
     - compressão adiabática do Diesel e rendimento do ciclo Otto;
     - relação de engrenagens e velocidade da roda;
     - Pascal no freio, \(d = v^2/2\mu g\) e atrito estático × cinético;
