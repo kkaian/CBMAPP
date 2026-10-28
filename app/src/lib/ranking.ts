@@ -2,7 +2,7 @@ import { calcularConquistas } from './conquistas'
 import { carregarIndice } from './conteudo'
 import { diaLocal, inicioSemana } from './datas'
 import { db, gravarConfig, lerConfig } from './db'
-import { calcularStreak, calcularXp, condecoracoes, diagnosticoPorMateria, diasComEstudo, patente } from './stats'
+import { calcularStreak, condecoracoes, extratoXp, xpDesde, diagnosticoPorMateria, diasComEstudo, patente } from './stats'
 import { supabase } from './supabase'
 
 // Resumo que cada pessoa publica para os colegas verem (tabela "ranking").
@@ -46,7 +46,9 @@ export async function montarResumo(): Promise<ResumoPublico> {
   const daSemana = <T extends { criadaEm: string }>(xs: T[]) => xs.filter((x) => diaLocal(new Date(x.criadaEm)) >= semana)
   const respSemana = daSemana(respostas)
   const julgadasSemana = respSemana.filter((r) => r.correta !== null)
-  const xp = calcularXp(respostas, leituras)
+  const redacoes = await db.redacoes.toArray()
+  const extrato = extratoXp({ respostas, leituras, simulados, redacoes })
+  const xp = extrato.total
   const p = patente(xp)
   const diag = diagnosticoPorMateria(respostas)
   const conquistas = calcularConquistas({ ind, respostas, leituras, revisoes, simulados }).flatMap((g) => g.itens)
@@ -56,7 +58,7 @@ export async function montarResumo(): Promise<ResumoPublico> {
   return {
     versao: 1,
     xp,
-    xpSemana: calcularXp(respSemana, daSemana(leituras)),
+    xpSemana: Math.max(0, xpDesde(extrato, semana)),
     patente: p.nome,
     nivel: p.nivel,
     condecoracoes: condecoracoes(xp).obtidas.length,

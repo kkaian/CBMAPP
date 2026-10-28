@@ -149,12 +149,91 @@ export function situacaoLeitura(topico: string, leituras: RegistroLeitura[], res
   return doTopico[doTopico.length - 1] ?? null
 }
 
-// XP: acerto 10, erro 2, branco 1, leitura validada 10. O acerto é o que mais pesa.
-export const REGRA_XP = 'XP: acerto 10, erro 2, branco 1, leitura 10 (a leitura só conta depois de 10 acertos no tópico). Coronel aos 50.000 XP (≈ 5.000 acertos); depois disso vêm as condecorações.'
-export function calcularXp(respostas: RegistroResposta[], leituras: RegistroLeitura[]): number {
-  let xp = leiturasValidas(leituras, respostas).length * 10
-  for (const r of respostas) xp += r.resposta === 'B' ? 1 : r.correta === 1 ? 10 : 2
-  return xp
+// ---------- XP ----------
+// Base de cada tarefa: acerto 10, erro 2, branco 1, leitura confirmada 10, simulado entregue 100
+// (completo, 120 itens) ou 30 (os menores), redação corrigida 150.
+// O XP de cada dia é multiplicado pela sequência de dias de estudo daquele dia: ×0,4 no 1º dia,
+// +0,1 por dia, até ×1,0 a partir do 7º, e fica no máximo enquanto a sequência continuar.
+// Perder a sequência custa 30 XP por dia da sequência perdida (no máximo 300).
+export const XP_BASE = { acerto: 10, erro: 2, branco: 1, leitura: 10, simuladoCompleto: 100, simulado: 30, redacao: 150 }
+export const DIAS_PARA_XP_MAXIMO = 7
+export const REGRA_XP = 'XP por tarefa: acerto 10, erro 2, branco 1, leitura confirmada 10, simulado completo 100 (menores 30), redação corrigida 150. Tudo multiplicado pela sequência do dia: ×0,4 no 1º dia, +0,1 por dia, ×1,0 a partir do 7º. Perder a sequência custa 30 XP por dia dela (máx. 300). Coronel aos 50.000 XP; depois vêm as condecorações.'
+
+export function multiplicadorSequencia(dias: number): number {
+  if (dias <= 0) return 0.4
+  return Math.min(1, 0.4 + 0.1 * (dias - 1))
+}
+
+export function penalidadeQuebra(diasPerdidos: number): number {
+  return Math.min(300, 30 * diasPerdidos)
+}
+
+export interface DadosXp {
+  respostas: RegistroResposta[]
+  leituras: RegistroLeitura[]
+  simulados?: RegistroSimulado[]
+  redacoes?: RegistroRedacao[]
+}
+
+export interface ExtratoXp {
+  total: number
+  porDia: Record<string, number> // ganho líquido do dia (já com multiplicador e penalidades)
+  penalidades: { dia: string; diasPerdidos: number; xp: number }[]
+  sequenciaAtual: number // dias seguidos já feitos (como no contador 🔥)
+  sequenciaHoje: number
+  multiplicadorHoje: number // o que vale estudar hoje (conta o dia de hoje na sequência)
+  emRisco: number // quanto se perde se a sequência atual quebrar
+}
+
+export function extratoXp({ respostas, leituras, simulados = [], redacoes = [] }: DadosXp, hoje = diaLocal()): ExtratoXp {
+  const base: Record<string, number> = {}
+  const somar = (iso: string, v: number) => { const d = diaLocal(new Date(iso)); base[d] = (base[d] ?? 0) + v }
+  for (const r of respostas) somar(r.criadaEm, r.resposta === 'B' ? XP_BASE.branco : r.correta === 1 ? XP_BASE.acerto : XP_BASE.erro)
+  for (const l of leiturasValidas(leituras, respostas)) somar(l.criadaEm, XP_BASE.leitura)
+  for (const x of simulados) if (x.status === 'concluido' && x.concluidoEm) somar(x.concluidoEm, x.itens.length >= 120 ? XP_BASE.simuladoCompleto : XP_BASE.simulado)
+  for (const x of redacoes) if (!x.excluida && x.npd !== null) somar(x.atualizadaEm ?? x.criadaEm, XP_BASE.redacao)
+
+  const estudo = diasComEstudo(respostas)
+  const dias = [...new Set([...estudo, ...Object.keys(base)])].sort()
+  const seq: Record<string, number> = {}
+  for (const d of estudo) seq[d] = calcularStreak(estudo, d).dias
+
+  const porDia: Record<string, number> = {}
+  const penalidades: ExtratoXp['penalidades'] = []
+  let total = 0
+  let anterior: string | null = null
+  for (const d of dias) {
+    let ganho = Math.round((base[d] ?? 0) * multiplicadorSequencia(seq[d] ?? 0))
+    if (estudo.has(d)) {
+      if (anterior && seq[d] === 1) {
+        const p = penalidadeQuebra(seq[anterior])
+        penalidades.push({ dia: d, diasPerdidos: seq[anterior], xp: p })
+        ganho -= p
+      }
+      anterior = d
+    }
+    porDia[d] = ganho
+    total = Math.max(0, total + ganho)
+  }
+  // sequência já perdida sem volta: dois ou mais dias seguidos sem estudo antes de hoje
+  if (anterior && anterior < somarDias(hoje, -2) && !estudo.has(hoje)) {
+    const p = penalidadeQuebra(seq[anterior])
+    penalidades.push({ dia: hoje, diasPerdidos: seq[anterior], xp: p })
+    porDia[hoje] = (porDia[hoje] ?? 0) - p
+    total = Math.max(0, total - p)
+  }
+
+  const atual = calcularStreak(estudo, hoje).dias
+  const sequenciaHoje = estudo.has(hoje) ? atual : atual + 1
+  return { total, porDia, penalidades, sequenciaAtual: atual, sequenciaHoje, multiplicadorHoje: multiplicadorSequencia(sequenciaHoje), emRisco: atual ? penalidadeQuebra(atual) : 0 }
+}
+
+export function calcularXp(dados: DadosXp): number {
+  return extratoXp(dados).total
+}
+
+export function xpDesde(extrato: ExtratoXp, dia: string): number {
+  return Object.entries(extrato.porDia).filter(([d]) => d >= dia).reduce((s, [, v]) => s + v, 0)
 }
 
 export function patente(xp: number) {

@@ -7,7 +7,7 @@ import { db, gravarConfig, lerConfig } from '../lib/db'
 import { calcularConquistas } from '../lib/conquistas'
 import { definirVisivel } from '../lib/ranking'
 import { modoLocal } from '../lib/supabase'
-import { PATENTES, REGRA_XP, calcularXp, condecoracoes, patente } from '../lib/stats'
+import { PATENTES, REGRA_XP, condecoracoes, extratoXp, patente } from '../lib/stats'
 import { useLeituras, useMetaDiaria, useRespostas, useRevisoes } from '../lib/useDados'
 
 export default function Perfil() {
@@ -20,10 +20,12 @@ export default function Perfil() {
   const visivel = useLiveQuery(() => lerConfig<boolean>('ranking.visivel', true), [])
   const [mudando, setMudando] = useState(false)
   const nav = useNavigate()
+  const redacoes = useLiveQuery(() => db.redacoes.toArray(), [])
   const reportes = useLiveQuery(() => lerConfig<{ itemId: string; motivo: string; em: string }[]>('reportes', []), [])
   if (!ind || !respostas || !leituras || !revisoes) return <Carregando />
 
-  const xp = calcularXp(respostas, leituras)
+  const ext = extratoXp({ respostas, leituras, simulados: simulados ?? [], redacoes: redacoes ?? [] })
+  const xp = ext.total
   const p = patente(xp)
   const cond = condecoracoes(xp)
   const anterior = cond.obtidas.length ? cond.obtidas[cond.obtidas.length - 1].xp : PATENTES[PATENTES.length - 1][1]
@@ -39,12 +41,14 @@ export default function Perfil() {
         <div className="my-2"><Barra valor={p.proximaXp ? (xp - p.base) / (p.proximaXp - p.base) : (xp - anterior) / (cond.proxima.xp - anterior)} cor="yellow" /></div>
         <div className="text-suave text-xs mb-2">
           {p.proximaXp
-            ? <>Faltam {(p.proximaXp - xp).toLocaleString('pt-BR')} XP para <b className="text-texto">{p.proximaNome}</b> (≈ {Math.ceil((p.proximaXp - xp) / 10).toLocaleString('pt-BR')} acertos).</>
+            ? <>Faltam {(p.proximaXp - xp).toLocaleString('pt-BR')} XP para <b className="text-texto">{p.proximaNome}</b> (≈ {Math.ceil((p.proximaXp - xp) / (10 * ext.multiplicadorHoje)).toLocaleString('pt-BR')} acertos no ritmo de hoje).</>
             : <>Próxima condecoração: {cond.proxima.icone} <b className="text-texto">{cond.proxima.nome}</b>, faltam {(cond.proxima.xp - xp).toLocaleString('pt-BR')} XP.</>}
         </div>
         <div className="text-suave text-[12px] leading-relaxed">
           {PATENTES.map(([n], i) => <span key={n} className={i === p.nivel ? 'text-texto font-bold' : ''}>{n}{i < PATENTES.length - 1 ? ' → ' : ''}</span>)}
         </div>
+        <div className="text-sm mt-2">🔥 Sequência: <b>{ext.sequenciaAtual} {ext.sequenciaAtual === 1 ? 'dia' : 'dias'}</b> · XP de hoje vale <b>×{ext.multiplicadorHoje.toLocaleString('pt-BR', { minimumFractionDigits: 1 })}</b>{ext.emRisco ? ` · em risco: ${ext.emRisco} XP` : ''}</div>
+        {ext.penalidades.length > 0 && <div className="text-suave text-xs mt-1">Sequências perdidas: {ext.penalidades.length} (−{ext.penalidades.reduce((t, p) => t + p.xp, 0).toLocaleString('pt-BR')} XP no total)</div>}
         <div className="text-suave text-xs mt-2">{REGRA_XP}</div>
       </Card>
 
