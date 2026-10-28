@@ -4,7 +4,7 @@
 > Prova: **26/01/2027**. App no ar: **https://cbmapp-sand.vercel.app**
 > Ao retomar: leia este arquivo e `docs/PROJETO.md`; regras em `CLAUDE.md`.
 
-## Estado atual (24/10/2026)
+## Estado atual (28/10/2026)
 
 ### Infraestrutura — pronta
 | Peça | Situação |
@@ -67,6 +67,13 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 - [ ] (Recomendado) a chave do Gemini foi colada na conversa: se quiser, gere outra no AI Studio e troque em Vercel › Settings › Environment Variables (`GEMINI_API_KEY`).
 
 ## Histórico resumido
+- **25–28/10** — **Teoria aprofundada** (pedido: "física bem raso… quero realmente conteúdo para estudar"). Só a seção **Teoria** foi reescrita; o Resumo, as Manias da banca e as questões ficaram iguais.
+  - **FIS**, 22 tópicos (de ~2,6 mil para 5 a 9 mil caracteres cada): cada fórmula vem com o significado e a unidade de cada símbolo, de onde vem, exemplos resolvidos e bizus.
+  - **QUI-02/11/12** (mol, estequiometria, concentração) e **RLM-08/09/11** (contagem, probabilidade, estatística): mesmo padrão, com roteiros de resolução.
+  - **BIO**, 22 tópicos (de ~1,4 mil para 6,5 a 10 mil caracteres cada): tabelas comparativas, mecanismos explicados (contração muscular, impulso nervoso, néfron, hematose, coagulação, resposta imune), contas (débito cardíaco, regra dos 9, regra dos 10%, ventilação) e uma seção **"Aplicações ao serviço"** em cada tópico (APH, queimaduras, trauma, CO e fumaça, peçonhentos, enchentes e leptospirose, precauções-padrão).
+  - Fórmulas conferidas com KaTeX (0 erros) e `npm run validar` ok.
+  - **MAT** foi avaliada e considerada adequada. **MEC** (~2,1 mil caracteres por tópico, mais conceitual) não foi mexida.
+  - **Próximo passo, se o usuário quiser:** MEC e os demais tópicos de QUI.
 - **25/10** — **Correção de redação por IA** (Redação › Corrigir uma redação):
   - **Como funciona:** o usuário digita o texto linha a linha como na folha (TL contado sozinho) e escolhe um dos 30 temas ou digita um tema próprio. A função `api/corrigir.ts` da **Vercel** chama o **Gemini**.
   - **Segurança:** a chave fica só no servidor (`GEMINI_API_KEY`); a função confere o login e a aprovação no Supabase.
