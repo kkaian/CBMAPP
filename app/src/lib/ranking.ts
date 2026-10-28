@@ -2,7 +2,7 @@ import { calcularConquistas } from './conquistas'
 import { carregarIndice } from './conteudo'
 import { diaLocal, inicioSemana } from './datas'
 import { db, gravarConfig, lerConfig } from './db'
-import { calcularStreak, calcularXp, diagnosticoPorMateria, diasComEstudo, patente } from './stats'
+import { calcularStreak, calcularXp, condecoracoes, diagnosticoPorMateria, diasComEstudo, patente } from './stats'
 import { supabase } from './supabase'
 
 // Resumo que cada pessoa publica para os colegas verem (tabela "ranking").
@@ -13,6 +13,7 @@ export interface ResumoPublico {
   xpSemana: number
   patente: string
   nivel: number
+  condecoracoes?: number
   streak: number
   diasEstudo: number
   itens: number
@@ -58,6 +59,7 @@ export async function montarResumo(): Promise<ResumoPublico> {
     xpSemana: calcularXp(respSemana, daSemana(leituras)),
     patente: p.nome,
     nivel: p.nivel,
+    condecoracoes: condecoracoes(xp).obtidas.length,
     streak: calcularStreak(diasComEstudo(respostas)).dias,
     diasEstudo: diasComEstudo(respostas).size,
     itens: respostas.length,

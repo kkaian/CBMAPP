@@ -4,7 +4,7 @@ import { CardInstalar } from '../components/Extras'
 import { Anel, Botao, Card, Carregando, Pill, Secao } from '../components/ui'
 import { acharTopico, useIndice } from '../lib/conteudo'
 import { diaLocal, diasEntre, formatarDia } from '../lib/datas'
-import { calcularStreak, calcularXp, diasComEstudo, montarMissao, patente } from '../lib/stats'
+import { calcularStreak, calcularXp, condecoracoes, diasComEstudo, montarMissao, patente } from '../lib/stats'
 import { useLeituras, useMetaDiaria, useRespostas, useRevisoes } from '../lib/useDados'
 
 function saudacao() {
@@ -29,6 +29,7 @@ export default function Inicio() {
   const streak = calcularStreak(diasComEstudo(respostas))
   const xp = calcularXp(respostas, leituras)
   const pat = patente(xp)
+  const cond = condecoracoes(xp)
   const m = montarMissao(ind, respostas, revisoes, leituras, meta)
   const foco = m.focoTopico ? acharTopico(ind, m.focoTopico) : null
   const leitura = m.leituraTopico ? acharTopico(ind, m.leituraTopico) : null
@@ -51,7 +52,9 @@ export default function Inicio() {
           <div className="text-suave text-sm">até a prova · {ind.edital.dataProva.split('-').reverse().join('/')}</div>
           <div className="text-sm mt-1.5">
             Patente: <b>{pat.nome}</b> · {xp.toLocaleString('pt-BR')} XP
-            {pat.proximaXp && <div className="text-suave">faltam {(pat.proximaXp - xp).toLocaleString('pt-BR')} XP para {pat.proximaNome}</div>}
+            {pat.proximaXp
+              ? <div className="text-suave">faltam {(pat.proximaXp - xp).toLocaleString('pt-BR')} XP para {pat.proximaNome}</div>
+              : <div className="text-suave">{cond.obtidas.length ? `${cond.obtidas.map((c) => c.icone).join('')} · ` : ''}próxima: {cond.proxima.nome}</div>}
           </div>
         </div>
       </Card>

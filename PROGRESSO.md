@@ -67,6 +67,15 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 - [ ] (Recomendado) a chave do Gemini foi colada na conversa: se quiser, gere outra no AI Studio e troque em Vercel › Settings › Environment Variables (`GEMINI_API_KEY`).
 
 ## Histórico resumido
+- **28/10** — **Quantidade de itens regulável e nova escala de patentes:**
+  - No tópico e na matéria, um seletor define quantos itens treinar: 5, 10, 20, 30, 50, "Todos" ou um número digitado. A última escolha fica guardada no aparelho (`app/src/components/Quantidade.tsx`).
+  - **XP refeito para premiar o acerto:** acerto 10, erro 2, branco 1, leitura 10 (antes: 10 por item respondido, mais bônus). O XP de todos foi recalculado com a regra nova, inclusive no ranking.
+  - **Patentes:** Coronel aos **50.000 XP** (≈ 5.000 acertos), com 13 patentes progressivas (Cabo 1.000 … Tenente-Coronel 40.000).
+  - **Condecorações** depois de Coronel, todas em `stats.ts` (`condecoracoes`):
+    - 9 fixas, de 55.000 XP (Medalha do Mérito · Bronze) a 200.000 XP (Grã-Cruz do Mérito);
+    - depois, uma Estrela de Honra a cada 50.000 XP.
+    - Aparecem no Perfil, na Início, no ranking e no perfil dos colegas (campo opcional `condecoracoes` no resumo público).
+  - Testado no modo local com 6.300 acertos de teste, depois apagados: Coronel, 2 condecorações e a próxima indicada.
 - **25–28/10** — **Teoria aprofundada** (pedido: "física bem raso… quero realmente conteúdo para estudar"). Só a seção **Teoria** foi reescrita; o Resumo, as Manias da banca e as questões ficaram iguais.
   - **FIS**, 22 tópicos (de ~2,6 mil para 5 a 9 mil caracteres cada): cada fórmula vem com o significado e a unidade de cada símbolo, de onde vem, exemplos resolvidos e bizus.
   - **QUI-02/11/12** (mol, estequiometria, concentração) e **RLM-08/09/11** (contagem, probabilidade, estatística): mesmo padrão, com roteiros de resolução.

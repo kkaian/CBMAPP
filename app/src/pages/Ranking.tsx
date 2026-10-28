@@ -4,7 +4,7 @@ import { Barra, Cabecalho, Card, Carregando, Pill, Secao, pct } from '../compone
 import { useIndice } from '../lib/conteudo'
 import { diaLocal, inicioSemana } from '../lib/datas'
 import { buscarRanking, publicarResumo, type LinhaRanking } from '../lib/ranking'
-import { PATENTES } from '../lib/stats'
+import { PATENTES, condecoracao } from '../lib/stats'
 import { modoLocal, supabase } from '../lib/supabase'
 
 type Estado = { linhas: LinhaRanking[]; eu: string | null } | { erro: string }
@@ -78,7 +78,7 @@ export default function Ranking() {
             <div className="w-8 text-center text-xl">{MEDALHAS[i] ?? <span className="text-suave text-base">{i + 1}º</span>}</div>
             <div className="flex-1 min-w-0">
               <div className="truncate"><b>{l.usuario}</b>{souEu && <span className="text-suave"> (você)</span>}</div>
-              <div className="text-suave text-[12px]">{l.dados.patente} · 🔥 {l.dados.streak} · {itensSemana(l)} itens na semana</div>
+              <div className="text-suave text-[12px]">{l.dados.patente}{l.dados.condecoracoes ? ` ${condecoracao(l.dados.condecoracoes - 1).icone}×${l.dados.condecoracoes}` : ''} · 🔥 {l.dados.streak} · {itensSemana(l)} itens na semana</div>
             </div>
             <div className="text-right">
               <div className="font-bold">{valor(l).toLocaleString('pt-BR')}</div>
@@ -114,6 +114,12 @@ export function PerfilColega() {
       <Card>
         <div className="flex justify-between"><b>{d.patente}</b><span className="text-suave text-sm">{d.xp.toLocaleString('pt-BR')}{prox ? ` / ${prox[1].toLocaleString('pt-BR')}` : ''} XP</span></div>
         <div className="mt-2"><Barra valor={prox ? (d.xp - base) / (prox[1] - base) : 1} cor="yellow" /></div>
+        {!!d.condecoracoes && (
+          <div className="text-sm mt-2">
+            {Array.from({ length: d.condecoracoes }, (_, k) => condecoracao(k)).map((c) => <span key={c.nome} title={c.nome} className="mr-1">{c.icone}</span>)}
+            <span className="text-suave text-xs"> · {d.condecoracoes} {d.condecoracoes === 1 ? 'condecoração' : 'condecorações'}</span>
+          </div>
+        )}
       </Card>
 
       <Secao>{eu ? `Comparando com você` : 'Números'}</Secao>

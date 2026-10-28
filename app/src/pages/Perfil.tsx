@@ -7,7 +7,7 @@ import { db, gravarConfig, lerConfig } from '../lib/db'
 import { calcularConquistas } from '../lib/conquistas'
 import { definirVisivel } from '../lib/ranking'
 import { modoLocal } from '../lib/supabase'
-import { PATENTES, calcularXp, patente } from '../lib/stats'
+import { PATENTES, REGRA_XP, calcularXp, condecoracoes, patente } from '../lib/stats'
 import { useLeituras, useMetaDiaria, useRespostas, useRevisoes } from '../lib/useDados'
 
 export default function Perfil() {
@@ -25,6 +25,8 @@ export default function Perfil() {
 
   const xp = calcularXp(respostas, leituras)
   const p = patente(xp)
+  const cond = condecoracoes(xp)
+  const anterior = cond.obtidas.length ? cond.obtidas[cond.obtidas.length - 1].xp : PATENTES[PATENTES.length - 1][1]
   const grupos = calcularConquistas({ ind, respostas, leituras, revisoes, simulados: simulados ?? [] })
   const conquistas = grupos.flatMap((g) => g.itens)
 
@@ -33,12 +35,36 @@ export default function Perfil() {
       <Cabecalho titulo="Perfil" />
       {!modoLocal && <Card onClick={() => nav('/ranking')} className="flex justify-between items-center text-sm"><span>🏆 <b>Ranking</b> <span className="text-suave">· XP da semana e perfil dos colegas</span></span><span className="text-suave">›</span></Card>}
       <Card>
-        <div className="flex justify-between"><b>{p.nome}</b><span className="text-suave text-sm">{xp.toLocaleString('pt-BR')}{p.proximaXp ? ` / ${p.proximaXp.toLocaleString('pt-BR')}` : ''} XP</span></div>
-        <div className="my-2"><Barra valor={p.proximaXp ? (xp - p.base) / (p.proximaXp - p.base) : 1} cor="yellow" /></div>
+        <div className="flex justify-between"><b>{p.nome}</b><span className="text-suave text-sm">{xp.toLocaleString('pt-BR')} / {(p.proximaXp ?? cond.proxima.xp).toLocaleString('pt-BR')} XP</span></div>
+        <div className="my-2"><Barra valor={p.proximaXp ? (xp - p.base) / (p.proximaXp - p.base) : (xp - anterior) / (cond.proxima.xp - anterior)} cor="yellow" /></div>
+        <div className="text-suave text-xs mb-2">
+          {p.proximaXp
+            ? <>Faltam {(p.proximaXp - xp).toLocaleString('pt-BR')} XP para <b className="text-texto">{p.proximaNome}</b> (≈ {Math.ceil((p.proximaXp - xp) / 10).toLocaleString('pt-BR')} acertos).</>
+            : <>Próxima condecoração: {cond.proxima.icone} <b className="text-texto">{cond.proxima.nome}</b>, faltam {(cond.proxima.xp - xp).toLocaleString('pt-BR')} XP.</>}
+        </div>
         <div className="text-suave text-[12px] leading-relaxed">
           {PATENTES.map(([n], i) => <span key={n} className={i === p.nivel ? 'text-texto font-bold' : ''}>{n}{i < PATENTES.length - 1 ? ' → ' : ''}</span>)}
         </div>
-        <div className="text-suave text-xs mt-2">XP: 10 por item (branco 4), +5 por acerto com certeza, +3 por revisão, 20 por leitura.</div>
+        <div className="text-suave text-xs mt-2">{REGRA_XP}</div>
+      </Card>
+
+      <Secao>Condecorações · {cond.obtidas.length}</Secao>
+      <Card>
+        {cond.obtidas.length ? (
+          <div className="grid grid-cols-3 gap-2 mb-2">
+            {cond.obtidas.map((c) => (
+              <div key={c.nome} className="bg-card2 rounded-xl p-2 text-center">
+                <div className="text-2xl">{c.icone}</div>
+                <div className="text-[10px] leading-tight mt-1">{c.nome}</div>
+              </div>
+            ))}
+          </div>
+        ) : null}
+        <div className="text-suave text-xs">
+          {p.proximaXp
+            ? <>As condecorações começam depois de Coronel: a primeira, {condecoracoes(0).proxima.icone} {condecoracoes(0).proxima.nome}, vem aos {condecoracoes(0).proxima.xp.toLocaleString('pt-BR')} XP.</>
+            : <>Próxima: {cond.proxima.icone} {cond.proxima.nome} aos {cond.proxima.xp.toLocaleString('pt-BR')} XP.</>}
+        </div>
       </Card>
 
       <Secao>Conquistas · {conquistas.filter((c) => c.ok).length}/{conquistas.length}</Secao>

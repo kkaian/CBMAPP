@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Rico } from '../components/Rico'
+import { EscolherQuantidade, useQuantidade } from '../components/Quantidade'
 import { Botao, Cabecalho, Card, Carregando, Pill, StatusPill } from '../components/ui'
 import { acharTopico, carregarMateria, materiaDoTopico, useAsync, useIndice } from '../lib/conteudo'
 import { diaLocal } from '../lib/datas'
@@ -17,6 +18,7 @@ export default function Topico() {
   const respostas = useRespostas()
   const leituras = useLeituras()
   const [aba, setAba] = useState<Aba | null>(null)
+  const [qtd, setQtd] = useQuantidade()
 
   if (!ind || !mat || !respostas || !leituras) return <Carregando />
   const info = acharTopico(ind, cod)
@@ -79,8 +81,8 @@ export default function Topico() {
       {abaAtual === 'questoes' && (
         itens.length ? (
           <div className="space-y-2">
-            <Botao to={`/quiz?modo=topico&t=${cod}&n=10`}>Responder 10 itens</Botao>
-            {itens.length > 10 && <Botao variante="secundario" to={`/quiz?modo=topico&t=${cod}&n=${itens.length}`}>Todos os {itens.length} itens</Botao>}
+            <EscolherQuantidade max={itens.length} valor={Math.min(qtd, itens.length)} onChange={setQtd} />
+            <Botao to={`/quiz?modo=topico&t=${cod}&n=${Math.min(qtd, itens.length)}`}>Responder {Math.min(qtd, itens.length)} {Math.min(qtd, itens.length) === 1 ? 'item' : 'itens'}</Botao>
             <div className="text-suave text-xs text-center pt-1">Primeiro os nunca respondidos, depois os que você errou.</div>
           </div>
         ) : (

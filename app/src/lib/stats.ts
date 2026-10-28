@@ -108,20 +108,18 @@ export function respostasDoDia(respostas: RegistroResposta[], dia = diaLocal()) 
   return respostas.filter((r) => diaLocal(new Date(r.criadaEm)) === dia)
 }
 
+// Patentes: Coronel com 50.000 XP, o que dá cerca de 5.000 acertos (cada acerto vale 10).
 export const PATENTES: [string, number][] = [
-  ['Soldado', 0], ['Cabo', 800], ['3º Sargento', 2000], ['2º Sargento', 3500], ['1º Sargento', 5500],
-  ['Subtenente', 8000], ['Aspirante', 11000], ['2º Tenente', 14500], ['1º Tenente', 18500], ['Capitão', 23000],
-  ['Major', 28000], ['Tenente-Coronel', 34000], ['Coronel', 41000],
+  ['Soldado', 0], ['Cabo', 1000], ['3º Sargento', 2500], ['2º Sargento', 4500], ['1º Sargento', 7000],
+  ['Subtenente', 10000], ['Aspirante', 13500], ['2º Tenente', 17500], ['1º Tenente', 22000], ['Capitão', 27000],
+  ['Major', 33000], ['Tenente-Coronel', 40000], ['Coronel', 50000],
 ]
 
-// XP: 10 por item respondido (branco vale 4), +5 por acerto com certeza, +3 por item de revisão; leitura vale 20.
+// XP: acerto 10, erro 2, branco 1, leitura de resumo/teoria 10. O acerto é o que mais pesa.
+export const REGRA_XP = 'XP: acerto 10, erro 2, branco 1, leitura 10. Coronel aos 50.000 XP (≈ 5.000 acertos); depois disso vêm as condecorações.'
 export function calcularXp(respostas: RegistroResposta[], leituras: RegistroLeitura[]): number {
-  let xp = leituras.length * 20
-  for (const r of respostas) {
-    xp += r.resposta === 'B' ? 4 : 10
-    if (r.correta === 1 && r.confianca === 'certeza') xp += 5
-    if (r.modo === 'revisao') xp += 3
-  }
+  let xp = leituras.length * 10
+  for (const r of respostas) xp += r.resposta === 'B' ? 1 : r.correta === 1 ? 10 : 2
   return xp
 }
 
@@ -131,6 +129,34 @@ export function patente(xp: number) {
   const [nome, base] = PATENTES[i]
   const proxima = PATENTES[i + 1]
   return { nome, nivel: i, base, proximaNome: proxima?.[0] ?? null, proximaXp: proxima?.[1] ?? null }
+}
+
+// Condecorações: para quem passa de Coronel. A lista fixa vai até 200.000 XP;
+// depois, uma Estrela de Honra a cada 50.000 XP.
+export interface Condecoracao { icone: string; nome: string; xp: number }
+const CONDECORACOES_FIXAS: Condecoracao[] = [
+  { icone: '🥉', nome: 'Medalha do Mérito · Bronze', xp: 55000 },
+  { icone: '🥈', nome: 'Medalha do Mérito · Prata', xp: 62500 },
+  { icone: '🥇', nome: 'Medalha do Mérito · Ouro', xp: 70000 },
+  { icone: '🎖️', nome: 'Cruz do Mérito Operacional', xp: 80000 },
+  { icone: '🏅', nome: 'Medalha Bombeiro Padrão', xp: 90000 },
+  { icone: '⭐', nome: 'Ordem do Mérito · Cavaleiro', xp: 100000 },
+  { icone: '✨', nome: 'Ordem do Mérito · Oficial', xp: 120000 },
+  { icone: '🌟', nome: 'Ordem do Mérito · Comendador', xp: 150000 },
+  { icone: '👑', nome: 'Grã-Cruz do Mérito', xp: 200000 },
+]
+
+export function condecoracao(n: number): Condecoracao {
+  if (n < CONDECORACOES_FIXAS.length) return CONDECORACOES_FIXAS[n]
+  const k = n - CONDECORACOES_FIXAS.length + 1
+  return { icone: '💫', nome: `Estrela de Honra nº ${k}`, xp: 200000 + 50000 * k }
+}
+
+export function condecoracoes(xp: number) {
+  const obtidas: Condecoracao[] = []
+  let n = 0
+  while (xp >= condecoracao(n).xp) obtidas.push(condecoracao(n++))
+  return { obtidas, proxima: condecoracao(n) }
 }
 
 // ---------- inteligência Cebraspe ----------
