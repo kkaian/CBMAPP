@@ -349,7 +349,7 @@ export function materiasDaSemana(respostas: RegistroResposta[], hoje = diaLocal(
   return c
 }
 
-// Metas mensais: 1 simulado completo (120 itens) e 1 redação corrigida por mês.
+// Metas mensais: 1 simulado completo (120 itens), 1 redação corrigida e 1 trilha de revisão por mês.
 // São cumulativas: o mês não cumprido fica pendente e soma com o seguinte. Fazer mais de um num mês
 // quita pendências antigas, mas não adianta meses futuros. A contagem começa no mês do primeiro estudo.
 export interface MetaMensal { feitosNoMes: number; pendentes: number; desde: string }
@@ -383,7 +383,14 @@ export function metasMensais(respostas: RegistroResposta[], simulados: RegistroS
   const inicio = primeiro && mesDe(primeiro) < atual ? mesDe(primeiro) : atual
   const sims = simulados.filter((x) => x.status === 'concluido' && x.itens.length >= 120 && x.concluidoEm).map((x) => x.concluidoEm!)
   const reds = redacoes.filter((x) => !x.excluida && x.npd !== null).map((x) => x.criadaEm)
-  return { simulado: metaCumulativa(sims, inicio, atual), redacao: metaCumulativa(reds, inicio, atual) }
+  return { simulado: metaCumulativa(sims, inicio, atual), redacao: metaCumulativa(reds, inicio, atual), revisao: metaCumulativa(trilhasConcluidas(respostas), inicio, atual) }
+}
+
+// Uma trilha de revisão conta como feita a cada 30 respostas no modo trilha (a data é a da 30ª).
+export const ITENS_POR_TRILHA = 30
+export function trilhasConcluidas(respostas: RegistroResposta[]): string[] {
+  const datas = respostas.filter((r) => r.modo === 'trilha').map((r) => r.criadaEm).sort()
+  return datas.filter((_, i) => (i + 1) % ITENS_POR_TRILHA === 0)
 }
 
 export interface Missao {

@@ -51,7 +51,7 @@ export async function montarResumo(): Promise<ResumoPublico> {
   const xp = extrato.total
   const p = patente(xp)
   const diag = diagnosticoPorMateria(respostas)
-  const conquistas = calcularConquistas({ ind, respostas, leituras, revisoes, simulados }).flatMap((g) => g.itens)
+  const conquistas = calcularConquistas({ ind, respostas, leituras, revisoes, simulados, redacoes }).flatMap((g) => g.itens)
   const completos = simulados.filter((s) => s.itens.length >= 120 && s.resumo)
   const ultimo = simulados[simulados.length - 1]
 

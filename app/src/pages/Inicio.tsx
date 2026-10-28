@@ -87,6 +87,11 @@ export default function Inicio() {
       onClick: () => nav('/simulados'),
     },
     {
+      chave: 'trilha', periodo: 'mes', feita: mensais.revisao.pendentes === 0,
+      titulo: `1 trilha de revisão · ${mesNome}`, sub: subMes(mensais.revisao, 'trilha', 'trilhas'),
+      onClick: () => nav('/trilha'),
+    },
+    {
       chave: 'redacao', periodo: 'mes', feita: mensais.redacao.pendentes === 0,
       titulo: `1 redação corrigida · ${mesNome}`, sub: subMes(mensais.redacao, 'redação', 'redações'),
       onClick: () => nav('/redacao/escrever'),

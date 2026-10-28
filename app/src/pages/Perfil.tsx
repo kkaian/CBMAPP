@@ -29,7 +29,7 @@ export default function Perfil() {
   const p = patente(xp)
   const cond = condecoracoes(xp)
   const anterior = cond.obtidas.length ? cond.obtidas[cond.obtidas.length - 1].xp : PATENTES[PATENTES.length - 1][1]
-  const grupos = calcularConquistas({ ind, respostas, leituras, revisoes, simulados: simulados ?? [] })
+  const grupos = calcularConquistas({ ind, respostas, leituras, revisoes, simulados: simulados ?? [], redacoes: redacoes ?? [] })
   const conquistas = grupos.flatMap((g) => g.itens)
 
   return (
