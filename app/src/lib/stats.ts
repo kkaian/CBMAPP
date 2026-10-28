@@ -115,10 +115,44 @@ export const PATENTES: [string, number][] = [
   ['Major', 33000], ['Tenente-Coronel', 40000], ['Coronel', 50000],
 ]
 
-// XP: acerto 10, erro 2, branco 1, leitura de resumo/teoria 10. O acerto é o que mais pesa.
-export const REGRA_XP = 'XP: acerto 10, erro 2, branco 1, leitura 10. Coronel aos 50.000 XP (≈ 5.000 acertos); depois disso vêm as condecorações.'
+// Uma leitura só conta (XP, conquistas, missão) depois de 10 acertos no tópico feitos a partir dela;
+// até lá fica pendente. Cada leitura usa os acertos até a leitura seguinte do mesmo tópico.
+export const ACERTOS_PARA_LEITURA = 10
+export interface LeituraAvaliada { leitura: RegistroLeitura; acertos: number; valida: boolean }
+
+export function avaliarLeituras(leituras: RegistroLeitura[], respostas: RegistroResposta[]): LeituraAvaliada[] {
+  const acertosPorTopico: Record<string, string[]> = {}
+  for (const r of respostas) if (r.correta === 1) (acertosPorTopico[r.topico] ??= []).push(r.criadaEm)
+  const porTopico: Record<string, RegistroLeitura[]> = {}
+  for (const l of leituras) (porTopico[l.topico] ??= []).push(l)
+  const saida: LeituraAvaliada[] = []
+  for (const [topico, ls] of Object.entries(porTopico)) {
+    const ordenadas = [...ls].sort((a, b) => a.criadaEm.localeCompare(b.criadaEm))
+    const acertos = acertosPorTopico[topico] ?? []
+    ordenadas.forEach((l, i) => {
+      const fim = ordenadas[i + 1]?.criadaEm
+      const n = acertos.filter((t) => t >= l.criadaEm && (!fim || t < fim)).length
+      saida.push({ leitura: l, acertos: n, valida: n >= ACERTOS_PARA_LEITURA })
+    })
+  }
+  return saida
+}
+
+export function leiturasValidas(leituras: RegistroLeitura[], respostas: RegistroResposta[]): RegistroLeitura[] {
+  return avaliarLeituras(leituras, respostas).filter((a) => a.valida).map((a) => a.leitura)
+}
+
+// Situação da última leitura de um tópico: null (nunca lido), pendente (com acertos feitos) ou válida.
+export function situacaoLeitura(topico: string, leituras: RegistroLeitura[], respostas: RegistroResposta[]) {
+  const doTopico = avaliarLeituras(leituras.filter((l) => l.topico === topico), respostas.filter((r) => r.topico === topico))
+    .sort((a, b) => a.leitura.criadaEm.localeCompare(b.leitura.criadaEm))
+  return doTopico[doTopico.length - 1] ?? null
+}
+
+// XP: acerto 10, erro 2, branco 1, leitura validada 10. O acerto é o que mais pesa.
+export const REGRA_XP = 'XP: acerto 10, erro 2, branco 1, leitura 10 (a leitura só conta depois de 10 acertos no tópico). Coronel aos 50.000 XP (≈ 5.000 acertos); depois disso vêm as condecorações.'
 export function calcularXp(respostas: RegistroResposta[], leituras: RegistroLeitura[]): number {
-  let xp = leituras.length * 10
+  let xp = leiturasValidas(leituras, respostas).length * 10
   for (const r of respostas) xp += r.resposta === 'B' ? 1 : r.correta === 1 ? 10 : 2
   return xp
 }
@@ -220,7 +254,22 @@ export function noCaderno(revisoes: RegistroRevisao[]) {
 
 // ---------- missão do dia ----------
 
+// Meta semanal: passar por pelo menos 7 matérias diferentes (seg a dom), com 5+ itens em cada.
+export const META_MATERIAS_SEMANA = 7
+export const ITENS_PARA_CONTAR_MATERIA = 5
+export function materiasDaSemana(respostas: RegistroResposta[], hoje = diaLocal()): Record<string, number> {
+  const semana = inicioSemana(hoje)
+  const c: Record<string, number> = {}
+  for (const r of respostas) if (diaLocal(new Date(r.criadaEm)) >= semana) c[r.materia] = (c[r.materia] ?? 0) + 1
+  return c
+}
+
 export interface Missao {
+  semanaFeitas: string[]
+  semanaParciais: Record<string, number>
+  semanaMeta: number
+  materiaSugerida: string | null
+  leituraAcertos: number
   focoTopico: string | null
   focoMeta: number
   focoFeitos: number
@@ -252,13 +301,28 @@ export function montarMissao(
     .filter((t) => diag[t]?.status === 'critico')
     .sort((a, b) => (diag[a].acerto ?? 0) - (diag[b].acerto ?? 0))
   const menosVisto = [...comItens].sort((a, b) => (diag[a]?.respondidas ?? 0) - (diag[b]?.respondidas ?? 0))[0]
-  const focoTopico = focoDeHoje ?? criticos[0] ?? menosVisto ?? null
+
+  // meta semanal: se ainda faltam matérias, o foco do dia vai para uma matéria não visitada na semana
+  const porMateriaSemana = materiasDaSemana(respostas, hoje)
+  const semanaFeitas = Object.entries(porMateriaSemana).filter(([, n]) => n >= ITENS_PARA_CONTAR_MATERIA).map(([m]) => m)
+  const materiasComItens = ind.edital.materias.filter((m) => m.topicos.some((t) => (ind.resumo[t.codigo]?.itens ?? 0) > 0))
+  const respondidasMateria = (cod: string) => respostas.filter((r) => r.materia === cod).length
+  const faltando = materiasComItens
+    .filter((m) => !semanaFeitas.includes(m.codigo))
+    .sort((a, b) => (porMateriaSemana[b.codigo] ?? 0) - (porMateriaSemana[a.codigo] ?? 0) || respondidasMateria(a.codigo) - respondidasMateria(b.codigo))
+  const materiaSugerida = semanaFeitas.length < META_MATERIAS_SEMANA ? faltando[0]?.codigo ?? null : null
+  const doSugerida = materiaSugerida ? comItens.filter((t) => materiaDoTopicoCod(t) === materiaSugerida) : []
+  const focoSemana = doSugerida.length
+    ? doSugerida.find((t) => diag[t]?.status === 'critico') ?? [...doSugerida].sort((a, b) => (diag[a]?.respondidas ?? 0) - (diag[b]?.respondidas ?? 0))[0]
+    : null
+
+  const focoTopico = focoDeHoje ?? focoSemana ?? criticos[0] ?? menosVisto ?? null
 
   const focoMeta = 25
   const focoFeitos = focoTopico ? deHoje.filter((r) => r.topico === focoTopico && r.modo === 'treino').length : 0
 
   const lidosHoje = new Set(leituras.filter((l) => diaLocal(new Date(l.criadaEm)) === hoje).map((l) => l.topico))
-  const jaLidos = new Set(leituras.map((l) => l.topico))
+  const jaLidos = new Set(leituras.map((l) => l.topico)) // inclui as pendentes: não sugere reler o que já foi lido
   const comConteudo = ordem.filter((t) => ind.temConteudo[t])
   const leituraTopico =
     [...lidosHoje][0] ??
@@ -267,17 +331,28 @@ export function montarMissao(
     comConteudo[0] ??
     null
 
+  const sitLeitura = leituraTopico ? situacaoLeitura(leituraTopico, leituras, respostas) : null
+  const leituraHoje = sitLeitura && diaLocal(new Date(sitLeitura.leitura.criadaEm)) === hoje
   return {
+    semanaFeitas,
+    semanaParciais: porMateriaSemana,
+    semanaMeta: META_MATERIAS_SEMANA,
+    materiaSugerida,
+    leituraAcertos: leituraHoje ? sitLeitura.acertos : 0,
     focoTopico,
     focoMeta,
     focoFeitos,
     revisaoPendentes: revisoesPendentes(revisoes, hoje).length,
     revisaoFeitas: deHoje.filter((r) => r.modo === 'revisao').length,
     leituraTopico,
-    leituraFeita: leituraTopico ? lidosHoje.has(leituraTopico) : false,
+    leituraFeita: !!(leituraHoje && sitLeitura.valida),
     metaItens,
     itensHoje: deHoje.length,
   }
+}
+
+function materiaDoTopicoCod(topico: string): string {
+  return topico.split('-')[0]
 }
 
 function maisFrequente(lista: string[]): string {

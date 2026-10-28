@@ -33,6 +33,8 @@ export default function Inicio() {
   const m = montarMissao(ind, respostas, revisoes, leituras, meta)
   const foco = m.focoTopico ? acharTopico(ind, m.focoTopico) : null
   const leitura = m.leituraTopico ? acharTopico(ind, m.leituraTopico) : null
+  const sugerida = m.materiaSugerida ? ind.edital.materias.find((x) => x.codigo === m.materiaSugerida) ?? null : null
+  const leituraMarcadaHoje = !!m.leituraTopico && leituras.some((l) => l.topico === m.leituraTopico && diaLocal(new Date(l.criadaEm)) === hoje)
   const nome = usuario && usuario !== 'modo local' ? `, ${usuario}` : ''
 
   return (
@@ -62,7 +64,10 @@ export default function Inicio() {
       <Secao>Missão do dia</Secao>
       <Card>
         {leitura && m.leituraTopico && (
-          <Tarefa feita={m.leituraFeita} titulo={`Resumo · ${m.leituraTopico} ${leitura.nome}`} sub={m.leituraFeita ? 'lido hoje' : 'leia o resumo do tópico'}
+          <Tarefa feita={m.leituraFeita} titulo={`Resumo · ${m.leituraTopico} ${leitura.nome}`}
+            sub={m.leituraFeita ? 'lido hoje e confirmado com 10 acertos'
+              : m.leituraAcertos > 0 || leituraMarcadaHoje ? `lido · faltam ${Math.max(0, 10 - m.leituraAcertos)} acertos no tópico para contar`
+              : 'leia o resumo e depois acerte 10 itens do tópico'}
             onClick={() => nav(`/t/${m.leituraTopico}`)} />
         )}
         {foco && m.focoTopico && (
@@ -70,6 +75,11 @@ export default function Inicio() {
             sub={`${Math.min(m.focoFeitos, m.focoMeta)} de ${m.focoMeta} feitos`}
             onClick={() => nav(`/quiz?modo=topico&t=${m.focoTopico}&n=${Math.max(5, m.focoMeta - m.focoFeitos)}`)} />
         )}
+        <Tarefa feita={m.semanaFeitas.length >= m.semanaMeta}
+          titulo={`Semana · ${Math.min(m.semanaFeitas.length, m.semanaMeta)} de ${m.semanaMeta} matérias`}
+          sub={m.semanaFeitas.length >= m.semanaMeta ? 'meta semanal batida'
+            : `${m.semanaMeta - m.semanaFeitas.length} a visitar até domingo${sugerida ? ` · sugestão de hoje: ${sugerida.nome}` : ''} (5+ itens em cada)`}
+          onClick={sugerida ? () => nav(`/m/${sugerida.codigo}`) : undefined} />
         <Tarefa feita={m.revisaoPendentes === 0} titulo={m.revisaoPendentes ? `Revisão · ${m.revisaoPendentes} itens do caderno de erros` : 'Revisão em dia'}
           sub={m.revisaoPendentes ? 'vencem hoje' : m.revisaoFeitas ? `${m.revisaoFeitas} revisados hoje` : 'nada pendente'}
           onClick={m.revisaoPendentes ? () => nav('/quiz?modo=revisao&n=20') : undefined} />

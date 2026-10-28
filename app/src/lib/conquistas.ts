@@ -1,4 +1,5 @@
 import {
+  leiturasValidas,
   calcularStreak, diagnosticoPorTopico, diasComEstudo, excessoConfianca, noCaderno,
 } from './stats'
 import type { IndiceConteudo, RegistroLeitura, RegistroResposta, RegistroRevisao, RegistroSimulado } from './types'
@@ -25,7 +26,7 @@ export function calcularConquistas({ ind, respostas, leituras, revisoes, simulad
   const driveFeitos = new Set(sims.filter((s) => s.tipo === 'drive').map((s) => s.titulo))
   const materiaVerde = ind.edital.materias.some((m) => m.topicos.length > 0 && m.topicos.every((t) => diag[t.codigo]?.status === 'dominado'))
   const topicosComDiagnostico = Object.values(diag).filter((d) => d.status !== 'semdados').length
-  const lidos = new Set(leituras.map((l) => l.topico))
+  const lidos = new Set(leiturasValidas(leituras, respostas).map((l) => l.topico))
   const materiaLida = ind.edital.materias.some((m) => m.topicos.length > 0 && m.topicos.every((t) => lidos.has(t.codigo)))
   const semErroComCerteza = respostas.length >= 100 && excessoConfianca(respostas, 7).length === 0
     && respostas.filter((r) => Date.now() - new Date(r.criadaEm).getTime() < 7 * 86_400_000).length >= 50

@@ -6,7 +6,7 @@ import { Botao, Cabecalho, Card, Carregando, Pill, StatusPill } from '../compone
 import { acharTopico, carregarMateria, materiaDoTopico, useAsync, useIndice } from '../lib/conteudo'
 import { diaLocal } from '../lib/datas'
 import { registrarLeitura } from '../lib/estudo'
-import { STATUS_INFO, diagnosticar } from '../lib/stats'
+import { ACERTOS_PARA_LEITURA, STATUS_INFO, diagnosticar, situacaoLeitura } from '../lib/stats'
 import { useLeituras, useRespostas } from '../lib/useDados'
 
 type Aba = 'resumo' | 'teoria' | 'manias' | 'questoes'
@@ -29,6 +29,7 @@ export default function Topico() {
   const diag = diagnosticar(respostas.filter((r) => r.topico === cod))
   const lidoHoje = leituras.some((l) => l.topico === cod && diaLocal(new Date(l.criadaEm)) === diaLocal())
   const ultimaLeitura = leituras.filter((l) => l.topico === cod).map((l) => l.criadaEm).sort().pop()
+  const sitLeitura = situacaoLeitura(cod, leituras, respostas)
   const abaAtual: Aba = aba ?? (conteudo.resumo ? 'resumo' : 'questoes')
 
   const abas: { id: Aba; rotulo: string; tem: boolean }[] = [
@@ -75,6 +76,13 @@ export default function Topico() {
             </Botao>
           )}
           {ultimaLeitura && <div className="text-suave text-xs text-center mt-2">Última leitura: {new Date(ultimaLeitura).toLocaleDateString('pt-BR')}</div>}
+          {sitLeitura && (
+            <div className={`text-xs text-center mt-1 ${sitLeitura.valida ? 'text-verde' : 'text-suave'}`}>
+              {sitLeitura.valida
+                ? '✔ Leitura confirmada: valeu XP'
+                : `Leitura pendente: ${sitLeitura.acertos}/${ACERTOS_PARA_LEITURA} acertos neste tópico para contar como lida`}
+            </div>
+          )}
         </>
       )}
 
