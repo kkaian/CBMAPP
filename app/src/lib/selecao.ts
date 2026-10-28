@@ -1,4 +1,4 @@
-import { carregarMateria, carregarTodas, materiaDoTopico, questoesPorId } from './conteudo'
+import { carregarIndice, carregarMateria, carregarTodas, materiaDoTopico, questoesPorId } from './conteudo'
 import { db } from './db'
 import { diaLocal } from './datas'
 import { diagnosticoPorTopico, revisoesPendentes } from './stats'
@@ -47,6 +47,28 @@ export async function itensDeRevisao(n: number): Promise<Questao[]> {
     .sort((a, b) => (a.proxima ?? '').localeCompare(b.proxima ?? ''))
     .slice(0, n)
   return questoesPorId(pendentes.map((r) => r.itemId))
+}
+
+// Trilha de revisão: os tópicos que a pessoa não acessa (leitura ou resposta) há mais tempo.
+// Pega os mais antigos (os nunca acessados entram só se faltarem) e sorteia entre eles.
+export async function topicosParaTrilha(n = 6): Promise<string[]> {
+  const ind = await carregarIndice()
+  const ultimo: Record<string, string> = {}
+  const marcar = (t: string, quando: string) => { if (!ultimo[t] || quando > ultimo[t]) ultimo[t] = quando }
+  for (const r of await db.respostas.toArray()) marcar(r.topico, r.criadaEm)
+  for (const l of await db.leituras.toArray()) marcar(l.topico, l.criadaEm)
+  const candidatos = ind.edital.materias.flatMap((m) => m.topicos.map((t) => t.codigo))
+    .filter((t) => ind.temConteudo[t] && (ind.resumo[t]?.itens ?? 0) >= 5)
+  const acessados = embaralhar(candidatos.filter((t) => ultimo[t])).sort((a, b) => ultimo[a].localeCompare(ultimo[b]))
+  const nunca = embaralhar(candidatos.filter((t) => !ultimo[t]))
+  const pool = [...acessados, ...nunca].slice(0, Math.max(n * 2, 12))
+  return embaralhar(pool).slice(0, n)
+}
+
+export async function itensDaTrilha(topicos: string[], porTopico = 5): Promise<Questao[]> {
+  const saida: Questao[] = []
+  for (const t of topicos) saida.push(...await itensDoTopico(t, porTopico))
+  return saida
 }
 
 // Relâmpago: 5 itens rápidos, puxando mais dos tópicos fracos

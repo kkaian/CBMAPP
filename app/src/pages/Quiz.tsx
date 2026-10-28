@@ -5,7 +5,7 @@ import { Barra, Botao, Card, Carregando, Pill } from '../components/ui'
 import { carregarMateria, materiaDoTopico } from '../lib/conteudo'
 import { gravarConfig, lerConfig } from '../lib/db'
 import { registrarResposta } from '../lib/estudo'
-import { itensDaMateria, itensDeRevisao, itensDoTopico, itensRelampago } from '../lib/selecao'
+import { itensDaMateria, itensDaTrilha, itensDeRevisao, itensDoTopico, itensRelampago } from '../lib/selecao'
 import type { Confianca, Grupo, ModoEstudo, Questao, RegistroResposta, Resposta } from '../lib/types'
 
 const CONFIANCAS: { id: Confianca; rotulo: string; tecla: string }[] = [
@@ -28,7 +28,7 @@ export default function Quiz() {
   const inicio = useRef(Date.now())
   const [segundos, setSegundos] = useState(0)
 
-  const modoEstudo: ModoEstudo = modo === 'revisao' ? 'revisao' : modo === 'relampago' ? 'relampago' : 'treino'
+  const modoEstudo: ModoEstudo = modo === 'revisao' ? 'revisao' : modo === 'relampago' ? 'relampago' : modo === 'trilha' ? 'trilha' : 'treino'
 
   useEffect(() => {
     let vivo = true
@@ -36,6 +36,7 @@ export default function Quiz() {
       modo === 'revisao' ? itensDeRevisao(n)
       : modo === 'relampago' ? itensRelampago(n)
       : modo === 'materia' ? itensDaMateria(params.get('m') ?? '', n)
+      : modo === 'trilha' ? itensDaTrilha((params.get('t') ?? '').split(',').filter(Boolean), 5)
       : itensDoTopico(params.get('t') ?? '', n)
     carregar.then(async (qs) => {
       const cods = [...new Set(qs.map((q) => materiaDoTopico(q.topico)))]
@@ -116,12 +117,12 @@ export default function Quiz() {
       </div>
     )
   }
-  if (!q) return <Resultado feitos={feitos} onSair={() => nav(-1)} />
+  if (!q) return <Resultado feitos={feitos} onSair={() => (modo === 'trilha' ? nav('/questoes', { replace: true }) : nav(-1))} />
 
   const grupo = q.grupo ? grupos[q.grupo] : null
   const mostraGrupo = grupo && (i === 0 || itens[i - 1]?.grupo !== q.grupo)
   const acertou = registro?.correta === 1
-  const titulo = modo === 'revisao' ? 'Revisão' : modo === 'relampago' ? '⚡ Relâmpago' : q.topico
+  const titulo = modo === 'revisao' ? 'Revisão' : modo === 'relampago' ? '⚡ Relâmpago' : modo === 'trilha' ? `🧭 Trilha · ${q.topico}` : q.topico
 
   return (
     <>

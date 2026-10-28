@@ -157,7 +157,7 @@ export function situacaoLeitura(topico: string, leituras: RegistroLeitura[], res
 // Perder a sequência custa 30 XP por dia da sequência perdida (no máximo 300).
 export const XP_BASE = { acerto: 10, erro: 2, branco: 1, leitura: 10, simuladoCompleto: 100, simulado: 30, redacao: 150 }
 export const DIAS_PARA_XP_MAXIMO = 7
-export const REGRA_XP = 'XP por tarefa: acerto 10, erro 2, branco 1, leitura confirmada 10, simulado completo 100 (menores 30), redação corrigida 150. Tudo multiplicado pela sequência do dia: ×0,4 no 1º dia, +0,1 por dia, ×1,0 a partir do 7º. Perder a sequência custa 30 XP por dia dela (máx. 300). Coronel aos 50.000 XP; depois vêm as condecorações.'
+export const REGRA_XP = 'XP por tarefa: acerto 10, erro 2, branco 1 (item já respondido antes, como na revisão, vale metade), leitura confirmada 10, simulado completo 100 (menores 30), redação corrigida 150. Tudo multiplicado pela sequência do dia: ×0,4 no 1º dia, +0,1 por dia, ×1,0 a partir do 7º. Perder a sequência custa 30 XP por dia dela (máx. 300). Coronel aos 50.000 XP; depois vêm as condecorações.'
 
 export function multiplicadorSequencia(dias: number): number {
   if (dias <= 0) return 0.4
@@ -188,7 +188,13 @@ export interface ExtratoXp {
 export function extratoXp({ respostas, leituras, simulados = [], redacoes = [] }: DadosXp, hoje = diaLocal()): ExtratoXp {
   const base: Record<string, number> = {}
   const somar = (iso: string, v: number) => { const d = diaLocal(new Date(iso)); base[d] = (base[d] ?? 0) + v }
-  for (const r of respostas) somar(r.criadaEm, r.resposta === 'B' ? XP_BASE.branco : r.correta === 1 ? XP_BASE.acerto : XP_BASE.erro)
+  // item já respondido antes (revisão, trilha, caderno de erros ou repetição) vale metade do inédito
+  const vistos = new Set<string>()
+  for (const r of [...respostas].sort((a, b) => a.criadaEm.localeCompare(b.criadaEm))) {
+    const v = r.resposta === 'B' ? XP_BASE.branco : r.correta === 1 ? XP_BASE.acerto : XP_BASE.erro
+    somar(r.criadaEm, vistos.has(r.itemId) ? v / 2 : v)
+    vistos.add(r.itemId)
+  }
   for (const l of leiturasValidas(leituras, respostas)) somar(l.criadaEm, XP_BASE.leitura)
   for (const x of simulados) if (x.status === 'concluido' && x.concluidoEm) somar(x.concluidoEm, x.itens.length >= 120 ? XP_BASE.simuladoCompleto : XP_BASE.simulado)
   for (const x of redacoes) if (!x.excluida && x.npd !== null) somar(x.atualizadaEm ?? x.criadaEm, XP_BASE.redacao)

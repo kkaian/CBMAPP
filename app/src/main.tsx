@@ -21,6 +21,7 @@ import Perfil from './pages/Perfil'
 import Questoes from './pages/Questoes'
 import Ranking, { PerfilColega } from './pages/Ranking'
 import Quiz from './pages/Quiz'
+import Trilha from './pages/Trilha'
 import Redacao from './pages/Redacao'
 import { RedacaoEscrever, RedacaoResultado } from './pages/RedacaoCorrecao'
 import { RedacaoModelo, RedacaoRepertorio } from './pages/RedacaoExtras'
@@ -57,6 +58,7 @@ const router = createHashRouter([
     ],
   },
   { path: '/quiz', element: <div className="max-w-lg mx-auto px-4 pt-4 pb-10"><Quiz /></div> },
+  { path: '/trilha', element: <div className="max-w-lg mx-auto px-4 pt-4 pb-10"><Trilha /></div> },
   { path: '/simulado/:id', element: <div className="max-w-lg mx-auto px-4 pt-4 pb-10"><Simulado /></div> },
 ])
 
