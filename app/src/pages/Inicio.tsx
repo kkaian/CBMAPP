@@ -2,6 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth'
 import { CardInstalar } from '../components/Extras'
+import { CartaoXp, LinhaMissao, NovaMissao, useMissoesPessoais, type ItemMissao } from '../components/Missoes'
 import { Anel, Botao, Card, Carregando, Pill, Secao } from '../components/ui'
 import { acharTopico, useIndice } from '../lib/conteudo'
 import { db } from '../lib/db'
@@ -24,6 +25,7 @@ export default function Inicio() {
   const nav = useNavigate()
   const simulados = useLiveQuery(() => db.simulados.where('status').equals('concluido').toArray(), [])
   const redacoes = useLiveQuery(() => db.redacoes.toArray(), [])
+  const pessoais = useMissoesPessoais()
 
   if (erro) return <Carregando texto={erro} />
   if (!ind || !respostas || !revisoes || !leituras) return <Carregando />
@@ -42,6 +44,57 @@ export default function Inicio() {
   const leituraMarcadaHoje = !!m.leituraTopico && leituras.some((l) => l.topico === m.leituraTopico && diaLocal(new Date(l.criadaEm)) === hoje)
   const mensais = metasMensais(respostas, simulados ?? [], redacoes ?? [], hoje)
   const mesNome = new Date().toLocaleDateString('pt-BR', { month: 'long' })
+  const plural = (n: number, um: string, varios: string) => `${n} ${n === 1 ? um : varios}`
+  const subMes = (meta: { feitosNoMes: number; pendentes: number }, um: string, varios: string) =>
+    meta.pendentes === 0
+      ? meta.feitosNoMes ? `feito este mês${meta.feitosNoMes > 1 ? ` (${meta.feitosNoMes})` : ''}` : 'em dia'
+      : `${meta.feitosNoMes ? `${meta.feitosNoMes} feito este mês · ` : ''}${plural(meta.pendentes, um, varios)} ${meta.pendentes === 1 ? 'pendente' : 'pendentes'}${meta.pendentes > 1 || meta.feitosNoMes ? ' (acumulado dos meses anteriores)' : ''}`
+  const missoes: ItemMissao[] = [
+    ...(leitura && m.leituraTopico ? [{
+      chave: 'leitura', periodo: 'dia' as const, feita: m.leituraFeita,
+      titulo: `Resumo · ${m.leituraTopico} ${leitura.nome}`,
+      sub: m.leituraFeita ? 'lido hoje e confirmado com 10 acertos'
+        : m.leituraAcertos > 0 || leituraMarcadaHoje ? `lido · faltam ${Math.max(0, 10 - m.leituraAcertos)} acertos no tópico para contar`
+        : 'leia o resumo e depois acerte 10 itens do tópico',
+      onClick: () => nav(`/t/${m.leituraTopico}`),
+    }] : []),
+    ...(foco && m.focoTopico ? [{
+      chave: 'foco', periodo: 'dia' as const, feita: m.focoFeitos >= m.focoMeta,
+      titulo: `${m.focoMeta} itens · ${m.focoTopico} ${foco.nome}`,
+      sub: `${Math.min(m.focoFeitos, m.focoMeta)} de ${m.focoMeta} feitos`,
+      onClick: () => nav(`/quiz?modo=topico&t=${m.focoTopico}&n=${Math.max(5, m.focoMeta - m.focoFeitos)}`),
+    }] : []),
+    {
+      chave: 'meta', periodo: 'dia', feita: m.itensHoje >= m.metaItens,
+      titulo: `Meta diária · ${m.metaItens} itens`, sub: `${Math.min(m.itensHoje, m.metaItens)} de ${m.metaItens} hoje`,
+    },
+    {
+      chave: 'revisao', periodo: 'dia', feita: m.revisaoPendentes === 0,
+      titulo: m.revisaoPendentes ? `Revisão · ${m.revisaoPendentes} itens do caderno de erros` : 'Revisão em dia',
+      sub: m.revisaoPendentes ? 'vencem hoje' : m.revisaoFeitas ? `${m.revisaoFeitas} revisados hoje` : 'nada pendente',
+      onClick: m.revisaoPendentes ? () => nav('/quiz?modo=revisao&n=20') : undefined,
+    },
+    {
+      chave: 'semana', periodo: 'semana', feita: m.semanaFeitas.length >= m.semanaMeta,
+      titulo: `${Math.min(m.semanaFeitas.length, m.semanaMeta)} de ${m.semanaMeta} matérias`,
+      sub: m.semanaFeitas.length >= m.semanaMeta ? 'meta semanal batida'
+        : `${m.semanaMeta - m.semanaFeitas.length} a visitar até domingo${sugerida ? ` · sugestão de hoje: ${sugerida.nome}` : ''} (5+ itens em cada)`,
+      onClick: sugerida ? () => nav(`/m/${sugerida.codigo}`) : undefined,
+    },
+    {
+      chave: 'simulado', periodo: 'mes', feita: mensais.simulado.pendentes === 0,
+      titulo: `1 simulado completo · ${mesNome}`, sub: subMes(mensais.simulado, 'simulado', 'simulados'),
+      onClick: () => nav('/simulados'),
+    },
+    {
+      chave: 'redacao', periodo: 'mes', feita: mensais.redacao.pendentes === 0,
+      titulo: `1 redação corrigida · ${mesNome}`, sub: subMes(mensais.redacao, 'redação', 'redações'),
+      onClick: () => nav('/redacao/escrever'),
+    },
+    ...pessoais.itens,
+  ]
+  const ordemPeriodo = { dia: 0, semana: 1, mes: 2 }
+  missoes.sort((a, b) => ordemPeriodo[a.periodo] - ordemPeriodo[b.periodo] || Number(!!a.pessoal) - Number(!!b.pessoal))
   const nome = usuario && usuario !== 'modo local' ? `, ${usuario}` : ''
 
   return (
@@ -59,44 +112,24 @@ export default function Inicio() {
         <div>
           <div className="text-[28px] font-bold leading-none">{faltam} dias</div>
           <div className="text-suave text-sm">até a prova · {ind.edital.dataProva.split('-').reverse().join('/')}</div>
-          <div className="text-sm mt-1.5">
-            Patente: <b>{pat.nome}</b> · {xp.toLocaleString('pt-BR')} XP
-            <div className="text-suave">XP de hoje ×{ext.multiplicadorHoje.toLocaleString('pt-BR', { minimumFractionDigits: 1 })}{ext.multiplicadorHoje < 1 ? ` (×1,0 com 7 dias seguidos)` : ' (máximo)'}</div>
-            {pat.proximaXp
-              ? <div className="text-suave">faltam {(pat.proximaXp - xp).toLocaleString('pt-BR')} XP para {pat.proximaNome}</div>
-              : <div className="text-suave">{cond.obtidas.length ? `${cond.obtidas.map((c) => c.icone).join('')} · ` : ''}próxima: {cond.proxima.nome}</div>}
-          </div>
         </div>
       </Card>
 
-      <Secao>Missão do dia</Secao>
-      <Card>
-        {leitura && m.leituraTopico && (
-          <Tarefa feita={m.leituraFeita} titulo={`Resumo · ${m.leituraTopico} ${leitura.nome}`}
-            sub={m.leituraFeita ? 'lido hoje e confirmado com 10 acertos'
-              : m.leituraAcertos > 0 || leituraMarcadaHoje ? `lido · faltam ${Math.max(0, 10 - m.leituraAcertos)} acertos no tópico para contar`
-              : 'leia o resumo e depois acerte 10 itens do tópico'}
-            onClick={() => nav(`/t/${m.leituraTopico}`)} />
-        )}
-        {foco && m.focoTopico && (
-          <Tarefa feita={m.focoFeitos >= m.focoMeta} titulo={`${m.focoMeta} itens · ${m.focoTopico} ${foco.nome}`}
-            sub={`${Math.min(m.focoFeitos, m.focoMeta)} de ${m.focoMeta} feitos`}
-            onClick={() => nav(`/quiz?modo=topico&t=${m.focoTopico}&n=${Math.max(5, m.focoMeta - m.focoFeitos)}`)} />
-        )}
-        <Tarefa feita={m.semanaFeitas.length >= m.semanaMeta}
-          titulo={`Semana · ${Math.min(m.semanaFeitas.length, m.semanaMeta)} de ${m.semanaMeta} matérias`}
-          sub={m.semanaFeitas.length >= m.semanaMeta ? 'meta semanal batida'
-            : `${m.semanaMeta - m.semanaFeitas.length} a visitar até domingo${sugerida ? ` · sugestão de hoje: ${sugerida.nome}` : ''} (5+ itens em cada)`}
-          onClick={sugerida ? () => nav(`/m/${sugerida.codigo}`) : undefined} />
-        <Tarefa feita={m.revisaoPendentes === 0} titulo={m.revisaoPendentes ? `Revisão · ${m.revisaoPendentes} itens do caderno de erros` : 'Revisão em dia'}
-          sub={m.revisaoPendentes ? 'vencem hoje' : m.revisaoFeitas ? `${m.revisaoFeitas} revisados hoje` : 'nada pendente'}
-          onClick={m.revisaoPendentes ? () => nav('/quiz?modo=revisao&n=20') : undefined} />
-      </Card>
+      <CartaoXp
+        patenteNome={pat.nome}
+        xp={xp}
+        base={pat.proximaXp ? pat.base : cond.obtidas[cond.obtidas.length - 1]?.xp ?? pat.base}
+        proximaXp={pat.proximaXp ?? cond.proxima.xp}
+        proximaNome={pat.proximaNome ?? cond.proxima.nome}
+        multiplicador={ext.multiplicadorHoje}
+        ganhoHoje={ext.porDia[hoje] ?? 0}
+        medalhas={cond.obtidas.map((c) => c.icone).join('')}
+      />
 
-      <Secao>Metas do mês · {mesNome}</Secao>
+      <Secao>Missões</Secao>
       <Card>
-        <MetaMes titulo="1 simulado completo (120 itens)" meta={mensais.simulado} rotulo="simulado" onClick={() => nav('/simulados')} />
-        <MetaMes titulo="1 redação corrigida" meta={mensais.redacao} rotulo="redação" onClick={() => nav('/redacao/escrever')} />
+        {missoes.map((x) => <LinhaMissao key={x.chave} m={x} />)}
+        <NovaMissao onAdicionar={pessoais.adicionar} />
       </Card>
 
       <div className="flex gap-2">
@@ -129,26 +162,5 @@ export default function Inicio() {
 
       <div className="text-center mt-4"><Link to="/desempenho" className="text-azul text-sm">Ver desempenho ›</Link></div>
     </>
-  )
-}
-
-function MetaMes({ titulo, meta, rotulo, onClick }: { titulo: string; meta: { feitosNoMes: number; pendentes: number }; rotulo: string; onClick: () => void }) {
-  const plural = (n: number) => `${n} ${rotulo === 'redação' ? (n === 1 ? 'redação' : 'redações') : n === 1 ? 'simulado' : 'simulados'}`
-  const sub = meta.pendentes === 0
-    ? meta.feitosNoMes ? `feito este mês${meta.feitosNoMes > 1 ? ` (${meta.feitosNoMes})` : ''}` : 'em dia'
-    : `${meta.feitosNoMes ? `${meta.feitosNoMes} feito este mês · ` : ''}${plural(meta.pendentes)} ${meta.pendentes === 1 ? 'pendente' : 'pendentes'}${meta.pendentes > 1 || meta.feitosNoMes ? ' (acumulado dos meses anteriores)' : ''}`
-  return <Tarefa feita={meta.pendentes === 0} titulo={titulo} sub={sub} onClick={onClick} />
-}
-
-function Tarefa({ feita, titulo, sub, onClick }: { feita: boolean; titulo: string; sub: string; onClick?: () => void }) {
-  return (
-    <div onClick={onClick} className={`flex gap-3 items-center py-3 border-t border-linha first:border-t-0 first:pt-1 last:pb-1 ${onClick ? 'cursor-pointer' : ''}`}>
-      <div className={`w-[22px] h-[22px] rounded-full border-2 shrink-0 ${feita ? 'bg-verde border-verde' : 'border-cinza'}`} />
-      <div className="flex-1 min-w-0">
-        <div className="font-semibold leading-snug">{titulo}</div>
-        <div className="text-suave text-[13px]">{sub}</div>
-      </div>
-      {onClick && <span className="text-suave">›</span>}
-    </div>
   )
 }
