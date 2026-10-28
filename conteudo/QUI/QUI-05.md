@@ -20,26 +20,41 @@
 
 ## Teoria
 
-### Formação
-No NaCl, o sódio (2, 8, 1) cede 1 elétron ao cloro (2, 8, 7): ficam Na⁺ (2, 8) e Cl⁻ (2, 8, 8), ambos com octeto. No CaCl₂, o cálcio cede 2 elétrons, um para cada cloro.
-A fórmula de um composto iônico indica a **proporção** entre os íons no retículo cristalino (fórmula mínima), e não uma molécula isolada: não existe "molécula de NaCl" no cristal.
+### 1. Por que os átomos se ligam
+Átomos isolados (exceto os gases nobres) são **menos estáveis** do que quando ligados. Ao se ligar, o sistema **libera energia** e fica mais estável, como uma bola que rola para o fundo de um vale. A **regra do octeto** resume o resultado mais comum: os átomos tendem a ficar com **8 elétrons na camada de valência** (configuração de gás nobre), ou **2**, no caso de H, Li e Be (imitando o hélio).
 
-### Retículo cristalino
-Os íons se organizam em uma rede tridimensional, cada íon cercado por íons de carga oposta. A atração forte em todas as direções explica:
-- **alto ponto de fusão** (NaCl ≈ 801 °C; MgO ≈ 2.800 °C);
-- **dureza** e **fragilidade** (um deslocamento coloca cargas iguais lado a lado e o cristal se parte).
+Há três modelos de ligação:
+| Ligação | Entre | Como |
+|---|---|---|
+| **iônica** | **metal + ametal** | **transferência** de elétrons, atração entre íons |
+| **covalente** | **ametal + ametal** (e H) | **compartilhamento** de pares (QUI-06) |
+| **metálica** | metal + metal | "mar de elétrons" (QUI-06) |
 
-### Condutividade
-Corrente elétrica exige cargas **livres para se mover**:
-- **sólido:** íons presos no retículo → **não conduz**;
-- **fundido** ou **em solução aquosa:** íons livres → **conduz** (eletrólito).
+### 2. Como a ligação iônica se forma
+1. O **metal** tem **baixa energia de ionização** (perde elétrons facilmente) e vira **cátion**.
+2. O **ametal** tem **alta eletronegatividade** e **afinidade eletrônica** (atrai elétrons) e vira **ânion**.
+3. Os íons de cargas opostas se **atraem eletrostaticamente** (lei de Coulomb: força maior para cargas maiores e íons menores).
 
-Por isso a água com sais (soro, água do mar, água de combate a incêndio) conduz eletricidade.
+**Exemplo, NaCl:**
+- Na (2, 8, 1) → **Na⁺** (2, 8) + 1 e⁻: fica com o octeto do neônio.
+- Cl (2, 8, 7) + 1 e⁻ → **Cl⁻** (2, 8, 8): fica com o octeto do argônio.
 
-### Íons poliatômicos
-Íons como NH₄⁺ (amônio), OH⁻ (hidróxido), NO₃⁻ (nitrato), SO₄²⁻ (sulfato), CO₃²⁻ (carbonato) e PO₄³⁻ (fosfato) têm ligações **covalentes internas**. Compostos formados por eles, como NH₄Cl, NaOH, CaCO₃ e (NH₄)₂SO₄, têm ao mesmo tempo **ligações iônicas** (entre os íons) e **covalentes** (dentro dos íons poliatômicos).
+**Exemplo, CaCl₂:** o cálcio (2, 8, 8, 2) perde **2** elétrons; cada cloro recebe **1**. Por isso são **dois** cloros para um cálcio.
 
-### Exemplos para treinar fórmulas
+**Critério da eletronegatividade:** quanto **maior a diferença** de eletronegatividade entre os átomos, mais **iônica** a ligação. Diferença grande (em geral acima de ≈ 1,7) → iônica; menor → covalente polar; zero → covalente apolar. Na prática de prova: **metal + ametal = iônica**.
+
+### 3. Montando a fórmula
+**Carga do íon pelo grupo:** metais perdem os elétrons de valência; ametais ganham o que falta para 8.
+| Grupo | 1 | 2 | 13 | 15 | 16 | 17 |
+|---|---|---|---|---|---|---|
+| carga | **+1** | **+2** | **+3** | **−3** | **−2** | **−1** |
+
+**Regra:** a soma das cargas tem de dar **zero**. Atalho: "**cruzar as cargas**" (o valor da carga de um vira o índice do outro) e **simplificar**.
+\[ \text{Al}^{3+} + \text{O}^{2-} \;\Rightarrow\; \text{Al}_2\text{O}_3 \qquad (2 \times (+3) + 3 \times (-2) = 0) \]
+- Ca²⁺ + O²⁻ → Ca₂O₂ → simplifica → **CaO**.
+- Mg²⁺ + N³⁻ → **Mg₃N₂** (3 × (+2) + 2 × (−3) = 0).
+- Ca²⁺ + PO₄³⁻ → **Ca₃(PO₄)₂** (íon poliatômico entre parênteses quando há índice).
+
 | Cátion | Ânion | Fórmula | Nome |
 |---|---|---|---|
 | K⁺ | Br⁻ | KBr | brometo de potássio |
@@ -48,7 +63,51 @@ Por isso a água com sais (soro, água do mar, água de combate a incêndio) con
 | Ca²⁺ | F⁻ | CaF₂ | fluoreto de cálcio |
 | Al³⁺ | Cl⁻ | AlCl₃ | cloreto de alumínio |
 | Na⁺ | SO₄²⁻ | Na₂SO₄ | sulfato de sódio |
-| Ca²⁺ | PO₄³⁻ | Ca₃(PO₄)₂ | fosfato de cálcio |
+| NH₄⁺ | NO₃⁻ | NH₄NO₃ | nitrato de amônio |
+| Fe³⁺ | O²⁻ | Fe₂O₃ | óxido de ferro III (ferrugem) |
+
+**A fórmula iônica é uma proporção** (fórmula mínima): não existe "molécula de NaCl". No cristal, cada Na⁺ está cercado por 6 Cl⁻ e cada Cl⁻ por 6 Na⁺, numa rede que se estende em todas as direções. Por isso o termo correto é **retículo cristalino** (ou "fórmula unitária"), e não molécula.
+
+### 4. Propriedades e de onde vêm
+| Propriedade | Explicação |
+|---|---|
+| **sólidos** cristalinos à temperatura ambiente | a atração entre os íons é forte e em todas as direções |
+| **pontos de fusão e de ebulição altos** (NaCl ≈ 801 °C; MgO ≈ 2.800 °C) | é preciso muita energia para desfazer a rede. Íons com **cargas maiores** e **menores** atraem mais: por isso o MgO (2+ e 2−) funde muito acima do NaCl (1+ e 1−) |
+| **duros**, mas **quebradiços** | um golpe desloca uma camada de íons, colocando **cargas iguais lado a lado**, que se repelem e o cristal se parte |
+| **não conduzem no estado sólido** | os íons estão **presos** na rede |
+| **conduzem fundidos ou em solução aquosa** | os íons ficam **livres** para se mover (são **eletrólitos**) |
+| muitos são **solúveis em água** | a água, polar, envolve os íons (hidratação) e os separa |
+
+**Dissociação iônica:** ao se dissolver, o composto iônico **separa** os íons que **já existiam**:
+\[ \text{NaCl}_{(s)} \xrightarrow{\text{água}} \text{Na}^+_{(aq)} + \text{Cl}^-_{(aq)} \]
+(É diferente da **ionização**, em que íons são **criados** a partir de uma molécula, como no HCl, QUI-08.)
+
+### 5. Íons poliatômicos
+São grupos de átomos unidos por ligações **covalentes** que, juntos, têm carga:
+| Íon | Nome | Íon | Nome |
+|---|---|---|---|
+| NH₄⁺ | amônio | NO₃⁻ | nitrato |
+| OH⁻ | hidróxido | SO₄²⁻ | sulfato |
+| CO₃²⁻ | carbonato | PO₄³⁻ | fosfato |
+| HCO₃⁻ | bicarbonato | ClO⁻ | hipoclorito |
+
+Compostos como **NaOH**, **NH₄Cl**, **CaCO₃** e **(NH₄)₂SO₄** têm **ligações iônicas** (entre os íons) e **covalentes** (dentro do íon poliatômico) ao mesmo tempo. O NH₄Cl é iônico mesmo **sem metal**: o amônio faz o papel do cátion.
+
+### 6. Aplicações ao serviço
+- **Água com sais conduz eletricidade.** A água pura conduz muito pouco, mas a água comum (da rede, de rios, do mar, de combate a incêndio) tem **íons dissolvidos** e conduz. Por isso **não se joga água** em equipamentos energizados: o jato pode levar a corrente ao bombeiro. Desligar a energia antes de combater com água; em equipamento energizado, usar agente **não condutor** (CO₂, pó químico).
+- **Suor** e **soro fisiológico** (NaCl 0,9%) conduzem: a pele molhada diminui a resistência do corpo e aumenta o risco de choque.
+- **Sal de cozinha** e outros compostos iônicos **não queimam** (já estão num estado estável); alguns, como os **nitratos**, são **oxidantes** e alimentam incêndios (QUI-10).
+- **Cloreto de sódio** é base de pós para incêndio de **metais** (classe D): forma uma crosta que abafa o metal.
+
+### 7. Bizus finais
+- Iônica = **metal + ametal**, **transferência** de elétrons.
+- Metal **perde** (cátion); ametal **ganha** (ânion).
+- Fórmula: cargas somam **zero**; cruzar e **simplificar** (CaO, Al₂O₃, Mg₃N₂).
+- Retículo cristalino: fórmula é **proporção**, não molécula.
+- Alto ponto de fusão; duros e quebradiços.
+- Conduzem **fundidos ou em água**, **não sólidos**.
+- NaOH e NH₄Cl: iônica + covalente juntas.
+- Água comum **conduz**: nada de água em equipamento energizado.
 
 ## Manias da banca
 

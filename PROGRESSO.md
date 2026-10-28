@@ -83,7 +83,10 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
     - lambda e \(pV = nRT\) no turbo e no intercooler.
     - Cada tópico liga o conteúdo à viatura: TDF, bombeamento parado, freio a ar com molas, GNV e elétricos.
   - **MAT** foi avaliada e considerada adequada.
-  - **Próximo passo, se o usuário quiser:** os demais tópicos de QUI.
+  - **QUI**, os 15 tópicos restantes (de ~1,5–2,5 mil para 5,5 a 8,7 mil caracteres cada), também com o *porquê* de cada regra e contas resolvidas: massa atômica média, meia-vida, distribuição passo a passo, propriedades periódicas explicadas, Lewis e geometria, forças intermoleculares, Nox, pH, hidrólise, fila de reatividade, fórmulas gerais e balanceamento de combustão.
+    - Aplicações ao serviço: classe D, água × equipamento energizado, densidade de gases em relação ao ar (M vs. 29), LII/LSI, pós BC e ABC, espuma AR, backdraft, oxidantes, aramidas.
+    - Agora **todas as 18 de QUI** estão no padrão novo.
+  - **Próximo passo, se o usuário quiser:** avaliar INF, PT, CDH e ING (não foram revisadas nesta rodada).
 - **25/10** — **Correção de redação por IA** (Redação › Corrigir uma redação):
   - **Como funciona:** o usuário digita o texto linha a linha como na folha (TL contado sozinho) e escolhe um dos 30 temas ou digita um tema próprio. A função `api/corrigir.ts` da **Vercel** chama o **Gemini**.
   - **Segurança:** a chave fica só no servidor (`GEMINI_API_KEY`); a função confere o login e a aprovação no Supabase.
