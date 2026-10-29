@@ -41,7 +41,7 @@ export default function Perfil() {
         <div className="my-2"><Barra valor={p.proximaXp ? (xp - p.base) / (p.proximaXp - p.base) : (xp - anterior) / (cond.proxima.xp - anterior)} cor="yellow" /></div>
         <div className="text-suave text-xs mb-2">
           {p.proximaXp
-            ? <>Faltam {(p.proximaXp - xp).toLocaleString('pt-BR')} XP para <b className="text-texto">{p.proximaNome}</b> (≈ {Math.ceil((p.proximaXp - xp) / (10 * ext.multiplicadorHoje)).toLocaleString('pt-BR')} acertos no ritmo de hoje).</>
+            ? <>Faltam {(p.proximaXp - xp).toLocaleString('pt-BR')} XP para <b className="text-texto">{p.proximaNome}</b> (≈ {Math.ceil((p.proximaXp - xp) / (10 * ext.multiplicadorHoje)).toLocaleString('pt-BR')} acertos com certeza no ritmo de hoje).</>
             : <>Próxima condecoração: {cond.proxima.icone} <b className="text-texto">{cond.proxima.nome}</b>, faltam {(cond.proxima.xp - xp).toLocaleString('pt-BR')} XP.</>}
         </div>
         <div className="text-suave text-[12px] leading-relaxed">

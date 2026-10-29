@@ -155,9 +155,16 @@ export function situacaoLeitura(topico: string, leituras: RegistroLeitura[], res
 // O XP de cada dia é multiplicado pela sequência de dias de estudo daquele dia: ×0,4 no 1º dia,
 // +0,1 por dia, até ×1,0 a partir do 7º, e fica no máximo enquanto a sequência continuar.
 // Perder a sequência custa 30 XP por dia da sequência perdida (no máximo 300).
-export const XP_BASE = { acerto: 10, erro: 2, branco: 1, leitura: 10, simuladoCompleto: 100, simulado: 30, redacao: 150 }
+export const XP_BASE = { branco: 1, leitura: 10, simuladoCompleto: 100, simulado: 30, redacao: 150 }
+// Questão: a errada tira o mesmo que a certa daria, e o valor depende da confiança marcada.
+// Sem confiança registrada (itens antigos, simulado sem marcação) vale como dúvida.
+export const XP_CONFIANCA = { certeza: 10, duvida: 6, chute: 3 } as const
+// Caderno de erros: cada volta do item vale mais, até o valor cheio (25%, 50%, 75%, 100%).
+export function fatorCaderno(revisoesFeitas: number): number {
+  return Math.min(1, 0.25 * (revisoesFeitas + 1))
+}
 export const DIAS_PARA_XP_MAXIMO = 7
-export const REGRA_XP = 'XP por tarefa: acerto 10, erro 2, branco 1 (item já respondido antes, como na revisão, vale metade), leitura confirmada 10, simulado completo 100 (menores 30), redação corrigida 150. Tudo multiplicado pela sequência do dia: ×0,4 no 1º dia, +0,1 por dia, ×1,0 a partir do 7º. Perder a sequência custa 30 XP por dia dela (máx. 300). Coronel aos 50.000 XP; depois vêm as condecorações.'
+export const REGRA_XP = 'Questão: certa soma e errada tira o mesmo valor, conforme a confiança: certeza ±10, dúvida ±6, chute ±3; branco +1. Item repetido vale metade; no caderno de erros o valor cresce a cada volta (25%, 50%, 75%, 100%). Leitura confirmada 10, simulado completo 100 (menores 30), redação corrigida 150. Tudo multiplicado pela sequência do dia: ×0,4 no 1º dia até ×1,0 a partir do 7º. Perder a sequência custa 30 XP por dia dela (máx. 300). Coronel aos 50.000 XP.'
 
 export function multiplicadorSequencia(dias: number): number {
   if (dias <= 0) return 0.4
@@ -188,12 +195,19 @@ export interface ExtratoXp {
 export function extratoXp({ respostas, leituras, simulados = [], redacoes = [] }: DadosXp, hoje = diaLocal()): ExtratoXp {
   const base: Record<string, number> = {}
   const somar = (iso: string, v: number) => { const d = diaLocal(new Date(iso)); base[d] = (base[d] ?? 0) + v }
-  // item já respondido antes (revisão, trilha, caderno de erros ou repetição) vale metade do inédito
+  // Valor da questão: ± pela confiança (certa soma, errada tira), branco +1.
+  // Caderno de erros: progressivo a cada volta do item (zera quando ele volta ao caderno).
+  // Outras repetições (trilha, treino de novo): metade do item inédito.
   const vistos = new Set<string>()
+  const voltas: Record<string, number> = {}
   for (const r of [...respostas].sort((a, b) => a.criadaEm.localeCompare(b.criadaEm))) {
-    const v = r.resposta === 'B' ? XP_BASE.branco : r.correta === 1 ? XP_BASE.acerto : XP_BASE.erro
-    somar(r.criadaEm, vistos.has(r.itemId) ? v / 2 : v)
+    const cheio = r.resposta === 'B' ? XP_BASE.branco
+      : (r.correta === 1 ? 1 : -1) * XP_CONFIANCA[r.confianca ?? 'duvida']
+    const fator = r.modo === 'revisao' ? fatorCaderno(voltas[r.itemId] ?? 0) : vistos.has(r.itemId) ? 0.5 : 1
+    somar(r.criadaEm, cheio * fator)
     vistos.add(r.itemId)
+    const precisaRever = r.correta !== 1 || r.confianca === 'chute'
+    voltas[r.itemId] = precisaRever ? 0 : r.modo === 'revisao' ? (voltas[r.itemId] ?? 0) + 1 : voltas[r.itemId] ?? 0
   }
   for (const l of leiturasValidas(leituras, respostas)) somar(l.criadaEm, XP_BASE.leitura)
   for (const x of simulados) if (x.status === 'concluido' && x.concluidoEm) somar(x.concluidoEm, x.itens.length >= 120 ? XP_BASE.simuladoCompleto : XP_BASE.simulado)

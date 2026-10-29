@@ -5,7 +5,7 @@ import { agendarSincronizacao } from './sync'
 import type { Confianca, ModoEstudo, Questao, RegistroResposta, Resposta } from './types'
 
 // Intervalos do caderno de erros (dias). Depois do último acerto com certeza, o item sai do caderno.
-export const INTERVALOS = [1, 3, 7, 15, 30]
+export const INTERVALOS = [1, 3, 7, 15]
 
 export async function registrarResposta(
   q: Questao,
@@ -58,7 +58,7 @@ async function atualizarRevisao(q: Questao, reg: RegistroResposta) {
     const proxima = etapa >= INTERVALOS.length ? null : somarDias(hoje, INTERVALOS[etapa])
     await db.revisoes.put({ ...atual, etapa, proxima, atualizadaEm: agora, sincronizada: 0 })
   } else {
-    await db.revisoes.put({ ...atual, proxima: somarDias(hoje, INTERVALOS[atual.etapa]), atualizadaEm: agora, sincronizada: 0 })
+    await db.revisoes.put({ ...atual, proxima: somarDias(hoje, INTERVALOS[Math.min(atual.etapa, INTERVALOS.length - 1)]), atualizadaEm: agora, sincronizada: 0 })
   }
 }
 
