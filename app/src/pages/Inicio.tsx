@@ -68,7 +68,7 @@ export default function Inicio() {
       onClick: () => nav(`/quiz?modo=topico&t=${m.focoTopico}&n=${Math.max(5, m.focoMeta - m.focoFeitos)}`),
     }] : []),
     {
-      chave: 'meta', periodo: 'dia', feita: m.itensHoje >= m.metaItens,
+      chave: 'meta', obrigatoria: true, periodo: 'dia', feita: m.itensHoje >= m.metaItens,
       titulo: `Meta diária · ${m.metaItens} itens`, sub: `${Math.min(m.itensHoje, m.metaItens)} de ${m.metaItens} hoje`,
     },
     {
@@ -78,31 +78,31 @@ export default function Inicio() {
       onClick: m.revisaoPendentes ? () => nav('/quiz?modo=revisao&n=20') : undefined,
     },
     {
-      chave: 'semana', periodo: 'semana', feita: m.semanaFeitas.length >= m.semanaMeta,
+      chave: 'semana', obrigatoria: true, periodo: 'semana', feita: m.semanaFeitas.length >= m.semanaMeta,
       titulo: `${Math.min(m.semanaFeitas.length, m.semanaMeta)} de ${m.semanaMeta} matérias`,
       sub: m.semanaFeitas.length >= m.semanaMeta ? 'meta semanal batida'
         : `${m.semanaMeta - m.semanaFeitas.length} a visitar até domingo${sugerida ? ` · sugestão de hoje: ${sugerida.nome}` : ''} (5+ itens em cada)`,
       onClick: sugerida ? () => nav(`/m/${sugerida.codigo}`) : undefined,
     },
     {
-      chave: 'simulado', periodo: 'mes', feita: mensais.simulado.pendentes === 0,
+      chave: 'simulado', obrigatoria: true, periodo: 'mes', feita: mensais.simulado.pendentes === 0,
       titulo: `1 simulado completo · ${mesNome}`, sub: subMes(mensais.simulado, 'simulado', 'simulados'),
       onClick: () => nav('/simulados'),
     },
     {
-      chave: 'trilha', periodo: 'mes', feita: mensais.revisao.pendentes === 0,
+      chave: 'trilha', obrigatoria: true, periodo: 'mes', feita: mensais.revisao.pendentes === 0,
       titulo: `1 trilha de revisão · ${mesNome}`, sub: subMes(mensais.revisao, 'trilha', 'trilhas'),
       onClick: () => nav('/trilha'),
     },
     {
-      chave: 'redacao', periodo: 'mes', feita: mensais.redacao.pendentes === 0,
+      chave: 'redacao', obrigatoria: true, periodo: 'mes', feita: mensais.redacao.pendentes === 0,
       titulo: `1 redação corrigida · ${mesNome}`, sub: subMes(mensais.redacao, 'redação', 'redações'),
       onClick: () => nav('/redacao/escrever'),
     },
     ...pessoais.itens,
   ]
   const ordemPeriodo = { dia: 0, semana: 1, mes: 2 }
-  missoes.sort((a, b) => ordemPeriodo[a.periodo] - ordemPeriodo[b.periodo] || Number(!!a.pessoal) - Number(!!b.pessoal))
+  missoes.sort((a, b) => ordemPeriodo[a.periodo] - ordemPeriodo[b.periodo] || Number(!!a.pessoal) - Number(!!b.pessoal) || Number(!a.obrigatoria) - Number(!b.obrigatoria))
   const nome = usuario && usuario !== 'modo local' ? `, ${usuario}` : ''
 
   return (

@@ -22,6 +22,7 @@ export interface ItemMissao {
   feita: boolean
   onClick?: () => void
   pessoal?: boolean
+  obrigatoria?: boolean // não cumprir no prazo tira XP; as outras são sugestão
   onRemover?: () => void
   onMarcar?: () => void
 }
@@ -44,7 +45,11 @@ export function LinhaMissao({ m }: { m: ItemMissao }) {
       <div onClick={m.onClick ?? m.onMarcar} className={`flex-1 min-w-0 ${clicavel ? 'cursor-pointer' : ''}`}>
         <div className="flex items-center gap-1.5 mb-0.5">
           <Pill cor={p.pill}>{p.rotulo}</Pill>
-          {m.pessoal && <span className="text-suave text-[11px]">✎ sua</span>}
+          {m.pessoal
+            ? <span className="text-suave text-[11px]">✎ sua</span>
+            : m.obrigatoria
+              ? <span className="text-destaque/90 text-[11px] font-semibold">obrigatória</span>
+              : <span className="text-suave text-[11px]">sugestão</span>}
         </div>
         <div className={`font-semibold leading-snug ${m.feita ? 'text-suave line-through decoration-1' : ''}`}>{m.titulo}</div>
         {m.sub && <div className="text-suave text-[13px]">{m.sub}</div>}
