@@ -168,6 +168,9 @@ export const DIAS_PARA_XP_MAXIMO = 7
 export const BONUS_MATERIA: Record<string, number> = { FIS: 1.2, QUI: 1.2 }
 // Meta não cumprida no prazo tira XP: dia (meta de itens), semana (7 matérias) e cada meta do mês.
 export const PENALIDADE_META = { dia: 20, semana: 100, mes: 150 }
+// A cobrança começou em 29/10/2026: dias a partir de hoje, a semana em andamento (26/10 a 1/11)
+// e os meses a partir de novembro (outubro já estava no fim). Nada antes disso é cobrado.
+export const INICIO_PENALIDADES = { dia: '2026-10-29', semana: '2026-10-26', mes: '2026-11' }
 export const REGRA_XP = 'Questão: certa soma e errada tira o mesmo valor, conforme a confiança: certeza ±10, dúvida ±6, chute ±3; branco +1. Física e Química valem 20% a mais. Item repetido vale metade; no caderno de erros o valor cresce a cada volta (25%, 50%, 75%, 100%). Leitura confirmada 10, simulado completo 100 (menores 30), redação corrigida 150. Tudo multiplicado pela sequência do dia: ×0,4 no 1º dia até ×1,0 a partir do 7º. Perder a sequência custa 30 XP por dia dela (máx. 300). Meta não cumprida no prazo: −20 (dia), −100 (semana), −150 (cada meta do mês). Coronel aos 50.000 XP.'
 
 export function multiplicadorSequencia(dias: number): number {
@@ -281,7 +284,7 @@ export function xpDaRespostaNova(r: RegistroResposta, historicoDoItem: RegistroR
   return { ...v, mult, final: v.xp * mult }
 }
 
-// Metas vencidas e não cumpridas, desde o primeiro dia de estudo (o período atual ainda não conta).
+// Metas vencidas e não cumpridas, desde INICIO_PENALIDADES (o período atual ainda não conta).
 export function penalidadesDeMetas(respostas: RegistroResposta[], simulados: RegistroSimulado[], redacoes: RegistroRedacao[], metaDiaria: number, hoje = diaLocal()) {
   const saida: ExtratoXp['penalidadesMetas'] = []
   if (!respostas.length) return saida
@@ -296,11 +299,11 @@ export function penalidadesDeMetas(respostas: RegistroResposta[], simulados: Reg
     w[r.materia] = (w[r.materia] ?? 0) + 1
   }
   // dia: meta de itens
-  for (let d = primeiro; d < hoje; d = somarDias(d, 1)) {
+  for (let d = primeiro < INICIO_PENALIDADES.dia ? INICIO_PENALIDADES.dia : primeiro; d < hoje; d = somarDias(d, 1)) {
     if ((porDia[d] ?? 0) < metaDiaria) saida.push({ dia: d, tipo: 'dia', descricao: `meta de ${metaDiaria} itens em ${d.split('-').reverse().join('/')}`, xp: PENALIDADE_META.dia })
   }
   // semana: 7 matérias (penalidade no domingo)
-  for (let w = inicioSemana(primeiro); w < inicioSemana(hoje); w = somarDias(w, 7)) {
+  for (let w = inicioSemana(primeiro < INICIO_PENALIDADES.semana ? INICIO_PENALIDADES.semana : primeiro); w < inicioSemana(hoje); w = somarDias(w, 7)) {
     const feitas = Object.values(materiasSemana[w] ?? {}).filter((n) => n >= ITENS_PARA_CONTAR_MATERIA).length
     if (feitas < META_MATERIAS_SEMANA) saida.push({ dia: somarDias(w, 6), tipo: 'semana', descricao: `semana de ${w.split('-').reverse().join('/')}: ${feitas} de ${META_MATERIAS_SEMANA} matérias`, xp: PENALIDADE_META.semana })
   }
@@ -312,8 +315,9 @@ export function penalidadesDeMetas(respostas: RegistroResposta[], simulados: Reg
     ['trilha de revisão', mesesFeitos(trilhasConcluidas(respostas))],
   ]
   const mesAtual = hoje.slice(0, 7)
-  let [a, m] = primeiro.slice(0, 7).split('-').map(Number)
-  for (let mes = primeiro.slice(0, 7); mes < mesAtual;) {
+  const mesInicial = primeiro.slice(0, 7) < INICIO_PENALIDADES.mes ? INICIO_PENALIDADES.mes : primeiro.slice(0, 7)
+  let [a, m] = mesInicial.split('-').map(Number)
+  for (let mes = mesInicial; mes < mesAtual;) {
     const proximo = m === 12 ? `${a + 1}-01` : `${a}-${String(m + 1).padStart(2, '0')}`
     const ultimoDia = somarDias(`${proximo}-01`, -1)
     for (const [nome, feitos] of metas) if (!feitos.has(mes)) saida.push({ dia: ultimoDia, tipo: 'mes', descricao: `${nome} de ${mes.split('-').reverse().join('/')}`, xp: PENALIDADE_META.mes })

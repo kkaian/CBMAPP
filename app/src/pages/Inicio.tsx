@@ -7,7 +7,7 @@ import { Anel, Botao, Card, Carregando, Pill, Secao } from '../components/ui'
 import { acharTopico, useIndice } from '../lib/conteudo'
 import { db } from '../lib/db'
 import { diaLocal, diasEntre, formatarDia } from '../lib/datas'
-import { PENALIDADE_META, calcularStreak, condecoracoes, extratoXp, diasComEstudo, metasMensais, montarMissao, patente } from '../lib/stats'
+import { INICIO_PENALIDADES, PENALIDADE_META, calcularStreak, condecoracoes, extratoXp, diasComEstudo, metasMensais, montarMissao, patente } from '../lib/stats'
 import { useLeituras, useMetaDiaria, useRespostas, useRevisoes } from '../lib/useDados'
 
 function saudacao() {
@@ -50,7 +50,7 @@ export default function Inicio() {
       ? meta.feitosNoMes ? `feito este mês${meta.feitosNoMes > 1 ? ` (${meta.feitosNoMes})` : ''}` : 'em dia'
       : `${meta.feitosNoMes ? `${meta.feitosNoMes} feito este mês · ` : ''}${plural(meta.pendentes, um, varios)} ${meta.pendentes === 1 ? 'pendente' : 'pendentes'}${meta.pendentes > 1 || meta.feitosNoMes ? ' (acumulado dos meses anteriores)' : ''}`
   const fimMes = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
-  const riscoMes = `até ${fimMes} · −${PENALIDADE_META.mes} XP se não cumprir neste mês`
+  const riscoMes = hoje.slice(0, 7) >= INICIO_PENALIDADES.mes ? `até ${fimMes} · −${PENALIDADE_META.mes} XP se não cumprir neste mês` : `a partir de novembro, −${PENALIDADE_META.mes} XP por mês sem cumprir`
   const missoes: ItemMissao[] = [
     ...(leitura && m.leituraTopico ? [{
       chave: 'leitura', periodo: 'dia' as const, feita: m.leituraFeita,
