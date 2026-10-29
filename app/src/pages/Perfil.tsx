@@ -24,12 +24,12 @@ export default function Perfil() {
   const reportes = useLiveQuery(() => lerConfig<{ itemId: string; motivo: string; em: string }[]>('reportes', []), [])
   if (!ind || !respostas || !leituras || !revisoes) return <Carregando />
 
-  const ext = extratoXp({ respostas, leituras, simulados: simulados ?? [], redacoes: redacoes ?? [] })
+  const ext = extratoXp({ respostas, leituras, simulados: simulados ?? [], redacoes: redacoes ?? [], metaDiaria: meta })
   const xp = ext.total
   const p = patente(xp)
   const cond = condecoracoes(xp)
   const anterior = cond.obtidas.length ? cond.obtidas[cond.obtidas.length - 1].xp : PATENTES[PATENTES.length - 1][1]
-  const grupos = calcularConquistas({ ind, respostas, leituras, revisoes, simulados: simulados ?? [], redacoes: redacoes ?? [] })
+  const grupos = calcularConquistas({ ind, respostas, leituras, revisoes, simulados: simulados ?? [], redacoes: redacoes ?? [], metaDiaria: meta })
   const conquistas = grupos.flatMap((g) => g.itens)
 
   return (
@@ -48,6 +48,7 @@ export default function Perfil() {
           {PATENTES.map(([n], i) => <span key={n} className={i === p.nivel ? 'text-texto font-bold' : ''}>{n}{i < PATENTES.length - 1 ? ' → ' : ''}</span>)}
         </div>
         <div className="text-sm mt-2">🔥 Sequência: <b>{ext.sequenciaAtual} {ext.sequenciaAtual === 1 ? 'dia' : 'dias'}</b> · XP de hoje vale <b>×{ext.multiplicadorHoje.toLocaleString('pt-BR', { minimumFractionDigits: 1 })}</b>{ext.emRisco ? ` · em risco: ${ext.emRisco} XP` : ''}</div>
+        {ext.penalidadesMetas.length > 0 && <div className="text-suave text-xs mt-1">Metas não cumpridas no prazo: {ext.penalidadesMetas.length} (−{ext.penalidadesMetas.reduce((t, p) => t + p.xp, 0).toLocaleString('pt-BR')} XP no total)</div>}
         {ext.penalidades.length > 0 && <div className="text-suave text-xs mt-1">Sequências perdidas: {ext.penalidades.length} (−{ext.penalidades.reduce((t, p) => t + p.xp, 0).toLocaleString('pt-BR')} XP no total)</div>}
         <div className="text-suave text-xs mt-2">{REGRA_XP}</div>
       </Card>

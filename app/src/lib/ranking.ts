@@ -47,11 +47,12 @@ export async function montarResumo(): Promise<ResumoPublico> {
   const respSemana = daSemana(respostas)
   const julgadasSemana = respSemana.filter((r) => r.correta !== null)
   const redacoes = await db.redacoes.toArray()
-  const extrato = extratoXp({ respostas, leituras, simulados, redacoes })
+  const metaDiaria = await lerConfig<number>('metaDiaria', 40)
+  const extrato = extratoXp({ respostas, leituras, simulados, redacoes, metaDiaria })
   const xp = extrato.total
   const p = patente(xp)
   const diag = diagnosticoPorMateria(respostas)
-  const conquistas = calcularConquistas({ ind, respostas, leituras, revisoes, simulados, redacoes }).flatMap((g) => g.itens)
+  const conquistas = calcularConquistas({ ind, respostas, leituras, revisoes, simulados, redacoes, metaDiaria }).flatMap((g) => g.itens)
   const completos = simulados.filter((s) => s.itens.length >= 120 && s.resumo)
   const ultimo = simulados[simulados.length - 1]
 

@@ -22,6 +22,7 @@ export interface ItemMissao {
   feita: boolean
   onClick?: () => void
   pessoal?: boolean
+  risco?: string // o que se perde se não cumprir no prazo
   onRemover?: () => void
   onMarcar?: () => void
 }
@@ -48,6 +49,7 @@ export function LinhaMissao({ m }: { m: ItemMissao }) {
         </div>
         <div className={`font-semibold leading-snug ${m.feita ? 'text-suave line-through decoration-1' : ''}`}>{m.titulo}</div>
         {m.sub && <div className="text-suave text-[13px]">{m.sub}</div>}
+        {m.risco && !m.feita && <div className="text-destaque/80 text-[11px] mt-0.5">⏳ {m.risco}</div>}
       </div>
       {m.onRemover
         ? <button type="button" onClick={m.onRemover} aria-label="remover missão" className="text-suave px-1 text-lg leading-none">×</button>

@@ -7,7 +7,7 @@ import { Anel, Botao, Card, Carregando, Pill, Secao } from '../components/ui'
 import { acharTopico, useIndice } from '../lib/conteudo'
 import { db } from '../lib/db'
 import { diaLocal, diasEntre, formatarDia } from '../lib/datas'
-import { calcularStreak, condecoracoes, extratoXp, diasComEstudo, metasMensais, montarMissao, patente } from '../lib/stats'
+import { PENALIDADE_META, calcularStreak, condecoracoes, extratoXp, diasComEstudo, metasMensais, montarMissao, patente } from '../lib/stats'
 import { useLeituras, useMetaDiaria, useRespostas, useRevisoes } from '../lib/useDados'
 
 function saudacao() {
@@ -33,7 +33,7 @@ export default function Inicio() {
   const hoje = diaLocal()
   const faltam = diasEntre(hoje, ind.edital.dataProva)
   const streak = calcularStreak(diasComEstudo(respostas))
-  const ext = extratoXp({ respostas, leituras, simulados: simulados ?? [], redacoes: redacoes ?? [] }, hoje)
+  const ext = extratoXp({ respostas, leituras, simulados: simulados ?? [], redacoes: redacoes ?? [], metaDiaria: meta }, hoje)
   const xp = ext.total
   const pat = patente(xp)
   const cond = condecoracoes(xp)
@@ -49,6 +49,8 @@ export default function Inicio() {
     meta.pendentes === 0
       ? meta.feitosNoMes ? `feito este mês${meta.feitosNoMes > 1 ? ` (${meta.feitosNoMes})` : ''}` : 'em dia'
       : `${meta.feitosNoMes ? `${meta.feitosNoMes} feito este mês · ` : ''}${plural(meta.pendentes, um, varios)} ${meta.pendentes === 1 ? 'pendente' : 'pendentes'}${meta.pendentes > 1 || meta.feitosNoMes ? ' (acumulado dos meses anteriores)' : ''}`
+  const fimMes = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
+  const riscoMes = `até ${fimMes} · −${PENALIDADE_META.mes} XP se não cumprir neste mês`
   const missoes: ItemMissao[] = [
     ...(leitura && m.leituraTopico ? [{
       chave: 'leitura', periodo: 'dia' as const, feita: m.leituraFeita,
@@ -67,6 +69,7 @@ export default function Inicio() {
     {
       chave: 'meta', periodo: 'dia', feita: m.itensHoje >= m.metaItens,
       titulo: `Meta diária · ${m.metaItens} itens`, sub: `${Math.min(m.itensHoje, m.metaItens)} de ${m.metaItens} hoje`,
+      risco: `até 23h59 de hoje · −${PENALIDADE_META.dia} XP se não cumprir`,
     },
     {
       chave: 'revisao', periodo: 'dia', feita: m.revisaoPendentes === 0,
@@ -80,21 +83,25 @@ export default function Inicio() {
       sub: m.semanaFeitas.length >= m.semanaMeta ? 'meta semanal batida'
         : `${m.semanaMeta - m.semanaFeitas.length} a visitar até domingo${sugerida ? ` · sugestão de hoje: ${sugerida.nome}` : ''} (5+ itens em cada)`,
       onClick: sugerida ? () => nav(`/m/${sugerida.codigo}`) : undefined,
+      risco: `até domingo · −${PENALIDADE_META.semana} XP se não cumprir`,
     },
     {
       chave: 'simulado', periodo: 'mes', feita: mensais.simulado.pendentes === 0,
       titulo: `1 simulado completo · ${mesNome}`, sub: subMes(mensais.simulado, 'simulado', 'simulados'),
       onClick: () => nav('/simulados'),
+      risco: riscoMes,
     },
     {
       chave: 'trilha', periodo: 'mes', feita: mensais.revisao.pendentes === 0,
       titulo: `1 trilha de revisão · ${mesNome}`, sub: subMes(mensais.revisao, 'trilha', 'trilhas'),
       onClick: () => nav('/trilha'),
+      risco: riscoMes,
     },
     {
       chave: 'redacao', periodo: 'mes', feita: mensais.redacao.pendentes === 0,
       titulo: `1 redação corrigida · ${mesNome}`, sub: subMes(mensais.redacao, 'redação', 'redações'),
       onClick: () => nav('/redacao/escrever'),
+      risco: riscoMes,
     },
     ...pessoais.itens,
   ]

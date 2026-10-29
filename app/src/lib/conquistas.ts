@@ -9,13 +9,14 @@ export interface Conquista { icone: string; nome: string; ok: boolean }
 export interface GrupoConquistas { titulo: string; itens: Conquista[] }
 
 // Todas ligadas a progresso real. Usadas no Perfil e no resumo público do ranking.
-export function calcularConquistas({ ind, respostas, leituras, revisoes, simulados, redacoes = [] }: {
+export function calcularConquistas({ ind, respostas, leituras, revisoes, simulados, redacoes = [], metaDiaria }: {
   ind: IndiceConteudo
   respostas: RegistroResposta[]
   leituras: RegistroLeitura[]
   revisoes: RegistroRevisao[]
   simulados: RegistroSimulado[] // só os concluídos
   redacoes?: RegistroRedacao[]
+  metaDiaria?: number
 }): GrupoConquistas[] {
   const streak = calcularStreak(diasComEstudo(respostas))
   const porMateria = (m: string) => respostas.filter((r) => r.materia === m).length
@@ -34,7 +35,7 @@ export function calcularConquistas({ ind, respostas, leituras, revisoes, simulad
     && respostas.filter((r) => Date.now() - new Date(r.criadaEm).getTime() < 7 * 86_400_000).length >= 50
 
   // novas: XP, acertos, inéditos, revisão, missões e redação
-  const xp = calcularXp({ respostas, leituras, simulados, redacoes })
+  const xp = calcularXp({ respostas, leituras, simulados, redacoes, metaDiaria })
   const nivel = patente(xp).nivel
   const nCond = condecoracoes(xp).obtidas.length
   const acertos = respostas.filter((r) => r.correta === 1).length
