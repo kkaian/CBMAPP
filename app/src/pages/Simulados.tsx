@@ -124,7 +124,7 @@ function PorMaterias({ carregando, onComecar }: { carregando: boolean; onComecar
   if (!ind) return <Carregando />
   const materias = ind.edital.materias
     .map((m) => ({ ...m, itens: m.topicos.reduce((t, x) => t + (ind.resumo[x.codigo]?.itens ?? 0), 0) }))
-    .filter((m) => m.itens > 0)
+    .filter((m) => m.itens > 0 && m.prova !== 'P3') // a discursiva fica de fora
   const disponiveis = materias.filter((m) => escolhidas.includes(m.codigo)).reduce((t, m) => t + m.itens, 0)
   const alternar = (c: string) => setEscolhidas((e) => (e.includes(c) ? e.filter((x) => x !== c) : [...e, c]))
   const chip = (ativo: boolean) => `px-3 py-1.5 rounded-full text-sm font-semibold border ${ativo ? 'bg-destaque text-white border-destaque' : 'bg-card2 border-linha text-texto'}`
