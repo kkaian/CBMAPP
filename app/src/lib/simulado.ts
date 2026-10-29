@@ -118,6 +118,31 @@ export async function montarFracos(n = 30): Promise<Montagem | null> {
   return { tipo: 'fracos', titulo: 'Pontos fracos', itens, limiteMs: itens.length * POR_ITEM_FRACOS }
 }
 
+// Mini por matérias: mistura itens de todos os tópicos das matérias escolhidas,
+// repartindo a quantidade entre os tópicos (inéditos primeiro em cada um).
+export async function montarPorMaterias(codigos: string[], n: number): Promise<Montagem | null> {
+  const ind = await carregarIndice()
+  const materias = ind.edital.materias.filter((m) => codigos.includes(m.codigo))
+  if (!materias.length) return null
+  const porTopico = new Map<string, Questao[]>()
+  for (const m of materias) {
+    for (const q of (await carregarMateria(m.codigo)).questoes) porTopico.set(q.topico, [...(porTopico.get(q.topico) ?? []), q])
+  }
+  const topicos = embaralhar([...porTopico.keys()])
+  if (!topicos.length) return null
+  const base = Math.floor(n / topicos.length)
+  const sobra = n % topicos.length
+  const partes: Questao[] = []
+  for (const [i, t] of topicos.entries()) {
+    const cota = base + (i < sobra ? 1 : 0)
+    if (cota > 0) partes.push(...(await sortear(porTopico.get(t)!, cota)))
+  }
+  const itens = embaralharBlocos(partes).slice(0, n)
+  const nomes = materias.map((m) => m.nome)
+  const titulo = nomes.length <= 2 ? `Mini · ${nomes.join(' + ')}` : `Mini · ${nomes.length} matérias`
+  return { tipo: 'materias', titulo, itens, limiteMs: itens.length * POR_ITEM_FRACOS }
+}
+
 // embaralha mantendo os itens de um mesmo texto-base juntos
 function embaralharBlocos(questoes: Questao[]): Questao[] {
   const blocos = new Map<string, Questao[]>()

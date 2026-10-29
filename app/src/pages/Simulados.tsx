@@ -2,10 +2,11 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Cabecalho, Card, Carregando, Pill, Secao } from '../components/ui'
+import { useIndice } from '../lib/conteudo'
 import { db } from '../lib/db'
 import {
   DRIVE, LIMITE_MINI, descartarSimulado, formatarDuracao, iniciarSimulado,
-  montarCompleto, montarDrive, montarFracos, montarMini, topicosFracos, type Montagem,
+  montarCompleto, montarDrive, montarFracos, montarMini, montarPorMaterias, topicosFracos, type Montagem,
 } from '../lib/simulado'
 import type { RegistroSimulado } from '../lib/types'
 
@@ -69,6 +70,8 @@ export default function Simulados() {
         sub={fracos === undefined ? '…' : fracos.length ? `30 itens ${fracos.length === 1 ? 'do seu tópico' : `dos seus ${fracos.length} tópicos`} 🔴🟠 · 40 min` : 'disponível quando houver tópicos 🔴 ou 🟠 no diagnóstico'}
         desativado={!fracos?.length} carregando={montando === 'fracos'} onClick={() => comecar('fracos', () => montarFracos())} />
 
+      <PorMaterias carregando={montando === 'materias'} onComecar={(cods, n) => comecar('materias', () => montarPorMaterias(cods, n))} />
+
       <Secao>Simulados 01–05 (caderno do Drive)</Secao>
       <div className="grid grid-cols-5 gap-2 mb-1">
         {DRIVE.map((n) => {
@@ -105,6 +108,53 @@ export default function Simulados() {
         </>
       )}
     </>
+  )
+}
+
+const TAMANHOS = [10, 20, 30, 50]
+
+function PorMaterias({ carregando, onComecar }: { carregando: boolean; onComecar: (codigos: string[], n: number) => void }) {
+  const { dados: ind } = useIndice()
+  const [aberto, setAberto] = useState(false)
+  const [escolhidas, setEscolhidas] = useState<string[]>([])
+  const [n, setN] = useState(20)
+  if (!aberto) {
+    return <Opcao icone="🧪" titulo="Mini por matérias" sub="você escolhe uma ou mais matérias; os itens vêm misturados de todos os tópicos delas" onClick={() => setAberto(true)} />
+  }
+  if (!ind) return <Carregando />
+  const materias = ind.edital.materias
+    .map((m) => ({ ...m, itens: m.topicos.reduce((t, x) => t + (ind.resumo[x.codigo]?.itens ?? 0), 0) }))
+    .filter((m) => m.itens > 0)
+  const disponiveis = materias.filter((m) => escolhidas.includes(m.codigo)).reduce((t, m) => t + m.itens, 0)
+  const alternar = (c: string) => setEscolhidas((e) => (e.includes(c) ? e.filter((x) => x !== c) : [...e, c]))
+  const chip = (ativo: boolean) => `px-3 py-1.5 rounded-full text-sm font-semibold border ${ativo ? 'bg-destaque text-white border-destaque' : 'bg-card2 border-linha text-texto'}`
+  const total = Math.min(n, disponiveis)
+  return (
+    <Card className="border border-azul/40">
+      <div className="flex justify-between items-center mb-2">
+        <b>🧪 Mini por matérias</b>
+        <button onClick={() => setAberto(false)} className="text-suave text-sm px-1">fechar</button>
+      </div>
+      <div className="text-suave text-xs mb-1.5">Matérias ({escolhidas.length} escolhida{escolhidas.length === 1 ? '' : 's'})</div>
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {materias.map((m) => (
+          <button key={m.codigo} type="button" className={chip(escolhidas.includes(m.codigo))} onClick={() => alternar(m.codigo)}>{m.nome}</button>
+        ))}
+      </div>
+      <div className="text-suave text-xs mb-1.5">Quantos itens?</div>
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {TAMANHOS.map((t) => <button key={t} type="button" className={chip(n === t)} onClick={() => setN(t)}>{t}</button>)}
+      </div>
+      <button
+        type="button"
+        disabled={!escolhidas.length || carregando}
+        onClick={() => onComecar(escolhidas, n)}
+        className="w-full py-3 rounded-xl bg-destaque text-white font-bold disabled:opacity-40"
+      >
+        {carregando ? 'Montando…' : escolhidas.length ? `Começar · ${total} itens · ${formatarDuracao(total * 80_000)}` : 'Escolha pelo menos uma matéria'}
+      </button>
+      <div className="text-suave text-[11px] mt-2">Os itens são repartidos entre todos os tópicos das matérias escolhidas, priorizando os que você nunca respondeu. Nota pela regra do edital (certos − errados).</div>
+    </Card>
   )
 }
 

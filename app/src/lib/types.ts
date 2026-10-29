@@ -140,7 +140,7 @@ export interface RegistroLeitura {
 
 // ---- simulados ----
 
-export type TipoSimulado = 'drive' | 'completo' | 'mini' | 'fracos'
+export type TipoSimulado = 'drive' | 'completo' | 'mini' | 'fracos' | 'materias'
 
 export interface RespostaSimulado {
   r: Resposta

@@ -143,6 +143,7 @@ export function calcularConquistas({ ind, respostas, leituras, revisoes, simulad
       { icone: '🗃️', nome: 'Simulados 01–05 feitos', ok: driveFeitos.size >= 5 },
       { icone: '📈', nome: '5 simulados concluídos', ok: sims.length >= 5 },
       { icone: '🩹', nome: 'Pontos fracos encarados', ok: sims.some((s) => s.tipo === 'fracos') },
+      { icone: '🧪', nome: 'Mini por matérias', ok: sims.some((s) => s.tipo === 'materias') },
     ] },
   ]
 }
