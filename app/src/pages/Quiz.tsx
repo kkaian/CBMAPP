@@ -4,7 +4,9 @@ import { Rico } from '../components/Rico'
 import { Barra, Botao, Card, Carregando, Pill } from '../components/ui'
 import { carregarMateria, materiaDoTopico } from '../lib/conteudo'
 import { gravarConfig, lerConfig } from '../lib/db'
+import { db } from '../lib/db'
 import { registrarResposta } from '../lib/estudo'
+import { xpDaRespostaNova } from '../lib/stats'
 import { itensDaMateria, itensDaTrilha, itensDeRevisao, itensDoTopico, itensRelampago } from '../lib/selecao'
 import type { Confianca, Grupo, ModoEstudo, Questao, RegistroResposta, Resposta } from '../lib/types'
 
@@ -25,6 +27,8 @@ export default function Quiz() {
   const [confianca, setConfianca] = useState<Confianca | null>(null)
   const [registro, setRegistro] = useState<RegistroResposta | null>(null)
   const [feitos, setFeitos] = useState<RegistroResposta[]>([])
+  const [xpItem, setXpItem] = useState<ReturnType<typeof xpDaRespostaNova> | null>(null)
+  const [xpSessao, setXpSessao] = useState(0)
   const inicio = useRef(Date.now())
   const [segundos, setSegundos] = useState(0)
 
@@ -67,6 +71,10 @@ export default function Quiz() {
       const reg = await registrarResposta(q, r, confianca, Date.now() - inicio.current, modoEstudo)
       setRegistro(reg)
       setFeitos((f) => [...f, reg])
+      const historico = await db.respostas.where('itemId').equals(q.id).toArray()
+      const x = xpDaRespostaNova(reg, historico, await db.respostas.toArray())
+      setXpItem(x)
+      setXpSessao((s) => s + x.final)
     } finally {
       gravando.current = false
     }
@@ -74,6 +82,7 @@ export default function Quiz() {
 
   const proximo = useCallback(() => {
     setRegistro(null)
+    setXpItem(null)
     setConfianca(null)
     setI((x) => x + 1)
     setSegundos(0)
@@ -117,7 +126,7 @@ export default function Quiz() {
       </div>
     )
   }
-  if (!q) return <Resultado feitos={feitos} onSair={() => (modo === 'trilha' ? nav('/questoes', { replace: true }) : nav(-1))} />
+  if (!q) return <Resultado feitos={feitos} xp={xpSessao} onSair={() => (modo === 'trilha' ? nav('/questoes', { replace: true }) : nav(-1))} />
 
   const grupo = q.grupo ? grupos[q.grupo] : null
   const mostraGrupo = grupo && (i === 0 || itens[i - 1]?.grupo !== q.grupo)
@@ -172,6 +181,7 @@ export default function Quiz() {
               ? <b>Em branco (0)</b>
               : acertou ? <b className="text-verde">✔ Acertou (+1)</b> : <b className="text-destaque">✘ Errou (−1)</b>}
             <span className="text-suave text-sm"> · gabarito: {q.gabarito === 'C' ? 'CERTO' : 'ERRADO'}</span>
+            {xpItem && <SeloXp x={xpItem} />}
             {(registro.correta !== 1 || registro.confianca === 'chute') && <div className="text-suave text-[13px] mt-1">Foi para o caderno de erros (volta amanhã).</div>}
             {registro.correta === 0 && registro.confianca === 'certeza' && <div className="text-amarelo text-[13px] mt-1">⚠️ Errou com certeza: esse é o tipo de erro que mais custa na prova.</div>}
           </Card>
@@ -189,7 +199,23 @@ export default function Quiz() {
   )
 }
 
-function Resultado({ feitos, onSair }: { feitos: RegistroResposta[]; onSair: () => void }) {
+function SeloXp({ x }: { x: ReturnType<typeof xpDaRespostaNova> }) {
+  const fmt = (n: number) => (Math.round(n * 10) / 10).toLocaleString('pt-BR')
+  const cor = x.final > 0 ? 'text-verde bg-[#173324]' : x.final < 0 ? 'text-destaque bg-[#3a1d20]' : 'text-suave bg-card2'
+  const partes = [
+    `${x.cheio > 0 ? '+' : ''}${fmt(x.cheio)} base`,
+    x.motivo,
+    `×${x.mult.toLocaleString('pt-BR', { minimumFractionDigits: 1 })} sequência`,
+  ].filter(Boolean)
+  return (
+    <div className="flex items-center gap-2 mt-2">
+      <span className={`px-2.5 py-1 rounded-full font-bold text-sm ${cor}`}>{x.final > 0 ? '+' : ''}{fmt(x.final)} XP</span>
+      <span className="text-suave text-[12px]">{partes.join(' · ')}</span>
+    </div>
+  )
+}
+
+function Resultado({ feitos, xp, onSair }: { feitos: RegistroResposta[]; xp: number; onSair: () => void }) {
   const acertos = feitos.filter((r) => r.correta === 1).length
   const erros = feitos.filter((r) => r.correta === 0).length
   const brancos = feitos.filter((r) => r.correta === null).length
@@ -207,6 +233,7 @@ function Resultado({ feitos, onSair }: { feitos: RegistroResposta[]; onSair: () 
       <Card>
         <div className="flex justify-between"><span>Nota Cebraspe (certos − errados)</span><b className={liquida >= 0 ? 'text-verde' : 'text-destaque'}>{liquida > 0 ? '+' : ''}{liquida}</b></div>
         <div className="flex justify-between text-sm text-suave mt-1"><span>Acerto entre os respondidos</span><span>{acertos + erros ? Math.round((acertos / (acertos + erros)) * 100) : 0}%</span></div>
+        <div className="flex justify-between text-sm mt-1"><span>XP nesta sessão</span><b className={xp >= 0 ? 'text-verde' : 'text-destaque'}>{xp > 0 ? '+' : ''}{(Math.round(xp * 10) / 10).toLocaleString('pt-BR')}</b></div>
         {chutes.length > 0 && <div className="flex justify-between text-sm text-suave mt-1"><span>Chutes certos</span><span>{chutes.filter((r) => r.correta === 1).length} de {chutes.length}</span></div>}
       </Card>
       {errosCerteza > 0 && <Card className="text-sm">⚠️ <b>{errosCerteza}</b> {errosCerteza === 1 ? 'erro' : 'erros'} com certeza. Eles já estão no caderno de erros com prioridade.</Card>}

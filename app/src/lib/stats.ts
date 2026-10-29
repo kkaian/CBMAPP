@@ -201,13 +201,9 @@ export function extratoXp({ respostas, leituras, simulados = [], redacoes = [] }
   const vistos = new Set<string>()
   const voltas: Record<string, number> = {}
   for (const r of [...respostas].sort((a, b) => a.criadaEm.localeCompare(b.criadaEm))) {
-    const cheio = r.resposta === 'B' ? XP_BASE.branco
-      : (r.correta === 1 ? 1 : -1) * XP_CONFIANCA[r.confianca ?? 'duvida']
-    const fator = r.modo === 'revisao' ? fatorCaderno(voltas[r.itemId] ?? 0) : vistos.has(r.itemId) ? 0.5 : 1
-    somar(r.criadaEm, cheio * fator)
+    somar(r.criadaEm, valorResposta(r, vistos.has(r.itemId), voltas[r.itemId] ?? 0).xp)
     vistos.add(r.itemId)
-    const precisaRever = r.correta !== 1 || r.confianca === 'chute'
-    voltas[r.itemId] = precisaRever ? 0 : r.modo === 'revisao' ? (voltas[r.itemId] ?? 0) + 1 : voltas[r.itemId] ?? 0
+    voltas[r.itemId] = proximasVoltas(r, voltas[r.itemId] ?? 0)
   }
   for (const l of leiturasValidas(leituras, respostas)) somar(l.criadaEm, XP_BASE.leitura)
   for (const x of simulados) if (x.status === 'concluido' && x.concluidoEm) somar(x.concluidoEm, x.itens.length >= 120 ? XP_BASE.simuladoCompleto : XP_BASE.simulado)
@@ -246,6 +242,29 @@ export function extratoXp({ respostas, leituras, simulados = [], redacoes = [] }
   const atual = calcularStreak(estudo, hoje).dias
   const sequenciaHoje = estudo.has(hoje) ? atual : atual + 1
   return { total, porDia, penalidades, sequenciaAtual: atual, sequenciaHoje, multiplicadorHoje: multiplicadorSequencia(sequenciaHoje), emRisco: atual ? penalidadeQuebra(atual) : 0 }
+}
+
+// Valor de uma resposta antes do multiplicador da sequência, com a explicação de cada parte.
+export function valorResposta(r: RegistroResposta, jaVisto: boolean, voltasNoCaderno: number) {
+  const cheio = r.resposta === 'B' ? XP_BASE.branco : (r.correta === 1 ? 1 : -1) * XP_CONFIANCA[r.confianca ?? 'duvida']
+  const fator = r.modo === 'revisao' ? fatorCaderno(voltasNoCaderno) : jaVisto ? 0.5 : 1
+  const motivo = r.modo === 'revisao' ? `caderno, ${voltasNoCaderno + 1}ª volta (${Math.round(fator * 100)}%)` : jaVisto ? 'item repetido (metade)' : null
+  return { xp: cheio * fator, cheio, fator, motivo }
+}
+
+function proximasVoltas(r: RegistroResposta, voltas: number) {
+  const precisaRever = r.correta !== 1 || r.confianca === 'chute'
+  return precisaRever ? 0 : r.modo === 'revisao' ? voltas + 1 : voltas
+}
+
+// XP de uma resposta recém-gravada, olhando o histórico do item e a sequência de hoje.
+export function xpDaRespostaNova(r: RegistroResposta, historicoDoItem: RegistroResposta[], todas: RegistroResposta[]) {
+  const antes = historicoDoItem.filter((x) => x.id !== r.id && x.criadaEm < r.criadaEm).sort((a, b) => a.criadaEm.localeCompare(b.criadaEm))
+  let voltas = 0
+  for (const x of antes) voltas = proximasVoltas(x, voltas)
+  const v = valorResposta(r, antes.length > 0, voltas)
+  const mult = multiplicadorSequencia(calcularStreak(diasComEstudo(todas), diaLocal(new Date(r.criadaEm))).dias)
+  return { ...v, mult, final: v.xp * mult }
 }
 
 export function calcularXp(dados: DadosXp): number {
