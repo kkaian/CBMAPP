@@ -1,6 +1,6 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Cabecalho, Card, Carregando, Pill, Secao } from '../components/ui'
 import { useIndice } from '../lib/conteudo'
 import { db } from '../lib/db'
@@ -15,6 +15,8 @@ export default function Simulados() {
   const simulados = useLiveQuery(() => db.simulados.orderBy('iniciadoEm').reverse().toArray(), [])
   const fracos = useLiveQuery(() => topicosFracos(), [])
   const [montando, setMontando] = useState<string | null>(null)
+  const [params, setParams] = useSearchParams()
+  const historico = params.get('aba') === 'historico'
   if (!simulados) return <Carregando />
 
   const andamento = simulados.filter((s) => s.status === 'andamento')
@@ -43,6 +45,14 @@ export default function Simulados() {
     <>
       <Cabecalho titulo="Simulados" sub="Nota pela regra do edital: certos − errados" />
 
+      <div className="grid grid-cols-2 gap-2 mb-3">
+        <button type="button" onClick={() => setParams({}, { replace: true })}
+          className={`py-2 rounded-xl border text-sm font-semibold ${historico ? 'border-linha bg-card text-suave' : 'border-azul bg-[#1b2740]'}`}>Fazer simulado</button>
+        <button type="button" onClick={() => setParams({ aba: 'historico' }, { replace: true })}
+          className={`py-2 rounded-xl border text-sm font-semibold ${historico ? 'border-azul bg-[#1b2740]' : 'border-linha bg-card text-suave'}`}>Histórico ({concluidos.length})</button>
+      </div>
+
+      {historico ? <Historico concluidos={concluidos} /> : <>
       {andamento.map((s) => {
         const marcados = Object.keys(s.respostas).length
         return (
@@ -87,26 +97,43 @@ export default function Simulados() {
       </div>
       <div className="text-suave text-[12px] mb-2">120 itens cada, na ordem do caderno · 4h30. Os gráficos que faltavam no PDF viraram tabelas.</div>
 
-      {concluidos.length > 0 && (
-        <>
-          <Secao>Histórico</Secao>
-          <Evolucao simulados={concluidos} />
-          {concluidos.map((s) => (
-            <Card key={s.id} onClick={() => nav(`/simulado/${s.id}`)} className="flex justify-between items-center">
-              <div>
-                <b>{s.titulo}</b>
-                <div className="text-suave text-[13px]">{new Date(s.concluidoEm ?? s.iniciadoEm).toLocaleDateString('pt-BR')} · {s.itens.length} itens · {formatarDuracao(s.gastoMs)}</div>
+      </>}
+    </>
+  )
+}
+
+function Historico({ concluidos }: { concluidos: RegistroSimulado[] }) {
+  const nav = useNavigate()
+  if (!concluidos.length) {
+    return (
+      <Card className="text-sm text-center py-6">
+        <div className="text-2xl mb-1">📊</div>
+        <b>Nenhum simulado entregue ainda</b>
+        <div className="text-suave text-[13px] mt-1">Ao entregar um simulado, ele aparece aqui com a nota, os erros por matéria e tópico, a segurança nas respostas, o tempo e o que revisar.</div>
+      </Card>
+    )
+  }
+  return (
+    <>
+      <Evolucao simulados={concluidos} />
+      {concluidos.map((s) => {
+        const brancos = s.itens.filter((id) => (s.respostas[id]?.r ?? 'B') === 'B').length
+        return (
+          <Card key={s.id} onClick={() => nav(`/simulado/${s.id}`)} className="flex justify-between items-center gap-2">
+            <div className="min-w-0">
+              <b>{s.titulo}</b>
+              <div className="text-suave text-[13px]">{new Date(s.concluidoEm ?? s.iniciadoEm).toLocaleDateString('pt-BR')} · {s.itens.length} itens · {formatarDuracao(s.gastoMs)}{brancos > 0 && ` · ${brancos} em branco`}</div>
+              <div className="text-azul text-[12px] mt-0.5">Ver diagnóstico ›</div>
+            </div>
+            {s.resumo && (
+              <div className="text-right shrink-0">
+                <div className={`text-xl font-bold ${s.resumo.passou ? 'text-verde' : 'text-destaque'}`}>{s.resumo.nota}</div>
+                <div className="text-suave text-[11px]">{s.resumo.passou ? 'acima do mínimo' : 'abaixo'}</div>
               </div>
-              {s.resumo && (
-                <div className="text-right">
-                  <div className={`text-xl font-bold ${s.resumo.passou ? 'text-verde' : 'text-destaque'}`}>{s.resumo.nota}</div>
-                  <div className="text-suave text-[11px]">{s.resumo.passou ? 'acima do mínimo' : 'abaixo'}</div>
-                </div>
-              )}
-            </Card>
-          ))}
-        </>
-      )}
+            )}
+          </Card>
+        )
+      })}
     </>
   )
 }

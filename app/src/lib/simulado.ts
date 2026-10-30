@@ -253,6 +253,82 @@ export function valeChutar(respostas: RegistroResposta[]): { acerto: number; n: 
   return { acerto: chutes.filter((r) => r.correta === 1).length / chutes.length, n: chutes.length }
 }
 
+// ---------- diagnóstico pós-prova ----------
+
+export type Seguranca = 'certeza' | 'duvida' | 'chute' | 'sem'
+
+export interface LinhaTopicoSimulado {
+  codigo: string
+  materia: string
+  itens: number
+  certos: number
+  errados: number
+  brancos: number
+  errosCerteza: number // errou achando que sabia
+  inseguros: number // acertou na dúvida ou no chute
+}
+
+export interface DiagnosticoSimulado {
+  seguranca: Record<Seguranca, { certos: number; errados: number }>
+  topicos: LinhaTopicoSimulado[] // do que mais pede revisão para o que menos pede
+  errosCerteza: string[]
+  inseguros: string[]
+  tempoMaterias: { codigo: string; ms: number; itens: number }[]
+  maisLentos: { id: string; numero: number; topico: string; ms: number }[]
+}
+
+// peso de revisão: errar com certeza é o pior sinal, e acertar sem segurança ainda pede atenção
+function pesoRevisao(t: LinhaTopicoSimulado) {
+  return t.errados * 2 + t.errosCerteza + t.brancos + t.inseguros
+}
+
+export function diagnosticarSimulado(s: RegistroSimulado, questoes: Questao[]): DiagnosticoSimulado {
+  const seguranca: DiagnosticoSimulado['seguranca'] = {
+    certeza: { certos: 0, errados: 0 }, duvida: { certos: 0, errados: 0 }, chute: { certos: 0, errados: 0 }, sem: { certos: 0, errados: 0 },
+  }
+  const topicos = new Map<string, LinhaTopicoSimulado>()
+  const tempo = new Map<string, { ms: number; itens: number }>()
+  const errosCerteza: string[] = []
+  const inseguros: string[] = []
+  questoes.forEach((q) => {
+    const resp = s.respostas[q.id]
+    const r = resp?.r ?? 'B'
+    const materia = materiaDoTopico(q.topico)
+    const t = topicos.get(q.topico) ?? { codigo: q.topico, materia, itens: 0, certos: 0, errados: 0, brancos: 0, errosCerteza: 0, inseguros: 0 }
+    t.itens++
+    if (r === 'B') t.brancos++
+    else {
+      const faixa = seguranca[resp?.c ?? 'sem']
+      if (r === q.gabarito) {
+        t.certos++
+        faixa.certos++
+        if (resp?.c === 'duvida' || resp?.c === 'chute') { t.inseguros++; inseguros.push(q.id) }
+      } else {
+        t.errados++
+        faixa.errados++
+        if (resp?.c === 'certeza') { t.errosCerteza++; errosCerteza.push(q.id) }
+      }
+    }
+    topicos.set(q.topico, t)
+    const m = tempo.get(materia) ?? { ms: 0, itens: 0 }
+    m.ms += s.tempos[q.id] ?? 0
+    m.itens++
+    tempo.set(materia, m)
+  })
+  return {
+    seguranca,
+    topicos: [...topicos.values()].sort((a, b) => pesoRevisao(b) - pesoRevisao(a) || a.codigo.localeCompare(b.codigo)),
+    errosCerteza,
+    inseguros,
+    tempoMaterias: [...tempo.entries()].map(([codigo, v]) => ({ codigo, ...v })),
+    maisLentos: questoes
+      .map((q, i) => ({ id: q.id, numero: i + 1, topico: q.topico, ms: s.tempos[q.id] ?? 0 }))
+      .filter((x) => x.ms > 0)
+      .sort((a, b) => b.ms - a.ms)
+      .slice(0, 3),
+  }
+}
+
 export function formatarDuracao(ms: number): string {
   const s = Math.max(0, Math.round(ms / 1000))
   const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), seg = s % 60

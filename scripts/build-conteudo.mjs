@@ -8,7 +8,7 @@
 //   questoes*.json  lista(s) de itens (formato em docs/PROJETO.md §6.4); ex.: questoes-FIS-12.json
 //   grupos*.json    lista(s) de { id, texto } com textos-base compartilhados (opcional)
 //   FIS-12.md       conteúdo do tópico, com as seções "## Resumo", "## Teoria" e "## Manias da banca" (opcional)
-//   temas.json      só na redação (RED): temas com ganchos e comandos
+//   temas.json      só na redação (RED): temas com ganchos, comandos e textos motivadores
 //   repertorio.json só na redação: autores e obras comentados, com aplicações por tema
 //   modelos.json    só na redação: redações-modelo anotadas parágrafo a parágrafo
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
@@ -100,6 +100,7 @@ for (const materia of edital.materias) {
 
   for (const t of temas ?? []) {
     if (!t.titulo || !Array.isArray(t.comandos) || !t.comandos.length) erros.push(`${materia.codigo}/temas.json: tema ${t.id} sem título ou comandos`)
+    if (!Array.isArray(t.motivadores) || t.motivadores.length < 2 || t.motivadores.some((m) => !m.texto || !m.fonte)) erros.push(`${materia.codigo}/temas.json: tema ${t.id} precisa de ao menos 2 textos motivadores com fonte`)
     if (t.eixo && topicoDaMateria.get(t.eixo) !== materia.codigo) erros.push(`${materia.codigo}/temas.json: tema ${t.id} com eixo inválido "${t.eixo}"`)
   }
 

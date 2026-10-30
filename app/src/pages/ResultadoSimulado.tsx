@@ -1,53 +1,39 @@
-import { useState, type ReactNode } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Rico } from '../components/Rico'
 import { Botao, Card, Carregando, Pill, Secao, StatusPill } from '../components/ui'
 import { acharTopico, materiaDoTopico, useIndice } from '../lib/conteudo'
-import { calcularNota, formatarDuracao, valeChutar, type Placar } from '../lib/simulado'
+import { calcularNota, diagnosticarSimulado, formatarDuracao, valeChutar, type DiagnosticoSimulado, type NotaSimulado, type Placar, type Seguranca } from '../lib/simulado'
 import { STATUS_INFO, diagnosticoPorTopico } from '../lib/stats'
 import type { Grupo, Questao, RegistroSimulado } from '../lib/types'
 import { useRespostas } from '../lib/useDados'
 
-type Filtro = 'errados' | 'brancos' | 'todos'
+type Filtro = 'errados' | 'certeza' | 'inseguros' | 'brancos' | 'todos'
 
 export default function ResultadoSimulado({ sim, questoes, grupos }: { sim: RegistroSimulado; questoes: Questao[]; grupos: Record<string, Grupo> }) {
   const { dados: ind } = useIndice()
   const respostas = useRespostas()
   const nav = useNavigate()
   const [filtro, setFiltro] = useState<Filtro | null>(null)
-  const [verTodos, setVerTodos] = useState(false)
   if (!ind || !respostas) return <Carregando />
 
   const nota = calcularNota(sim, questoes, ind.edital)
+  const diag = diagnosticarSimulado(sim, questoes)
   // chutes de fora deste simulado (as respostas dele foram gravadas na entrega)
   const chute = valeChutar(respostas.filter((r) => !(r.modo === 'simulado' && sim.concluidoEm && r.criadaEm >= sim.concluidoEm)))
   const respondidos = nota.total.certos + nota.total.errados
   const mediaItem = sim.itens.length ? sim.gastoMs / sim.itens.length : 0
 
-  // impacto por tópico: o que este simulado mandou para revisão e como ficou o diagnóstico de cada tópico
-  const porTopico = new Map<string, { erros: number; brancos: number; chutes: number }>()
-  let paraCaderno = 0
-  for (const q of questoes) {
+  // o que este simulado mandou para o caderno de erros
+  const paraCaderno = questoes.filter((q) => {
     const resp = sim.respostas[q.id]
     const r = resp?.r ?? 'B'
-    const errou = r !== 'B' && r !== q.gabarito
-    const chutou = !errou && r !== 'B' && resp?.c === 'chute'
-    if (errou || r === 'B' || chutou) paraCaderno++
-    if (!errou && r !== 'B' && !chutou) continue
-    const t = porTopico.get(q.topico) ?? { erros: 0, brancos: 0, chutes: 0 }
-    if (errou) t.erros++
-    else if (r === 'B') t.brancos++
-    else t.chutes++
-    porTopico.set(q.topico, t)
-  }
-  const diag = diagnosticoPorTopico(respostas)
-  const impacto = [...porTopico.entries()]
-    .sort((a, b) => b[1].erros - a[1].erros || b[1].brancos + b[1].chutes - a[1].brancos - a[1].chutes)
-  const mostrar = verTodos ? impacto : impacto.slice(0, 6)
+    return r === 'B' || r !== q.gabarito || resp?.c === 'chute'
+  }).length
 
   return (
     <div className="pt-1">
-      <button onClick={() => nav('/simulados')} className="text-suave text-sm mb-1 -ml-1 px-1">‹ Simulados</button>
+      <button onClick={() => nav('/simulados?aba=historico')} className="text-suave text-sm mb-1 -ml-1 px-1">‹ Histórico</button>
       <div className="text-suave text-sm">{new Date(sim.iniciadoEm).toLocaleDateString('pt-BR')} · {sim.itens.length} itens</div>
       <h2 className="text-[22px] font-bold leading-tight mb-3">{sim.titulo}</h2>
 
@@ -99,79 +85,43 @@ export default function ResultadoSimulado({ sim, questoes, grupos }: { sim: Regi
         </Card>
       )}
 
-      <Secao>Por matéria</Secao>
-      <Card className="!p-0 overflow-hidden">
-        <table className="w-full text-sm">
-          <thead className="text-suave text-xs">
-            <tr><th className="text-left p-2.5 font-normal">Matéria</th><th className="font-normal">C</th><th className="font-normal">E</th><th className="font-normal">B</th><th className="font-normal pr-2.5 text-right">Nota</th></tr>
-          </thead>
-          <tbody>
-            {nota.materias.map((m) => (
-              <tr key={m.codigo} className="border-t border-linha">
-                <td className="p-2.5">{m.nome}<span className="text-suave text-xs"> · {m.placar.itens}</span></td>
-                <td className="text-center text-verde">{m.placar.certos}</td>
-                <td className="text-center text-destaque">{m.placar.errados}</td>
-                <td className="text-center">{m.placar.brancos}</td>
-                <td className={`text-right pr-2.5 font-bold ${corNota(m.placar)}`}>{m.placar.nota}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Card>
-
-      {impacto.length > 0 && (
-        <>
-          <Secao>Impacto nos tópicos</Secao>
-          <Card className="text-sm">
-            <b>{paraCaderno}</b> {paraCaderno === 1 ? 'item foi' : 'itens foram'} para o caderno de erros (errados, brancos e chutes) e
-            {' '}{paraCaderno === 1 ? 'volta' : 'voltam'} amanhã em <b>Revisão</b>. O diagnóstico de cada tópico já conta este simulado.
-          </Card>
-          {mostrar.map(([t, n]) => {
-            const d = diag[t]
-            const fraco = d && (d.status === 'critico' || d.status === 'construcao')
-            return (
-              <Card key={t} onClick={() => nav(`/t/${t}`)} className="text-sm">
-                <div className="flex justify-between items-start gap-2">
-                  <span><b>{t}</b> <span className="text-suave">{acharTopico(ind, t)?.nome}</span></span>
-                  {d && <StatusPill status={d.status} acerto={d.acerto} />}
-                </div>
-                <div className="text-suave text-[12px] mt-1">
-                  {[n.erros && <span key="e" className="text-destaque">{n.erros} {n.erros === 1 ? 'erro' : 'erros'} (−{n.erros})</span>,
-                    n.brancos && <span key="b">{n.brancos} em branco</span>,
-                    n.chutes && <span key="c">{n.chutes} {n.chutes === 1 ? 'chute certo' : 'chutes certos'}</span>]
-                    .filter(Boolean).reduce<ReactNode[]>((acc, x, i) => (i ? [...acc, ' · ', x] : [x]), [])}
-                </div>
-                {fraco && <div className="text-[12px] mt-1">{STATUS_INFO[d.status].recomendacao}</div>}
-              </Card>
-            )
-          })}
-          {impacto.length > mostrar.length && (
-            <button onClick={() => setVerTodos(true)} className="text-suave text-sm w-full py-2">Ver todos os {impacto.length} tópicos ›</button>
-          )}
-        </>
-      )}
+      <Diagnostico d={diag} nota={nota} paraCaderno={paraCaderno} />
 
       <Secao>Revisar itens</Secao>
-      <div className="grid grid-cols-3 gap-2 mb-3">
-        {(['errados', 'brancos', 'todos'] as Filtro[]).map((f) => (
+      <div className="grid grid-cols-2 gap-2 mb-3">
+        {([
+          ['errados', `Errados (${nota.total.errados})`],
+          ['certeza', `Erros com certeza (${diag.errosCerteza.length})`],
+          ['inseguros', `Acertos inseguros (${diag.inseguros.length})`],
+          ['brancos', `Brancos (${nota.total.brancos})`],
+          ['todos', `Todos (${sim.itens.length})`],
+        ] as [Filtro, string][]).map(([f, rotulo]) => (
           <button key={f} onClick={() => setFiltro(filtro === f ? null : f)}
             className={`py-2 rounded-xl border text-[13px] ${filtro === f ? 'border-azul bg-[#1b2740]' : 'border-linha bg-card'}`}>
-            {f === 'errados' ? `Errados (${nota.total.errados})` : f === 'brancos' ? `Brancos (${nota.total.brancos})` : 'Todos'}
+            {rotulo}
           </button>
         ))}
       </div>
-      {filtro && <Revisao sim={sim} questoes={questoes} grupos={grupos} filtro={filtro} />}
+      {filtro && <Revisao sim={sim} questoes={questoes} grupos={grupos} filtro={filtro} errosCerteza={diag.errosCerteza} inseguros={diag.inseguros} />}
 
       <div className="text-suave text-[12px] my-3">As respostas entraram no seu diagnóstico, e os erros, brancos e chutes foram para o caderno de erros.</div>
-      <Botao onClick={() => nav('/simulados')}>Concluir</Botao>
+      <Botao onClick={() => nav('/simulados?aba=historico')}>Concluir</Botao>
     </div>
   )
 }
 
-function Revisao({ sim, questoes, grupos, filtro }: { sim: RegistroSimulado; questoes: Questao[]; grupos: Record<string, Grupo>; filtro: Filtro }) {
+function Revisao({ sim, questoes, grupos, filtro, errosCerteza, inseguros }: {
+  sim: RegistroSimulado; questoes: Questao[]; grupos: Record<string, Grupo>; filtro: Filtro; errosCerteza: string[]; inseguros: string[]
+}) {
   const lista = questoes
     .map((q, i) => ({ q, i, r: sim.respostas[q.id]?.r ?? 'B' }))
-    .filter(({ q, r }) => filtro === 'todos' || (filtro === 'brancos' ? r === 'B' : r !== 'B' && r !== q.gabarito))
+    .filter(({ q, r }) => {
+      if (filtro === 'todos') return true
+      if (filtro === 'brancos') return r === 'B'
+      if (filtro === 'certeza') return errosCerteza.includes(q.id)
+      if (filtro === 'inseguros') return inseguros.includes(q.id)
+      return r !== 'B' && r !== q.gabarito
+    })
   if (!lista.length) return <div className="text-suave text-sm text-center py-4">Nenhum item aqui.</div>
   return (
     <>
@@ -180,8 +130,12 @@ function Revisao({ sim, questoes, grupos, filtro }: { sim: RegistroSimulado; que
         const grupo = q.grupo ? grupos[q.grupo] : null
         return (
           <Card key={q.id} className={`border ${r === 'B' ? 'border-linha' : certo ? 'border-verde/40' : 'border-destaque/40'}`}>
-            <div className="flex justify-between text-xs text-suave mb-1">
-              <span>Item {i + 1} · {q.topico}</span>
+            <div className="flex justify-between gap-2 text-xs text-suave mb-1">
+              <span>
+                Item {i + 1} · {q.topico}
+                {sim.respostas[q.id]?.c && <> · {SEGURANCA[sim.respostas[q.id].c!].rotulo}</>}
+                {sim.tempos[q.id] > 0 && <> · {formatarDuracao(sim.tempos[q.id])}</>}
+              </span>
               <span>
                 você: <b className={r === 'B' ? '' : certo ? 'text-verde' : 'text-destaque'}>{r === 'B' ? 'branco' : r === 'C' ? 'CERTO' : 'ERRADO'}</b>
                 {' · '}gabarito: <b>{q.gabarito === 'C' ? 'CERTO' : 'ERRADO'}</b>
@@ -198,6 +152,146 @@ function Revisao({ sim, questoes, grupos, filtro }: { sim: RegistroSimulado; que
           </Card>
         )
       })}
+    </>
+  )
+}
+
+const SEGURANCA: Record<Seguranca, { rotulo: string }> = {
+  certeza: { rotulo: '✅ Certeza' },
+  duvida: { rotulo: '🤔 Dúvida' },
+  chute: { rotulo: '🎲 Chute' },
+  sem: { rotulo: 'Sem marcar' },
+}
+
+function Diagnostico({ d, nota, paraCaderno }: { d: DiagnosticoSimulado; nota: NotaSimulado; paraCaderno: number }) {
+  const { dados: ind } = useIndice()
+  const respostas = useRespostas()
+  const nav = useNavigate()
+  const [materiaAberta, setMateriaAberta] = useState<string | null>(null)
+  const [verTodos, setVerTodos] = useState(false)
+  if (!ind || !respostas) return null
+
+  const status = diagnosticoPorTopico(respostas)
+  const revisar = d.topicos.filter((t) => t.errados + t.brancos + t.inseguros > 0)
+  const mostrar = verTodos ? revisar : revisar.slice(0, 6)
+  const faixas = (Object.keys(SEGURANCA) as Seguranca[]).filter((k) => d.seguranca[k].certos + d.seguranca[k].errados > 0)
+  const pior = [...nota.materias].filter((m) => m.placar.itens > 0).sort((a, b) => a.placar.nota / a.placar.itens - b.placar.nota / b.placar.itens)[0]
+  const nomeMateria = (cod: string) => nota.materias.find((m) => m.codigo === cod)?.nome ?? cod
+  const leituras = [
+    pior && pior.placar.errados + pior.placar.brancos > 0 && `Menor aproveitamento: ${pior.nome} (nota ${pior.placar.nota} em ${pior.placar.itens} ${pior.placar.itens === 1 ? 'item' : 'itens'}).`,
+    d.errosCerteza.length > 0 && `${d.errosCerteza.length} ${d.errosCerteza.length === 1 ? 'erro' : 'erros'} com certeza: aqui você acha que sabe, e é onde mais perde ponto sem perceber.`,
+    d.inseguros.length > 0 && `${d.inseguros.length} ${d.inseguros.length === 1 ? 'acerto' : 'acertos'} na dúvida ou no chute: o ponto veio, mas o assunto ainda não está firme.`,
+    nota.total.brancos > 0 && `${nota.total.brancos} em branco: não tiraram ponto, mas também não somaram.`,
+    faixas.length === 1 && faixas[0] === 'sem' && 'Você não marcou a segurança nas respostas. Marque na próxima prova para este diagnóstico ficar mais preciso.',
+  ].filter(Boolean) as string[]
+
+  return (
+    <>
+      <Secao>Diagnóstico</Secao>
+      {leituras.length > 0 && (
+        <Card className="text-sm space-y-1.5">
+          {leituras.map((l) => <div key={l}>· {l}</div>)}
+        </Card>
+      )}
+
+      {faixas.length > 0 && (
+        <>
+          <Secao>Segurança nas respostas</Secao>
+          <Card className="!p-0 overflow-hidden">
+            <table className="w-full text-sm">
+              <thead className="text-suave text-xs">
+                <tr><th className="text-left p-2.5 font-normal">Você marcou</th><th className="font-normal">Certos</th><th className="font-normal">Errados</th><th className="font-normal pr-2.5 text-right">Acerto</th></tr>
+              </thead>
+              <tbody>
+                {faixas.map((k) => {
+                  const f = d.seguranca[k]
+                  return (
+                    <tr key={k} className="border-t border-linha">
+                      <td className="p-2.5">{SEGURANCA[k].rotulo}</td>
+                      <td className="text-center text-verde">{f.certos}</td>
+                      <td className="text-center text-destaque">{f.errados}</td>
+                      <td className="text-right pr-2.5 font-bold">{Math.round((f.certos / (f.certos + f.errados)) * 100)}%</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </Card>
+        </>
+      )}
+
+      <Secao>Matérias e tópicos</Secao>
+      <Card className="!p-0 overflow-hidden">
+        <div className="flex text-suave text-xs p-2.5 pb-1.5">
+          <span className="flex-1">Toque na matéria para ver os tópicos</span>
+          <span className="w-6 text-center">C</span><span className="w-6 text-center">E</span><span className="w-6 text-center">B</span><span className="w-10 text-right">Nota</span>
+        </div>
+        {nota.materias.map((m) => (
+          <div key={m.codigo} className="border-t border-linha">
+            <button type="button" onClick={() => setMateriaAberta(materiaAberta === m.codigo ? null : m.codigo)} className="flex w-full items-center p-2.5 text-sm text-left">
+              <span className="flex-1 min-w-0"><span className="text-suave text-xs mr-1">{materiaAberta === m.codigo ? '▾' : '▸'}</span>{m.nome}<span className="text-suave text-xs"> · {m.placar.itens}</span></span>
+              <span className="w-6 text-center text-verde">{m.placar.certos}</span>
+              <span className="w-6 text-center text-destaque">{m.placar.errados}</span>
+              <span className="w-6 text-center">{m.placar.brancos}</span>
+              <b className={`w-10 text-right ${corNota(m.placar)}`}>{m.placar.nota}</b>
+            </button>
+            {materiaAberta === m.codigo && d.topicos.filter((t) => t.materia === m.codigo).map((t) => (
+              <button key={t.codigo} type="button" onClick={() => nav(`/t/${t.codigo}`)} className="flex w-full items-center px-2.5 py-1.5 text-[13px] text-left bg-card2">
+                <span className="flex-1 min-w-0"><b>{t.codigo}</b> <span className="text-suave">{acharTopico(ind, t.codigo)?.nome}</span></span>
+                <span className="w-6 text-center text-verde">{t.certos}</span>
+                <span className="w-6 text-center text-destaque">{t.errados}</span>
+                <span className="w-6 text-center">{t.brancos}</span>
+                <span className="w-10 text-right font-semibold">{t.certos - t.errados}</span>
+              </button>
+            ))}
+          </div>
+        ))}
+      </Card>
+
+      <Secao>Tempo</Secao>
+      <Card className="text-sm">
+        {d.tempoMaterias.map((m) => (
+          <Linha key={m.codigo} rotulo={nomeMateria(m.codigo)} valor={`${formatarDuracao(m.ms)} · ${formatarDuracao(m.ms / m.itens)} por item`} />
+        ))}
+        {d.maisLentos.length > 0 && (
+          <div className="border-t border-linha mt-2 pt-2">
+            <div className="text-suave text-xs mb-0.5">Onde você mais demorou</div>
+            {d.maisLentos.map((x) => <Linha key={x.id} rotulo={`Item ${x.numero} · ${x.topico}`} valor={formatarDuracao(x.ms)} />)}
+          </div>
+        )}
+      </Card>
+
+      {revisar.length > 0 && (
+        <>
+          <Secao>O que revisar</Secao>
+          <Card className="text-sm">
+            Em ordem de prioridade. <b>{paraCaderno}</b> {paraCaderno === 1 ? 'item foi' : 'itens foram'} para o caderno de erros (errados, brancos e chutes) e
+            {' '}{paraCaderno === 1 ? 'volta' : 'voltam'} amanhã em <b>Revisão</b>. O diagnóstico de cada tópico já conta este simulado.
+          </Card>
+          {mostrar.map((t) => {
+            const st = status[t.codigo]
+            const fraco = st && (st.status === 'critico' || st.status === 'construcao')
+            const partes = [
+              t.errados > 0 && `${t.errados} ${t.errados === 1 ? 'erro' : 'erros'}${t.errosCerteza ? ` (${t.errosCerteza} com certeza)` : ''}`,
+              t.brancos > 0 && `${t.brancos} em branco`,
+              t.inseguros > 0 && `${t.inseguros} ${t.inseguros === 1 ? 'acerto inseguro' : 'acertos inseguros'}`,
+            ].filter(Boolean)
+            return (
+              <Card key={t.codigo} onClick={() => nav(`/t/${t.codigo}`)} className="text-sm">
+                <div className="flex justify-between items-start gap-2">
+                  <span><b>{t.codigo}</b> <span className="text-suave">{acharTopico(ind, t.codigo)?.nome}</span></span>
+                  {st && <StatusPill status={st.status} acerto={st.acerto} />}
+                </div>
+                <div className="text-suave text-[12px] mt-1">{partes.join(' · ')}</div>
+                {fraco && <div className="text-[12px] mt-1">{STATUS_INFO[st.status].recomendacao}</div>}
+              </Card>
+            )
+          })}
+          {revisar.length > mostrar.length && (
+            <button onClick={() => setVerTodos(true)} className="text-suave text-sm w-full py-2">Ver todos os {revisar.length} tópicos ›</button>
+          )}
+        </>
+      )}
     </>
   )
 }

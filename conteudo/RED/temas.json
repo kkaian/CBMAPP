@@ -1,92 +1,212 @@
 [
   { "id": 1, "eixo": "RED-06", "titulo": "Prevenção e enfrentamento de desastres naturais no Brasil",
     "ganchos": ["Lei 12.608/2012: Política Nacional de Proteção e Defesa Civil (PNPDEC)", "CF, art. 144, §5º: bombeiros e defesa civil", "Enchentes no Rio Grande do Sul (2024), com centenas de milhares de afetados [confirme os números]", "Prevenção é mais barata e eficaz que a resposta emergencial"],
-    "comandos": ["Discorra sobre a importância da prevenção e da educação da população diante de desastres naturais.", "Aborde dois fatores que agravam os impactos desses desastres no país.", "Apresente o papel dos órgãos de proteção e defesa civil, incluindo o corpo de bombeiros."] },
+    "comandos": ["Discorra sobre a importância da prevenção e da educação da população diante de desastres naturais.", "Aborde dois fatores que agravam os impactos desses desastres no país.", "Apresente o papel dos órgãos de proteção e defesa civil, incluindo o corpo de bombeiros."],
+    "motivadores": [
+      {"texto": "A Política Nacional de Proteção e Defesa Civil trata a gestão de riscos como um ciclo: prevenção, mitigação, preparação, resposta e recuperação. A lei coloca a redução de riscos como dever de União, estados, Distrito Federal e municípios, e admite que a falta de certeza sobre um risco não serve de desculpa para deixar de agir.", "fonte": "Com base na Lei nº 12.608/2012."},
+      {"texto": "Em 2024, as enchentes no Rio Grande do Sul atingiram centenas de municípios, desalojaram famílias inteiras e interromperam serviços essenciais. O episódio reacendeu a pergunta sobre quanto o país investe antes do desastre, e não apenas depois dele.", "fonte": "Texto elaborado para o treino, a partir das enchentes de 2024 no RS."}
+    ] },
   { "id": 2, "eixo": "RED-06", "titulo": "Enchentes urbanas e a atuação da defesa civil",
     "ganchos": ["Causas: impermeabilização do solo, ocupação de margens de rios, drenagem precária", "SINPDEC e os alertas da Defesa Civil por celular", "Bombeiros: busca, salvamento, resgate e mapeamento de áreas de risco"],
-    "comandos": ["Discorra sobre as causas das enchentes urbanas.", "Aborde as consequências para a população vulnerável.", "Apresente medidas de prevenção e de resposta."] },
+    "comandos": ["Discorra sobre as causas das enchentes urbanas.", "Aborde as consequências para a população vulnerável.", "Apresente medidas de prevenção e de resposta."],
+    "motivadores": [
+      {"texto": "Quando o solo é coberto por asfalto e concreto, a água da chuva deixa de infiltrar e corre rápido para os canais. Somados ao lixo nas galerias e à ocupação das margens dos rios, esses fatores fazem chuvas comuns virarem alagamentos, e quem mora nas partes baixas costuma ser quem menos pode se mudar.", "fonte": "Texto elaborado para o treino."},
+      {"texto": "A legislação de defesa civil prevê um cadastro nacional dos municípios com áreas suscetíveis a deslizamentos e inundações, além de mapeamento dessas áreas e planos de contingência. Mapa guardado na gaveta, porém, não tira ninguém do caminho da água: o plano depende de obra, de alerta e de população treinada.", "fonte": "Com base na Lei nº 12.340/2010, alterada pela Lei nº 12.608/2012."}
+    ] },
   { "id": 3, "eixo": "RED-06", "titulo": "Mudanças climáticas e o aumento de eventos extremos",
     "ganchos": ["Acordo de Paris (2015): limitar o aquecimento global", "COP30, realizada em Belém (PA) em 2025", "Relação clima → secas, enchentes, ondas de calor e incêndios", "Mitigação (reduzir emissões) × adaptação (preparar cidades)"],
-    "comandos": ["Discorra sobre a relação entre mudanças climáticas e eventos extremos.", "Aborde os impactos desses eventos no Brasil.", "Apresente ações de mitigação e de adaptação."] },
+    "comandos": ["Discorra sobre a relação entre mudanças climáticas e eventos extremos.", "Aborde os impactos desses eventos no Brasil.", "Apresente ações de mitigação e de adaptação."],
+    "motivadores": [
+      {"texto": "No Acordo de Paris, de 2015, os países se comprometeram a manter o aquecimento global bem abaixo de 2 °C em relação aos níveis pré-industriais, com esforços para limitá-lo a 1,5 °C. Dez anos depois, em 2025, o Brasil recebeu a COP30 em Belém, no Pará.", "fonte": "Com base no Acordo de Paris (2015) e na realização da COP30."},
+      {"texto": "O Painel Intergovernamental sobre Mudanças do Clima (IPCC) aponta a influência humana no aquecimento e a associa a ondas de calor, chuvas intensas e secas mais frequentes em várias regiões. Por isso o debate tem duas frentes: reduzir emissões (mitigação) e preparar as cidades para o que já está acontecendo (adaptação).", "fonte": "Com base no Sexto Relatório de Avaliação do IPCC."}
+    ] },
   { "id": 4, "eixo": "RED-06", "titulo": "Queimadas e incêndios florestais no Brasil",
     "ganchos": ["Temporadas severas de queimadas no Pantanal e na Amazônia [confirme os focos do ano]", "INPE monitora focos de calor por satélite", "Lei 9.605/1998 (Crimes Ambientais): queimadas criminosas", "Bombeiros e brigadistas no combate; prevenção na estiagem"],
-    "comandos": ["Discorra sobre as causas das queimadas.", "Aborde os impactos ambientais e à saúde.", "Apresente o papel do poder público e da fiscalização."] },
+    "comandos": ["Discorra sobre as causas das queimadas.", "Aborde os impactos ambientais e à saúde.", "Apresente o papel do poder público e da fiscalização."],
+    "motivadores": [
+      {"texto": "Grande parte dos incêndios florestais começa com ação humana: limpeza de pasto, abertura de área e descuido com fogo. A estiagem e o calor fazem o resto. A fumaça viaja por centenas de quilômetros e chega às cidades, enchendo os serviços de saúde de pessoas com problemas respiratórios.", "fonte": "Texto elaborado para o treino."},
+      {"texto": "Provocar incêndio em mata ou floresta é crime ambiental no Brasil. Em 2024, o país também instituiu a Política Nacional de Manejo Integrado do Fogo, que aposta em planejamento, prevenção e brigadas, em vez de agir apenas quando o fogo já se espalhou.", "fonte": "Com base nas Leis nº 9.605/1998 e nº 14.944/2024."}
+    ] },
   { "id": 5, "eixo": "RED-06", "titulo": "A cultura de prevenção e a educação para emergências",
     "ganchos": ["Lei 13.722/2018 (Lei Lucas): primeiros socorros nas escolas", "Rotas de fuga, áreas de risco e simulados salvam vidas", "Prevenção como responsabilidade compartilhada (Estado + sociedade)"],
-    "comandos": ["Discorra sobre a importância da educação preventiva.", "Aborde os obstáculos à sua difusão.", "Apresente iniciativas para fortalecê-la."] },
+    "comandos": ["Discorra sobre a importância da educação preventiva.", "Aborde os obstáculos à sua difusão.", "Apresente iniciativas para fortalecê-la."],
+    "motivadores": [
+      {"texto": "Em 2017, o menino Lucas morreu engasgado durante um passeio escolar. Do caso nasceu a Lei Lucas, que obriga escolas a capacitar professores e funcionários em noções de primeiros socorros. A lei mostra uma lógica incômoda: muitas medidas de prevenção só chegam depois de uma perda.", "fonte": "Com base na Lei nº 13.722/2018."},
+      {"texto": "A lei de proteção e defesa civil atribui ao poder público o dever de desenvolver uma cultura nacional de prevenção de desastres. Na prática, cultura se constrói com repetição: saber a rota de fuga, conhecer o sinal de alerta e participar de simulados antes que a emergência aconteça.", "fonte": "Com base na Lei nº 12.608/2012."}
+    ] },
   { "id": 6, "eixo": "RED-06", "titulo": "Ocupação desordenada do solo e áreas de risco",
     "ganchos": ["Estatuto da Cidade (Lei 10.257/2001): função social da propriedade urbana", "Deslizamentos em Petrópolis (2022) e São Sebastião (2023)", "Afundamento do solo em Maceió ligado à mineração de sal-gema", "Os mais pobres ocupam as áreas de maior risco (Darcy Ribeiro, Milton Santos)"],
-    "comandos": ["Discorra sobre as causas da ocupação de áreas de risco.", "Aborde suas consequências.", "Apresente o papel do planejamento urbano."] },
+    "comandos": ["Discorra sobre as causas da ocupação de áreas de risco.", "Aborde suas consequências.", "Apresente o papel do planejamento urbano."],
+    "motivadores": [
+      {"texto": "A Constituição exige plano diretor nas cidades com mais de vinte mil habitantes, e o Estatuto da Cidade afirma que a propriedade urbana deve cumprir função social. Mesmo assim, encostas e margens de rios seguem ocupadas por quem não consegue pagar por moradia em áreas seguras.", "fonte": "Com base na CF, art. 182, e na Lei nº 10.257/2001."},
+      {"texto": "Os deslizamentos de Petrópolis (2022) e São Sebastião (2023) mostraram o risco das encostas. Em Maceió, o afundamento do solo ligado à mineração de sal-gema esvaziou bairros inteiros e forçou a saída de milhares de famílias: o risco nem sempre vem da natureza, e também pode ser produzido pela atividade econômica.", "fonte": "Texto elaborado para o treino, a partir de eventos registrados nessas cidades."}
+    ] },
   { "id": 7, "eixo": "RED-07", "titulo": "Gestão e segurança hídrica no Brasil",
     "ganchos": ["Lei 9.433/1997 (Lei das Águas): água é bem público, gestão por bacia, prioridade ao consumo humano na escassez", "O Brasil tem grande parte da água doce do planeta, mas mal distribuída [confirme o percentual]", "Tema de 2021 do CBMAL: usos múltiplos das águas do Rio São Francisco"],
-    "comandos": ["Discorra sobre a importância da gestão consciente da água.", "Aborde os conflitos de uso.", "Apresente medidas para a segurança hídrica."] },
+    "comandos": ["Discorra sobre a importância da gestão consciente da água.", "Aborde os conflitos de uso.", "Apresente medidas para a segurança hídrica."],
+    "motivadores": [
+      {"texto": "A Lei das Águas define a água como bem de domínio público, recurso limitado e dotado de valor econômico. Em situação de escassez, a prioridade é o consumo humano e a dessedentação de animais, e a gestão deve ocorrer por bacia hidrográfica, com participação do poder público, dos usuários e das comunidades.", "fonte": "Com base na Lei nº 9.433/1997."},
+      {"texto": "O Rio São Francisco abastece cidades, irriga lavouras, move hidrelétricas e sustenta a pesca e a navegação. Em períodos de seca, esses usos competem entre si. Para o sertão de Alagoas, a discussão é concreta: dela depende o acesso à água de populações inteiras.", "fonte": "Texto elaborado para o treino."}
+    ] },
   { "id": 8, "eixo": "RED-07", "titulo": "Saneamento básico como questão de saúde pública",
     "ganchos": ["Marco do Saneamento (Lei 14.026/2020): 99% de água potável e 90% de esgoto até 2033", "Milhões de brasileiros ainda sem coleta de esgoto [confirme]", "Saneamento → menos doenças e menor mortalidade infantil"],
-    "comandos": ["Discorra sobre os impactos da falta de saneamento.", "Aborde os entraves à universalização.", "Apresente caminhos para superá-los."] },
+    "comandos": ["Discorra sobre os impactos da falta de saneamento.", "Aborde os entraves à universalização.", "Apresente caminhos para superá-los."],
+    "motivadores": [
+      {"texto": "O Marco Legal do Saneamento fixou a meta de atender 99% da população com água potável e 90% com coleta e tratamento de esgoto até 31 de dezembro de 2033. A meta conversa com o Objetivo de Desenvolvimento Sustentável 6 da ONU, que trata de água limpa e saneamento para todos.", "fonte": "Com base na Lei nº 14.026/2020 e na Agenda 2030."},
+      {"texto": "Esgoto a céu aberto e água contaminada estão ligados a diarreias, hepatite A e leptospirose, doenças que afetam sobretudo as crianças e os moradores de áreas pobres. Por isso, cada real aplicado em saneamento também é uma decisão sobre saúde, educação e dignidade.", "fonte": "Texto elaborado para o treino."}
+    ] },
   { "id": 9, "eixo": "RED-07", "titulo": "Desenvolvimento sustentável e preservação ambiental",
     "ganchos": ["CF, art. 225: meio ambiente ecologicamente equilibrado", "Agenda 2030 e ODS (ONU)", "Relatório Brundtland (1987): atender o presente sem comprometer o futuro"],
-    "comandos": ["Discorra sobre o conceito de desenvolvimento sustentável.", "Aborde os desafios de conciliá-lo com o crescimento econômico.", "Apresente o papel da sociedade."] },
+    "comandos": ["Discorra sobre o conceito de desenvolvimento sustentável.", "Aborde os desafios de conciliá-lo com o crescimento econômico.", "Apresente o papel da sociedade."],
+    "motivadores": [
+      {"texto": "O Relatório Brundtland, de 1987, consagrou a ideia de desenvolvimento sustentável: atender às necessidades do presente sem comprometer a capacidade das gerações futuras de atender às suas. Quase quatro décadas depois, a Agenda 2030 da ONU desdobrou o conceito em 17 objetivos globais.", "fonte": "Com base no relatório Nosso Futuro Comum (1987) e na Agenda 2030."},
+      {"texto": "A Constituição reconhece a todos o direito ao meio ambiente ecologicamente equilibrado e impõe ao poder público e à coletividade o dever de defendê-lo e preservá-lo para as presentes e futuras gerações. A responsabilidade, portanto, não é só do governo: alcança empresas e cidadãos.", "fonte": "Com base na CF, art. 225."}
+    ] },
   { "id": 10, "eixo": "RED-07", "titulo": "Resíduos sólidos e poluição",
     "ganchos": ["Política Nacional de Resíduos Sólidos (Lei 12.305/2010): fim dos lixões, logística reversa, coleta seletiva", "Lixões ainda existentes e baixa reciclagem", "Poluição de rios, solo e ar"],
-    "comandos": ["Discorra sobre os problemas do descarte inadequado.", "Aborde os entraves à reciclagem.", "Apresente soluções possíveis."] },
+    "comandos": ["Discorra sobre os problemas do descarte inadequado.", "Aborde os entraves à reciclagem.", "Apresente soluções possíveis."],
+    "motivadores": [
+      {"texto": "A Política Nacional de Resíduos Sólidos estabelece uma ordem de prioridade: não gerar, reduzir, reutilizar, reciclar, tratar e, só por fim, dispor os rejeitos de forma adequada. Também criou a logística reversa, pela qual fabricantes e comerciantes respondem pelo retorno de certos produtos após o uso.", "fonte": "Com base na Lei nº 12.305/2010."},
+      {"texto": "O prazo para o fim dos lixões foi adiado mais de uma vez desde 2010. Enquanto isso, chorume contamina solo e água, e catadores fazem, muitas vezes sem proteção nem renda garantida, boa parte do trabalho que sustenta a reciclagem no país.", "fonte": "Texto elaborado para o treino."}
+    ] },
   { "id": 11, "eixo": "RED-08", "titulo": "Segurança contra incêndio em edificações",
     "ganchos": ["Boate Kiss (Santa Maria/RS, 2013): 242 mortos", "Lei 13.425/2017 (Lei Kiss): prevenção em locais de reunião de público", "Vistoria e licenciamento pelo corpo de bombeiros; saídas de emergência, extintores, brigadas"],
-    "comandos": ["Discorra sobre a importância da prevenção de incêndios.", "Aborde falhas que agravam tragédias.", "Apresente o papel do corpo de bombeiros."] },
+    "comandos": ["Discorra sobre a importância da prevenção de incêndios.", "Aborde falhas que agravam tragédias.", "Apresente o papel do corpo de bombeiros."],
+    "motivadores": [
+      {"texto": "Na madrugada de 27 de janeiro de 2013, um artefato pirotécnico incendiou o revestimento de espuma da boate Kiss, em Santa Maria (RS). Morreram 242 pessoas. A superlotação e as dificuldades de saída mostraram que tragédias assim se constroem com uma sequência de falhas evitáveis.", "fonte": "Texto elaborado para o treino, a partir do caso da boate Kiss."},
+      {"texto": "A chamada Lei Kiss estabeleceu diretrizes sobre prevenção e combate a incêndio e a desastres em estabelecimentos e áreas de reunião de público, dando peso ao papel dos corpos de bombeiros na vistoria e no licenciamento. A regra só protege quando é cumprida e fiscalizada.", "fonte": "Com base na Lei nº 13.425/2017."}
+    ] },
   { "id": 12, "eixo": "RED-08", "titulo": "Segurança no trânsito e redução de acidentes",
     "ganchos": ["Código de Trânsito Brasileiro (Lei 9.503/1997); Maio Amarelo", "O Brasil está entre os países com mais mortes no trânsito [confirme o número]", "Bombeiros no resgate e no atendimento pré-hospitalar"],
-    "comandos": ["Discorra sobre as causas dos acidentes de trânsito.", "Aborde suas consequências sociais.", "Apresente medidas de prevenção."] },
+    "comandos": ["Discorra sobre as causas dos acidentes de trânsito.", "Aborde suas consequências sociais.", "Apresente medidas de prevenção."],
+    "motivadores": [
+      {"texto": "O Código de Trânsito Brasileiro afirma que o trânsito em condições seguras é direito de todos e dever dos órgãos do sistema de trânsito. A Lei Seca endureceu as regras contra a direção sob efeito de álcool, mas excesso de velocidade, celular ao volante e distração seguem no dia a dia das vias.", "fonte": "Com base nas Leis nº 9.503/1997 e nº 11.705/2008."},
+      {"texto": "A ONU declarou a década de 2021 a 2030 como a Segunda Década de Ação pela Segurança no Trânsito, com a meta de reduzir pela metade as mortes e lesões. Por trás de cada ocorrência há famílias atingidas, leitos ocupados e bombeiros acionados para resgates que poderiam não existir.", "fonte": "Com base na Resolução da ONU sobre a Década de Ação 2021-2030."}
+    ] },
   { "id": 13, "eixo": "RED-08", "titulo": "Afogamentos e segurança aquática",
     "ganchos": ["Afogamento é causa importante de morte acidental, sobretudo no verão [confirme]", "Guarda-vidas do corpo de bombeiros; sinalização de praias, rios e lagoas", "Prevenção: educação, supervisão de crianças, respeito à sinalização"],
-    "comandos": ["Discorra sobre os fatores que levam aos afogamentos.", "Aborde os grupos mais vulneráveis.", "Apresente medidas de prevenção."] },
+    "comandos": ["Discorra sobre os fatores que levam aos afogamentos.", "Aborde os grupos mais vulneráveis.", "Apresente medidas de prevenção."],
+    "motivadores": [
+      {"texto": "O afogamento costuma ser rápido e silencioso: uma criança pode submergir sem gritar nem chamar atenção, a poucos metros de um adulto. A Organização Mundial da Saúde trata o tema como problema de saúde pública e o inclui entre as principais causas de morte de crianças no mundo.", "fonte": "Com base em publicações da OMS sobre afogamento."},
+      {"texto": "Praia não é o único cenário de risco. Rios, lagoas, açudes, cisternas e piscinas sem proteção também fazem vítimas, muitas vezes longe de guarda-vidas e de sinalização. Em Alagoas, com seu litoral e suas lagoas, a prevenção depende de informação, supervisão e respeito aos avisos.", "fonte": "Texto elaborado para o treino."}
+    ] },
   { "id": 14, "eixo": "RED-08", "titulo": "Primeiros socorros como política pública",
     "ganchos": ["Lei 13.722/2018 (Lei Lucas)", "Parada cardiorrespiratória: a reanimação iniciada por leigos aumenta a sobrevivência", "Acionar 193 (bombeiros) e 192 (SAMU)"],
-    "comandos": ["Discorra sobre a importância da capacitação em primeiros socorros.", "Aborde os obstáculos à sua difusão.", "Apresente os benefícios para a sociedade."] },
+    "comandos": ["Discorra sobre a importância da capacitação em primeiros socorros.", "Aborde os obstáculos à sua difusão.", "Apresente os benefícios para a sociedade."],
+    "motivadores": [
+      {"texto": "Em uma parada cardiorrespiratória, a chance de sobreviver cai a cada minuto sem atendimento. Enquanto o socorro especializado está a caminho, quem está ao lado pode acionar o 193 ou o 192 e iniciar as compressões torácicas: esses minutos costumam definir o desfecho.", "fonte": "Texto elaborado para o treino."},
+      {"texto": "Desde 2018, a Lei Lucas obriga as escolas a capacitar professores e funcionários em noções básicas de primeiros socorros. Ainda assim, a maior parte da população nunca fez um treinamento desse tipo, e o conhecimento fica restrito a quem trabalha na área ou teve a chance de buscá-lo.", "fonte": "Com base na Lei nº 13.722/2018."}
+    ] },
   { "id": 15, "eixo": "RED-09", "titulo": "Desigualdade social no Brasil",
     "ganchos": ["CF, art. 3º, III: reduzir as desigualdades sociais e regionais", "Darcy Ribeiro: o país se estruturou produzindo profundas desigualdades", "Acesso desigual a saúde, educação, moradia e segurança"],
-    "comandos": ["Discorra sobre as raízes da desigualdade.", "Aborde suas consequências.", "Apresente caminhos para reduzi-la."] },
+    "comandos": ["Discorra sobre as raízes da desigualdade.", "Aborde suas consequências.", "Apresente caminhos para reduzi-la."],
+    "motivadores": [
+      {"texto": "A Constituição aponta como objetivo fundamental da República erradicar a pobreza e a marginalização e reduzir as desigualdades sociais e regionais. Ao colocar isso entre seus objetivos, reconhece que a desigualdade não é um detalhe, mas um problema a ser enfrentado pelo Estado.", "fonte": "Com base na CF, art. 3º, III."},
+      {"texto": "Em O Povo Brasileiro, Darcy Ribeiro descreve um país formado sobre a escravidão e a concentração de terra e poder, em que a distância entre as camadas sociais se reproduz ao longo do tempo. Essa herança aparece, hoje, no acesso desigual a escola, saúde, moradia e segurança.", "fonte": "Paráfrase de ideias de Darcy Ribeiro, O Povo Brasileiro (1995)."}
+    ] },
   { "id": 16, "eixo": "RED-09", "titulo": "Direitos humanos e dignidade da pessoa humana",
     "ganchos": ["DUDH (1948); CF, art. 1º, III: dignidade da pessoa humana", "Dimensões: liberdade, igualdade, fraternidade", "Igualdade formal × igualdade real"],
-    "comandos": ["Discorra sobre a importância dos direitos humanos.", "Aborde os obstáculos à sua efetivação.", "Apresente o papel do Estado e da sociedade."] },
+    "comandos": ["Discorra sobre a importância dos direitos humanos.", "Aborde os obstáculos à sua efetivação.", "Apresente o papel do Estado e da sociedade."],
+    "motivadores": [
+      {"texto": "A Declaração Universal dos Direitos Humanos, de 1948, nasceu no pós-guerra e afirma que todos os seres humanos nascem livres e iguais em dignidade e direitos. A Constituição de 1988 elevou a dignidade da pessoa humana a fundamento da República.", "fonte": "Com base na DUDH (1948), art. 1º, e na CF, art. 1º, III."},
+      {"texto": "Estar escrito na lei não basta para que um direito chegue a todos. A igualdade formal diz que todos são iguais perante a lei; a igualdade real pergunta se as pessoas têm, de fato, condições de exercer esses direitos, seja na fila do hospital, seja na abordagem policial, seja na escola.", "fonte": "Texto elaborado para o treino, com base na CF, art. 5º."}
+    ] },
   { "id": 17, "eixo": "RED-09", "titulo": "Combate à desinformação (fake news)",
     "ganchos": ["Velocidade das redes amplia o alcance de mensagens falsas", "Riscos: saúde pública, eleições, pânico durante desastres", "Checagem de fatos e educação midiática; Bauman (modernidade líquida)"],
-    "comandos": ["Discorra sobre os impactos da desinformação.", "Aborde as razões de sua disseminação.", "Apresente formas de combatê-la."] },
+    "comandos": ["Discorra sobre os impactos da desinformação.", "Aborde as razões de sua disseminação.", "Apresente formas de combatê-la."],
+    "motivadores": [
+      {"texto": "Um estudo publicado na revista Science em 2018 analisou anos de postagens no então Twitter e concluiu que notícias falsas se espalhavam mais rápido e mais longe do que as verdadeiras, em boa parte porque as pessoas as compartilhavam. Novidade e emoção ajudam a explicar o alcance.", "fonte": "Com base em Vosoughi, Roy e Aral, Science, 2018."},
+      {"texto": "Durante uma emergência, um boato pode custar caro: informações falsas sobre rompimento de barragem, rotas ou doações atrapalham o socorro e confundem quem precisa de orientação. Nessas horas, conferir a fonte oficial antes de encaminhar uma mensagem também é um gesto de proteção.", "fonte": "Texto elaborado para o treino."}
+    ] },
   { "id": 18, "eixo": "RED-09", "titulo": "Voluntariado e solidariedade em situações de crise",
     "ganchos": ["Lei do Voluntariado (Lei 9.608/1998)", "Mobilização da sociedade civil nas enchentes do RS (2024)", "Doações, mutirões e defesa civil voluntária"],
-    "comandos": ["Discorra sobre a importância do voluntariado.", "Aborde seus limites e desafios.", "Apresente formas de estimulá-lo."] },
+    "comandos": ["Discorra sobre a importância do voluntariado.", "Aborde seus limites e desafios.", "Apresente formas de estimulá-lo."],
+    "motivadores": [
+      {"texto": "A Lei do Voluntariado define o serviço voluntário como atividade não remunerada prestada a entidade pública ou a instituição privada sem fins lucrativos, sem gerar vínculo de emprego. Trata-se de um gesto individual com enquadramento legal próprio.", "fonte": "Com base na Lei nº 9.608/1998."},
+      {"texto": "Nas enchentes de 2024 no Rio Grande do Sul, barcos particulares, cozinhas improvisadas e pontos de doação se multiplicaram em poucas horas. A mobilização salvou vidas, mas também mostrou o outro lado: sem coordenação com a defesa civil, o esforço pode se duplicar ou expor o próprio voluntário ao risco.", "fonte": "Texto elaborado para o treino, a partir das enchentes de 2024 no RS."}
+    ] },
   { "id": 19, "eixo": "RED-09", "titulo": "Inclusão das pessoas com deficiência",
     "ganchos": ["Lei Brasileira de Inclusão (Lei 13.146/2015)", "Barreiras físicas, atitudinais e de comunicação", "Inclusão no trabalho, na educação e no espaço público"],
-    "comandos": ["Discorra sobre a importância da inclusão.", "Aborde as barreiras existentes.", "Apresente medidas para superá-las."] },
+    "comandos": ["Discorra sobre a importância da inclusão.", "Aborde as barreiras existentes.", "Apresente medidas para superá-las."],
+    "motivadores": [
+      {"texto": "A Lei Brasileira de Inclusão considera a deficiência na relação entre o impedimento da pessoa e as barreiras do ambiente. A mudança é de foco: o problema não está só na pessoa, mas em calçadas, atitudes, sistemas e formas de comunicação que impedem sua participação em igualdade de condições.", "fonte": "Com base na Lei nº 13.146/2015, art. 2º."},
+      {"texto": "O Brasil incorporou a Convenção da ONU sobre os Direitos das Pessoas com Deficiência com status de emenda constitucional, e a lei de cotas obriga empresas maiores a reservar vagas. Cumprir percentual, porém, não encerra o assunto: inclusão também é acessibilidade, permanência e chance real de crescer no trabalho.", "fonte": "Com base no Decreto nº 6.949/2009 e na Lei nº 8.213/1991, art. 93."}
+    ] },
   { "id": 20, "eixo": "RED-09", "titulo": "Valorização do serviço público",
     "ganchos": ["CF, art. 37: legalidade, impessoalidade, moralidade, publicidade e eficiência", "O servidor efetiva direitos (segurança, saúde, educação)", "Ética e probidade"],
-    "comandos": ["Discorra sobre a importância do serviço público de qualidade.", "Aborde os desafios enfrentados.", "Apresente o papel da ética do servidor."] },
+    "comandos": ["Discorra sobre a importância do serviço público de qualidade.", "Aborde os desafios enfrentados.", "Apresente o papel da ética do servidor."],
+    "motivadores": [
+      {"texto": "A Constituição determina que a administração pública obedeça aos princípios da legalidade, impessoalidade, moralidade, publicidade e eficiência. São esses princípios que separam o serviço prestado a todos do favor feito a alguns.", "fonte": "Com base na CF, art. 37, caput."},
+      {"texto": "Para boa parte dos brasileiros, o Estado tem rosto: é a professora da escola pública, o enfermeiro do posto de saúde, o bombeiro que chega ao resgate. Quando esses serviços falham, direitos ficam só no papel; quando funcionam, muitas vezes nem são notados.", "fonte": "Texto elaborado para o treino."}
+    ] },
   { "id": 21, "eixo": "RED-08", "titulo": "Saúde mental na sociedade contemporânea",
     "ganchos": ["Setembro Amarelo e CVV (188)", "Aumento de ansiedade e depressão após a pandemia [confirme dados]", "Estigma e acesso ao cuidado (CAPS)"],
-    "comandos": ["Discorra sobre os fatores que afetam a saúde mental.", "Aborde os obstáculos ao cuidado.", "Apresente medidas de enfrentamento."] },
+    "comandos": ["Discorra sobre os fatores que afetam a saúde mental.", "Aborde os obstáculos ao cuidado.", "Apresente medidas de enfrentamento."],
+    "motivadores": [
+      {"texto": "A Organização Mundial da Saúde define saúde como um estado de completo bem-estar físico, mental e social, e não apenas a ausência de doença. A OMS também registrou aumento de quadros de ansiedade e depressão no mundo durante a pandemia de covid-19.", "fonte": "Com base na Constituição da OMS e em publicações da entidade sobre a pandemia."},
+      {"texto": "A Lei da Reforma Psiquiátrica assegura os direitos das pessoas com transtornos mentais e redireciona o cuidado para a comunidade, em serviços como os Centros de Atenção Psicossocial (CAPS). Apesar disso, o estigma e a dificuldade de acesso fazem muita gente adiar o pedido de ajuda.", "fonte": "Com base na Lei nº 10.216/2001."}
+    ] },
   { "id": 22, "eixo": "RED-08", "titulo": "Arboviroses e o combate ao Aedes aegypti",
     "ganchos": ["Dengue, zika e chikungunya; surtos recorrentes [confirme casos do ano]", "Eliminação de criadouros, mutirões e vacina contra a dengue", "Relação com saneamento e clima"],
-    "comandos": ["Discorra sobre os fatores que favorecem a proliferação do mosquito.", "Aborde os impactos na saúde pública.", "Apresente estratégias de combate."] },
+    "comandos": ["Discorra sobre os fatores que favorecem a proliferação do mosquito.", "Aborde os impactos na saúde pública.", "Apresente estratégias de combate."],
+    "motivadores": [
+      {"texto": "O Aedes aegypti, transmissor de dengue, zika e chikungunya, deposita seus ovos perto da água parada, e esses ovos resistem por meses mesmo em ambiente seco. Por isso, a caixa-d'água destampada, o pneu e o vaso de planta seguem no centro de um problema que volta todos os anos.", "fonte": "Texto elaborado para o treino."},
+      {"texto": "O mosquito é favorecido por calor, chuva, falta de coleta de lixo e abastecimento irregular, que obriga famílias a guardar água. O combate reúne mutirões, vigilância e novas ferramentas, como a vacina contra a dengue, mas continua dependendo da rotina de cada casa e da oferta de saneamento.", "fonte": "Texto elaborado para o treino."}
+    ] },
   { "id": 23, "eixo": "RED-08", "titulo": "Prevenção ao uso de drogas",
     "ganchos": ["Abordagem de saúde pública e prevenção, não só repressão (Lei 11.343/2006)", "Fatores de risco e de proteção (família, escola, esporte)", "Rede de atenção e acolhimento"],
-    "comandos": ["Discorra sobre os fatores associados ao uso de drogas.", "Aborde as consequências sociais.", "Apresente estratégias de prevenção."] },
+    "comandos": ["Discorra sobre os fatores associados ao uso de drogas.", "Aborde as consequências sociais.", "Apresente estratégias de prevenção."],
+    "motivadores": [
+      {"texto": "A Lei sobre Drogas organiza o sistema nacional de políticas públicas na área em torno de três frentes: prevenção do uso, atenção e reinserção social de usuários e dependentes, e repressão à produção e ao tráfico. Ela mesma, portanto, não reduz o tema à resposta policial.", "fonte": "Com base na Lei nº 11.343/2006."},
+      {"texto": "Família presente, escola acolhedora, esporte e perspectiva de futuro são apontados como fatores de proteção; exclusão, violência e fácil acesso às substâncias, como fatores de risco. Prevenir, nesse sentido, envolve muito mais do que falar sobre os efeitos da droga.", "fonte": "Texto elaborado para o treino."}
+    ] },
   { "id": 24, "eixo": "RED-08", "titulo": "Sedentarismo e qualidade de vida",
     "ganchos": ["OMS recomenda atividade física regular", "Sedentarismo eleva obesidade, hipertensão e diabetes", "Políticas de incentivo ao esporte e ao lazer"],
-    "comandos": ["Discorra sobre as causas do sedentarismo.", "Aborde os impactos na saúde.", "Apresente formas de incentivar a atividade física."] },
+    "comandos": ["Discorra sobre as causas do sedentarismo.", "Aborde os impactos na saúde.", "Apresente formas de incentivar a atividade física."],
+    "motivadores": [
+      {"texto": "As diretrizes da Organização Mundial da Saúde, de 2020, recomendam a adultos de 150 a 300 minutos semanais de atividade física moderada, ou de 75 a 150 minutos de atividade vigorosa, e a crianças e adolescentes, em média, 60 minutos por dia. A entidade também orienta a reduzir o tempo parado.", "fonte": "Com base nas Diretrizes da OMS sobre atividade física e comportamento sedentário (2020)."},
+      {"texto": "A Constituição atribui ao Estado o dever de fomentar o esporte e incentivar o lazer como forma de promoção social. Mesmo assim, mexer o corpo depende de condições concretas: tempo depois do trabalho, calçada iluminada, praça segura e transporte que não consuma o dia inteiro.", "fonte": "Com base na CF, art. 217, §3º."}
+    ] },
   { "id": 25, "eixo": "RED-09", "titulo": "Inteligência artificial e seus impactos",
     "ganchos": ["Avanço das IAs generativas; regulação em debate no Congresso [confirme a situação]", "Impactos no trabalho, na educação e na desinformação", "Oportunidades (saúde, segurança) e riscos (vieses, privacidade)"],
-    "comandos": ["Discorra sobre os benefícios da inteligência artificial.", "Aborde os riscos e desafios.", "Apresente a necessidade de regulação."] },
+    "comandos": ["Discorra sobre os benefícios da inteligência artificial.", "Aborde os riscos e desafios.", "Apresente a necessidade de regulação."],
+    "motivadores": [
+      {"texto": "Ferramentas de inteligência artificial já ajudam a interpretar exames, traduzir textos e prever eventos climáticos. Também levantam questões novas: quem responde quando um sistema erra, que dados foram usados para treiná-lo e quais vieses ele pode repetir em decisões sobre pessoas.", "fonte": "Texto elaborado para o treino."},
+      {"texto": "A Unesco aprovou, em 2021, uma recomendação sobre a ética da inteligência artificial, e a União Europeia adotou, em 2024, um regulamento próprio, baseado em níveis de risco. No Brasil, a regulação é debatida no Congresso, e o desafio é proteger direitos sem barrar a inovação.", "fonte": "Com base na Recomendação da Unesco (2021), no regulamento europeu de IA (2024) e no debate legislativo brasileiro."}
+    ] },
   { "id": 26, "eixo": "RED-09", "titulo": "Proteção de dados e privacidade",
     "ganchos": ["LGPD (Lei 13.709/2018) e a ANPD", "Vazamentos de dados e golpes digitais", "Equilíbrio entre inovação e privacidade"],
-    "comandos": ["Discorra sobre a importância da proteção de dados.", "Aborde os riscos do uso indevido.", "Apresente medidas de proteção."] },
+    "comandos": ["Discorra sobre a importância da proteção de dados.", "Aborde os riscos do uso indevido.", "Apresente medidas de proteção."],
+    "motivadores": [
+      {"texto": "A Lei Geral de Proteção de Dados regula o tratamento de dados pessoais por empresas e pelo poder público, e a Autoridade Nacional de Proteção de Dados (ANPD) fiscaliza sua aplicação. Em 2022, a proteção de dados passou a constar expressamente da Constituição como direito fundamental.", "fonte": "Com base na Lei nº 13.709/2018 e na EC nº 115/2022."},
+      {"texto": "Um cadastro em troca de desconto, um aplicativo que pede acesso aos contatos, um vazamento em uma empresa: dados que parecem soltos, quando reunidos, permitem golpes cada vez mais convincentes. A conveniência de hoje pode se transformar em prejuízo amanhã.", "fonte": "Texto elaborado para o treino."}
+    ] },
   { "id": 27, "eixo": "RED-06", "titulo": "Tecnologia a serviço da defesa civil e da segurança",
     "ganchos": ["Alertas da Defesa Civil por celular, drones, monitoramento por satélite (INPE)", "Antecipação de desastres e agilidade no socorro", "Limite: desigualdade de acesso à tecnologia"],
-    "comandos": ["Discorra sobre como a tecnologia auxilia a defesa civil.", "Aborde os limites de sua aplicação.", "Apresente caminhos para ampliá-la."] },
+    "comandos": ["Discorra sobre como a tecnologia auxilia a defesa civil.", "Aborde os limites de sua aplicação.", "Apresente caminhos para ampliá-la."],
+    "motivadores": [
+      {"texto": "Criado em 2011, o Centro Nacional de Monitoramento e Alertas de Desastres Naturais (Cemaden) acompanha áreas de risco e emite alertas. Mais recentemente, a Defesa Civil passou a enviar avisos diretamente à tela do celular nas áreas ameaçadas, sem a necessidade de cadastro prévio.", "fonte": "Com base em informações públicas sobre o Cemaden e o serviço Defesa Civil Alerta."},
+      {"texto": "Satélites apontam focos de calor, e drones sobrevoam locais de difícil acesso nas buscas. Nenhuma tecnologia, porém, ajuda quem está sem sinal, sem aparelho ou sem saber o que fazer quando o alerta chega. A ferramenta precisa vir acompanhada de plano, treinamento e rotas de saída conhecidas.", "fonte": "Texto elaborado para o treino."}
+    ] },
   { "id": 28, "eixo": "RED-07", "titulo": "Energias renováveis e transição energética",
     "ganchos": ["Matriz elétrica brasileira majoritariamente renovável (hidrelétrica, eólica, solar)", "Transição energética e combate às mudanças climáticas", "Desafios: custo, infraestrutura e segurança no fornecimento"],
-    "comandos": ["Discorra sobre as vantagens das energias renováveis.", "Aborde os desafios da transição.", "Apresente o papel do Brasil nesse cenário."] },
+    "comandos": ["Discorra sobre as vantagens das energias renováveis.", "Aborde os desafios da transição.", "Apresente o papel do Brasil nesse cenário."],
+    "motivadores": [
+      {"texto": "A matriz elétrica brasileira é majoritariamente renovável, com peso histórico das hidrelétricas e crescimento das fontes eólica e solar, em especial no Nordeste. Por outro lado, a dependência da água expõe o sistema às secas, e as usinas térmicas costumam ser acionadas nos períodos críticos, a um custo maior.", "fonte": "Texto elaborado para o treino."},
+      {"texto": "Em 2022, o Brasil criou um marco legal para a geração própria de energia, como os painéis solares em casas e comércios. A transição, contudo, não se resume a trocar a fonte: envolve linhas de transmissão, custo para o consumidor e atenção às comunidades que vivem perto dos grandes empreendimentos.", "fonte": "Com base na Lei nº 14.300/2022."}
+    ] },
   { "id": 29, "eixo": "RED-09", "titulo": "Enfrentamento da violência contra a mulher",
     "ganchos": ["Lei Maria da Penha (Lei 11.340/2006); Lei do Feminicídio (Lei 13.104/2015); Ligue 180", "Subnotificação e ciclo da violência", "Rede de proteção e acolhimento"],
-    "comandos": ["Discorra sobre os fatores que perpetuam a violência contra a mulher.", "Aborde suas consequências sociais.", "Apresente medidas de enfrentamento."] },
+    "comandos": ["Discorra sobre os fatores que perpetuam a violência contra a mulher.", "Aborde suas consequências sociais.", "Apresente medidas de enfrentamento."],
+    "motivadores": [
+      {"texto": "A Lei Maria da Penha leva o nome de uma mulher que sobreviveu a tentativas de homicídio cometidas pelo marido e levou seu caso à Comissão Interamericana de Direitos Humanos. A lei reconhece que a violência doméstica pode ser física, psicológica, sexual, patrimonial e moral, e prevê medidas protetivas de urgência.", "fonte": "Com base na Lei nº 11.340/2006, art. 7º."},
+      {"texto": "O feminicídio entrou no Código Penal em 2015 e, em 2024, tornou-se crime autônomo, com pena mais alta. A resposta penal, porém, costuma chegar quando o ciclo de violência já avançou. Por vergonha, medo ou dependência financeira, muitas mulheres não denunciam, e o Ligue 180 é uma das portas de entrada para a rede de atendimento.", "fonte": "Com base nas Leis nº 13.104/2015 e nº 14.994/2024."}
+    ] },
   { "id": 30, "eixo": "RED-09", "titulo": "Envelhecimento populacional e os direitos da pessoa idosa",
     "ganchos": ["Estatuto da Pessoa Idosa (Lei 10.741/2003)", "Transição demográfica: o Brasil envelhece rapidamente [confirme dados do IBGE]", "Previdência, saúde, cuidado e combate à violência contra o idoso"],
-    "comandos": ["Discorra sobre os desafios do envelhecimento populacional.", "Aborde os direitos da pessoa idosa.", "Apresente o papel da família e do Estado."] }
+    "comandos": ["Discorra sobre os desafios do envelhecimento populacional.", "Aborde os direitos da pessoa idosa.", "Apresente o papel da família e do Estado."],
+    "motivadores": [
+      {"texto": "A Constituição atribui à família, à sociedade e ao Estado o dever de amparar as pessoas idosas, defender sua dignidade e seu bem-estar e garantir-lhes o direito à vida. O Estatuto da Pessoa Idosa detalha essa proteção para quem tem 60 anos ou mais.", "fonte": "Com base na CF, art. 230, e na Lei nº 10.741/2003."},
+      {"texto": "Os censos do IBGE mostram uma população que envelhece, com menos nascimentos e vida mais longa. A mudança pressiona a previdência e a saúde e traz uma pergunta para dentro de casa: quem vai cuidar, e em que condições? Em 2024, o país instituiu uma Política Nacional de Cuidados para tratar do tema.", "fonte": "Com base nos censos do IBGE e na Lei nº 15.069/2024."}
+    ] }
 ]

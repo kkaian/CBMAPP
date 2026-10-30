@@ -147,6 +147,7 @@ function Tema({ tema, aberto, onToggle, modelo, onAbrir }: {
         </div>
         {aberto && (
           <div className="mt-3 text-[14px]" onClick={(e) => e.stopPropagation()}>
+            <TextosMotivadores textos={tema.motivadores} />
             <div className="text-suave text-xs uppercase tracking-wide mb-1">Comandos</div>
             <ol className="list-decimal pl-5 space-y-1 mb-3">{tema.comandos.map((c) => <li key={c}>{c}</li>)}</ol>
             <div className="text-suave text-xs uppercase tracking-wide mb-1">Ganchos de repertório</div>
@@ -161,6 +162,23 @@ function Tema({ tema, aberto, onToggle, modelo, onAbrir }: {
           </div>
         )}
       </Card>
+    </div>
+  )
+}
+
+export function TextosMotivadores({ textos }: { textos?: TemaRedacao['motivadores'] }) {
+  if (!textos?.length) return null
+  return (
+    <div className="mb-3">
+      <div className="text-suave text-xs uppercase tracking-wide mb-1">Textos motivadores</div>
+      {textos.map((t, i) => (
+        <div key={t.fonte + i} className="bg-card2 rounded-lg p-2.5 mb-1.5 text-[13px] leading-relaxed">
+          <div className="font-semibold text-suave text-[11px] mb-0.5">Texto {i + 1}</div>
+          {t.texto}
+          <div className="text-suave text-[11px] mt-1">{t.fonte}</div>
+        </div>
+      ))}
+      <div className="text-suave text-[11px]">Servem de ponto de partida: use as ideias com as suas palavras, sem copiar trechos.</div>
     </div>
   )
 }

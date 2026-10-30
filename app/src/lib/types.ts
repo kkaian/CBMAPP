@@ -66,6 +66,7 @@ export interface TemaRedacao {
   titulo: string
   ganchos: string[]
   comandos: string[]
+  motivadores?: { texto: string; fonte: string }[]
 }
 
 export interface Repertorio {

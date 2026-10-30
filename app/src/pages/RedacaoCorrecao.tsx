@@ -10,6 +10,7 @@ import {
 } from '../lib/redacao'
 import { modoLocal } from '../lib/supabase'
 import type { RegistroRedacao } from '../lib/types'
+import { TextosMotivadores } from './Redacao'
 
 const fmt = (n: number | null) => (n == null ? '—' : n.toLocaleString('pt-BR', { maximumFractionDigits: 2 }))
 
@@ -45,6 +46,7 @@ export function RedacaoEscrever() {
 
   if (!red || !r) return <Carregando />
   const temas = red.temas ?? []
+  const temaAtual = temas.find((t) => t.id === r.temaId)
   const linhas = linhasDoTexto(r.texto)
   const tl = contarLinhas(r.texto)
   const restam = cota ? Math.max(0, cota.limite - cota.usadas) : null
@@ -126,7 +128,15 @@ export function RedacaoEscrever() {
               className="w-full mt-2 p-2 rounded-lg bg-card2 text-[14px] outline-none" />
           </>
         ) : (
-          <ol className="list-decimal pl-5 mt-2 text-[13px] text-suave space-y-0.5">{r.comandos.map((c) => <li key={c}>{c}</li>)}</ol>
+          <>
+            <ol className="list-decimal pl-5 mt-2 text-[13px] text-suave space-y-0.5">{r.comandos.map((c) => <li key={c}>{c}</li>)}</ol>
+            {temaAtual?.motivadores?.length ? (
+              <details className="mt-2 text-[13px]">
+                <summary className="cursor-pointer text-azul">Ver os textos motivadores</summary>
+                <div className="mt-2"><TextosMotivadores textos={temaAtual.motivadores} /></div>
+              </details>
+            ) : null}
+          </>
         )}
       </Card>
 
