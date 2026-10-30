@@ -66,7 +66,18 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 - [ ] Trocar o código de convite padrão em **Mais › Administração** (antes de passar o link ao amigo) e aprovar a conta dele lá.
 - [ ] (Recomendado) a chave do Gemini foi colada na conversa: se quiser, gere outra no AI Studio e troque em Vercel › Settings › Environment Variables (`GEMINI_API_KEY`).
 
-## Histórico resumido
+## Histórico resumido
+- **30/10** — **Histórico e diagnóstico de simulados, e textos motivadores.**
+  - Simulados agora tem duas abas: "Fazer simulado" e "Histórico" (`?aba=historico`), com a evolução e os simulados entregues.
+  - O resultado virou diagnóstico (`diagnosticarSimulado`, em `simulado.ts`): leitura geral, tabela de segurança (certeza, dúvida, chute), matérias que abrem em tópicos, tempo por matéria e itens mais lentos, e "O que revisar" por prioridade (erro pesa 2, erro com certeza mais 1, branco e acerto inseguro 1).
+  - Filtros novos na revisão de itens: erros com certeza e acertos inseguros; cada item mostra a segurança marcada e o tempo.
+  - 30 temas com 2 textos motivadores cada (`motivadores` em `conteudo/RED/temas.json`), na lista de temas e na tela de correção. O build exige ao menos 2, com fonte.
+  - Decisão: os textos são paráfrases escritas para o treino, sem aspas e sem números que mudam com o tempo; a fonte diz a lei ou o caso de origem. Foram escritos de memória: **não conferidos com os originais**, conferir antes de citar uma lei ou dado na prova.
+  - XP de item repetido: já valia metade (`valorResposta`), para ganhar e para perder, em qualquer modo fora do caderno. Conferido, sem mudança.
+  - Testado em modo local com simulado sintético de 30 itens, depois apagado. Sem teste com a conta real.
+- **29/10** — **Mini por matérias** (Simulados › 🧪): a pessoa escolhe uma ou mais matérias objetivas e o tamanho (10, 20, 30 ou 50 itens).
+  - Os itens são repartidos entre todos os tópicos das matérias, com os inéditos primeiro em cada tópico, e vêm misturados (os de um mesmo texto-base ficam juntos). Tempo de 80 s por item. Tipo `materias` (`montarPorMaterias`).
+- **29/10** — **Missões:** sem aviso fixo de prazo; o cartão "Meta não cumprida" só aparece depois que uma meta vence. Cada missão é marcada como obrigatória (tira XP) ou sugestão: a meta diária de itens é obrigatória, a matéria do dia e o resumo são sugestão.
 - **28/10** — **Quantidade de itens regulável e nova escala de patentes:**
   - No tópico e na matéria, um seletor define quantos itens treinar: 5, 10, 20, 30, 50, "Todos" ou um número digitado. A última escolha fica guardada no aparelho (`app/src/components/Quantidade.tsx`).
   - **XP refeito para premiar o acerto:** acerto 10, erro 2, branco 1, leitura 10 (antes: 10 por item respondido, mais bônus). O XP de todos foi recalculado com a regra nova, inclusive no ranking.

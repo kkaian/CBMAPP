@@ -32,7 +32,7 @@ Tudo em **português do Brasil**: conversa, conteúdo, comentários de questão 
 - Questões já existentes no Drive: importar seguindo `docs/PROJETO.md` §5.3.1 (extrair → classificar → gabaritar → filtrar → reescrever → completar), registrando a origem exata em `origem`.
 
 ## Redação
-- Matéria `RED` (P3) tem conteúdo de estudo, itens de técnica e `conteudo/RED/temas.json` (30 temas com comandos e ganchos).
+- Matéria `RED` (P3) tem conteúdo de estudo, itens de técnica e `conteudo/RED/temas.json` (30 temas com comandos, ganchos e textos motivadores).
 - **Citação coringa do usuário: Darcy Ribeiro, *O Povo Brasileiro*** (desigualdade estrutural). Preferir paráfrase; aspas só com frase conferida.
 - Fórmula do edital: NPD = NC − 6 × NE ÷ TL, mínimo 15 (o guia antigo do Drive diz "fator 2 ou 3": está errado, é 6).
 - Não inventar números nos temas: marcar `[confirme]` quando o dado muda com o tempo.
