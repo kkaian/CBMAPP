@@ -159,6 +159,8 @@ export const XP_BASE = { branco: 1, leitura: 10, simuladoCompleto: 100, simulado
 // Questão: a errada tira o mesmo que a certa daria, e o valor depende da confiança marcada.
 // Sem confiança registrada (itens antigos, simulado sem marcação) vale como dúvida.
 export const XP_CONFIANCA = { certeza: 10, duvida: 6, chute: 3 } as const
+// Intervalos do caderno de erros (dias). Depois do último acerto com certeza, o item sai do caderno.
+export const INTERVALOS = [1, 3, 7, 15]
 // Caderno de erros: cada volta do item vale mais, até o valor cheio (25%, 50%, 75%, 100%).
 export function fatorCaderno(revisoesFeitas: number): number {
   return Math.min(1, 0.25 * (revisoesFeitas + 1))
@@ -171,7 +173,7 @@ export const PENALIDADE_META = { dia: 20, semana: 100, mes: 150 }
 // A cobrança começou em 29/10/2026: dias a partir de hoje, a semana em andamento (26/10 a 1/11)
 // e os meses a partir de novembro (outubro já estava no fim). Nada antes disso é cobrado.
 export const INICIO_PENALIDADES = { dia: '2026-10-29', semana: '2026-10-26', mes: '2026-11' }
-export const REGRA_XP = 'Questão: certa soma e errada tira o mesmo valor, conforme a confiança: certeza ±10, dúvida ±6, chute ±3; branco +1. Física e Química valem 20% a mais. Item repetido vale metade; no caderno de erros o valor cresce a cada volta (25%, 50%, 75%, 100%). Leitura confirmada 10, simulado completo 100 (menores 30), redação corrigida 150. Tudo multiplicado pela sequência do dia: ×0,4 no 1º dia até ×1,0 a partir do 7º. Perder a sequência custa 30 XP por dia dela (máx. 300). Meta não cumprida no prazo: −20 (dia), −100 (semana), −150 (cada meta do mês). Coronel aos 50.000 XP.'
+export const REGRA_XP = 'Questão: certa soma e errada tira o mesmo valor, conforme a confiança: certeza ±10, dúvida ±6, chute ±3; branco +1. Física e Química valem 20% a mais. Item repetido vale metade; no caderno de erros o valor cresce a cada volta (25%, 50%, 75%, 100%), e acertar um item do caderno em qualquer lugar conta como volta. No caderno de dúvidas, acertar com certeza dá só a diferença para a dúvida (+4), e errar tira o valor normal. Leitura confirmada 10, simulado completo 100 (menores 30), redação corrigida 150. Tudo multiplicado pela sequência do dia: ×0,4 no 1º dia até ×1,0 a partir do 7º. Perder a sequência custa 30 XP por dia dela (máx. 300). Meta não cumprida no prazo: −20 (dia), −100 (semana), −150 (cada meta do mês). Coronel aos 50.000 XP.'
 
 export function multiplicadorSequencia(dias: number): number {
   if (dias <= 0) return 0.4
@@ -208,11 +210,12 @@ export function extratoXp({ respostas, leituras, simulados = [], redacoes = [], 
   // Caderno de erros: progressivo a cada volta do item (zera quando ele volta ao caderno).
   // Outras repetições (trilha, treino de novo): metade do item inédito.
   const vistos = new Set<string>()
-  const voltas: Record<string, number> = {}
+  const estados: Record<string, EstadoCaderno> = {}
   for (const r of [...respostas].sort((a, b) => a.criadaEm.localeCompare(b.criadaEm))) {
-    somar(r.criadaEm, valorResposta(r, vistos.has(r.itemId), voltas[r.itemId] ?? 0).xp)
+    const estado = estados[r.itemId] ?? FORA_DO_CADERNO
+    somar(r.criadaEm, valorResposta(r, vistos.has(r.itemId), estado).xp)
     vistos.add(r.itemId)
-    voltas[r.itemId] = proximasVoltas(r, voltas[r.itemId] ?? 0)
+    estados[r.itemId] = proximoEstado(r, estado)
   }
   for (const l of leiturasValidas(leituras, respostas)) somar(l.criadaEm, XP_BASE.leitura)
   for (const x of simulados) if (x.status === 'concluido' && x.concluidoEm) somar(x.concluidoEm, x.itens.length >= 120 ? XP_BASE.simuladoCompleto : XP_BASE.simulado)
@@ -258,28 +261,58 @@ export function extratoXp({ respostas, leituras, simulados = [], redacoes = [], 
 }
 
 // Valor de uma resposta antes do multiplicador da sequência, com a explicação de cada parte.
-export function valorResposta(r: RegistroResposta, jaVisto: boolean, voltasNoCaderno: number) {
+export function valorResposta(r: RegistroResposta, jaVisto: boolean, estado: EstadoCaderno = FORA_DO_CADERNO) {
   const bonus = BONUS_MATERIA[r.materia] ?? 1
+  const textoBonus = bonus !== 1 ? `${r.materia === 'FIS' ? 'Física' : 'Química'} +${Math.round((bonus - 1) * 100)}%` : null
   const cheio = (r.resposta === 'B' ? XP_BASE.branco : (r.correta === 1 ? 1 : -1) * XP_CONFIANCA[r.confianca ?? 'duvida']) * bonus
-  const fator = r.modo === 'revisao' ? fatorCaderno(voltasNoCaderno) : jaVisto ? 0.5 : 1
-  const motivos = [
-    bonus !== 1 ? `${r.materia === 'FIS' ? 'Física' : 'Química'} +${Math.round((bonus - 1) * 100)}%` : null,
-    r.modo === 'revisao' ? `caderno, ${voltasNoCaderno + 1}ª volta (${Math.round(fator * 100)}%)` : jaVisto ? 'item repetido (metade)' : null,
-  ].filter(Boolean)
-  return { xp: cheio * fator, cheio, fator, motivo: motivos.length ? motivos.join(' · ') : null }
+  const juntar = (...motivos: (string | null)[]) => motivos.filter(Boolean).join(' · ') || null
+
+  // Caderno de dúvidas: o acerto já pagou o valor da dúvida, então só falta a diferença; errar tira o valor normal.
+  if (r.modo === 'duvidas' && r.correta === 1) {
+    const diferenca = Math.max(0, XP_CONFIANCA[r.confianca ?? 'duvida'] - XP_CONFIANCA.duvida) * bonus
+    return { xp: diferenca, cheio: diferenca, fator: 1, motivo: juntar(textoBonus, 'caderno de dúvidas: só a diferença') }
+  }
+  if (r.modo === 'duvidas' && r.correta === 0) return { xp: cheio, cheio, fator: 1, motivo: juntar(textoBonus, 'caderno de dúvidas: valor normal') }
+
+  const volta = r.modo === 'revisao' || contaComoRevisita(r, estado)
+  const fator = volta ? fatorCaderno(estado.voltas) : jaVisto ? 0.5 : 1
+  const motivo = juntar(textoBonus, volta ? `caderno, ${estado.voltas + 1}ª volta (${Math.round(fator * 100)}%)` : jaVisto ? 'item repetido (metade)' : null)
+  return { xp: cheio * fator, cheio, fator, motivo }
 }
 
-function proximasVoltas(r: RegistroResposta, voltas: number) {
-  const precisaRever = r.correta !== 1 || r.confianca === 'chute'
-  return precisaRever ? 0 : r.modo === 'revisao' ? voltas + 1 : voltas
+// Situação do item no caderno de erros, refeita a partir do histórico (espelha atualizarRevisao, em estudo.ts).
+export interface EstadoCaderno { voltas: number; etapa: number | null; dia: string | null }
+const FORA_DO_CADERNO: EstadoCaderno = { voltas: 0, etapa: null, dia: null }
+
+// Acertar um item do caderno em qualquer lugar conta como revisita, menos no mesmo dia em que ele mudou.
+function contaComoRevisita(r: RegistroResposta, e: EstadoCaderno) {
+  return e.etapa !== null && r.correta === 1 && r.confianca !== 'chute' && e.dia !== diaLocal(new Date(r.criadaEm))
+}
+
+function proximoEstado(r: RegistroResposta, e: EstadoCaderno): EstadoCaderno {
+  const dia = diaLocal(new Date(r.criadaEm))
+  if (r.correta !== 1 || r.confianca === 'chute') return { voltas: 0, etapa: 0, dia }
+  if (!contaComoRevisita(r, e)) return e
+  const etapa = r.confianca === 'certeza' ? e.etapa! + 1 : e.etapa!
+  return { voltas: e.voltas + 1, etapa: etapa >= INTERVALOS.length ? null : etapa, dia }
+}
+
+// Caderno de dúvidas: itens cuja última resposta foi um acerto marcado como dúvida.
+export function cadernoDeDuvidas(respostas: RegistroResposta[]) {
+  const ultima = new Map<string, RegistroResposta>()
+  for (const r of respostas) {
+    const u = ultima.get(r.itemId)
+    if (!u || r.criadaEm >= u.criadaEm) ultima.set(r.itemId, r)
+  }
+  return [...ultima.values()].filter((r) => r.correta === 1 && r.confianca === 'duvida')
 }
 
 // XP de uma resposta recém-gravada, olhando o histórico do item e a sequência de hoje.
 export function xpDaRespostaNova(r: RegistroResposta, historicoDoItem: RegistroResposta[], todas: RegistroResposta[]) {
   const antes = historicoDoItem.filter((x) => x.id !== r.id && x.criadaEm < r.criadaEm).sort((a, b) => a.criadaEm.localeCompare(b.criadaEm))
-  let voltas = 0
-  for (const x of antes) voltas = proximasVoltas(x, voltas)
-  const v = valorResposta(r, antes.length > 0, voltas)
+  let estado = FORA_DO_CADERNO
+  for (const x of antes) estado = proximoEstado(x, estado)
+  const v = valorResposta(r, antes.length > 0, estado)
   const mult = multiplicadorSequencia(calcularStreak(diasComEstudo(todas), diaLocal(new Date(r.criadaEm))).dias)
   return { ...v, mult, final: v.xp * mult }
 }

@@ -10,6 +10,7 @@ import { Carregando } from './components/ui'
 import Admin from './pages/Admin'
 import Aguardando from './pages/Aguardando'
 import Desempenho from './pages/Desempenho'
+import Duvidas from './pages/Duvidas'
 import EmBreve from './pages/EmBreve'
 import Erros from './pages/Erros'
 import Estudar from './pages/Estudar'
@@ -44,6 +45,7 @@ const router = createHashRouter([
       { path: '/desempenho', element: <Desempenho /> },
       { path: '/mais', element: <Mais /> },
       { path: '/erros', element: <Erros /> },
+      { path: '/duvidas', element: <Duvidas /> },
       { path: '/perfil', element: <Perfil /> },
       { path: '/em-breve', element: <EmBreve /> },
       { path: '/redacao', element: <Redacao /> },

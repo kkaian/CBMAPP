@@ -67,6 +67,13 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 - [ ] (Recomendado) a chave do Gemini foi colada na conversa: se quiser, gere outra no AI Studio e troque em Vercel › Settings › Environment Variables (`GEMINI_API_KEY`).
 
 ## Histórico resumido
+- **30/10** — **Caderno de dúvidas e revisita fora do caderno.**
+  - Caderno de dúvidas (`/duvidas`, em Questões e em Mais): itens cuja última resposta foi acerto marcado como dúvida. Sem prazo, sem missão e sem contador na tela inicial. Dá para voltar ao acaso, por matéria ou por tópico (até 20 por vez). Modo `duvidas`.
+  - XP nele: certo com certeza dá só a diferença (10 − 6 = 4, 4,8 em Física e Química) e o item sai; certo com dúvida ou chute dá 0; errado tira o valor normal (sem a metade de repetido) e o item vai para o caderno de erros.
+  - Decisão: erro na dúvida não entra, pois já está no caderno de erros; a regra da diferença só vale dentro desse modo.
+  - Revisita: o acerto em qualquer modo já avançava a etapa; agora o XP acompanha (`proximoEstado` espelha `atualizarRevisao`), pagando como volta do caderno em vez de metade, e o Quiz avisa ("agora volta só em 15 dias"). Acerto com dúvida repete o intervalo, como no caderno.
+  - Decisão: revisita não conta no mesmo dia em que o item mudou, para errar e acertar em seguida não esvaziar o caderno. Item na 1ª volta paga 25% (antes 50% fora do caderno). O XP é recalculado do histórico, então respostas antigas nessa situação mudam um pouco.
+  - Testado em modo local com dados sintéticos (etapa 2 → 3, próxima em 15 dias), depois apagados. Sem teste com a conta real.
 - **30/10** — **Histórico e diagnóstico de simulados, e textos motivadores.**
   - Simulados agora tem duas abas: "Fazer simulado" e "Histórico" (`?aba=historico`), com a evolução e os simulados entregues.
   - O resultado virou diagnóstico (`diagnosticarSimulado`, em `simulado.ts`): leitura geral, tabela de segurança (certeza, dúvida, chute), matérias que abrem em tópicos, tempo por matéria e itens mais lentos, e "O que revisar" por prioridade (erro pesa 2, erro com certeza mais 1, branco e acerto inseguro 1).

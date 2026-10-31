@@ -20,6 +20,7 @@ export default function Questoes() {
       <Opcao icone="⚡" titulo="Relâmpago" sub="5 itens rápidos, puxando dos seus pontos fracos" onClick={() => nav('/quiz?modo=relampago&n=5')} />
       <Opcao icone="🧭" titulo="Revisão · trilha de 6 tópicos" sub="os tópicos que você não vê há mais tempo: 6 resumos e depois 30 itens (5 de cada)" onClick={() => nav('/trilha')} />
       <Opcao icone="📕" titulo="Revisão do caderno de erros" sub={pendentes ? `${pendentes} itens vencem hoje` : 'nada pendente hoje'} onClick={() => nav('/quiz?modo=revisao&n=30')} />
+      <Opcao icone="🤔" titulo="Caderno de dúvidas" sub="acertos na dúvida, para voltar quando quiser" onClick={() => nav('/duvidas')} />
       <Opcao icone="📝" titulo="Simulados" sub="completo (120 itens · 4h30), mini, pontos fracos e os simulados 01–05" onClick={() => nav('/simulados')} />
       <Opcao icone="✍️" titulo="Redação" sub="estudo, temas e calculadora da nota" onClick={() => nav('/redacao')} />
 

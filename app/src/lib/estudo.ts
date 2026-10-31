@@ -1,11 +1,11 @@
 import { db } from './db'
 import { diaLocal, somarDias } from './datas'
 import { materiaDoTopico } from './conteudo'
+import { INTERVALOS } from './stats'
 import { agendarSincronizacao } from './sync'
 import type { Confianca, ModoEstudo, Questao, RegistroResposta, Resposta } from './types'
 
-// Intervalos do caderno de erros (dias). Depois do último acerto com certeza, o item sai do caderno.
-export const INTERVALOS = [1, 3, 7, 15]
+export { INTERVALOS }
 
 export async function registrarResposta(
   q: Questao,
@@ -41,6 +41,7 @@ export async function registrarResposta(
 // - errou, deixou em branco ou acertou no chute → entra (ou volta) para a etapa 0 (revisar amanhã)
 // - acertou com certeza um item do caderno → avança uma etapa; depois da última, sai do caderno
 // - acertou com dúvida um item do caderno → repete o mesmo intervalo
+// - vale em qualquer modo (refazer o tópico conta como revisita), menos no mesmo dia em que o item mudou
 async function atualizarRevisao(q: Questao, reg: RegistroResposta) {
   const hoje = diaLocal()
   const atual = await db.revisoes.get(q.id)
@@ -52,6 +53,7 @@ async function atualizarRevisao(q: Questao, reg: RegistroResposta) {
     return
   }
   if (!atual || atual.proxima === null) return
+  if (diaLocal(new Date(atual.atualizadaEm)) === hoje) return
 
   if (reg.confianca === 'certeza') {
     const etapa = atual.etapa + 1

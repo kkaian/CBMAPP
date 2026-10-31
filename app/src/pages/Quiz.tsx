@@ -5,10 +5,10 @@ import { Barra, Botao, Card, Carregando, Pill } from '../components/ui'
 import { carregarMateria, materiaDoTopico } from '../lib/conteudo'
 import { gravarConfig, lerConfig } from '../lib/db'
 import { db } from '../lib/db'
-import { registrarResposta } from '../lib/estudo'
+import { INTERVALOS, registrarResposta } from '../lib/estudo'
 import { xpDaRespostaNova } from '../lib/stats'
-import { itensDaMateria, itensDaTrilha, itensDeRevisao, itensDoTopico, itensRelampago } from '../lib/selecao'
-import type { Confianca, Grupo, ModoEstudo, Questao, RegistroResposta, Resposta } from '../lib/types'
+import { itensDaMateria, itensDaTrilha, itensDeDuvidas, itensDeRevisao, itensDoTopico, itensRelampago } from '../lib/selecao'
+import type { Confianca, Grupo, ModoEstudo, Questao, RegistroResposta, RegistroRevisao, Resposta } from '../lib/types'
 
 const CONFIANCAS: { id: Confianca; rotulo: string; tecla: string }[] = [
   { id: 'certeza', rotulo: '✅ Certeza', tecla: '1' },
@@ -29,15 +29,17 @@ export default function Quiz() {
   const [feitos, setFeitos] = useState<RegistroResposta[]>([])
   const [xpItem, setXpItem] = useState<ReturnType<typeof xpDaRespostaNova> | null>(null)
   const [xpSessao, setXpSessao] = useState(0)
+  const [avisoCaderno, setAvisoCaderno] = useState<string | null>(null)
   const inicio = useRef(Date.now())
   const [segundos, setSegundos] = useState(0)
 
-  const modoEstudo: ModoEstudo = modo === 'revisao' ? 'revisao' : modo === 'relampago' ? 'relampago' : modo === 'trilha' ? 'trilha' : 'treino'
+  const modoEstudo: ModoEstudo = modo === 'revisao' ? 'revisao' : modo === 'relampago' ? 'relampago' : modo === 'trilha' ? 'trilha' : modo === 'duvidas' ? 'duvidas' : 'treino'
 
   useEffect(() => {
     let vivo = true
     const carregar =
       modo === 'revisao' ? itensDeRevisao(n)
+      : modo === 'duvidas' ? itensDeDuvidas(n, { topico: params.get('t') ?? undefined, materia: params.get('m') ?? undefined })
       : modo === 'relampago' ? itensRelampago(n)
       : modo === 'materia' ? itensDaMateria(params.get('m') ?? '', n)
       : modo === 'trilha' ? itensDaTrilha((params.get('t') ?? '').split(',').filter(Boolean), 5)
@@ -68,7 +70,9 @@ export default function Quiz() {
     if (r !== 'B' && !confianca) return
     gravando.current = true // evita gravar duas vezes com toque duplo
     try {
+      const antes = await db.revisoes.get(q.id)
       const reg = await registrarResposta(q, r, confianca, Date.now() - inicio.current, modoEstudo)
+      setAvisoCaderno(textoRevisita(reg, antes, await db.revisoes.get(q.id)))
       setRegistro(reg)
       setFeitos((f) => [...f, reg])
       const historico = await db.respostas.where('itemId').equals(q.id).toArray()
@@ -83,6 +87,7 @@ export default function Quiz() {
   const proximo = useCallback(() => {
     setRegistro(null)
     setXpItem(null)
+    setAvisoCaderno(null)
     setConfianca(null)
     setI((x) => x + 1)
     setSegundos(0)
@@ -120,8 +125,8 @@ export default function Quiz() {
     return (
       <div className="pt-10 text-center">
         <div className="text-4xl mb-2">{modo === 'revisao' ? '🎉' : '📭'}</div>
-        <div className="font-semibold mb-1">{modo === 'revisao' ? 'Nenhuma revisão pendente hoje.' : 'Nenhum item disponível aqui ainda.'}</div>
-        <div className="text-suave text-sm mb-6">{modo === 'revisao' ? 'O caderno de erros está em dia.' : 'O banco deste tópico ainda está sendo produzido.'}</div>
+        <div className="font-semibold mb-1">{modo === 'revisao' ? 'Nenhuma revisão pendente hoje.' : modo === 'duvidas' ? 'Nenhuma dúvida guardada aqui.' : 'Nenhum item disponível aqui ainda.'}</div>
+        <div className="text-suave text-sm mb-6">{modo === 'revisao' ? 'O caderno de erros está em dia.' : modo === 'duvidas' ? 'Os acertos marcados como dúvida aparecem no caderno de dúvidas.' : 'O banco deste tópico ainda está sendo produzido.'}</div>
         <Botao variante="secundario" onClick={() => nav(-1)}>Voltar</Botao>
       </div>
     )
@@ -131,7 +136,7 @@ export default function Quiz() {
   const grupo = q.grupo ? grupos[q.grupo] : null
   const mostraGrupo = grupo && (i === 0 || itens[i - 1]?.grupo !== q.grupo)
   const acertou = registro?.correta === 1
-  const titulo = modo === 'revisao' ? 'Revisão' : modo === 'relampago' ? '⚡ Relâmpago' : modo === 'trilha' ? `🧭 Trilha · ${q.topico}` : q.topico
+  const titulo = modo === 'revisao' ? 'Revisão' : modo === 'duvidas' ? '🤔 Dúvidas' : modo === 'relampago' ? '⚡ Relâmpago' : modo === 'trilha' ? `🧭 Trilha · ${q.topico}` : q.topico
 
   return (
     <>
@@ -183,6 +188,9 @@ export default function Quiz() {
             <span className="text-suave text-sm"> · gabarito: {q.gabarito === 'C' ? 'CERTO' : 'ERRADO'}</span>
             {xpItem && <SeloXp x={xpItem} />}
             {(registro.correta !== 1 || registro.confianca === 'chute') && <div className="text-suave text-[13px] mt-1">Foi para o caderno de erros (volta amanhã).</div>}
+            {avisoCaderno && <div className="text-suave text-[13px] mt-1">{avisoCaderno}</div>}
+            {modo === 'duvidas' && acertou && registro.confianca === 'certeza' && <div className="text-suave text-[13px] mt-1">Virou certeza: saiu do caderno de dúvidas.</div>}
+            {modo === 'duvidas' && acertou && registro.confianca === 'duvida' && <div className="text-suave text-[13px] mt-1">Ainda na dúvida: continua no caderno de dúvidas.</div>}
             {registro.correta === 0 && registro.confianca === 'certeza' && <div className="text-amarelo text-[13px] mt-1">⚠️ Errou com certeza: esse é o tipo de erro que mais custa na prova.</div>}
           </Card>
           <Card>
@@ -197,6 +205,15 @@ export default function Quiz() {
       )}
     </>
   )
+}
+
+// O que o acerto fez no caderno de erros, para o item que já estava lá.
+function textoRevisita(reg: RegistroResposta, antes?: RegistroRevisao, depois?: RegistroRevisao) {
+  if (!antes || antes.proxima === null || reg.correta !== 1 || reg.confianca === 'chute') return null
+  if (!depois || depois.atualizadaEm === antes.atualizadaEm) return 'Item do caderno de erros que já mudou hoje: só conta como revisita em outro dia.'
+  if (depois.proxima === null) return 'Contou como revisita: saiu do caderno de erros.'
+  const dias = INTERVALOS[Math.min(depois.etapa, INTERVALOS.length - 1)]
+  return reg.confianca === 'certeza' ? `Contou como revisita: agora volta só em ${dias} dias.` : `Contou como revisita, mas na dúvida: repete o intervalo de ${dias} dias.`
 }
 
 function SeloXp({ x }: { x: ReturnType<typeof xpDaRespostaNova> }) {

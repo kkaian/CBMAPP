@@ -105,7 +105,7 @@ export interface DadosMateria {
 
 // ---- registros locais (IndexedDB) e no Supabase ----
 
-export type ModoEstudo = 'treino' | 'revisao' | 'relampago' | 'simulado' | 'trilha'
+export type ModoEstudo = 'treino' | 'revisao' | 'relampago' | 'simulado' | 'trilha' | 'duvidas'
 
 export interface RegistroResposta {
   id: string

@@ -1,7 +1,7 @@
 import { carregarIndice, carregarMateria, carregarTodas, materiaDoTopico, questoesPorId } from './conteudo'
 import { db } from './db'
 import { diaLocal } from './datas'
-import { diagnosticoPorTopico, revisoesPendentes } from './stats'
+import { cadernoDeDuvidas, diagnosticoPorTopico, revisoesPendentes } from './stats'
 import type { Questao } from './types'
 
 function embaralhar<T>(lista: T[]): T[] {
@@ -47,6 +47,13 @@ export async function itensDeRevisao(n: number): Promise<Questao[]> {
     .sort((a, b) => (a.proxima ?? '').localeCompare(b.proxima ?? ''))
     .slice(0, n)
   return questoesPorId(pendentes.map((r) => r.itemId))
+}
+
+// Caderno de dúvidas: sorteia entre os itens do caderno, de um tópico, de uma matéria ou de todos.
+export async function itensDeDuvidas(n: number, filtro: { topico?: string; materia?: string } = {}): Promise<Questao[]> {
+  const itens = cadernoDeDuvidas(await db.respostas.toArray())
+    .filter((r) => (!filtro.topico || r.topico === filtro.topico) && (!filtro.materia || r.materia === filtro.materia))
+  return questoesPorId(embaralhar(itens).slice(0, n).map((r) => r.itemId))
 }
 
 // Trilha de revisão: os tópicos que a pessoa não acessa (leitura ou resposta) há mais tempo.

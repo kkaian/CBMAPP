@@ -24,7 +24,7 @@ export default function Erros() {
       </div>
       <Card className="text-sm">
         Errou, deixou em branco ou acertou no chute → o item entra aqui. Ele volta em <b>{INTERVALOS.join(', ')} dias</b>.
-        Acertou com certeza → avança. Errou de novo → volta ao começo.
+        Acertou com certeza → avança. Errou de novo → volta ao começo. Acertar o item ao refazer um tópico também conta como revisita.
       </Card>
       <Botao to="/quiz?modo=revisao&n=30" disabled={!pendentes.length}>
         {pendentes.length ? `Revisar os ${pendentes.length} de hoje` : 'Nada para revisar hoje'}

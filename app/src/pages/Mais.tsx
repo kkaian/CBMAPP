@@ -17,6 +17,7 @@ export default function Mais() {
 
   const itens = [
     { icone: '📕', titulo: 'Caderno de erros', sub: `${noCaderno(revisoes).length} itens · ${revisoesPendentes(revisoes).length} vencem hoje`, para: '/erros' },
+    { icone: '🤔', titulo: 'Caderno de dúvidas', sub: 'acertos na dúvida, para voltar quando quiser', para: '/duvidas' },
     { icone: '🎖️', titulo: 'Perfil e conquistas', sub: 'patente, XP, meta diária', para: '/perfil' },
     { icone: '🏆', titulo: 'Ranking', sub: 'XP da semana e geral, perfil dos colegas', para: '/ranking' },
     { icone: '📝', titulo: 'Simulados', sub: 'completo, mini, pontos fracos e 01–05', para: '/simulados' },
