@@ -14,7 +14,7 @@ const CHECKLIST = [
   'Respondi todos os comandos, na ordem e de forma explícita?',
   'Cada parágrafo de desenvolvimento abre sinalizando o comando?',
   'Está em 3ª pessoa, sem opinião pessoal?',
-  'Introdução anuncia os comandos e a conclusão sintetiza?',
+  'Introdução anuncia os comandos e o parágrafo final fecha o texto?',
   'Proposta de intervenção só se algum comando pediu?',
   'Nenhum dado, número ou citação inventada?',
   'Conferi crase, concordância e vírgula entre sujeito e verbo?',
@@ -89,7 +89,7 @@ export default function Redacao() {
       <Botao onClick={() => nav('/redacao/escrever')} className="mb-2.5">✍️ Corrigir uma redação (IA ou nota manual)</Botao>
 
       <Secao>Redações-modelo · {modelos.length}</Secao>
-      <div className="text-suave text-[13px] mb-2">Textos completos, de 28 a 30 linhas, com o comentário de cada parágrafo: qual comando responde, como o repertório foi amarrado e por que pontua.</div>
+      <div className="text-suave text-[13px] mb-2">Textos completos, em 2 desenvolvimentos e um parágrafo final com o comando 3, com o comentário de cada parágrafo: qual comando responde, como o repertório foi amarrado e por que pontua.</div>
       {modelos.map((m) => (
         <Card key={m.id} onClick={() => nav(`/redacao/modelo/${m.id}`)} className="flex items-center gap-3">
           <span className="text-2xl">📄</span>
