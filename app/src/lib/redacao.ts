@@ -127,3 +127,40 @@ export function errosFrequentes(redacoes: RegistroRedacao[]): { nome: string; n:
   }
   return [...conta.entries()].map(([nome, n]) => ({ nome, n })).sort((a, b) => b.n - a.n)
 }
+
+// tópico de Português para revisar cada categoria de erro (as sem tópico no edital ficam de fora)
+export const TOPICO_DO_ERRO: Record<string, string> = {
+  Crase: 'PT-12',
+  'Concordância': 'PT-10',
+  'Regência': 'PT-11',
+  'Pontuação': 'PT-09',
+  'Acentuação': 'PT-03',
+  'Colocação pronominal': 'PT-13',
+  Ortografia: 'PT-03',
+}
+
+// ---------- histórico ----------
+
+const media = (v: number[]) => (v.length ? v.reduce((s, x) => s + x, 0) / v.length : 0)
+
+// Resumo das redações corrigidas: de onde vem a nota e o que já foi treinado
+export function resumoRedacoes(redacoes: RegistroRedacao[]) {
+  const corrigidas = redacoes.filter((r) => r.npd != null)
+  const comandos = corrigidas.flatMap((r) => r.avaliacao?.comandos ?? [])
+  return {
+    total: corrigidas.length,
+    mediaNpd: media(corrigidas.map((r) => r.npd!)),
+    melhor: Math.max(0, ...corrigidas.map((r) => r.npd!)),
+    acimaDoMinimo: corrigidas.filter((r) => r.npd! >= 15).length,
+    mediaNc: media(corrigidas.map((r) => r.nc ?? 0)),
+    mediaErros: media(corrigidas.map((r) => r.ne ?? 0)),
+    // quanto os erros tiram da nota de conteúdo, em média
+    perdaPorErros: media(corrigidas.map((r) => Math.max(0, (r.nc ?? 0) - r.npd!))),
+    comandos: {
+      sim: comandos.filter((c) => c.atendido === 'sim').length,
+      parcial: comandos.filter((c) => c.atendido === 'parcial').length,
+      nao: comandos.filter((c) => c.atendido === 'nao').length,
+    },
+    temasEscritos: new Set(corrigidas.filter((r) => r.temaId != null).map((r) => r.temaId)).size,
+  }
+}

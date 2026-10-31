@@ -10,7 +10,7 @@ import {
 } from '../lib/redacao'
 import { modoLocal } from '../lib/supabase'
 import type { RegistroRedacao } from '../lib/types'
-import { TextosMotivadores } from './Redacao'
+import { ErrosParaRevisar, TextosMotivadores } from './Redacao'
 
 const fmt = (n: number | null) => (n == null ? '—' : n.toLocaleString('pt-BR', { maximumFractionDigits: 2 }))
 
@@ -202,7 +202,7 @@ export function RedacaoResultado() {
   }
 
   async function excluir() {
-    if (r && window.confirm('Excluir esta redação do histórico?')) { await excluirRedacao(r); nav('/redacao', { replace: true }) }
+    if (r && window.confirm('Excluir esta redação do histórico?')) { await excluirRedacao(r); nav('/redacao?aba=historico', { replace: true }) }
   }
 
   return (
@@ -245,6 +245,7 @@ export function RedacaoResultado() {
           </Card>
 
           <Secao>Erros · {r.ne} {r.ne === 1 ? 'aceito' : 'aceitos'} de {a.erros.length}</Secao>
+          <ErrosParaRevisar redacoes={[r]} titulo="O que revisar" />
           <div className="text-suave text-[12px] mb-2">Toque em "não é erro" se discordar da IA: o NE e a nota são recalculados.</div>
           {a.erros.length === 0 && <Card className="text-sm text-suave">A IA não encontrou erros.</Card>}
           {a.erros.map((e, i) => {

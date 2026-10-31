@@ -1,12 +1,14 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Botao, Cabecalho, Card, Carregando, Pill, Secao } from '../components/ui'
 import { carregarMateria, useAsync, useIndice } from '../lib/conteudo'
-import type { TemaRedacao } from '../lib/types'
+import type { RegistroRedacao, TemaRedacao } from '../lib/types'
 import { useLeituras } from '../lib/useDados'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from '../lib/db'
-import { errosFrequentes } from '../lib/redacao'
+import { TOPICO_DO_ERRO, contarLinhas, errosFrequentes, excluirRedacao, resumoRedacoes } from '../lib/redacao'
+
+const br = (n: number) => n.toFixed(1).replace('.', ',')
 
 const CHECKLIST = [
   'Respondi todos os comandos, na ordem e de forma explícita?',
@@ -29,8 +31,14 @@ export default function Redacao() {
   const [nc, setNc] = useState('22')
   const [ne, setNe] = useState('4')
   const [tl, setTl] = useState('28')
+  const [params, setParams] = useSearchParams()
+  const historico = params.get('aba') === 'historico'
+  const lista = useLiveQuery(() => db.redacoes.orderBy('criadaEm').reverse().toArray(), [])
 
-  if (!ind || !red || !leituras) return <Carregando />
+  if (!ind || !red || !leituras || !lista) return <Carregando />
+  const redacoes = lista.filter((r) => !r.excluida)
+  const corrigidas = redacoes.filter((r) => r.npd != null)
+  const rascunhos = redacoes.filter((r) => r.npd == null)
   const materia = ind.edital.materias.find((m) => m.codigo === 'RED')
   const temas = red.temas ?? []
   const modelos = red.modelos ?? []
@@ -51,6 +59,16 @@ export default function Redacao() {
     <>
       <Cabecalho titulo="Redação" sub="Discursiva · até 30 linhas · 30 pontos · mínimo 15" />
 
+      <div className="grid grid-cols-2 gap-2 mb-3">
+        <button type="button" onClick={() => setParams({}, { replace: true })}
+          className={`py-2 rounded-xl border text-sm font-semibold ${historico ? 'border-linha bg-card text-suave' : 'border-azul bg-[#1b2740]'}`}>Estudar e escrever</button>
+        <button type="button" onClick={() => setParams({ aba: 'historico' }, { replace: true })}
+          className={`py-2 rounded-xl border text-sm font-semibold ${historico ? 'border-azul bg-[#1b2740]' : 'border-linha bg-card text-suave'}`}>Histórico ({corrigidas.length})</button>
+      </div>
+
+      {historico ? <Historico corrigidas={corrigidas} totalTemas={temas.length} /> : <>
+      <Rascunhos rascunhos={rascunhos} />
+
       <Card>
         <div className="font-semibold mb-1">Calculadora da nota (fórmula do edital)</div>
         <div className="text-suave text-[13px] mb-2">NPD = NC − 6 × NE ÷ TL</div>
@@ -69,8 +87,6 @@ export default function Redacao() {
       </Card>
 
       <Botao onClick={() => nav('/redacao/escrever')} className="mb-2.5">✍️ Corrigir uma redação (IA ou nota manual)</Botao>
-
-      <MinhasRedacoes />
 
       <Secao>Redações-modelo · {modelos.length}</Secao>
       <div className="text-suave text-[13px] mb-2">Textos completos, de 28 a 30 linhas, com o comentário de cada parágrafo: qual comando responde, como o repertório foi amarrado e por que pontua.</div>
@@ -120,6 +136,7 @@ export default function Redacao() {
       <Card className="text-sm">
         {CHECKLIST.map((c) => <div key={c} className="py-1 border-b border-linha last:border-b-0">☐ {c}</div>)}
       </Card>
+      </>}
     </>
   )
 }
@@ -183,45 +200,109 @@ export function TextosMotivadores({ textos }: { textos?: TemaRedacao['motivadore
   )
 }
 
-function MinhasRedacoes() {
+function Rascunhos({ rascunhos }: { rascunhos: RegistroRedacao[] }) {
   const nav = useNavigate()
-  const lista = useLiveQuery(() => db.redacoes.orderBy('criadaEm').reverse().toArray(), [])
-  const redacoes = (lista ?? []).filter((r) => !r.excluida)
-  if (!redacoes.length) return null
-  const notas = redacoes.filter((r) => r.npd != null).slice(0, 12).reverse()
-  const freq = errosFrequentes(redacoes).slice(0, 5)
-  const media = notas.length ? notas.reduce((s, r) => s + r.npd!, 0) / notas.length : null
+  async function excluir(r: RegistroRedacao) {
+    if (window.confirm(`Excluir o rascunho "${r.tema || 'Sem tema'}"? O texto será perdido.`)) await excluirRedacao(r)
+  }
   return (
     <>
-      <Secao>Minhas redações · {redacoes.length}</Secao>
-      {notas.length >= 2 && (
-        <Card>
-          <div className="flex justify-between text-xs text-suave mb-1"><span>NPD das últimas {notas.length}</span><span>tracejado = mínimo (15)</span></div>
-          <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-20">
-            <line x1="0" x2="100" y1={100 - (15 / 30) * 100} y2={100 - (15 / 30) * 100} stroke="#9aa1ae" strokeDasharray="2 2" strokeWidth="0.6" vectorEffect="non-scaling-stroke" />
-            <polyline fill="none" stroke="#e5484d" strokeWidth="2" vectorEffect="non-scaling-stroke"
-              points={notas.map((r, i) => `${(i / (notas.length - 1)) * 100},${100 - (Math.min(30, r.npd!) / 30) * 100}`).join(' ')} />
-          </svg>
-          <div className="flex justify-between text-[12px] text-suave mt-1"><span>média {media!.toFixed(1).replace('.', ',')}</span><span>última <b className="text-texto">{notas[notas.length - 1].npd!.toFixed(1).replace('.', ',')}</b></span></div>
-        </Card>
-      )}
-      {freq.length > 0 && (
-        <Card className="text-sm">
-          <div className="font-semibold mb-1">Seus erros mais frequentes</div>
-          {freq.map((f) => <div key={f.nome} className="flex justify-between py-0.5"><span>{f.nome}</span><b>{f.n}×</b></div>)}
-        </Card>
-      )}
-      {redacoes.slice(0, 8).map((r) => (
-        <Card key={r.id} onClick={() => nav(r.npd != null ? `/redacao/r/${r.id}` : `/redacao/escrever?id=${r.id}`)} className="flex justify-between items-center gap-2">
-          <div className="min-w-0">
-            <div className="font-semibold leading-snug truncate">{r.tema || 'Sem tema'}</div>
-            <div className="text-suave text-[12px]">{new Date(r.criadaEm).toLocaleDateString('pt-BR')} · {r.origem === 'ia' ? 'IA' : r.origem === 'manual' ? 'nota manual' : 'rascunho'}</div>
+      {rascunhos.map((r) => (
+        <Card key={r.id} className="border border-azul/50">
+          <b className="leading-snug">{r.tema || 'Sem tema'}</b> <Pill cor="blue">rascunho</Pill>
+          <div className="text-suave text-[13px] mt-0.5">{new Date(r.criadaEm).toLocaleDateString('pt-BR')} · {contarLinhas(r.texto)} linhas</div>
+          <div className="flex gap-2 mt-2.5">
+            <button onClick={() => nav(`/redacao/escrever?id=${r.id}`)} className="flex-1 py-2.5 rounded-xl bg-destaque text-white font-bold">Continuar</button>
+            <button onClick={() => excluir(r)} className="px-4 py-2.5 rounded-xl bg-card2 text-suave">Excluir</button>
           </div>
-          {r.npd != null
-            ? <b className={r.npd >= 15 ? 'text-verde' : 'text-destaque'}>{r.npd.toFixed(1).replace('.', ',')}</b>
-            : <span className="text-suave text-sm">›</span>}
         </Card>
       ))}
     </>
+  )
+}
+
+function Historico({ corrigidas, totalTemas }: { corrigidas: RegistroRedacao[]; totalTemas: number }) {
+  const nav = useNavigate()
+  if (!corrigidas.length) {
+    return (
+      <Card className="text-sm text-center py-6">
+        <div className="text-2xl mb-1">✍️</div>
+        <b>Nenhuma redação corrigida ainda</b>
+        <div className="text-suave text-[13px] mt-1">Ao corrigir uma redação, ela aparece aqui com a nota, os comandos atendidos, os erros que mais se repetem e o que revisar.</div>
+      </Card>
+    )
+  }
+  const resumo = resumoRedacoes(corrigidas)
+  const { sim, parcial, nao } = resumo.comandos
+  return (
+    <>
+      <div className="grid grid-cols-3 gap-2 mb-2.5">
+        <Card className="!mb-0 text-center"><div className="text-[22px] font-bold">{br(resumo.mediaNpd)}</div><div className="text-suave text-[12px]">média</div></Card>
+        <Card className="!mb-0 text-center"><div className="text-[22px] font-bold">{br(resumo.melhor)}</div><div className="text-suave text-[12px]">melhor nota</div></Card>
+        <Card className="!mb-0 text-center"><div className="text-[22px] font-bold">{resumo.acimaDoMinimo}/{resumo.total}</div><div className="text-suave text-[12px]">acima de 15</div></Card>
+      </div>
+      <EvolucaoNotas corrigidas={corrigidas} />
+      <Card className="text-sm">
+        <div className="font-semibold mb-1">De onde vem a sua nota</div>
+        <div className="flex justify-between py-0.5"><span>Conteúdo (NC médio)</span><b>{br(resumo.mediaNc)} de 30</b></div>
+        <div className="flex justify-between py-0.5"><span>Erros por redação</span><b>{br(resumo.mediaErros)}</b></div>
+        <div className="flex justify-between py-0.5"><span>Os erros tiram, em média</span><b>{br(resumo.perdaPorErros)} ponto{resumo.perdaPorErros >= 2 ? 's' : ''}</b></div>
+        {sim + parcial + nao > 0 && <div className="flex justify-between py-0.5"><span>Comandos atendidos</span><b>{sim} sim · {parcial} parcial · {nao} não</b></div>}
+        <div className="flex justify-between py-0.5"><span>Temas escritos</span><b>{resumo.temasEscritos} de {totalTemas}</b></div>
+      </Card>
+      <ErrosParaRevisar redacoes={corrigidas} titulo="Seus erros mais frequentes" />
+      <Secao>Redações corrigidas · {corrigidas.length}</Secao>
+      {corrigidas.map((r) => (
+        <Card key={r.id} onClick={() => nav(`/redacao/r/${r.id}`)} className="flex justify-between items-center gap-2">
+          <div className="min-w-0">
+            <div className="font-semibold leading-snug">{r.tema || 'Sem tema'}</div>
+            <div className="text-suave text-[13px]">{new Date(r.criadaEm).toLocaleDateString('pt-BR')} · {r.origem === 'ia' ? 'IA' : 'nota manual'} · {contarLinhas(r.texto)} linhas</div>
+            <div className="text-suave text-[13px]">NC {br(r.nc ?? 0)} · {r.ne ?? 0} {r.ne === 1 ? 'erro' : 'erros'}{r.avaliacao?.fugaAoTema ? ' · fuga ao tema' : ''}</div>
+            <div className="text-azul text-[12px] mt-0.5">{r.origem === 'ia' ? 'Ver correção ›' : 'Ver nota e texto ›'}</div>
+          </div>
+          <div className="text-right shrink-0">
+            <div className={`text-xl font-bold ${r.npd! >= 15 ? 'text-verde' : 'text-destaque'}`}>{br(r.npd!)}</div>
+            <div className="text-suave text-[11px]">{r.npd! >= 15 ? 'acima do mínimo' : 'abaixo'}</div>
+          </div>
+        </Card>
+      ))}
+    </>
+  )
+}
+
+// Erros por categoria, com atalho para o tópico de Português quando ele existe no edital
+export function ErrosParaRevisar({ redacoes, titulo }: { redacoes: RegistroRedacao[]; titulo: string }) {
+  const nav = useNavigate()
+  const freq = errosFrequentes(redacoes).slice(0, 6)
+  if (!freq.length) return null
+  return (
+    <Card className="text-sm">
+      <div className="font-semibold mb-1">{titulo}</div>
+      {freq.map((f) => {
+        const topico = TOPICO_DO_ERRO[f.nome]
+        return (
+          <div key={f.nome} className="flex justify-between items-center gap-2 py-1">
+            <span className="flex-1">{f.nome} <b>{f.n}×</b></span>
+            {topico && <button type="button" onClick={() => nav(`/t/${topico}`)} className="text-azul text-[13px]">Revisar {topico} ›</button>}
+          </div>
+        )
+      })}
+    </Card>
+  )
+}
+
+function EvolucaoNotas({ corrigidas }: { corrigidas: RegistroRedacao[] }) {
+  const notas = corrigidas.slice(0, 12).reverse()
+  if (notas.length < 2) return null
+  return (
+    <Card>
+      <div className="flex justify-between text-xs text-suave mb-1"><span>NPD das últimas {notas.length}</span><span>tracejado = mínimo (15)</span></div>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-20">
+        <line x1="0" x2="100" y1={100 - (15 / 30) * 100} y2={100 - (15 / 30) * 100} stroke="#9aa1ae" strokeDasharray="2 2" strokeWidth="0.6" vectorEffect="non-scaling-stroke" />
+        <polyline fill="none" stroke="#e5484d" strokeWidth="2" vectorEffect="non-scaling-stroke"
+          points={notas.map((r, i) => `${(i / (notas.length - 1)) * 100},${100 - (Math.min(30, r.npd!) / 30) * 100}`).join(' ')} />
+      </svg>
+      <div className="flex justify-end text-[12px] text-suave mt-1"><span>última <b className="text-texto">{br(notas[notas.length - 1].npd!)}</b></span></div>
+    </Card>
   )
 }
