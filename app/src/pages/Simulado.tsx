@@ -55,6 +55,7 @@ function Prova({ inicial, questoes, grupos, onEntregue }: {
   const ultimoTique = useRef(Date.now())
   const sujo = useRef(false)
   const encerrado = useRef(false)
+  const avanco = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const q = questoes[sim.atual]
   const restante = sim.limiteMs - sim.gastoMs
@@ -103,20 +104,28 @@ function Prova({ inicial, questoes, grupos, onEntregue }: {
   }, [restante, entregando, entregar])
 
   function ir(i: number) {
+    if (avanco.current) clearTimeout(avanco.current)
     sujo.current = true
     setSim((s) => ({ ...s, atual: Math.max(0, Math.min(questoes.length - 1, i)) }))
     setFolha(false)
     window.scrollTo(0, 0)
   }
 
+  // avança sozinho, exceto no último item; um novo toque cancela o avanço anterior para não pular item
+  function avancar() {
+    if (avanco.current) clearTimeout(avanco.current)
+    if (sim.atual + 1 < questoes.length) avanco.current = setTimeout(() => ir(simRef.current.atual + 1), 250)
+  }
+
   function marcar(r: Resposta) {
+    if (avanco.current) clearTimeout(avanco.current)
     sujo.current = true
     setSim((s) => {
       const atual = s.respostas[q.id]
       return { ...s, respostas: { ...s.respostas, [q.id]: { r, c: r === 'B' ? null : atual?.c ?? null } } }
     })
-    // avança sozinho, exceto no último item
-    if (sim.atual + 1 < questoes.length) setTimeout(() => ir(simRef.current.atual + 1), 250)
+    // Certo ou Errado espera a segurança; o branco não tem o que marcar
+    if (r === 'B') avancar()
   }
 
   function confiar(c: Confianca) {
@@ -126,6 +135,9 @@ function Prova({ inicial, questoes, grupos, onEntregue }: {
       if (!atual || atual.r === 'B') return s
       return { ...s, respostas: { ...s.respostas, [q.id]: { r: atual.r, c: atual.c === c ? null : c } } }
     })
+    // desmarcar não avança
+    if (avanco.current) clearTimeout(avanco.current)
+    if (resp?.r && resp.r !== 'B' && resp.c !== c) avancar()
   }
 
   function pedirEntrega() {
@@ -176,7 +188,7 @@ function Prova({ inicial, questoes, grupos, onEntregue }: {
         <button onClick={() => marcar('E')} className={`py-3.5 rounded-xl border-2 font-bold ${marcada === 'E' ? 'border-destaque bg-[#3a1d20]' : 'border-linha bg-card'}`}>ERRADO</button>
         <button onClick={() => marcar('B')} className={`py-3.5 rounded-xl border-2 font-bold ${marcada === 'B' ? 'border-azul bg-[#1b2740]' : 'border-linha bg-card'}`}>Branco</button>
       </div>
-      <div className="text-suave text-[12px] mt-3 mb-1.5">Confiança (opcional, ajuda no diagnóstico)</div>
+      <div className="text-suave text-[12px] mt-3 mb-1.5">Sua segurança: ao marcar, passa para o próximo item</div>
       <div className="grid grid-cols-3 gap-2">
         {CONFIANCAS.map((c) => (
           <button key={c.id} disabled={!marcada || marcada === 'B'} onClick={() => confiar(c.id)}

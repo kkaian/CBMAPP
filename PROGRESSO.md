@@ -67,6 +67,7 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 - [ ] (Recomendado) a chave do Gemini foi colada na conversa: se quiser, gere outra no AI Studio e troque em Vercel › Settings › Environment Variables (`GEMINI_API_KEY`).
 
 ## Histórico resumido
+- **31/10** — **Simulado:** ao marcar Certo ou Errado o item fica parado; ele avança ao marcar certeza, dúvida ou chute. Branco avança direto, desmarcar a segurança não avança e "Próximo" continua passando sem marcar (a resposta fica como "sem marcar" no diagnóstico). Um novo toque cancela o avanço anterior, para dois toques rápidos não pularem um item.
 - **30/10** — **Caderno de dúvidas e revisita fora do caderno.**
   - Caderno de dúvidas (`/duvidas`, em Questões e em Mais): itens cuja última resposta foi acerto marcado como dúvida. Sem prazo, sem missão e sem contador na tela inicial. Dá para voltar ao acaso, por matéria ou por tópico (até 20 por vez). Modo `duvidas`.
   - XP nele: certo com certeza dá só a diferença (10 − 6 = 4, 4,8 em Física e Química) e o item sai; certo com dúvida ou chute dá 0; errado tira o valor normal (sem a metade de repetido) e o item vai para o caderno de erros.
