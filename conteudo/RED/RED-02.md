@@ -13,7 +13,7 @@
 
 **Bizu:** abra cada parágrafo de desenvolvimento **sinalizando o comando**: "No que se refere a…", "Quanto a…", "Acerca de…". O examinador acha o comando na hora.
 
-Com **3 comandos**, o parágrafo final abre sinalizando o comando 3 e termina com 1 ou 2 frases de fechamento. O edital não exige uma conclusão separada, mas o texto precisa terminar com um fecho claro. Com **4 comandos**: intro e fechamento mais curtos (2–3 linhas) e quatro parágrafos de 5–6.
+Com **3 comandos**, o parágrafo final abre sinalizando o comando 3 e termina com 1 ou 2 frases de fechamento. O edital não exige uma conclusão separada, mas o texto precisa terminar com um fecho claro. Na correção de treino do app, esse formato perde **0,5 ponto** na estrutura por não ter conclusão separada: é uma escolha de conforto com custo pequeno, desde que o comando 3 esteja desenvolvido. Com **4 comandos**: intro e fechamento mais curtos (2–3 linhas) e quatro parágrafos de 5–6.
 
 ## Teoria
 

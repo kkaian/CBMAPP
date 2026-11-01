@@ -6,7 +6,7 @@ import { carregarMateria, useAsync } from '../lib/conteudo'
 import { db } from '../lib/db'
 import {
   aplicarAvaliacao, calcularNpd, categoriaDoErro, contarLinhas, corrigirComIA, cotaIA, excluirRedacao,
-  linhasDoTexto, montarPromptManual, novaRedacao, salvarRedacao,
+  linhasDoTexto, linhasParaNota, montarPromptManual, novaRedacao, salvarRedacao,
 } from '../lib/redacao'
 import { modoLocal } from '../lib/supabase'
 import type { RegistroRedacao } from '../lib/types'
@@ -50,6 +50,7 @@ export function RedacaoEscrever() {
   const linhas = linhasDoTexto(r.texto)
   const tl = contarLinhas(r.texto)
   const restam = cota ? Math.max(0, cota.limite - cota.usadas) : null
+  const motivadores = (temaAtual?.motivadores ?? []).map((m) => m.texto)
 
   function escolherTema(valor: string) {
     if (valor === 'outro') { setOutroTema(true); setR((x) => x && { ...x, temaId: null, tema: '', comandos: [] }); setComandosTexto(''); return }
@@ -76,7 +77,7 @@ export function RedacaoEscrever() {
     setErro(null)
     setEstado('corrigindo')
     try {
-      const { avaliacao, limite, usadas } = await corrigirComIA(x)
+      const { avaliacao, limite, usadas } = await corrigirComIA(x, motivadores)
       setCota({ limite, usadas })
       const final = aplicarAvaliacao({ ...x, errosRecusados: [] }, avaliacao, [])
       await salvarRedacao(final)
@@ -90,19 +91,20 @@ export function RedacaoEscrever() {
   async function copiar() {
     const x = atual()
     try {
-      await navigator.clipboard.writeText(montarPromptManual(x))
+      await navigator.clipboard.writeText(montarPromptManual(x, motivadores))
       window.alert('Prompt copiado. Cole no Claude ou no ChatGPT e, depois, lance aqui o NC e o NE que ele der.')
     } catch {
-      window.prompt('Copie o texto abaixo:', montarPromptManual(x))
+      window.prompt('Copie o texto abaixo:', montarPromptManual(x, motivadores))
     }
     setManual({ nc: '', ne: '' })
   }
 
   async function lancarManual() {
     if (!manual) return
+    const x0 = atual()
     const nc = Number(manual.nc.replace(',', '.')), ne = Number(manual.ne)
     if (!(nc >= 0 && nc <= 30) || !(ne >= 0)) { setErro('NC entre 0 e 30 e NE a partir de 0.'); return }
-    const x = { ...atual(), origem: 'manual' as const, nc, ne, npd: calcularNpd(nc, ne, tl) }
+    const x = { ...x0, origem: 'manual' as const, nc, ne, npd: calcularNpd(nc, ne, linhasParaNota(x0.texto)) }
     await salvarRedacao(x)
     nav(`/redacao/r/${x.id}`, { replace: true })
   }
@@ -191,8 +193,11 @@ export function RedacaoResultado() {
   if (r === undefined) return <Carregando />
   if (r === null || !r || r.excluida) return (<><Cabecalho titulo="Redação" /><Card className="text-sm text-suave">Redação não encontrada.</Card></>)
 
-  const tl = contarLinhas(r.texto)
+  const tl = linhasParaNota(r.texto)
   const a = r.avaliacao
+  const riscos = a?.riscos ?? []
+  const npdComRiscos = r.nc != null && r.ne != null && riscos.length ? calcularNpd(r.nc, r.ne + riscos.length, tl) : null
+  const margem = r.npd != null ? Math.round((r.npd - 15) * 100) / 100 : 0
   const linhasComErro = new Set(a?.erros.filter((_, i) => !r.errosRecusados.includes(i)).map((e) => e.linha) ?? [])
 
   async function alternarErro(i: number) {
@@ -219,6 +224,8 @@ export function RedacaoResultado() {
             <Pill cor={r.npd >= 15 ? 'green' : 'red'}>{r.npd >= 15 ? 'acima do mínimo (15)' : 'abaixo do mínimo (15)'}</Pill>
           </div>
           <div className="text-suave text-[13px] mt-1">NC {fmt(r.nc)} · NE {r.ne} · TL {tl} · cada erro custou {fmt(tl ? 6 / tl : 0)}</div>
+          <div className="text-suave text-[13px]">Margem em relação ao corte: {margem > 0 ? '+' : ''}{fmt(margem)}</div>
+          {npdComRiscos != null && <div className="text-amarelo text-[13px] mt-1">Se {riscos.length === 1 ? 'o risco contar' : `os ${riscos.length} riscos contarem`}: NE {r.ne! + riscos.length} e NPD {fmt(npdComRiscos)}</div>}
         </Card>
       ) : (
         <Card className="text-sm">Rascunho sem correção. <button className="underline" onClick={() => nav(`/redacao/escrever?id=${r.id}`)}>Abrir para corrigir</button></Card>
@@ -235,12 +242,18 @@ export function RedacaoResultado() {
                 <span className="text-suave text-[13px]">Comando {i + 1}: {c.comando}</span>
                 <b className="whitespace-nowrap">{fmt(c.nota)} / {fmt(c.maximo)}</b>
               </div>
-              <div className="mt-1"><Pill cor={c.atendido === 'sim' ? 'green' : c.atendido === 'parcial' ? 'yellow' : 'red'}>{c.atendido === 'sim' ? 'atendido' : c.atendido === 'parcial' ? 'parcial' : 'não atendido'}</Pill></div>
+              <div className="mt-1"><Pill cor={c.atendido === 'sim' ? 'green' : c.atendido === 'parcial' ? 'yellow' : 'red'}>{c.atendido === 'sim' ? 'atendido' : c.atendido === 'parcial' ? 'parcial' : c.atendido === 'superficial' ? 'superficial' : 'não atendido'}</Pill></div>
+              {c.partes && c.partes.length > 0 && <div className="text-suave text-[13px] mt-1.5">O comando pede: {c.partes.join('; ')}</div>}
               <div className="mt-1.5">{c.comentario}</div>
+              {c.faltou && <div className="mt-1.5"><b>Faltou:</b> {c.faltou}</div>}
+              {c.erroConteudo && <div className="mt-1.5 text-[#ff8a8d]"><b>Erro de conteúdo:</b> {c.erroConteudo}</div>}
             </Card>
           ))}
           <Card className="text-[14px]">
             <div className="flex justify-between"><span className="text-suave text-[13px]">Apresentação e estrutura textual</span><b>{fmt(a.estrutura.nota)} / {a.estrutura.maximo}</b></div>
+            {a.estrutura.falhas?.map((f) => (
+              <div key={f.falha} className="flex justify-between gap-2 mt-1.5"><span>{f.falha}</span><b className="text-[#ff8a8d] whitespace-nowrap">−{fmt(f.desconto)}</b></div>
+            ))}
             <div className="mt-1.5">{a.estrutura.comentario}</div>
           </Card>
 
@@ -262,6 +275,20 @@ export function RedacaoResultado() {
             )
           })}
 
+          {riscos.length > 0 && (
+            <>
+              <Secao>Riscos · {riscos.length}</Secao>
+              <div className="text-suave text-[12px] mb-2">Os corretores divergem nestes pontos. Não entram no NE, mas vale evitá-los.</div>
+              {riscos.map((e, i) => (
+                <Card key={i} className="text-[14px]">
+                  <div className="text-suave text-[12px]">Linha {e.linha}</div>
+                  <div className="mt-1"><span className="text-amarelo">{e.trecho}</span> → <b>{e.correcao}</b></div>
+                  <div className="text-suave text-[13px] mt-1">{e.motivo}</div>
+                </Card>
+              ))}
+            </>
+          )}
+
           <Secao>Repertório</Secao>
           <Card className="text-[14px]">{a.repertorio}</Card>
 
@@ -269,9 +296,10 @@ export function RedacaoResultado() {
           {a.melhorias.length > 0 && (<><Secao>Para melhorar</Secao><Card className="text-[14px]"><ul className="list-disc pl-5 space-y-1">{a.melhorias.map((x) => <li key={x}>{x}</li>)}</ul></Card></>)}
           {a.reescritas.length > 0 && (
             <>
-              <Secao>Trechos reescritos</Secao>
+              <Secao>{a.reescritas.some((x) => x.mudanca) ? 'Prioridades' : 'Trechos reescritos'}</Secao>
               {a.reescritas.map((x, i) => (
                 <Card key={i} className="text-[14px]">
+                  {x.mudanca && <div className="font-semibold mb-1.5">{i + 1}. {x.mudanca}</div>}
                   <div className="text-suave line-through decoration-1">{x.original}</div>
                   <div className="mt-1.5">{x.sugestao}</div>
                 </Card>

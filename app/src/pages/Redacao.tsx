@@ -233,7 +233,7 @@ function Historico({ corrigidas, totalTemas }: { corrigidas: RegistroRedacao[]; 
     )
   }
   const resumo = resumoRedacoes(corrigidas)
-  const { sim, parcial, nao } = resumo.comandos
+  const { sim, parcial, superficial, nao } = resumo.comandos
   return (
     <>
       <div className="grid grid-cols-3 gap-2 mb-2.5">
@@ -247,7 +247,7 @@ function Historico({ corrigidas, totalTemas }: { corrigidas: RegistroRedacao[]; 
         <div className="flex justify-between py-0.5"><span>Conteúdo (NC médio)</span><b>{br(resumo.mediaNc)} de 30</b></div>
         <div className="flex justify-between py-0.5"><span>Erros por redação</span><b>{br(resumo.mediaErros)}</b></div>
         <div className="flex justify-between py-0.5"><span>Os erros tiram, em média</span><b>{br(resumo.perdaPorErros)} ponto{resumo.perdaPorErros >= 2 ? 's' : ''}</b></div>
-        {sim + parcial + nao > 0 && <div className="flex justify-between py-0.5"><span>Comandos atendidos</span><b>{sim} sim · {parcial} parcial · {nao} não</b></div>}
+        {sim + parcial + superficial + nao > 0 && <div className="flex justify-between gap-2 py-0.5"><span>Comandos atendidos</span><b className="text-right">{sim} sim · {parcial} parcial{superficial > 0 ? ` · ${superficial} superficial` : ''} · {nao} não</b></div>}
         <div className="flex justify-between py-0.5"><span>Temas escritos</span><b>{resumo.temasEscritos} de {totalTemas}</b></div>
       </Card>
       <ErrosParaRevisar redacoes={corrigidas} titulo="Seus erros mais frequentes" />

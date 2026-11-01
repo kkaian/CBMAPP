@@ -170,15 +170,17 @@ export interface RegistroSimulado {
 
 export type TipoErro = 'grafia' | 'morfossintaxe' | 'propriedade vocabular'
 
+// Campos opcionais: as correções antigas, salvas antes das regras novas, não têm.
 export interface AvaliacaoIA {
   fugaAoTema: boolean
-  estrutura: { nota: number; maximo: number; comentario: string }
-  comandos: { comando: string; atendido: 'sim' | 'parcial' | 'nao'; nota: number; maximo: number; comentario: string }[]
+  estrutura: { nota: number; maximo: number; comentario: string; falhas?: { falha: string; desconto: number }[] }
+  comandos: { comando: string; partes?: string[]; atendido: 'sim' | 'parcial' | 'superficial' | 'nao'; nota: number; maximo: number; comentario: string; faltou?: string; erroConteudo?: string }[]
   erros: { linha: number; trecho: string; correcao: string; tipo: TipoErro; explicacao: string }[]
+  riscos?: { linha: number; trecho: string; correcao: string; motivo: string }[] // divergem entre corretores: não somam ao NE
   repertorio: string
   pontosFortes: string[]
   melhorias: string[]
-  reescritas: { original: string; sugestao: string }[]
+  reescritas: { mudanca?: string; original: string; sugestao: string }[]
   nc: number
   modelo: string
 }
