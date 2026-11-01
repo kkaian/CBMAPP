@@ -1,0 +1,93 @@
+[
+  {
+    "id": "MAT-02-0070",
+    "topico": "MAT-02",
+    "grupo": "MAT-CEB-A",
+    "enunciado": "A companhia de menor efetivo receberá R$ 6.000,00.",
+    "gabarito": "C",
+    "comentario": "Total de 150 militares: 30.000 ÷ 150 = R$ 200 por militar. 30 · 200 = R$ 6.000.",
+    "dificuldade": 2,
+    "tipo": "calculo",
+    "armadilha": null,
+    "origem": "inedita",
+    "status": "ok"
+  },
+  {
+    "id": "MAT-02-0071",
+    "topico": "MAT-02",
+    "grupo": "MAT-CEB-A",
+    "enunciado": "A companhia de maior efetivo receberá R$ 15.000,00.",
+    "gabarito": "E",
+    "comentario": "70 · 200 = **R$ 14.000**.",
+    "dificuldade": 2,
+    "tipo": "calculo",
+    "armadilha": "numero",
+    "origem": "inedita",
+    "status": "ok"
+  },
+  {
+    "id": "MAT-06-0069",
+    "topico": "MAT-06",
+    "grupo": "MAT-CEB-A",
+    "enunciado": "No regime de juros compostos, o montante após dois meses será de R$ 12.100,00.",
+    "gabarito": "C",
+    "comentario": "M = 10.000 · 1,1² = 10.000 · 1,21 = R$ 12.100.",
+    "dificuldade": 2,
+    "tipo": "calculo",
+    "armadilha": null,
+    "origem": "inedita",
+    "status": "ok"
+  },
+  {
+    "id": "MAT-06-0070",
+    "topico": "MAT-06",
+    "grupo": "MAT-CEB-A",
+    "enunciado": "No regime de juros compostos, os juros acumulados em três meses serão de R$ 3.000,00.",
+    "gabarito": "E",
+    "comentario": "M = 10.000 · 1,1³ = R$ 13.310. Os juros são de **R$ 3.310**. R$ 3.000 seria o resultado em juros simples.",
+    "dificuldade": 3,
+    "tipo": "calculo",
+    "armadilha": "numero",
+    "origem": "inedita",
+    "status": "ok"
+  },
+  {
+    "id": "MAT-05-0069",
+    "topico": "MAT-05",
+    "grupo": "MAT-CEB-A",
+    "enunciado": "No regime de juros simples, o capital dobrará em cinco meses.",
+    "gabarito": "E",
+    "comentario": "Em cinco meses, os juros são de 5 · 10% = 50%. Para dobrar, são necessários **dez** meses.",
+    "dificuldade": 2,
+    "tipo": "calculo",
+    "armadilha": "numero",
+    "origem": "inedita",
+    "status": "ok"
+  },
+  {
+    "id": "MAT-08-0069",
+    "topico": "MAT-08",
+    "grupo": "MAT-CEB-A",
+    "enunciado": "A taxa composta de 10% ao mês é equivalente à taxa de 21% ao bimestre.",
+    "gabarito": "C",
+    "comentario": "(1 + 0,1)² = 1,21, ou seja, 21% ao bimestre.",
+    "dificuldade": 3,
+    "tipo": "calculo",
+    "armadilha": null,
+    "origem": "inedita",
+    "status": "ok"
+  },
+  {
+    "id": "MAT-04-0079",
+    "topico": "MAT-04",
+    "grupo": "MAT-CEB-A",
+    "enunciado": "Se o preço de um equipamento sofrer aumento de 10% e, em seguida, desconto de 10%, o preço final será 1% menor que o inicial.",
+    "gabarito": "C",
+    "comentario": "1,10 · 0,90 = 0,99. As porcentagens incidem sobre bases diferentes, por isso não se anulam.",
+    "dificuldade": 3,
+    "tipo": "calculo",
+    "armadilha": null,
+    "origem": "inedita",
+    "status": "ok"
+  }
+]

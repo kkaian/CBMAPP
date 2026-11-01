@@ -67,6 +67,8 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 - [ ] (Recomendado) a chave do Gemini foi colada na conversa: se quiser, gere outra no AI Studio e troque em Vercel › Settings › Environment Variables (`GEMINI_API_KEY`).
 
 ## Histórico resumido
+- **01/11** — **126 itens novos no estilo Cebraspe** (`questoes-cebraspe.json` e `grupos-cebraspe.json`, grupos `<COD>-CEB-*`, origem `inedita`): 21 blocos com texto-base e situação hipotética, em FIS 27, QUI 18, BIO 17, RLM 15, INF 13, MEC 12, PT 11, MAT 7 e CDH 6. Banco agora com 6.880 itens; 64 C e 62 E; dificuldade 12 fáceis, 82 médias e 32 difíceis, com menos fáceis que a meta de propósito. As contas foram conferidas por script. Legislação ficou de fora porque já tem texto oficial próprio e não era o ponto fraco, e Inglês por falta de texto-base adequado. O XP do histórico não muda, porque nenhum id antigo foi alterado. Itens novos entram primeiro no treino do tópico (prioridade dos nunca respondidos). As metas "Metade do banco" e "Banco inteiro" ficam um pouco mais distantes.
+- **01/11** — Tirada a conquista "100 dias de estudo": faltam 84 dias para a prova, então ela não seria alcançável. Agora são 95 conquistas.
 - **01/11** — **Conquistas e caderno de erros.** Agora são 96 conquistas.
   - Simulado completo: nota 70+, 80+, 90+ e 100+. Só contam os de 120 itens, porque o mini não tem como comparar a nota.
   - Redação: NPD 15+, 18+, 22+ e 28+, além de 5 e 10 redações acima do mínimo.

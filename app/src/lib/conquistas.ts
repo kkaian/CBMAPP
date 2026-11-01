@@ -139,7 +139,6 @@ export function calcularConquistas({ ind, respostas, leituras, revisoes, simulad
       { icone: '💎', nome: '60 dias seguidos', ok: streak.dias >= 60 },
       { icone: '📅', nome: '20 dias de estudo', ok: ultimos30.size >= 20 },
       { icone: '🗓️', nome: '60 dias de estudo', ok: ultimos30.size >= 60 },
-      { icone: '🌳', nome: '100 dias de estudo', ok: ultimos30.size >= 100 },
     ] },
     { titulo: 'Tópicos (estudado = 10+ itens respondidos)', itens: [
       { icone: '🌱', nome: '10 tópicos estudados', ok: topicosEstudados >= 10 },

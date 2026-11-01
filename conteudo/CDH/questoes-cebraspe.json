@@ -1,0 +1,80 @@
+[
+  {
+    "id": "CDH-04-0039",
+    "topico": "CDH-04",
+    "grupo": "CDH-CEB-A",
+    "enunciado": "Aceitar a vantagem oferecida para priorizar um processo violaria os deveres de impessoalidade e moralidade da função pública.",
+    "gabarito": "C",
+    "comentario": "O interesse particular não pode definir a ordem do serviço público, por isso a recusa foi correta.",
+    "dificuldade": 1,
+    "tipo": "situacao",
+    "armadilha": null,
+    "origem": "inedita",
+    "status": "ok"
+  },
+  {
+    "id": "CDH-01-0047",
+    "topico": "CDH-01",
+    "grupo": "CDH-CEB-A",
+    "enunciado": "A moral é a reflexão filosófica sobre o agir humano, e a ética corresponde ao conjunto de costumes concretos de cada grupo social.",
+    "gabarito": "E",
+    "comentario": "É o contrário: a **ética** é a reflexão sobre o agir, e a **moral** é o conjunto de normas e costumes de um grupo.",
+    "dificuldade": 2,
+    "tipo": "conceito",
+    "armadilha": "inversao",
+    "origem": "inedita",
+    "status": "ok"
+  },
+  {
+    "id": "CDH-05-0072",
+    "topico": "CDH-05",
+    "grupo": "CDH-CEB-A",
+    "enunciado": "Os direitos humanos são universais, indivisíveis, interdependentes e inter-relacionados, conforme a Declaração de Viena de 1993.",
+    "gabarito": "C",
+    "comentario": "A Declaração e o Programa de Ação de Viena consagram essas características.",
+    "dificuldade": 2,
+    "tipo": "conceito",
+    "armadilha": null,
+    "origem": "inedita",
+    "status": "ok"
+  },
+  {
+    "id": "CDH-06-0063",
+    "topico": "CDH-06",
+    "grupo": "CDH-CEB-A",
+    "enunciado": "A Declaração Universal dos Direitos Humanos foi aprovada em 1948 pelo Conselho de Segurança da ONU.",
+    "gabarito": "E",
+    "comentario": "Ela foi aprovada pela **Assembleia Geral** da ONU, em 10/12/1948, por resolução.",
+    "dificuldade": 3,
+    "tipo": "conceito",
+    "armadilha": "competencia",
+    "origem": "inedita",
+    "status": "ok"
+  },
+  {
+    "id": "CDH-07-0054",
+    "topico": "CDH-07",
+    "grupo": "CDH-CEB-A",
+    "enunciado": "O Estado pode ser responsabilizado internacionalmente por violações de direitos humanos praticadas por seus agentes, ainda que não haja ordem superior para tais atos.",
+    "gabarito": "C",
+    "comentario": "A conduta de agente estatal é atribuída ao Estado, que também responde por deixar de prevenir, investigar e punir as violações.",
+    "dificuldade": 3,
+    "tipo": "conceito",
+    "armadilha": null,
+    "origem": "inedita",
+    "status": "ok"
+  },
+  {
+    "id": "CDH-03-0037",
+    "topico": "CDH-03",
+    "grupo": "CDH-CEB-A",
+    "enunciado": "O exercício da cidadania limita-se ao direito de votar e de ser votado.",
+    "gabarito": "E",
+    "comentario": "Essa é a cidadania em sentido estrito. Em sentido amplo, ela envolve direitos civis, políticos e sociais, além da participação na vida pública.",
+    "dificuldade": 2,
+    "tipo": "conceito",
+    "armadilha": "absoluto",
+    "origem": "inedita",
+    "status": "ok"
+  }
+]

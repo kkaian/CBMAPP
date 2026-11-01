@@ -1,0 +1,14 @@
+[
+  {
+    "id": "RLM-CEB-A",
+    "texto": "Considere a proposição P a seguir.\n\nP: Se há fumaça no corredor, então o alarme é acionado e a brigada é avisada.\n\nCom base nessa proposição, julgue os itens a seguir."
+  },
+  {
+    "id": "RLM-CEB-B",
+    "texto": "De uma equipe com 5 homens e 3 mulheres, serão escolhidas 3 pessoas para compor uma guarnição.\n\nCom base nessa situação hipotética, julgue os itens que se seguem."
+  },
+  {
+    "id": "RLM-CEB-C",
+    "texto": "Os tempos de resposta de uma guarnição em cinco ocorrências foram, em minutos: 6, 8, 8, 10 e 18.\n\nCom base nesses dados, julgue os itens a seguir."
+  }
+]

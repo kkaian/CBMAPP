@@ -1,0 +1,22 @@
+[
+  {
+    "id": "FIS-CEB-A",
+    "texto": "Durante o combate a um incêndio em um edifício, uma autobomba recalca água, de densidade 1.000 kg/m³, até um reservatório aberto situado 20 m acima do nível da bomba, com vazão constante de 600 L/min. Considere g = 10 m/s², pressão atmosférica de 1 × 10⁵ Pa e despreze as perdas de carga e a variação de velocidade da água.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-CEB-B",
+    "texto": "Uma viatura de 4.000 kg trafega a 72 km/h em via plana e horizontal, quando o motorista avista um obstáculo. Após um tempo de reação de 1 s, durante o qual a velocidade permanece constante, ele aciona os freios, e a viatura desacelera a 5 m/s² até parar, sem que os pneus deslizem. Considere g = 10 m/s².\n\nA respeito dessa situação hipotética, julgue os itens que se seguem."
+  },
+  {
+    "id": "FIS-CEB-C",
+    "texto": "Em um incêndio, uma linha de mangueira lança 20 kg de água a 20 °C sobre um material em combustão, e toda essa água é aquecida e vaporizada à pressão de 1 atm. Considere o calor específico da água igual a 1 cal/(g·°C) e o calor latente de vaporização igual a 540 cal/g.\n\nConsiderando essas informações, julgue os itens subsequentes."
+  },
+  {
+    "id": "FIS-CEB-D",
+    "texto": "Em uma residência atingida por um alagamento, um circuito de 220 V alimenta, em paralelo, um chuveiro de 4.400 W e uma lâmpada de 110 W, ambos protegidos por um único disjuntor de 25 A.\n\nCom relação a essa situação hipotética e aos efeitos da corrente elétrica, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-CEB-E",
+    "texto": "Uma fonte de iodo-131, radioisótopo com meia-vida de aproximadamente 8 dias, contém inicialmente 80 mg desse isótopo e é armazenada em um hospital atingido por um incêndio.\n\nA partir dessa situação hipotética, julgue os itens seguintes."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "QUI-CEB-A",
+    "texto": "O gás liquefeito de petróleo (GLP) é formado principalmente por propano e butano. A combustão completa do propano é representada pela equação a seguir.\n\nC₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O\n\nConsidere as massas molares, em g/mol: H = 1, C = 12 e O = 16, e o volume molar dos gases igual a 25 L/mol.\n\nCom base nessas informações, julgue os itens a seguir."
+  },
+  {
+    "id": "QUI-CEB-B",
+    "texto": "Em um acidente com produto perigoso, ocorreu o derramamento de 2 L de solução aquosa de ácido sulfúrico a 0,5 mol/L. Para a neutralização, foi usada solução aquosa de hidróxido de sódio a 1 mol/L, conforme a equação a seguir.\n\nH₂SO₄ + 2 NaOH → Na₂SO₄ + 2 H₂O\n\nConsidere as massas molares, em g/mol: H = 1, O = 16, Na = 23 e S = 32.\n\nA partir dessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "QUI-CEB-C",
+    "texto": "O etanol, de fórmula CH₃CH₂OH, é combustível e também produto perigoso nas operações de bombeiros. Em determinadas condições, ele pode ser oxidado a etanal (CH₃CHO) e, depois, a ácido etanoico (CH₃COOH).\n\nCom base nessas informações, julgue os itens que se seguem."
+  }
+]
