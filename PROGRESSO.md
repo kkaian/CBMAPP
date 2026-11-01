@@ -67,6 +67,12 @@ Para cada matéria (método em `docs/PROJETO.md` §5.3.1, igual ao de MAT):
 - [ ] (Recomendado) a chave do Gemini foi colada na conversa: se quiser, gere outra no AI Studio e troque em Vercel › Settings › Environment Variables (`GEMINI_API_KEY`).
 
 ## Histórico resumido
+- **01/11** — **Conquistas e caderno de erros.** Agora são 96 conquistas.
+  - Simulado completo: nota 70+, 80+, 90+ e 100+. Só contam os de 120 itens, porque o mini não tem como comparar a nota.
+  - Redação: NPD 15+, 18+, 22+ e 28+, além de 5 e 10 redações acima do mínimo.
+  - Novo grupo Tópicos: 10, 25, 50, 75, 100 e todos os 138 estudados, um por matéria completa e 5, 20, 50 e 100 dominados. Estudado = 10+ itens julgados, o mesmo critério do diagnóstico; Redação fica de fora porque o banco dela é pequeno. "50 tópicos estudados" substituiu "Diagnóstico em 50 tópicos".
+  - Caderno de erros: intervalos de 1, 3 e 7 dias, sem os 15, porque a espera é longa para o tempo até a prova. Item que já esperava os 15 dias conta como concluído (`estaNoCaderno`, sem migrar o banco, o que também cobre dados vindos de outro aparelho). Se errar esse item de novo, ele volta ao começo.
+  - Sem mudar o `fatorCaderno`: a última volta com certeza agora paga 75%; os 100% só aparecem em quem repete o intervalo na dúvida. Testado no modo local com dados de exemplo.
 - **01/11** — **Correção de redação por IA mais rigorosa**, com as regras do PDF enviado pelo usuário ("Regras de correção - Redação Cebraspe CBM-AL"; a divisão 6 + 24 é referência de treino, não do edital).
   - Comandos: quatro níveis (atendido, parcial, superficial, não atendido) com faixa de nota; o servidor (`normalizar`) corrige a nota que sair da faixa. Estrutura: começa em 6 e o servidor desconta 0,5 a 1 por falha listada. A IA também lista as partes de cada comando, o que faltou e erros de conteúdo, e agora recebe os textos motivadores.
   - Erros: cada ocorrência conta; o que os corretores divergem vai para "Riscos", fora do NE, e a tela mostra como ficaria o NPD se contassem. Prioridades com reescrita (até 3) e margem em relação ao corte. O prompt de "Copiar para correção" recebeu as mesmas regras, resumidas.

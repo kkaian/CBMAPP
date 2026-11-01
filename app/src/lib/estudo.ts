@@ -1,7 +1,7 @@
 import { db } from './db'
 import { diaLocal, somarDias } from './datas'
 import { materiaDoTopico } from './conteudo'
-import { INTERVALOS } from './stats'
+import { INTERVALOS, estaNoCaderno } from './stats'
 import { agendarSincronizacao } from './sync'
 import type { Confianca, ModoEstudo, Questao, RegistroResposta, Resposta } from './types'
 
@@ -52,7 +52,7 @@ async function atualizarRevisao(q: Questao, reg: RegistroResposta) {
     await db.revisoes.put({ itemId: q.id, topico: q.topico, etapa: 0, proxima: somarDias(hoje, INTERVALOS[0]), atualizadaEm: agora, sincronizada: 0 })
     return
   }
-  if (!atual || atual.proxima === null) return
+  if (!atual || !estaNoCaderno(atual)) return
   if (diaLocal(new Date(atual.atualizadaEm)) === hoje) return
 
   if (reg.confianca === 'certeza') {

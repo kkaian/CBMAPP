@@ -160,7 +160,7 @@ export const XP_BASE = { branco: 1, leitura: 10, simuladoCompleto: 100, simulado
 // Sem confiança registrada (itens antigos, simulado sem marcação) vale como dúvida.
 export const XP_CONFIANCA = { certeza: 10, duvida: 6, chute: 3 } as const
 // Intervalos do caderno de erros (dias). Depois do último acerto com certeza, o item sai do caderno.
-export const INTERVALOS = [1, 3, 7, 15]
+export const INTERVALOS = [1, 3, 7]
 // Caderno de erros: cada volta do item vale mais, até o valor cheio (25%, 50%, 75%, 100%).
 export function fatorCaderno(revisoesFeitas: number): number {
   return Math.min(1, 0.25 * (revisoesFeitas + 1))
@@ -455,12 +455,17 @@ export function serieSemanal(respostas: RegistroResposta[], semanas = 6) {
 
 // ---------- caderno de erros ----------
 
+// Etapa além do último intervalo: item que já esperava os antigos 15 dias conta como concluído.
+export function estaNoCaderno(r: RegistroRevisao) {
+  return r.proxima !== null && r.etapa < INTERVALOS.length
+}
+
 export function revisoesPendentes(revisoes: RegistroRevisao[], hoje = diaLocal()) {
-  return revisoes.filter((r) => r.proxima !== null && r.proxima <= hoje)
+  return revisoes.filter((r) => estaNoCaderno(r) && r.proxima! <= hoje)
 }
 
 export function noCaderno(revisoes: RegistroRevisao[]) {
-  return revisoes.filter((r) => r.proxima !== null)
+  return revisoes.filter(estaNoCaderno)
 }
 
 // ---------- missão do dia ----------

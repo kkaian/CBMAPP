@@ -320,7 +320,7 @@ Para cada tópico, calculado sobre as **últimas 30 respostas** (as recentes pes
 
 ### 4.5 Caderno de erros e revisão espaçada
 - Todo item errado (ou acertado no chute) entra no caderno.
-- Volta em **1, 3, 7 e 15 dias** (o intervalo de 30 dias foi retirado em 29/10/2026). Acertou com certeza → avança; errou → volta ao início.
+- Volta em **1, 3 e 7 dias** (os intervalos de 30 e de 15 dias foram retirados em 29/10 e 1/11/2026; item que já esperava os 15 dias conta como concluído). Acertou com certeza → avança; errou → volta ao início.
 - O mesmo motor serve para os flashcards.
 
 ### 4.6 Simulados

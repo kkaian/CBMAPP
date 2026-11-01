@@ -8,6 +8,10 @@ import type { IndiceConteudo, RegistroLeitura, RegistroRedacao, RegistroResposta
 export interface Conquista { icone: string; nome: string; ok: boolean }
 export interface GrupoConquistas { titulo: string; itens: Conquista[] }
 
+const ICONE_MATERIA: Record<string, string> = {
+  MAT: '🧮', RLM: '🧠', FIS: '⚛️', QUI: '🧪', MEC: '🔧', BIO: '🧬', INF: '💻', PT: '✒️', ING: '🌎', CDH: '⚖️', LEG: '📜',
+}
+
 // Todas ligadas a progresso real. Usadas no Perfil e no resumo público do ranking.
 export function calcularConquistas({ ind, respostas, leituras, revisoes, simulados, redacoes = [], metaDiaria }: {
   ind: IndiceConteudo
@@ -28,7 +32,12 @@ export function calcularConquistas({ ind, respostas, leituras, revisoes, simulad
   const completos = sims.filter((s) => s.itens.length >= 120)
   const driveFeitos = new Set(sims.filter((s) => s.tipo === 'drive').map((s) => s.titulo))
   const materiaVerde = ind.edital.materias.some((m) => m.topicos.length > 0 && m.topicos.every((t) => diag[t.codigo]?.status === 'dominado'))
-  const topicosComDiagnostico = Object.values(diag).filter((d) => d.status !== 'semdados').length
+  // Tópico estudado: tem diagnóstico (10+ itens julgados). A redação fica de fora: o banco dela é pequeno.
+  const materiasDeItens = ind.edital.materias.filter((m) => m.codigo !== 'RED')
+  const topicosDeItens = materiasDeItens.flatMap((m) => m.topicos)
+  const estudado = (codigo: string) => (diag[codigo]?.status ?? 'semdados') !== 'semdados'
+  const topicosEstudados = topicosDeItens.filter((t) => estudado(t.codigo)).length
+  const topicosDominados = topicosDeItens.filter((t) => diag[t.codigo]?.status === 'dominado').length
   const lidos = new Set(leiturasValidas(leituras, respostas).map((l) => l.topico))
   const materiaLida = ind.edital.materias.some((m) => m.topicos.length > 0 && m.topicos.every((t) => lidos.has(t.codigo)))
   const semErroComCerteza = respostas.length >= 100 && excessoConfianca(respostas, 7).length === 0
@@ -44,6 +53,8 @@ export function calcularConquistas({ ind, respostas, leituras, revisoes, simulad
   const trilhas = trilhasConcluidas(respostas).length
   const corrigidas = redacoes.filter((x) => !x.excluida && x.npd !== null)
   const melhorNpd = Math.max(0, ...corrigidas.map((x) => x.npd ?? 0))
+  const acimaDoMinimo = corrigidas.filter((x) => (x.npd ?? 0) >= 15).length
+  const melhorCompleto = Math.max(0, ...completos.map((s) => s.resumo?.nota ?? 0))
   const semanas: Record<string, Record<string, number>> = {}
   for (const r of respostas) {
     const w = inicioSemana(diaLocal(new Date(r.criadaEm)))
@@ -99,8 +110,14 @@ export function calcularConquistas({ ind, respostas, leituras, revisoes, simulad
       { icone: '✍️', nome: '1ª redação corrigida', ok: corrigidas.length >= 1 },
       { icone: '📄', nome: '5 redações corrigidas', ok: corrigidas.length >= 5 },
       { icone: '📚', nome: '12 redações corrigidas', ok: corrigidas.length >= 12 },
+      { icone: '🎯', nome: 'NPD 15+ (acima do mínimo)', ok: melhorNpd >= 15 },
+      { icone: '📈', nome: 'NPD 18+', ok: melhorNpd >= 18 },
       { icone: '🖋️', nome: 'NPD 20+', ok: melhorNpd >= 20 },
+      { icone: '🥈', nome: 'NPD 22+', ok: melhorNpd >= 22 },
       { icone: '🏆', nome: 'NPD 25+', ok: melhorNpd >= 25 },
+      { icone: '👑', nome: 'NPD 28+', ok: melhorNpd >= 28 },
+      { icone: '🧱', nome: '5 redações acima do mínimo', ok: acimaDoMinimo >= 5 },
+      { icone: '🏰', nome: '10 redações acima do mínimo', ok: acimaDoMinimo >= 10 },
     ] },
     { titulo: 'Volume', itens: [
       { icone: '🎯', nome: 'Primeiro item', ok: respostas.length >= 1 },
@@ -124,10 +141,22 @@ export function calcularConquistas({ ind, respostas, leituras, revisoes, simulad
       { icone: '🗓️', nome: '60 dias de estudo', ok: ultimos30.size >= 60 },
       { icone: '🌳', nome: '100 dias de estudo', ok: ultimos30.size >= 100 },
     ] },
+    { titulo: 'Tópicos (estudado = 10+ itens respondidos)', itens: [
+      { icone: '🌱', nome: '10 tópicos estudados', ok: topicosEstudados >= 10 },
+      { icone: '🌿', nome: '25 tópicos estudados', ok: topicosEstudados >= 25 },
+      { icone: '🗺️', nome: '50 tópicos estudados', ok: topicosEstudados >= 50 },
+      { icone: '🌳', nome: '75 tópicos estudados', ok: topicosEstudados >= 75 },
+      { icone: '🏕️', nome: '100 tópicos estudados', ok: topicosEstudados >= 100 },
+      { icone: '🌍', nome: `Todos os ${topicosDeItens.length} tópicos estudados`, ok: topicosEstudados >= topicosDeItens.length },
+      ...materiasDeItens.map((m) => ({ icone: ICONE_MATERIA[m.codigo] ?? '📘', nome: `${m.nome}: todos os tópicos`, ok: m.topicos.every((t) => estudado(t.codigo)) })),
+      { icone: '🟢', nome: '5 tópicos dominados', ok: topicosDominados >= 5 },
+      { icone: '✨', nome: '20 tópicos dominados', ok: topicosDominados >= 20 },
+      { icone: '🌟', nome: '50 tópicos dominados', ok: topicosDominados >= 50 },
+      { icone: '💫', nome: '100 tópicos dominados', ok: topicosDominados >= 100 },
+    ] },
     { titulo: 'Domínio', itens: [
       { icone: '🧠', nome: 'Raciocínio Lógico todo verde', ok: rlmVerde },
       { icone: '🌟', nome: 'Uma matéria inteira em 🟢', ok: materiaVerde },
-      { icone: '🗺️', nome: 'Diagnóstico em 50 tópicos', ok: topicosComDiagnostico >= 50 },
       { icone: '🛡️', nome: '7 dias sem errar com certeza (50+ itens)', ok: semErroComCerteza },
       { icone: '📕', nome: 'Caderno de erros zerado (com 20+ revisões)', ok: noCaderno(revisoes).length === 0 && respostas.filter((r) => r.modo === 'revisao').length >= 20 },
       { icone: '🔁', nome: '100 revisões do caderno', ok: respostas.filter((r) => r.modo === 'revisao').length >= 100 },
@@ -139,7 +168,11 @@ export function calcularConquistas({ ind, respostas, leituras, revisoes, simulad
       { icone: '✅', nome: 'Mini acima do mínimo', ok: sims.some((s) => s.tipo === 'mini' && s.resumo?.passou) },
       { icone: '📝', nome: '1º simulado completo', ok: completos.length > 0 },
       { icone: '🎖️', nome: 'Simulado completo acima do mínimo', ok: completos.some((s) => s.resumo?.passou) },
-      { icone: '🚀', nome: 'Nota 60+ num simulado completo', ok: completos.some((s) => (s.resumo?.nota ?? 0) >= 60) },
+      { icone: '🚀', nome: 'Nota 60+ num simulado completo', ok: melhorCompleto >= 60 },
+      { icone: '🛫', nome: 'Nota 70+ num simulado completo', ok: melhorCompleto >= 70 },
+      { icone: '🌠', nome: 'Nota 80+ num simulado completo', ok: melhorCompleto >= 80 },
+      { icone: '🏅', nome: 'Nota 90+ num simulado completo', ok: melhorCompleto >= 90 },
+      { icone: '🥇', nome: 'Nota 100+ num simulado completo', ok: melhorCompleto >= 100 },
       { icone: '🗃️', nome: 'Simulados 01–05 feitos', ok: driveFeitos.size >= 5 },
       { icone: '📈', nome: '5 simulados concluídos', ok: sims.length >= 5 },
       { icone: '🩹', nome: 'Pontos fracos encarados', ok: sims.some((s) => s.tipo === 'fracos') },

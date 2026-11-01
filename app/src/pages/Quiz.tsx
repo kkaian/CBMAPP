@@ -6,7 +6,7 @@ import { carregarMateria, materiaDoTopico } from '../lib/conteudo'
 import { gravarConfig, lerConfig } from '../lib/db'
 import { db } from '../lib/db'
 import { INTERVALOS, registrarResposta } from '../lib/estudo'
-import { xpDaRespostaNova } from '../lib/stats'
+import { estaNoCaderno, xpDaRespostaNova } from '../lib/stats'
 import { itensDaMateria, itensDaTrilha, itensDeDuvidas, itensDeRevisao, itensDoTopico, itensRelampago } from '../lib/selecao'
 import type { Confianca, Grupo, ModoEstudo, Questao, RegistroResposta, RegistroRevisao, Resposta } from '../lib/types'
 
@@ -209,7 +209,7 @@ export default function Quiz() {
 
 // O que o acerto fez no caderno de erros, para o item que já estava lá.
 function textoRevisita(reg: RegistroResposta, antes?: RegistroRevisao, depois?: RegistroRevisao) {
-  if (!antes || antes.proxima === null || reg.correta !== 1 || reg.confianca === 'chute') return null
+  if (!antes || !estaNoCaderno(antes) || reg.correta !== 1 || reg.confianca === 'chute') return null
   if (!depois || depois.atualizadaEm === antes.atualizadaEm) return 'Item do caderno de erros que já mudou hoje: só conta como revisita em outro dia.'
   if (depois.proxima === null) return 'Contou como revisita: saiu do caderno de erros.'
   const dias = INTERVALOS[Math.min(depois.etapa, INTERVALOS.length - 1)]
