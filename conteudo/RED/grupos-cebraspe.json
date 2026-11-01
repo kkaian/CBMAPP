@@ -1,0 +1,22 @@
+[
+  {
+    "id": "RED-CEB-A",
+    "texto": "Um candidato escreveu um texto dissertativo de 25 linhas, obteve nota de conteúdo (NC) igual a 20 e cometeu 5 erros (NE). A nota é calculada pela fórmula do edital: NPD = NC − 6 × NE ÷ TL, em que TL é o número de linhas escritas, sendo 15 a nota mínima para aprovação.\n\nCom base nessas informações, julgue os itens a seguir."
+  },
+  {
+    "id": "RED-CEB-B",
+    "texto": "Um candidato planeja uma redação sobre a prevenção de incêndios. O enunciado traz três comandos: discorrer sobre a importância da prevenção; abordar dois fatores que agravam os incêndios urbanos; e apresentar o papel do corpo de bombeiros.\n\nCom relação ao planejamento e à organização desse texto, julgue os itens a seguir."
+  },
+  {
+    "id": "RED-CEB-C",
+    "texto": "Os itens a seguir tratam da correção gramatical de trechos de redações. Considere a norma-padrão e julgue-os."
+  },
+  {
+    "id": "RED-CEB-D",
+    "texto": "A respeito do uso de repertório na redação da prova discursiva, julgue os itens a seguir."
+  },
+  {
+    "id": "RED-CEB-E",
+    "texto": "Os temas de Atualidades frequentemente exigem conceitos, leis e fatos usados como repertório. Acerca desse assunto, julgue os itens a seguir."
+  }
+]
