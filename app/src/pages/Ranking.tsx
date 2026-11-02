@@ -78,7 +78,7 @@ export default function Ranking() {
             <div className="w-8 text-center text-xl">{MEDALHAS[i] ?? <span className="text-suave text-base">{i + 1}º</span>}</div>
             <div className="flex-1 min-w-0">
               <div className="truncate"><b>{l.usuario}</b>{souEu && <span className="text-suave"> (você)</span>}</div>
-              <div className="text-suave text-[12px]">{l.dados.patente}{l.dados.condecoracoes ? ` ${condecoracao(l.dados.condecoracoes - 1).icone}×${l.dados.condecoracoes}` : ''} · 🔥 {l.dados.streak} · {itensSemana(l)} itens na semana</div>
+              <div className="text-suave text-[12px]">{l.dados.patente}{l.dados.condecoracoes ? ` ${condecoracao(l.dados.condecoracoes - 1).icone}×${l.dados.condecoracoes}` : ''} · 🔥 {l.dados.streak} · {aba === 'semana' ? `${itensSemana(l)} itens na semana` : `${l.dados.itens.toLocaleString('pt-BR')} itens no total`}</div>
             </div>
             <div className="text-right">
               <div className="font-bold">{valor(l).toLocaleString('pt-BR')}</div>
