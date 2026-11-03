@@ -1,0 +1,38 @@
+[
+  {
+    "id": "QUI-01-PROVA",
+    "texto": "Considere o ferro, de número atômico 26, em seu isótopo de número de massa 56, e o íon Fe³⁺ formado a partir dele.\n\nCom base nessas informações, julgue os itens a seguir."
+  },
+  {
+    "id": "QUI-02-PROVA",
+    "texto": "Um cilindro contém 4,4 kg de propano (C₃H₈). Considere as massas molares C = 12 g/mol e H = 1 g/mol, a constante de Avogadro igual a 6 × 10²³ mol⁻¹ e o volume molar dos gases igual a 25 L/mol.\n\nCom base nessas informações, julgue os itens a seguir."
+  },
+  {
+    "id": "QUI-03-PROVA",
+    "texto": "Considere os elementos sódio (Z = 11), cloro (Z = 17), cálcio (Z = 20) e ferro (Z = 26), no estado fundamental.\n\nA respeito desses elementos, julgue os itens a seguir."
+  },
+  {
+    "id": "QUI-04-PROVA",
+    "texto": "Considere os elementos lítio, sódio e potássio (grupo 1), flúor e cloro (grupo 17) e neônio (grupo 18).\n\nCom base nas propriedades periódicas, julgue os itens a seguir."
+  },
+  {
+    "id": "QUI-05-PROVA",
+    "texto": "Considere os compostos cloreto de sódio (NaCl), cloreto de cálcio, óxido de magnésio (MgO) e óxido de alumínio.\n\nA respeito desses compostos e da ligação iônica, julgue os itens a seguir."
+  },
+  {
+    "id": "QUI-06-PROVA",
+    "texto": "Considere as moléculas H₂O, CO₂, NH₃, CH₄ e N₂.\n\nA respeito dessas substâncias e da ligação covalente, julgue os itens a seguir."
+  },
+  {
+    "id": "QUI-07-PROVA",
+    "texto": "Considere as espécies químicas KMnO₄, H₂O₂, NH₃ e Cr₂O₇²⁻.\n\nA respeito dos números de oxidação (Nox) nessas espécies, julgue os itens a seguir."
+  },
+  {
+    "id": "QUI-08-PROVA",
+    "texto": "Em um laboratório, foram analisadas soluções aquosas de ácido clorídrico (HCl), hidróxido de sódio (NaOH), amônia (NH₃) e ácido acético (CH₃COOH), a 25 °C.\n\nCom base nessas informações, julgue os itens a seguir."
+  },
+  {
+    "id": "QUI-09-PROVA",
+    "texto": "O pó dos extintores de classe BC contém bicarbonato de sódio (NaHCO₃). Em obras, a cal virgem (CaO) reage com a água, e incêndios produzem óxidos como CO₂ e CO.\n\nCom base nessas informações, julgue os itens a seguir."
+  }
+]
