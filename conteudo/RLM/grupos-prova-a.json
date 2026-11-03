@@ -1,0 +1,46 @@
+[
+  {
+    "id": "RLM-01-PROVA",
+    "texto": "Considere as seguintes sentenças.\n\nI O incêndio foi controlado.\nII Que horas são?\nIII x + 2 = 5.\nIV Feche a porta!\nV Se chover, a operação será adiada.\n\nCom base nessas sentenças, julgue os itens a seguir."
+  },
+  {
+    "id": "RLM-02-PROVA",
+    "texto": "Considere as proposições A: \"O alarme toca\" e B: \"A brigada sai\", e a proposição composta P: A → B.\n\nCom base nessas proposições, julgue os itens a seguir."
+  },
+  {
+    "id": "RLM-03-PROVA",
+    "texto": "Considere as proposições a seguir.\n\nP: Todos os bombeiros da guarnição estão equipados.\nQ: Se a viatura chegou, então o socorro começou.\n\nCom base nessas proposições, julgue os itens a seguir."
+  },
+  {
+    "id": "RLM-04-PROVA",
+    "texto": "Considere o argumento a seguir.\n\nPremissa 1: Todo bombeiro é socorrista.\nPremissa 2: Algum socorrista é motorista.\nConclusão: Algum bombeiro é motorista.\n\nCom base nesse argumento, julgue os itens a seguir."
+  },
+  {
+    "id": "RLM-05-PROVA",
+    "texto": "Ana, Bruno e Carla trabalham em funções diferentes — motorista, socorrista e comandante — e em turnos diferentes — manhã, tarde e noite. Sabe-se que:\n\n1 Ana não é motorista nem trabalha à noite;\n2 o comandante trabalha à tarde;\n3 Bruno trabalha de manhã;\n4 Carla não é socorrista.\n\nCom base nessas informações, julgue os itens a seguir."
+  },
+  {
+    "id": "RLM-06-PROVA",
+    "texto": "Considere a sequência numérica 2, 5, 10, 17, 26, …, em que o padrão observado nos primeiros termos se mantém.\n\nCom base nessa sequência, julgue os itens a seguir."
+  },
+  {
+    "id": "RLM-07-PROVA",
+    "texto": "A tabela a seguir mostra o número de ocorrências atendidas por um batalhão de janeiro a maio.\n\n| Mês | Jan | Fev | Mar | Abr | Mai |\n|---|---|---|---|---|---|\n| Ocorrências | 40 | 60 | 50 | 90 | 60 |\n\nCom base nessa tabela, julgue os itens a seguir."
+  },
+  {
+    "id": "RLM-08-PROVA",
+    "texto": "O cofre de um quartel usa senhas de 4 algarismos, escolhidos entre 0 e 9. Em outra situação, deseja-se formar comissões e filas com os bombeiros de uma equipe.\n\nCom base nessas informações, julgue os itens a seguir."
+  },
+  {
+    "id": "RLM-09-PROVA",
+    "texto": "Uma urna contém 4 bolas vermelhas e 6 bolas azuis, idênticas exceto pela cor.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "RLM-10-PROVA",
+    "texto": "Em uma discussão nas redes sociais sobre campanhas de prevenção de incêndios, vários participantes apresentaram argumentos defeituosos.\n\nA respeito das falácias, julgue os itens a seguir."
+  },
+  {
+    "id": "RLM-11-PROVA",
+    "texto": "As idades de seis bombeiros de uma guarnição são: 22, 25, 25, 28, 30 e 38 anos.\n\nCom base nesses dados, julgue os itens a seguir."
+  }
+]
