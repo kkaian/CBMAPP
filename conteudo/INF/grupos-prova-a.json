@@ -1,0 +1,54 @@
+[
+  {
+    "id": "INF-01-PROVA",
+    "texto": "Um servidor usa o Windows 10, em português, em um computador do quartel, e precisa organizar arquivos e programas no dia a dia.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "INF-02-PROVA",
+    "texto": "Em um servidor com sistema operacional Linux, um técnico usa o terminal para gerenciar arquivos e permissões.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "INF-03-PROVA",
+    "texto": "Um bombeiro precisa redigir um relatório no Microsoft Word, em português, e um colega usa o LibreOffice Writer.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "INF-04-PROVA",
+    "texto": "Em uma planilha do Microsoft Excel, em português, as células A1, A2 e A3 contêm, respectivamente, 5, 8 e 12; a célula A4 contém o texto bombeiro; e a célula B1 contém 4.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "INF-05-PROVA",
+    "texto": "Um instrutor prepara no Microsoft PowerPoint uma apresentação para uma palestra de prevenção de incêndios, e outro instrutor usa o LibreOffice Impress.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "INF-06-PROVA",
+    "texto": "Uma corporação mantém uma intranet para os seus servidores e um portal na Internet para atender o público.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "INF-07-PROVA",
+    "texto": "Um servidor usa navegadores como Google Chrome, Mozilla Firefox e Microsoft Edge para acessar sistemas da corporação.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "INF-08-PROVA",
+    "texto": "Um servidor usa o Mozilla Thunderbird e o webmail da corporação para trocar mensagens com outras unidades.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "INF-09-PROVA",
+    "texto": "Um bombeiro pesquisa na Internet informações sobre normas de segurança e acompanha grupos de discussão e redes sociais da corporação.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "INF-10-PROVA",
+    "texto": "Uma unidade passou a guardar documentos em um serviço de armazenamento em nuvem, sincronizado com os computadores da seção.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "INF-11-PROVA",
+    "texto": "Um servidor organiza os arquivos de uma seção em pastas no Windows, com nomes e extensões variados.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "INF-12-PROVA",
+    "texto": "Após um computador do quartel ficar lento e exibir mensagens estranhas, a equipe de informática revisou os procedimentos de segurança da unidade.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "INF-13-PROVA",
+    "texto": "A seção de informática definiu uma rotina de backup para os documentos da unidade, com cópias completas aos domingos e cópias parciais nos demais dias.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  }
+]
