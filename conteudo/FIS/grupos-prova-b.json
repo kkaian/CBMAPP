@@ -1,0 +1,46 @@
+[
+  {
+    "id": "FIS-12-PROVA",
+    "texto": "Uma peça metálica de 1 kg, com calor específico de 0,1 cal/(g·°C), a 120 °C, é mergulhada em 900 g de água a 20 °C, em um recipiente isolado de capacidade térmica desprezível. Considere o calor específico da água igual a 1 cal/(g·°C).\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-13-PROVA",
+    "texto": "Um trilho de aço tem 20 m de comprimento a 10 °C e é aquecido pelo sol até 60 °C. Considere o coeficiente de dilatação linear do aço igual a 1,2 × 10⁻⁵ °C⁻¹.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-14-PROVA",
+    "texto": "Em um incêndio em um cômodo fechado, os gases quentes acumularam-se junto ao teto, e a porta metálica de saída aqueceu do lado oposto ao das chamas.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-15-PROVA",
+    "texto": "Um bombeiro precisa de óculos para enxergar placas distantes, e outro, mais velho, passou a precisar deles para ler textos de perto.\n\nA respeito dessa situação hipotética e dos defeitos da visão, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-16-PROVA",
+    "texto": "A sirene de uma viatura emite som de 680 Hz. Considere a velocidade do som no ar igual a 340 m/s.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-17-PROVA",
+    "texto": "Duas cargas puntiformes, q₁ = 2 µC e q₂ = −4 µC, estão separadas por 3 m, no vácuo. Considere k = 9 × 10⁹ N·m²/C².\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-18-PROVA",
+    "texto": "Dois resistores, de 6 Ω e de 3 Ω, são ligados em paralelo a uma fonte ideal de 12 V.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-19-PROVA",
+    "texto": "Após uma tempestade, um cabo de alta tensão rompeu-se e caiu sobre um carro com uma pessoa no interior. A equipe do corpo de bombeiros chegou ao local antes da concessionária de energia.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-20-PROVA",
+    "texto": "Um ímã em barra foi partido ao meio, e os pedaços foram usados em demonstrações sobre magnetismo.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-21-PROVA",
+    "texto": "Em uma cidade litorânea, em um dia ensolarado, um bombeiro guarda-vidas observou a mudança da direção do vento ao longo do dia e, à noite, uma tempestade com raios.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-22-PROVA",
+    "texto": "Em 1987, em Goiânia, a abertura de uma cápsula de césio-137, radioisótopo com meia-vida de aproximadamente 30 anos, causou o maior acidente radiológico do país.\n\nA respeito desse fato e da radioatividade, julgue os itens a seguir."
+  }
+]

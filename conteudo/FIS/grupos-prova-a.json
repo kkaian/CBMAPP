@@ -1,0 +1,46 @@
+[
+  {
+    "id": "FIS-01-PROVA",
+    "texto": "Para remover um veículo acidentado, duas equipes puxam cabos presos a um mesmo ponto do chassi com forças horizontais F₁ = 300 N e F₂ = 400 N, perpendiculares entre si.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-02-PROVA",
+    "texto": "Uma viatura parte do quartel às 14 h e percorre 60 km de uma estrada retilínea, com velocidade constante de 80 km/h, até o local de um incêndio. Outra viatura parte do mesmo quartel 15 minutos depois, pela mesma estrada, com velocidade constante de 100 km/h.\n\nCom base nessa situação hipotética, julgue os itens subsequentes."
+  },
+  {
+    "id": "FIS-03-PROVA",
+    "texto": "Durante um treinamento em uma torre, um bombeiro deixa cair uma ferramenta, a partir do repouso, de uma altura de 45 m. Despreze a resistência do ar e considere g = 10 m/s².\n\nA respeito dessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-04-PROVA",
+    "texto": "Do alto de uma escada, a 5 m do solo plano, um bombeiro lança um jato de água horizontalmente, com velocidade de 10 m/s. Despreze a resistência do ar e considere g = 10 m/s².\n\nCom base nessa situação hipotética, julgue os itens seguintes."
+  },
+  {
+    "id": "FIS-05-PROVA",
+    "texto": "Um bombeiro de 80 kg desce por uma corda vertical durante um treinamento de salvamento. Considere g = 10 m/s² e despreze a massa da corda.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-06-PROVA",
+    "texto": "Um satélite de monitoramento de queimadas descreve uma órbita circular em torno da Terra.\n\nConsiderando essa situação hipotética e os conhecimentos de gravitação, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-07-PROVA",
+    "texto": "Uma bomba elevou 1.200 L de água a uma altura de 15 m em 2 minutos, enquanto seu motor consumia 2 kW de potência elétrica. Considere a densidade da água igual a 1 kg/L e g = 10 m/s².\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-08-PROVA",
+    "texto": "Em um treinamento de evacuação, uma vítima de 60 kg desliza, a partir do repouso, por um tobogã de fuga com 5 m de desnível. Considere g = 10 m/s².\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-09-PROVA",
+    "texto": "Um mergulhador do corpo de bombeiros atua em um lago de água doce, de densidade 1.000 kg/m³. Considere a pressão atmosférica igual a 1 × 10⁵ Pa e g = 10 m/s².\n\nCom base nessa situação hipotética, julgue os próximos itens."
+  },
+  {
+    "id": "FIS-10-PROVA",
+    "texto": "Em um equipamento hidráulico de resgate, o êmbolo menor tem área de 10 cm², e o maior, de 500 cm².\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "FIS-11-PROVA",
+    "texto": "Um termômetro instalado em um ambiente marca 25 °C. Considere as relações entre as escalas Celsius, Fahrenheit e Kelvin.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  }
+]
