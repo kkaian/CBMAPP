@@ -5,6 +5,7 @@ import { registerSW } from 'virtual:pwa-register'
 import './index.css'
 import './lib/instalar' // escuta o convite de instalação desde o início
 import { AuthProvider, useAuth } from './auth'
+import AvisoConquista from './components/AvisoConquista'
 import Shell from './components/Shell'
 import { Carregando } from './components/ui'
 import Admin from './pages/Admin'
@@ -70,7 +71,12 @@ function Portao() {
   if (!logado) return <Login />
   if (!perfil) return <Carregando texto="Conectando… (na primeira vez é preciso internet)" />
   if (perfil.status !== 'aprovado') return <Aguardando />
-  return <RouterProvider router={router} />
+  return (
+    <>
+      <RouterProvider router={router} />
+      <AvisoConquista abrirPerfil={() => void router.navigate('/perfil')} />
+    </>
+  )
 }
 
 createRoot(document.getElementById('root')!).render(
