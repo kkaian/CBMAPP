@@ -1,0 +1,38 @@
+[
+  {
+    "id": "RED-01-PROVA",
+    "texto": "Na prova discursiva, a nota é dada por NPD = NC − 6 × NE ÷ TL, com mínimo de 15 pontos. O candidato A obteve NC = 24, com 3 erros em 30 linhas; o candidato B obteve NC = 18, com 6 erros em 20 linhas.\n\nCom base nessa situação hipotética e nas regras do edital, julgue os itens a seguir."
+  },
+  {
+    "id": "RED-02-PROVA",
+    "texto": "Um candidato recebe um tema com três comandos e planeja escrever introdução, dois parágrafos de desenvolvimento e um parágrafo final que responda ao terceiro comando e feche o texto.\n\nCom base nessa situação hipotética e na estrutura da redação, julgue os itens a seguir."
+  },
+  {
+    "id": "RED-03-PROVA",
+    "texto": "Os trechos a seguir foram retirados de redações de treino. Considerando a norma-padrão, julgue-os quanto à correção gramatical."
+  },
+  {
+    "id": "RED-04-PROVA",
+    "texto": "Ao revisar uma redação, o candidato verificou os conectivos, as retomadas e o nível de formalidade do texto.\n\nA respeito da coesão e da impessoalidade na redação, julgue os itens a seguir."
+  },
+  {
+    "id": "RED-05-PROVA",
+    "texto": "Ao montar seu repertório para a prova discursiva, um candidato reuniu autores, obras e artigos da Constituição Federal.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "RED-06-PROVA",
+    "texto": "Os temas sobre desastres, defesa civil e clima são considerados prováveis na prova, por dialogarem com a missão do bombeiro.\n\nA respeito desses temas, julgue os itens a seguir."
+  },
+  {
+    "id": "RED-07-PROVA",
+    "texto": "O eixo água, saneamento e meio ambiente foi o tema da redação de 2021 e continua relevante para a prova.\n\nA respeito desse eixo, julgue os itens a seguir."
+  },
+  {
+    "id": "RED-08-PROVA",
+    "texto": "Os temas de segurança, prevenção e saúde exigem repertório sobre leis, campanhas e fatos.\n\nA respeito desse eixo, julgue os itens a seguir."
+  },
+  {
+    "id": "RED-09-PROVA",
+    "texto": "Os temas de sociedade, cidadania e tecnologia exigem domínio de leis e conceitos ligados aos direitos.\n\nA respeito desse eixo, julgue os itens a seguir."
+  }
+]
