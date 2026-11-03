@@ -1,0 +1,34 @@
+[
+  {
+    "id": "MEC-01-PROVA",
+    "texto": "Uma viatura tem motor de combustão interna de quatro cilindros e quatro tempos, que funciona a 3.000 rpm em regime de patrulha.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "MEC-02-PROVA",
+    "texto": "O corpo de bombeiros usa uma viatura leve com motor flex, de ciclo Otto, e um caminhão autobomba com motor de ciclo Diesel.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "MEC-03-PROVA",
+    "texto": "Um caminhão do corpo de bombeiros tem caixa de câmbio manual, árvore cardã, diferencial e tomada de força para acionar a bomba de incêndio.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "MEC-04-PROVA",
+    "texto": "Uma viatura tem freios a disco nas rodas dianteiras, freios a tambor nas traseiras e sistema antitravamento (ABS).\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "MEC-05-PROVA",
+    "texto": "Uma viatura tem suspensão com molas, amortecedores e barra estabilizadora. Após rodar em estradas ruins, ela passou a oscilar muito depois de passar por buracos.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "MEC-06-PROVA",
+    "texto": "O sistema elétrico de uma viatura inclui bateria de 12 V, alternador, motor de partida, fusíveis e relés.\n\nCom base nessas informações, julgue os itens a seguir."
+  },
+  {
+    "id": "MEC-07-PROVA",
+    "texto": "O sistema de arrefecimento de uma viatura tem radiador, bomba d'água, válvula termostática, ventoinha e líquido com aditivo.\n\nCom base nessas informações, julgue os itens a seguir."
+  },
+  {
+    "id": "MEC-08-PROVA",
+    "texto": "Uma viatura flex tem injeção eletrônica, e um caminhão Diesel tem filtro separador de água e sistema que usa ARLA 32.\n\nCom base nessas informações, julgue os itens a seguir."
+  }
+]
