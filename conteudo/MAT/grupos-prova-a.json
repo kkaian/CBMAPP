@@ -1,0 +1,34 @@
+[
+  {
+    "id": "MAT-01-PROVA",
+    "texto": "Uma companhia tem 120 bombeiros. Em determinado dia, 3/8 deles estavam de serviço, 1/5 estava de folga, e os demais participavam de instrução.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-02-PROVA",
+    "texto": "Para formar espuma de combate a incêndio, um líquido gerador de espuma (LGE) é misturado à água de modo que o LGE represente 3% do volume da solução.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-03-PROVA",
+    "texto": "Seis bombeiros, trabalhando no mesmo ritmo, limpam a área atingida por um deslizamento em 8 horas.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-04-PROVA",
+    "texto": "Um equipamento de proteção individual custava R$ 800,00 e passou por reajustes ao longo do ano.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-05-PROVA",
+    "texto": "Um capital de R$ 5.000,00 foi aplicado a juros simples, à taxa de 2% ao mês.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-06-PROVA",
+    "texto": "Um capital de R$ 1.000,00 foi aplicado a juros compostos, à taxa de 10% ao mês.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-07-PROVA",
+    "texto": "Um título de R$ 10.000,00 foi descontado 3 meses antes do vencimento, à taxa de 2% ao mês, em regime simples.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  },
+  {
+    "id": "MAT-08-PROVA",
+    "texto": "Uma instituição financeira anuncia empréstimos com taxa de 12% ao ano, capitalizados mensalmente.\n\nCom base nessa situação hipotética, julgue os itens a seguir."
+  }
+]
