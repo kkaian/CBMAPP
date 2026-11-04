@@ -19,7 +19,7 @@ export default function Duvidas() {
     <>
       <Cabecalho titulo="Caderno de dúvidas" sub={`${itens.length} ${itens.length === 1 ? 'item' : 'itens'}`} />
       <Card className="text-sm">
-        Os acertos que você marcou como dúvida ficam aqui, sem prazo: às vezes foi um chute disfarçado.
+        Os acertos que você marcou como dúvida ficam aqui, sem prazo: às vezes foi um chute disfarçado. Isso vale também para os itens do caderno de erros acertados na dúvida.
         Acertou com certeza → soma só a diferença para a dúvida e o item sai. Errou → tira o valor normal e o item vai para o caderno de erros.
       </Card>
       {itens.length === 0

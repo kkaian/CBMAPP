@@ -209,11 +209,13 @@ export default function Quiz() {
 
 // O que o acerto fez no caderno de erros, para o item que já estava lá.
 function textoRevisita(reg: RegistroResposta, antes?: RegistroRevisao, depois?: RegistroRevisao) {
-  if (!antes || !estaNoCaderno(antes) || reg.correta !== 1 || reg.confianca === 'chute') return null
+  if (!antes || !estaNoCaderno(antes) || reg.correta !== 1) return null
   if (!depois || depois.atualizadaEm === antes.atualizadaEm) return 'Item do caderno de erros que já mudou hoje: só conta como revisita em outro dia.'
-  if (depois.proxima === null) return 'Contou como revisita: saiu do caderno de erros.'
-  const dias = INTERVALOS[Math.min(depois.etapa, INTERVALOS.length - 1)]
-  return reg.confianca === 'certeza' ? `Contou como revisita: agora volta só em ${dias} dias.` : `Contou como revisita, mas na dúvida: repete o intervalo de ${dias} dias.`
+  const fase = (e: number) => `fase ${e + 1} de ${INTERVALOS.length}`
+  if (reg.confianca === 'chute') return `Acerto no chute: continua na ${fase(depois.etapa)} e volta em ${INTERVALOS[depois.etapa]} dias.`
+  const duvida = reg.confianca === 'duvida' ? ' Como foi na dúvida, também foi para o caderno de dúvidas.' : ''
+  if (!estaNoCaderno(depois)) return `Contou como revisita: saiu do caderno de erros.${duvida}`
+  return `Avançou para a ${fase(depois.etapa)}: volta em ${INTERVALOS[depois.etapa]} dias.${duvida}`
 }
 
 function SeloXp({ x }: { x: ReturnType<typeof xpDaRespostaNova> }) {

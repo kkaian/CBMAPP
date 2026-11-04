@@ -7,7 +7,7 @@ import { Anel, Botao, Card, Carregando, Pill, Secao } from '../components/ui'
 import { acharTopico, useIndice } from '../lib/conteudo'
 import { db } from '../lib/db'
 import { diaLocal, diasEntre, formatarDia, somarDias } from '../lib/datas'
-import { calcularStreak, condecoracoes, extratoXp, diasComEstudo, metasMensais, montarMissao, patente } from '../lib/stats'
+import { calcularStreak, condecoracoes, extratoXp, diasComEstudo, metaTrilhaSemanal, metasMensais, montarMissao, patente } from '../lib/stats'
 import { useLeituras, useMetaDiaria, useRespostas, useRevisoes } from '../lib/useDados'
 
 function saudacao() {
@@ -43,6 +43,7 @@ export default function Inicio() {
   const sugerida = m.materiaSugerida ? ind.edital.materias.find((x) => x.codigo === m.materiaSugerida) ?? null : null
   const leituraMarcadaHoje = !!m.leituraTopico && leituras.some((l) => l.topico === m.leituraTopico && diaLocal(new Date(l.criadaEm)) === hoje)
   const mensais = metasMensais(respostas, simulados ?? [], redacoes ?? [], hoje)
+  const trilha = metaTrilhaSemanal(respostas, hoje)
   const mesNome = new Date().toLocaleDateString('pt-BR', { month: 'long' })
   const plural = (n: number, um: string, varios: string) => `${n} ${n === 1 ? um : varios}`
   const subMes = (meta: { feitosNoMes: number; pendentes: number }, um: string, varios: string) =>
@@ -90,8 +91,11 @@ export default function Inicio() {
       onClick: () => nav('/simulados'),
     },
     {
-      chave: 'trilha', obrigatoria: true, periodo: 'mes', feita: mensais.revisao.pendentes === 0,
-      titulo: `1 trilha de revisão · ${mesNome}`, sub: subMes(mensais.revisao, 'trilha', 'trilhas'),
+      chave: 'trilha', obrigatoria: true, periodo: 'semana', feita: trilha.pendentes === 0,
+      titulo: '1 trilha de revisão · esta semana',
+      sub: trilha.pendentes === 0
+        ? trilha.feitosNaSemana ? `feita esta semana${trilha.feitosNaSemana > 1 ? ` (${trilha.feitosNaSemana})` : ''}` : 'em dia'
+        : `${trilha.feitosNaSemana ? `${trilha.feitosNaSemana} feita esta semana · ` : ''}${plural(trilha.pendentes, 'trilha', 'trilhas')} ${trilha.pendentes === 1 ? 'pendente' : 'pendentes'} até domingo${trilha.pendentes > 1 || trilha.feitosNaSemana ? ' (acumulado das semanas anteriores)' : ''}`,
       onClick: () => nav('/trilha'),
     },
     {

@@ -161,19 +161,22 @@ export const XP_BASE = { branco: 1, leitura: 10, simuladoCompleto: 100, simulado
 export const XP_CONFIANCA = { certeza: 10, duvida: 6, chute: 3 } as const
 // Intervalos do caderno de erros (dias). Depois do último acerto com certeza, o item sai do caderno.
 export const INTERVALOS = [1, 3, 7]
-// Caderno de erros: cada volta do item vale mais, até o valor cheio (25%, 50%, 75%, 100%).
-export function fatorCaderno(revisoesFeitas: number): number {
-  return Math.min(1, 0.25 * (revisoesFeitas + 1))
+// Caderno de erros: o acerto vale conforme a fase em que o item está (1/3, 2/3 e cheio na última).
+// Repetir a mesma fase (acerto no chute) não aumenta o valor: só o avanço de fase aumenta.
+export function fatorCaderno(etapa: number): number {
+  return Math.min(1, (etapa + 1) / INTERVALOS.length)
 }
 export const DIAS_PARA_XP_MAXIMO = 7
 // Física e Química valem um pouco mais (para ganhar e para perder).
 export const BONUS_MATERIA: Record<string, number> = { FIS: 1.2, QUI: 1.2 }
-// Meta não cumprida no prazo tira XP: dia (meta de itens), semana (7 matérias) e cada meta do mês.
-export const PENALIDADE_META = { dia: 20, semana: 100, mes: 150 }
+// Meta não cumprida no prazo tira XP: dia (meta de itens), semana (7 matérias e trilha de revisão)
+// e cada meta do mês (simulado e redação).
+export const PENALIDADE_META = { dia: 20, semana: 100, trilha: 50, mes: 150 }
 // A cobrança começou em 29/10/2026: dias a partir de hoje, a semana em andamento (26/10 a 1/11)
 // e os meses a partir de novembro (outubro já estava no fim). Nada antes disso é cobrado.
-export const INICIO_PENALIDADES = { dia: '2026-10-29', semana: '2026-10-26', mes: '2026-11' }
-export const REGRA_XP = 'Questão: certa soma e errada tira o mesmo valor, conforme a confiança: certeza ±10, dúvida ±6, chute ±3; branco +1. Física e Química valem 20% a mais. Item repetido vale metade; no caderno de erros o valor cresce a cada volta (25%, 50%, 75%, 100%), e acertar um item do caderno em qualquer lugar conta como volta. No caderno de dúvidas, acertar com certeza dá só a diferença para a dúvida (+4), e errar tira o valor normal. Leitura confirmada 10, simulado completo 100 (menores 30), redação corrigida 150. Tudo multiplicado pela sequência do dia: ×0,4 no 1º dia até ×1,0 a partir do 7º. Perder a sequência custa 30 XP por dia dela (máx. 300). Meta não cumprida no prazo: −20 (dia), −100 (semana), −150 (cada meta do mês). Coronel aos 50.000 XP.'
+// A trilha de revisão passou de mensal a semanal em 4/11/2026 e é cobrada a partir da semana de 2/11.
+export const INICIO_PENALIDADES = { dia: '2026-10-29', semana: '2026-10-26', trilha: '2026-11-02', mes: '2026-11' }
+export const REGRA_XP = 'Questão: certa soma e errada tira o mesmo valor, conforme a confiança: certeza ±10, dúvida ±6, chute ±3; branco +1. Física e Química valem 20% a mais. Item repetido vale metade; no caderno de erros o acerto vale conforme a fase (1/3, 2/3 e cheio na 3ª), e só o avanço de fase aumenta o valor; acertar um item do caderno em qualquer lugar conta como revisita. No caderno de dúvidas, acertar com certeza dá só a diferença para a dúvida (+4), e errar tira o valor normal. Leitura confirmada 10, simulado completo 100 (menores 30), redação corrigida 150. Tudo multiplicado pela sequência do dia: ×0,4 no 1º dia até ×1,0 a partir do 7º. Perder a sequência custa 30 XP por dia dela (máx. 300). Meta não cumprida no prazo: −20 (dia), −100 (7 matérias na semana), −50 (trilha da semana), −150 (cada meta do mês). Coronel aos 50.000 XP.'
 
 export function multiplicadorSequencia(dias: number): number {
   if (dias <= 0) return 0.4
@@ -275,26 +278,30 @@ export function valorResposta(r: RegistroResposta, jaVisto: boolean, estado: Est
   if (r.modo === 'duvidas' && r.correta === 0) return { xp: cheio, cheio, fator: 1, motivo: juntar(textoBonus, 'caderno de dúvidas: valor normal') }
 
   const volta = r.modo === 'revisao' || contaComoRevisita(r, estado)
-  const fator = volta ? fatorCaderno(estado.voltas) : jaVisto ? 0.5 : 1
-  const motivo = juntar(textoBonus, volta ? `caderno, ${estado.voltas + 1}ª volta (${Math.round(fator * 100)}%)` : jaVisto ? 'item repetido (metade)' : null)
+  const etapa = estado.etapa ?? 0
+  const fator = volta ? fatorCaderno(etapa) : jaVisto ? 0.5 : 1
+  const motivo = juntar(textoBonus, volta ? `caderno, fase ${etapa + 1} de ${INTERVALOS.length} (${Math.round(fator * 100)}%)` : jaVisto ? 'item repetido (metade)' : null)
   return { xp: cheio * fator, cheio, fator, motivo }
 }
 
 // Situação do item no caderno de erros, refeita a partir do histórico (espelha atualizarRevisao, em estudo.ts).
-export interface EstadoCaderno { voltas: number; etapa: number | null; dia: string | null }
-const FORA_DO_CADERNO: EstadoCaderno = { voltas: 0, etapa: null, dia: null }
+export interface EstadoCaderno { etapa: number | null; dia: string | null }
+const FORA_DO_CADERNO: EstadoCaderno = { etapa: null, dia: null }
 
 // Acertar um item do caderno em qualquer lugar conta como revisita, menos no mesmo dia em que ele mudou.
 function contaComoRevisita(r: RegistroResposta, e: EstadoCaderno) {
-  return e.etapa !== null && r.correta === 1 && r.confianca !== 'chute' && e.dia !== diaLocal(new Date(r.criadaEm))
+  return e.etapa !== null && r.correta === 1 && e.dia !== diaLocal(new Date(r.criadaEm))
 }
 
+// Errou ou deixou em branco: volta à fase 1. Fora do caderno, o acerto no chute também entra na fase 1.
+// No caderno: certeza ou dúvida avançam de fase; o chute repete a fase.
 function proximoEstado(r: RegistroResposta, e: EstadoCaderno): EstadoCaderno {
   const dia = diaLocal(new Date(r.criadaEm))
-  if (r.correta !== 1 || r.confianca === 'chute') return { voltas: 0, etapa: 0, dia }
+  if (r.correta !== 1) return { etapa: 0, dia }
+  if (e.etapa === null) return r.confianca === 'chute' ? { etapa: 0, dia } : e
   if (!contaComoRevisita(r, e)) return e
-  const etapa = r.confianca === 'certeza' ? e.etapa! + 1 : e.etapa!
-  return { voltas: e.voltas + 1, etapa: etapa >= INTERVALOS.length ? null : etapa, dia }
+  const etapa = r.confianca === 'chute' ? e.etapa : e.etapa + 1
+  return { etapa: etapa >= INTERVALOS.length ? null : etapa, dia }
 }
 
 // Caderno de dúvidas: itens cuja última resposta foi um acerto marcado como dúvida.
@@ -340,12 +347,16 @@ export function penalidadesDeMetas(respostas: RegistroResposta[], simulados: Reg
     const feitas = Object.values(materiasSemana[w] ?? {}).filter((n) => n >= ITENS_PARA_CONTAR_MATERIA).length
     if (feitas < META_MATERIAS_SEMANA) saida.push({ dia: somarDias(w, 6), tipo: 'semana', descricao: `semana de ${w.split('-').reverse().join('/')}: ${feitas} de ${META_MATERIAS_SEMANA} matérias`, xp: PENALIDADE_META.semana })
   }
-  // mês: simulado completo, redação corrigida e trilha (penalidade no último dia do mês)
+  // semana: trilha de revisão (penalidade no domingo)
+  const semanasComTrilha = new Set(trilhasConcluidas(respostas).map((x) => inicioSemana(diaLocal(new Date(x)))))
+  for (let w = inicioSemana(primeiro < INICIO_PENALIDADES.trilha ? INICIO_PENALIDADES.trilha : primeiro); w < inicioSemana(hoje); w = somarDias(w, 7)) {
+    if (!semanasComTrilha.has(w)) saida.push({ dia: somarDias(w, 6), tipo: 'semana', descricao: `trilha de revisão da semana de ${w.split('-').reverse().join('/')}`, xp: PENALIDADE_META.trilha })
+  }
+  // mês: simulado completo e redação corrigida (penalidade no último dia do mês)
   const mesesFeitos = (datas: string[]) => new Set(datas.map((x) => diaLocal(new Date(x)).slice(0, 7)))
   const metas: [string, Set<string>][] = [
     ['simulado completo', mesesFeitos(simulados.filter((x) => x.status === 'concluido' && x.itens.length >= 120 && x.concluidoEm).map((x) => x.concluidoEm!))],
     ['redação corrigida', mesesFeitos(redacoes.filter((x) => !x.excluida && x.npd !== null).map((x) => x.criadaEm))],
-    ['trilha de revisão', mesesFeitos(trilhasConcluidas(respostas))],
   ]
   const mesAtual = hoje.slice(0, 7)
   const mesInicial = primeiro.slice(0, 7) < INICIO_PENALIDADES.mes ? INICIO_PENALIDADES.mes : primeiro.slice(0, 7)
@@ -480,7 +491,7 @@ export function materiasDaSemana(respostas: RegistroResposta[], hoje = diaLocal(
   return c
 }
 
-// Metas mensais: 1 simulado completo (120 itens), 1 redação corrigida e 1 trilha de revisão por mês.
+// Metas mensais: 1 simulado completo (120 itens) e 1 redação corrigida por mês (a trilha é semanal, abaixo).
 // São cumulativas: o mês não cumprido fica pendente e soma com o seguinte. Fazer mais de um num mês
 // quita pendências antigas, mas não adianta meses futuros. A contagem começa no mês do primeiro estudo.
 export interface MetaMensal { feitosNoMes: number; pendentes: number; desde: string }
@@ -514,7 +525,25 @@ export function metasMensais(respostas: RegistroResposta[], simulados: RegistroS
   const inicio = primeiro && mesDe(primeiro) < atual ? mesDe(primeiro) : atual
   const sims = simulados.filter((x) => x.status === 'concluido' && x.itens.length >= 120 && x.concluidoEm).map((x) => x.concluidoEm!)
   const reds = redacoes.filter((x) => !x.excluida && x.npd !== null).map((x) => x.criadaEm)
-  return { simulado: metaCumulativa(sims, inicio, atual), redacao: metaCumulativa(reds, inicio, atual), revisao: metaCumulativa(trilhasConcluidas(respostas), inicio, atual) }
+  return { simulado: metaCumulativa(sims, inicio, atual), redacao: metaCumulativa(reds, inicio, atual) }
+}
+
+// Meta semanal: 1 trilha de revisão por semana (segunda a domingo), cumulativa como as mensais,
+// contada a partir da semana em que a regra passou a valer (INICIO_PENALIDADES.trilha).
+export function metaTrilhaSemanal(respostas: RegistroResposta[], hoje = diaLocal()) {
+  const atual = inicioSemana(hoje)
+  const primeiro = respostas.reduce<string | null>((min, r) => (!min || r.criadaEm < min ? r.criadaEm : min), null)
+  const primeiraSemana = primeiro ? inicioSemana(diaLocal(new Date(primeiro))) : atual
+  let semana = primeiraSemana > INICIO_PENALIDADES.trilha ? primeiraSemana : INICIO_PENALIDADES.trilha
+  if (semana > atual) semana = atual
+  const porSemana: Record<string, number> = {}
+  for (const d of trilhasConcluidas(respostas)) {
+    const w = inicioSemana(diaLocal(new Date(d)))
+    porSemana[w] = (porSemana[w] ?? 0) + 1
+  }
+  let divida = 0
+  for (; semana <= atual; semana = somarDias(semana, 7)) divida = Math.max(0, divida + 1 - (porSemana[semana] ?? 0))
+  return { feitosNaSemana: porSemana[atual] ?? 0, pendentes: divida }
 }
 
 // Uma trilha de revisão conta como feita a cada 30 respostas no modo trilha (a data é a da 30ª).
